@@ -84,6 +84,11 @@
     background-color: var(--bg);
     color: var(--fg);
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
   }
 
   :focus-visible {
@@ -103,6 +108,14 @@
 /* Long-form copy under the tools and on the hub. Styling descendants here keeps
    the HTML free of repeated utility classes (60 KB page budget). */
 @layer components {
+  header nav a {
+    @apply inline-flex min-h-9 items-center py-1;
+  }
+
+  footer nav a {
+    @apply inline-block py-1;
+  }
+
   .prose-content {
     @apply text-lg leading-relaxed;
   }
@@ -129,10 +142,10 @@
     @apply text-brand underline hover:text-brand-strong;
   }
   .prose-content table {
-    @apply w-full border-collapse text-base;
+    @apply w-full border-collapse text-sm sm:text-base;
   }
   .prose-content :is(th, td) {
-    @apply border-b border-line py-2 pr-3 text-left align-top;
+    @apply border-b border-line py-2 pr-2 sm:pr-3 text-left align-top;
   }
   .prose-content th {
     @apply font-bold;
@@ -177,11 +190,14 @@
   .ccm-handle {
     @apply hidden cursor-grab select-none px-1 text-xl text-muted sm:inline;
   }
+  .ccm-day {
+    @apply flex-1 min-w-0 max-w-11;
+  }
   .ccm-day input {
     @apply sr-only;
   }
   .ccm-day span {
-    @apply flex size-11 cursor-pointer items-center justify-center rounded-lg border border-line bg-bg text-sm font-semibold text-muted;
+    @apply flex h-11 w-full min-w-7 max-w-11 cursor-pointer items-center justify-center rounded-lg border border-line bg-bg text-xs sm:text-sm font-semibold text-muted;
   }
   .ccm-day input:checked + span {
     @apply border-brand bg-brand text-brand-fg;
@@ -202,7 +218,7 @@
     @apply lg:mt-8 lg:border-t lg:border-line lg:pt-6;
   }
   .ccm-step-btn {
-    @apply flex min-h-11 w-full flex-col items-center justify-center rounded-lg border border-line text-xs font-semibold text-muted aria-[current=step]:border-brand aria-[current=step]:bg-brand aria-[current=step]:text-brand-fg;
+    @apply flex min-h-11 w-full flex-col items-center justify-center rounded-lg border border-line py-1 text-xs font-semibold text-muted touch-manipulation aria-[current=step]:border-brand aria-[current=step]:bg-brand aria-[current=step]:text-brand-fg;
   }
   .ccm-steps {
     @apply mb-4;
@@ -214,10 +230,13 @@
     @apply block h-auto w-full rounded-md shadow-md ring-1 ring-line;
   }
   .ccm-bar {
-    @apply sticky bottom-0 z-20 -mx-4 mt-6 flex gap-2 border-t border-line bg-bg/95 px-4 py-2 backdrop-blur;
+    @apply sticky bottom-0 z-20 -mx-4 mt-6 flex gap-2 border-t border-line bg-bg/95 px-4 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur;
   }
   .ccm-dialog {
-    @apply m-auto w-[min(36rem,calc(100vw-2rem))] rounded-xl border border-line bg-bg p-4 text-fg backdrop:bg-black/50;
+    @apply m-auto max-h-[85vh] w-[min(36rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-line bg-bg p-4 text-fg overscroll-contain backdrop:bg-black/50;
+  }
+  .ccm-dialog > div:first-child {
+    @apply sticky -top-4 z-10 -mx-4 -mt-4 mb-2 flex items-center justify-between border-b border-line bg-bg/95 px-4 py-3 backdrop-blur;
   }
 }
 
