@@ -1,0 +1,49 @@
+---
+import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
+import { SITE_CONFIG } from '../lib/seo.ts';
+
+const columns = [
+  {
+    label: 'Tools',
+    links: [PAGES.choreChartMaker, PAGES.rewardChartMaker, PAGES.familyChoreChart, PAGES.roommateChoreChart, PAGES.morningRoutineChart],
+  },
+  {
+    label: 'Guides',
+    links: [PAGES.choresByAge, ...AGE_PAGE_AGES.filter((age) => age % 3 === 0).map(agePage)],
+  },
+  {
+    label: 'Site',
+    links: [PAGES.about, PAGES.contact, PAGES.privacyPolicy, PAGES.terms],
+  },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-line bg-surface print:hidden">
+  <div class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <p class="font-semibold text-fg">{SITE_CONFIG.name}</p>
+      <p class="mt-2 text-sm text-muted">
+        Our privacy promise: names, chores and charts stay in your browser. No accounts, nothing uploaded.
+      </p>
+    </div>
+    {
+      columns.map((column) => (
+        <nav aria-label={column.label}>
+          <p class="text-sm font-semibold text-fg">{column.label}</p>
+          <ul class="mt-2 space-y-1 text-sm">
+            {column.links.map((link) => (
+              <li>
+                <a href={link.path} class="text-muted hover:text-brand">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <p class="mx-auto max-w-5xl px-4 pb-8 text-xs text-muted">© {year} {SITE_CONFIG.name}. Free printable tools.</p>
+</footer>

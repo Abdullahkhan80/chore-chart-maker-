@@ -1,0 +1,22 @@
+# Chore Chart Maker
+
+> Free, privacy-first printable tools for parents, teachers, roommates and caregivers. Charts are made in the browser: names and chores never leave the device, and there are no accounts.
+
+<!-- Placeholder: expand with page summaries once the tools and guides are live. -->
+
+## Tools
+
+- [Chore Chart Maker](https://chorechartmaker.com/chore-chart-maker/): make a printable chore chart (Letter or A4)
+- [Reward Chart Maker](https://chorechartmaker.com/reward-chart-maker/): make a printable reward chart
+- [Roommate Chore Chart](https://chorechartmaker.com/roommate-chore-chart/)
+- [Morning Routine Chart](https://chorechartmaker.com/morning-routine-chart/)
+- [Family Chore Chart](https://chorechartmaker.com/family-chore-chart/)
+
+## Guides
+
+- [Age-appropriate chores for kids, by age](https://chorechartmaker.com/chores-for-kids-by-age/)
+
+## About
+
+- [About](https://chorechartmaker.com/about/)
+- [Privacy policy](https://chorechartmaker.com/privacy-policy/)

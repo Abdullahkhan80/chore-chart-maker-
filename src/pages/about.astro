@@ -1,0 +1,13 @@
+---
+import InfoLayout from '../layouts/InfoLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import { SITE_CONFIG, buildPerson } from '../lib/seo.ts';
+---
+
+<InfoLayout page={PAGES.about} jsonLd={[buildPerson()]}>
+  <p>
+    {SITE_CONFIG.name} makes free, privacy-first printable tools for parents, teachers, roommates and caregivers.
+    Everything runs in your browser: no accounts, no uploads.
+  </p>
+  <p>The site is made by {SITE_CONFIG.author.name}. Placeholder: the full story is coming soon.</p>
+</InfoLayout>

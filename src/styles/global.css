@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+/* Color tokens: light by default, dark via prefers-color-scheme. Use these
+   (bg-bg, text-fg, text-muted, border-line, bg-surface, text-brand, ...) instead
+   of raw palette colors so every component is dark-mode safe. */
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --surface: #f0fdfa;
+  --fg: #0f172a;
+  --muted: #475569;
+  --line: #d6e4e1;
+  --brand: #0f766e;
+  --brand-strong: #115e59;
+  --brand-fg: #ffffff;
+  --focus: #b45309;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --surface: #111c2e;
+    --fg: #e2e8f0;
+    --muted: #a3b1c4;
+    --line: #23324a;
+    --brand: #2dd4bf;
+    --brand-strong: #5eead4;
+    --brand-fg: #042f2a;
+    --focus: #fbbf24;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-fg: var(--brand-fg);
+  --color-focus: var(--focus);
+}
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--fg);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --fg: #000000;
+      color-scheme: light;
+    }
+  }
+}

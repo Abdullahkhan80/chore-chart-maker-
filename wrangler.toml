@@ -1,0 +1,18 @@
+name = "chorechartmaker"
+main = "src/worker.ts"
+compatibility_date = "2026-10-01"
+
+# Custom domains; the worker 301s www → apex.
+routes = [
+  { pattern = "chorechartmaker.com", custom_domain = true },
+  { pattern = "www.chorechartmaker.com", custom_domain = true },
+]
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+# Run the worker on every request so it can redirect before assets are served.
+run_worker_first = true
+# Serve dist/404.html with a real 404 status for unknown paths.
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"

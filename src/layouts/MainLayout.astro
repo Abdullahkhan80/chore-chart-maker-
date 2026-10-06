@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import type { PageMeta } from '../lib/pages.ts';
+import { SITE_CONFIG, buildBreadcrumbList, type BreadcrumbItem, type JsonLd } from '../lib/seo.ts';
+
+interface Props {
+  page: PageMeta;
+  /** Trail after "Home"; renders visible breadcrumbs plus BreadcrumbList JSON-LD. */
+  breadcrumbs?: BreadcrumbItem[];
+  jsonLd?: JsonLd[];
+  ogType?: 'website' | 'article';
+}
+
+const { page, breadcrumbs, jsonLd = [], ogType } = Astro.props;
+const trail = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : undefined;
+const structuredData = trail ? [...jsonLd, buildBreadcrumbList(trail)] : jsonLd;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SEO
+      title={page.title}
+      description={page.description}
+      path={page.path}
+      noindex={page.noindex}
+      ogType={ogType}
+      jsonLd={structuredData}
+    />
+    <meta name="theme-color" content={SITE_CONFIG.themeColor.light} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={SITE_CONFIG.themeColor.dark} media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body class="flex min-h-screen flex-col bg-bg font-sans text-fg antialiased">
+    <a
+      href="#main"
+      class="sr-only rounded bg-brand px-4 py-2 font-semibold text-brand-fg focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
+    >
+      Skip to main content
+    </a>
+    <Header currentPath={page.path} />
+    <main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 py-8 focus:outline-none">
+      {trail && <Breadcrumbs items={trail} />}
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

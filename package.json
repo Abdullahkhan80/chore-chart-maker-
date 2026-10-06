@@ -1,5 +1,5 @@
 {
-  "name": "helpless-heliosphere",
+  "name": "chorechartmaker",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,12 +9,26 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --experimental-strip-types --test \"tests/*.test.ts\"",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.18.2",
+    "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.147.0"
+  },
+  "overrides": {
+    "vite": "^6.4.4"
   }
 }

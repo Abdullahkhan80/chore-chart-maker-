@@ -1,0 +1,19 @@
+---
+import MainLayout from './MainLayout.astro';
+import type { PageMeta } from '../lib/pages.ts';
+import type { JsonLd } from '../lib/seo.ts';
+
+interface Props {
+  page: PageMeta;
+  jsonLd?: JsonLd[];
+}
+
+const { page, jsonLd } = Astro.props;
+---
+
+<MainLayout page={page} breadcrumbs={[{ name: page.label, path: page.path }]} jsonLd={jsonLd}>
+  <div class="max-w-prose">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
+    <div class="mt-6 space-y-4"><slot /></div>
+  </div>
+</MainLayout>

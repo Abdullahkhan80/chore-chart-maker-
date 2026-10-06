@@ -1,0 +1,54 @@
+---
+import {
+  SITE_CONFIG,
+  buildAssetUrl,
+  buildCanonicalUrl,
+  buildOrganization,
+  buildWebSite,
+  serializeJsonLd,
+  type JsonLd,
+} from '../lib/seo.ts';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  ogImage?: { path: string; width: number; height: number; alt: string };
+  jsonLd?: JsonLd[];
+}
+
+const { title, description, path, noindex = false, ogType = 'website', ogImage = SITE_CONFIG.ogImage, jsonLd = [] } =
+  Astro.props;
+
+const canonical = buildCanonicalUrl(path);
+const imageUrl = buildAssetUrl(ogImage.path);
+const isHome = canonical === buildCanonicalUrl('/');
+const robots = noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large';
+const structuredData = isHome ? [buildWebSite(), buildOrganization(), ...jsonLd] : jsonLd;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+{!noindex && <link rel="canonical" href={canonical} />}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_CONFIG.name} />
+<meta property="og:locale" content={SITE_CONFIG.locale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content={String(ogImage.width)} />
+<meta property="og:image:height" content={String(ogImage.height)} />
+<meta property="og:image:alt" content={ogImage.alt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={ogImage.alt} />
+
+{structuredData.map((data) => <script type="application/ld+json" is:inline set:html={serializeJsonLd(data)} />)}

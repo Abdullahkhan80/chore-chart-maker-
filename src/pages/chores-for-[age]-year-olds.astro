@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
+
+export const getStaticPaths = (() =>
+  AGE_PAGE_AGES.map((age) => ({ params: { age: String(age) } }))) satisfies GetStaticPaths;
+
+const age = Number(Astro.params.age);
+const page = agePage(age);
+---
+
+<ArticleLayout
+  page={page}
+  breadcrumbs={[
+    { name: PAGES.choresByAge.label, path: PAGES.choresByAge.path },
+    { name: page.label, path: page.path },
+  ]}
+>
+  <p>Placeholder: a list of chores for {age}-year-olds, with tips for teaching each one, is coming soon.</p>
+  <p><a href={PAGES.choreChartMaker.path} class="text-brand underline">Make a chore chart</a> with these chores.</p>
+</ArticleLayout>

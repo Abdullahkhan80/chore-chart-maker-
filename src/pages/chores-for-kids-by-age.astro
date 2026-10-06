@@ -1,0 +1,19 @@
+---
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
+---
+
+<ArticleLayout page={PAGES.choresByAge}>
+  <p>Placeholder: an age-by-age guide to chores for kids from 2 to 14 is coming soon.</p>
+  <ul class="list-disc space-y-1 pl-6">
+    {
+      AGE_PAGE_AGES.map(agePage).map((page) => (
+        <li>
+          <a href={page.path} class="text-brand underline">
+            {page.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</ArticleLayout>

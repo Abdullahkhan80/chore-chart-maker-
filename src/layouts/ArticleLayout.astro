@@ -1,0 +1,28 @@
+---
+import MainLayout from './MainLayout.astro';
+import type { PageMeta } from '../lib/pages.ts';
+import { buildArticle, type BreadcrumbItem } from '../lib/seo.ts';
+
+interface Props {
+  page: PageMeta;
+  /** Breadcrumb trail after "Home"; defaults to just this page. */
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { page, breadcrumbs = [{ name: page.label, path: page.path }] } = Astro.props;
+const article = buildArticle({
+  headline: page.h1,
+  description: page.description,
+  path: page.path,
+  datePublished: page.published,
+  dateModified: page.lastmod,
+});
+---
+
+<MainLayout page={page} breadcrumbs={breadcrumbs} jsonLd={[article]} ogType="article">
+  <article class="max-w-prose">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
+    <p class="mt-2 text-sm text-muted">Updated <time datetime={page.lastmod}>{page.lastmod}</time></p>
+    <div class="mt-6 space-y-4 text-lg"><slot /></div>
+  </article>
+</MainLayout>

@@ -1,0 +1,27 @@
+---
+import MainLayout from './MainLayout.astro';
+import type { PageMeta } from '../lib/pages.ts';
+import { buildWebApplication } from '../lib/seo.ts';
+
+interface Props {
+  page: PageMeta;
+}
+
+const { page } = Astro.props;
+---
+
+<MainLayout
+  page={page}
+  breadcrumbs={[{ name: page.label, path: page.path }]}
+  jsonLd={[buildWebApplication({ name: page.label, path: page.path, description: page.description })]}
+>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
+  <div class="mt-4 max-w-prose text-lg text-muted"><slot name="intro" /></div>
+  <section
+    aria-label="Chart builder"
+    class="mt-8 rounded-xl border border-dashed border-line bg-surface p-8 text-center text-muted"
+  >
+    <slot name="tool">The chart builder is coming soon.</slot>
+  </section>
+  <div class="mt-12 max-w-prose space-y-4"><slot /></div>
+</MainLayout>

@@ -1,11 +1,38 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import { PAGES } from '../lib/pages.ts';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const page = PAGES.home;
+const tools = [
+  PAGES.choreChartMaker,
+  PAGES.rewardChartMaker,
+  PAGES.familyChoreChart,
+  PAGES.roommateChoreChart,
+  PAGES.morningRoutineChart,
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout page={page}>
+  <h1 class="max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">{page.h1}</h1>
+  <p class="mt-4 max-w-prose text-lg text-muted">
+    Make a chart in minutes and print it at home. Free, no sign-up, and everything you type stays in your browser.
+  </p>
+  <a
+    href={PAGES.choreChartMaker.path}
+    class="mt-6 inline-block rounded-lg bg-brand px-5 py-3 font-semibold text-brand-fg hover:bg-brand-strong"
+  >
+    Make a chore chart
+  </a>
+  <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      tools.map((tool) => (
+        <li>
+          <a href={tool.path} class="block h-full rounded-xl border border-line p-5 hover:border-brand">
+            <span class="font-semibold text-fg">{tool.label}</span>
+            <span class="mt-1 block text-sm text-muted">{tool.description}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</MainLayout>

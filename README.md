@@ -1,46 +1,26 @@
-# Astro Starter Kit: Basics
+# chore chart maker
 
-```sh
-npm create astro@latest -- --template basics
-```
+Free, privacy-first printable tools at https://chorechartmaker.com. The first one is the Chore Chart Maker (`/chore-chart-maker/`). Nothing you type leaves your browser.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Built with Astro, Tailwind CSS v4 and TypeScript, and deployed as a static site on Cloudflare Workers. See [CLAUDE.md](./CLAUDE.md) for architecture, budgets and project rules.
 
-## 🚀 Project Structure
+## Requirements
 
-Inside of your Astro project, you'll see the following folders and files:
+- Node 22+
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Commands
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the dev server at `localhost:4321` |
+| `astro dev --background` | Start the dev server in the background (`astro dev stop` / `status` / `logs`) |
+| `npm run build` | Build the static site to `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm test` | Run tests (`node --experimental-strip-types --test tests/*.test.ts`) |
+| `npm run check` | Type-check the project (`astro check`) |
+| `npx wrangler deploy` | Deploy `dist/` to Cloudflare (needs `wrangler.toml`) |
 
-## 🧞 Commands
+## Definition of done
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`npm run build`, `npm test` and `npm run check` all pass, and no page's HTML exceeds 60 KB.
