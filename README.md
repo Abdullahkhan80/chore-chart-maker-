@@ -8,6 +8,9 @@ Built with Astro, Tailwind CSS v4 and TypeScript, and deployed as a static site 
 
 - Node 22+
 
+
+
+
 ## Commands
 
 | Command | Action |
