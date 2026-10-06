@@ -1,5 +1,42 @@
 @import 'tailwindcss';
 
+/* Nunito, self-hosted Latin subset (SIL OFL 1.1, see /fonts/LICENSE.txt).
+   Only 400 and 700 ship; 600 (font-semibold) resolves to the 700 file.
+   MainLayout preloads 700, the weight of the above-the-fold H1. */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/nunito-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/nunito-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Arial scaled to Nunito's metrics (Capsize data) so the swap barely shifts layout. */
+@font-face {
+  font-family: 'Nunito Fallback';
+  src: local('Arial'), local('ArialMT'), local('Helvetica');
+  size-adjust: 101.39%;
+  ascent-override: 99.71%;
+  descent-override: 34.82%;
+  line-gap-override: 0%;
+}
+
+@theme {
+  --font-sans: 'Nunito', 'Nunito Fallback', ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Color tokens: light by default, dark via prefers-color-scheme. Use these
    (bg-bg, text-fg, text-muted, border-line, bg-surface, text-brand, ...) instead
    of raw palette colors so every component is dark-mode safe. */
@@ -60,5 +97,155 @@
       --fg: #000000;
       color-scheme: light;
     }
+  }
+}
+
+/* Long-form copy under the tools and on the hub. Styling descendants here keeps
+   the HTML free of repeated utility classes (60 KB page budget). */
+@layer components {
+  .prose-content {
+    @apply text-lg leading-relaxed;
+  }
+  .prose-content > * + *,
+  .prose-content section > * + * {
+    @apply mt-4;
+  }
+  .prose-content h2 {
+    @apply mt-12 text-2xl font-bold tracking-tight;
+  }
+  .prose-content h3 {
+    @apply mt-8 text-xl font-bold;
+  }
+  .prose-content :is(ul, ol) {
+    @apply space-y-2 pl-6;
+  }
+  .prose-content ul {
+    @apply list-disc;
+  }
+  .prose-content ol {
+    @apply list-decimal;
+  }
+  .prose-content a {
+    @apply text-brand underline hover:text-brand-strong;
+  }
+  .prose-content table {
+    @apply w-full border-collapse text-base;
+  }
+  .prose-content :is(th, td) {
+    @apply border-b border-line py-2 pr-3 text-left align-top;
+  }
+  .prose-content th {
+    @apply font-bold;
+  }
+}
+
+/* Chart editor (ChoreChartMaker.astro, editorMarkup.ts). Shared classes keep the
+   repeated list markup small. Touch targets are at least 44px (min-h-11). */
+@layer components {
+  .ccm-input {
+    @apply mt-1 block min-h-11 w-full rounded-lg border border-line bg-bg px-3 text-base font-normal text-fg;
+  }
+  .ccm-label {
+    @apply block text-sm font-semibold text-fg;
+  }
+  .ccm-legend {
+    @apply mb-3 text-lg font-bold text-fg;
+  }
+  .ccm-btn {
+    @apply inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg border border-line bg-bg px-3 font-semibold text-fg hover:border-brand disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .ccm-btn-primary {
+    @apply border-brand bg-brand text-brand-fg hover:bg-brand-strong;
+  }
+  .ccm-chip {
+    @apply inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line bg-bg px-3 text-sm text-fg hover:border-brand has-checked:border-brand has-checked:bg-surface has-checked:font-semibold disabled:opacity-50;
+  }
+  .ccm-check {
+    @apply flex min-h-11 cursor-pointer items-center gap-3 text-sm text-fg;
+  }
+  .ccm-check input,
+  .ccm-chip input[type='checkbox'],
+  .ccm-chip input[type='radio'] {
+    @apply size-5 accent-brand;
+  }
+  .ccm-card {
+    @apply rounded-xl border border-line bg-surface p-3;
+  }
+  .ccm-swatch {
+    @apply inline-block size-4 shrink-0 rounded-full border border-line;
+  }
+  .ccm-handle {
+    @apply hidden cursor-grab select-none px-1 text-xl text-muted sm:inline;
+  }
+  .ccm-day input {
+    @apply sr-only;
+  }
+  .ccm-day span {
+    @apply flex size-11 cursor-pointer items-center justify-center rounded-lg border border-line bg-bg text-sm font-semibold text-muted;
+  }
+  .ccm-day input:checked + span {
+    @apply border-brand bg-brand text-brand-fg;
+  }
+  .ccm-day input:focus-visible + span {
+    @apply outline-3 outline-offset-2 outline-focus;
+  }
+  .ccm-theme {
+    @apply flex cursor-pointer flex-col gap-1;
+  }
+  .ccm-theme-thumb {
+    @apply block aspect-[8/5] w-full overflow-hidden rounded-lg border-2 border-line bg-surface peer-checked:border-brand peer-checked:ring-2 peer-checked:ring-brand peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus;
+  }
+  .ccm-step {
+    @apply min-w-0 border-0 p-0 focus:outline-none;
+  }
+  .ccm-step + .ccm-step {
+    @apply lg:mt-8 lg:border-t lg:border-line lg:pt-6;
+  }
+  .ccm-step-btn {
+    @apply flex min-h-11 w-full flex-col items-center justify-center rounded-lg border border-line text-xs font-semibold text-muted aria-[current=step]:border-brand aria-[current=step]:bg-brand aria-[current=step]:text-brand-fg;
+  }
+  .ccm-steps {
+    @apply mb-4;
+  }
+  .ccm-preview {
+    @apply grid gap-3;
+  }
+  .ccm-page svg {
+    @apply block h-auto w-full rounded-md shadow-md ring-1 ring-line;
+  }
+  .ccm-bar {
+    @apply sticky bottom-0 z-20 -mx-4 mt-6 flex gap-2 border-t border-line bg-bg/95 px-4 py-2 backdrop-blur;
+  }
+  .ccm-dialog {
+    @apply m-auto w-[min(36rem,calc(100vw-2rem))] rounded-xl border border-line bg-bg p-4 text-fg backdrop:bg-black/50;
+  }
+}
+
+/* Mobile: one step at a time. Desktop (lg) shows every step in the left pane. */
+@media (width < 64rem) {
+  .ccm-step:not([data-active]) {
+    display: none;
+  }
+}
+
+/* Print: only the chart pages inserted by src/scripts/export.ts (printChart). */
+#print-root {
+  display: none;
+}
+
+@media print {
+  body > :not(#print-root) {
+    display: none !important;
+  }
+  #print-root {
+    display: block;
+  }
+  #print-root > svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  #print-root > svg:not(:last-child) {
+    break-after: page;
   }
 }

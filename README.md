@@ -18,6 +18,7 @@ Built with Astro, Tailwind CSS v4 and TypeScript, and deployed as a static site 
 | `npm run build` | Build the static site to `dist/` |
 | `npm run preview` | Preview the production build locally |
 | `npm test` | Run tests (`node --experimental-strip-types --test tests/*.test.ts`) |
+| `UPDATE_SNAPSHOTS=1 npm test` | Accept intended changes to the chart renderer snapshots in `tests/__snapshots__/` |
 | `npm run check` | Type-check the project (`astro check`) |
 | `npx wrangler deploy` | Deploy `dist/` to Cloudflare (needs `wrangler.toml`) |
 

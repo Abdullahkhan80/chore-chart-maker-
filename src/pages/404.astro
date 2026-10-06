@@ -3,13 +3,32 @@ import MainLayout from '../layouts/MainLayout.astro';
 import { PAGES } from '../lib/pages.ts';
 
 const page = PAGES.notFound;
+const suggestions = [
+  PAGES.choreChartMaker,
+  PAGES.rewardChartMaker,
+  PAGES.familyChoreChart,
+  PAGES.morningRoutineChart,
+  PAGES.choresByAge,
+];
 ---
 
 <MainLayout page={page}>
-  <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
-  <p class="mt-4 text-lg text-muted">Sorry, we couldn't find that page. It may have moved, or the link may be mistyped.</p>
-  <p class="mt-6">
-    <a href="/" class="text-brand underline">Go to the home page</a> or
-    <a href={PAGES.choreChartMaker.path} class="text-brand underline">make a chore chart</a>.
-  </p>
+  <div class="max-w-prose">
+    <p class="text-sm font-semibold tracking-wide text-muted uppercase">Error 404</p>
+    <h1 class="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
+    <p class="mt-4 text-lg text-muted">Sorry, we couldn't find that page. It may have moved, or the link may be mistyped.</p>
+    <p class="mt-6">
+      <a href="/" class="text-brand underline">Go to the home page</a> or
+      <a href={PAGES.choreChartMaker.path} class="text-brand underline">make a chore chart</a>.
+    </p>
+
+    <p class="mt-8 font-semibold">Popular pages</p>
+    <ul class="mt-2 list-disc space-y-1 pl-6">
+      {suggestions.map((p) => <li><a href={p.path} class="text-brand underline">{p.label}</a></li>)}
+    </ul>
+
+    <p class="mt-8 text-sm text-muted">
+      Followed a broken link on our site? <a href={PAGES.contact.path} class="text-brand underline">Let us know</a>.
+    </p>
+  </div>
 </MainLayout>

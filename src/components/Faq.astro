@@ -1,0 +1,24 @@
+---
+// Visible FAQ section. Pair it with buildFaqPage() from the same items so the JSON-LD matches the text.
+import type { FaqItem } from '../lib/seo.ts';
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section aria-labelledby="faq">
+      <h2 id="faq">Frequently asked questions</h2>
+      {items.map((item) => (
+        <>
+          <h3>{item.question}</h3>
+          <p>{item.answer}</p>
+        </>
+      ))}
+    </section>
+  )
+}

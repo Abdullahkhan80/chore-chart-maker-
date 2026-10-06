@@ -1,9 +1,214 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
-import { PAGES } from '../lib/pages.ts';
+import { AGE_PAGE_AGES, PAGES, agePagePath } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const ageBands: { label: string; ages: number[]; chores: string }[] = [
+  { label: '2–3', ages: [2, 3], chores: 'Put toys in a bin, clothes in the hamper, wipe up small spills, help feed a pet.' },
+  { label: '4–5', ages: [4, 5], chores: 'Make the bed (roughly), set the table, match socks, water plants, tidy their room.' },
+  { label: '6–7', ages: [6, 7], chores: 'Put away silverware, sweep, fold towels, feed pets, pack their backpack.' },
+  { label: '8–9', ages: [8, 9], chores: 'Load the dishwasher, vacuum a room, take out trash, put away their own laundry.' },
+  { label: '10–12', ages: [10, 11, 12], chores: 'Run a load of laundry, clean the bathroom, make a simple meal, rake or weed.' },
+  { label: '13–14', ages: [13, 14], chores: 'Cook a family dinner, deep-clean the kitchen, mow the lawn, manage their own laundry.' },
+];
+const livePages = new Set<number>(AGE_PAGE_AGES);
+
+const faq: FaqItem[] = [
+  {
+    question: 'What chores should a 5-year-old do?',
+    answer:
+      'Most 5-year-olds can make their bed (not perfectly), set the table, put clothes in the hamper, match socks, feed a pet, water plants and tidy their toys. Pick three to five of these, show them how the first few times, and use picture icons so they can follow the chart on their own.',
+  },
+  {
+    question: 'How many chores should a child have?',
+    answer:
+      'Start with three to five daily chores for kids under 8 and five to seven for older kids, plus one or two bigger weekly jobs. A short chart that gets done every day teaches more than a long one that gets ignored, so add a chore only once the current list feels easy.',
+  },
+  {
+    question: 'Should kids get paid for chores?',
+    answer:
+      'Many families split chores into two groups. Everyday jobs like making the bed or clearing their plate are unpaid, because everyone helps run the home. Extra jobs like washing the car can earn money. This keeps basic help from turning into a negotiation while still teaching kids that work can earn money.',
+  },
+  {
+    question: 'Can I edit the chart later?',
+    answer:
+      'Yes. Your chart saves automatically in the browser you made it in, so you can come back on the same device, change chores or names and print a new copy. To edit it on another device, use Copy share link and open that link there.',
+  },
+  {
+    question: 'Is this chore chart maker really free?',
+    answer:
+      'Yes. Every chart type, theme and download format is free, with no sign-up, no trial and nothing locked behind a paywall. You can print as many charts as you like.',
+  },
+  {
+    question: 'What age should kids start doing chores?',
+    answer:
+      'Kids can start simple chores around age 2, like putting toys in a bin or clothes in the hamper. Toddlers usually want to help, and doing small jobs alongside you builds the habit long before they can do a job on their own.',
+  },
+  {
+    question: 'Can I make one chore chart for several kids?',
+    answer:
+      'Yes. Add up to eight people in step 1 and choose the Family chart type. You can put everyone on one color-coded chart or print one page per child, and each chore can be assigned to one child, several children or everyone.',
+  },
+  {
+    question: 'How do I make a chore chart for a child who cannot read yet?',
+    answer:
+      'Every chore on the chart has a picture icon, so pre-readers can tell what to do from the picture alone. Keep it to three or four chores, turn on large text, and go through the chart together each day until your child can point to each chore and tell you what it means.',
+  },
+];
 ---
 
-<ToolLayout page={PAGES.choreChartMaker}>
-  <Fragment slot="intro">Make a printable chore chart for one child or the whole family. Pick chores by age, choose a weekly layout and print on Letter or A4 paper. Nothing you type leaves your browser.</Fragment>
-  <p>Placeholder: how-to steps, printable examples and FAQs go here.</p>
+<ToolLayout page={PAGES.choreChartMaker} faq={faq}>
+  <Fragment slot="intro">
+    This free chore chart maker builds a printable chore chart for your kids in about two minutes: pick
+    age-appropriate chores with pictures, choose a layout and print it. No sign-up, and nothing you type leaves your
+    browser.
+  </Fragment>
+
+  <h2>How to make a chore chart in 4 steps</h2>
+  <p>The chart maker above walks you through four short steps, and the preview updates as you go.</p>
+  <ol>
+    <li>
+      <strong>Who is it for?</strong> Give your chart a title and add each child, up to eight. Add their age if you
+      like, and the tool will suggest chores that suit it.
+    </li>
+    <li>
+      <strong>Chores.</strong> Tap the suggested chores, browse the full list or type your own. Each chore gets a
+      picture you can change, and you choose which days it happens and who does it.
+    </li>
+    <li>
+      <strong>Style.</strong> Pick a chart type, a theme, Letter or A4 paper and portrait or landscape. You can also
+      turn on sticker rewards, points or an allowance amount for each chore, plus large text for younger kids.
+    </li>
+    <li>
+      <strong>Download.</strong> Save a PDF to print, a PNG for a phone or tablet, print straight from your browser,
+      or copy a share link to send to another parent or caregiver.
+    </li>
+  </ol>
+
+  <h2>Age-appropriate chores at a glance</h2>
+  <p>
+    Kids can usually do more than we expect, but the right chore depends on attention span and coordination as much
+    as age. Use this table as a starting point, then see our full guide to
+    <a href={PAGES.choresByAge.path}>chores for kids by age</a>. If you add your child's age in step 1, the chart maker
+    suggests chores from the same range.
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr><th scope="col">Age</th><th scope="col">Chores they can usually handle</th><th scope="col">Guides</th></tr>
+      </thead>
+      <tbody>
+        {
+          ageBands.map((band) => {
+            const linked = band.ages.filter((age) => livePages.has(age));
+            return (
+              <tr>
+                <th scope="row">{band.label}</th>
+                <td>{band.chores}</td>
+                <td>
+                  {linked.length > 0
+                    ? linked.map((age, i) => (
+                        <>
+                          {i > 0 && ', '}
+                          <a href={agePagePath(age)}>Age {age}</a>
+                        </>
+                      ))
+                    : <a href={PAGES.choresByAge.path}>All ages</a>}
+                </td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Chore chart types explained</h2>
+  <p>Switch between these in step 3. Your kids and chores carry over, so you can try each one in the preview.</p>
+  <h3>Weekly chore chart</h3>
+  <p>
+    The classic: chores down the side, days across the top and a box to check off each day. It is the best place to
+    start for most kids from about age 4, and it is the chart this page opens with.
+  </p>
+  <h3>Routine chart</h3>
+  <p>
+    The steps of one part of the day in order, such as getting dressed, brushing teeth and packing a backpack. Routine
+    charts work well for kids aged 3 to 7 who need help with busy mornings or bedtime. Start with our
+    <a href={PAGES.morningRoutineChart.path}>morning routine chart</a>.
+  </p>
+  <h3>Reward chart</h3>
+  <p>
+    A sticker track that leads to a prize you choose, from 5 to 30 stickers. Use it to build one new habit at a time,
+    like getting dressed without reminders. Make one with the
+    <a href={PAGES.rewardChartMaker.path}>reward chart maker</a>.
+  </p>
+  <h3>Family chore chart</h3>
+  <p>
+    Everyone in the house on one color-coded chart, or one page per child, with each chore assigned to one person or
+    shared. It is ideal for siblings who like to compare. See the
+    <a href={PAGES.familyChoreChart.path}>family chore chart</a>.
+  </p>
+  <h3>Rotation chart for roommates</h3>
+  <p>
+    Chores rotate to the next person each week, so nobody gets stuck with the bathroom forever. It suits roommates,
+    shared houses and teenagers. Try the <a href={PAGES.roommateChoreChart.path}>roommate chore chart</a>.
+  </p>
+
+  <h2>Tips to make a chore chart actually work</h2>
+  <ul>
+    <li>
+      <strong>Be consistent.</strong> Do chores at the same time each day and tie them to something that already
+      happens: "after breakfast, make your bed." A chart only works if someone checks it, so look at it together every
+      day for the first few weeks.
+    </li>
+    <li>
+      <strong>Use pictures for pre-readers.</strong> Picture icons let kids aged 2 to 5 read the chart themselves. Point
+      to each picture the first few times, then let them lead.
+    </li>
+    <li>
+      <strong>Teach first, then expect.</strong> Do each new chore together a few times before it goes on the chart,
+      and accept a kid-sized standard. A lumpy bed made by a 5-year-old still counts.
+    </li>
+    <li>
+      <strong>Rewards and allowance do different jobs.</strong> Stickers and small prizes help build a new habit; fade
+      them out once the habit sticks. An allowance is better for teaching money skills. Many families keep everyday
+      chores unpaid and pay only for extra jobs.
+    </li>
+    <li>
+      <strong>Hang it where the chores happen.</strong> Put it at your child's eye level, on the fridge, a bedroom door
+      or next to the backpack hook, not in a drawer.
+    </li>
+    <li>
+      <strong>Reset every week.</strong> Pick a time, such as Sunday evening, to look at the week together, celebrate
+      what went well, swap any chore that is not working and put up a fresh chart.
+    </li>
+  </ul>
+
+  <h2>Printing tips</h2>
+  <ul>
+    <li>
+      <strong>Pick the right paper size first.</strong> Choose Letter (US) or A4 in step 3 so nothing is cut off, and
+      print at actual size or 100%. Cardstock holds up much better on a fridge than plain copy paper.
+    </li>
+    <li>
+      <strong>Laminate it and reuse it.</strong> Laminate the chart or slide it into a clear sheet protector, then
+      check off chores with a dry-erase marker and wipe it clean each week. One print can last for months.
+    </li>
+    <li>
+      <strong>Save ink.</strong> Turn on Ink saver for a white background with outlines only. The pictures still print,
+      so pre-readers can follow along.
+    </li>
+    <li>
+      <strong>No printer?</strong> Download a PNG and set it as your tablet's lock screen, or save the PDF and print
+      it at a library or copy shop.
+    </li>
+  </ul>
+
+  <h2>Privacy: names stay in your browser</h2>
+  <p>
+    Everything you type, including names, ages and chores, is saved only in your browser on this device. There are no
+    accounts, and your chart is never uploaded to our server. Share links keep the chart in the part of the link after
+    the # sign, which browsers do not send to any server. We never record what you type. Read the
+    <a href={PAGES.privacyPolicy.path}>privacy policy</a> for details.
+  </p>
 </ToolLayout>

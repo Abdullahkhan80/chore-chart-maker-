@@ -18,33 +18,62 @@ async function pageExists(env: Env, url: URL): Promise<boolean> {
   return response.ok;
 }
 
+async function serve500(env: Env, request: Request): Promise<Response> {
+  try {
+    const response = await env.ASSETS.fetch(new Request(new URL('/500.html', request.url)));
+    if (response.ok) {
+      const headers = new Headers(response.headers);
+      headers.set('Cache-Control', 'no-store');
+      return new Response(response.body, { status: 500, headers });
+    }
+  } catch {
+    // If fetching /500.html fails, fall through to plain text.
+  }
+  return new Response('Internal Server Error', {
+    status: 500,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store',
+    },
+  });
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-    const target = new URL(url);
+    try {
+      const url = new URL(request.url);
+      const target = new URL(url);
 
-    // http → https and www → apex, only on production hosts (not localhost or *.workers.dev).
-    if (PRODUCTION_HOSTS.has(url.hostname)) {
-      target.protocol = 'https:';
-      target.hostname = APEX_HOST;
-      target.port = '';
+      // http → https and www → apex, only on production hosts (not localhost or *.workers.dev).
+      if (PRODUCTION_HOSTS.has(url.hostname)) {
+        target.protocol = 'https:';
+        target.hostname = APEX_HOST;
+        target.port = '';
+      }
+
+      // /foo/index.html → /foo/
+      if (target.pathname.endsWith('/index.html')) {
+        target.pathname = target.pathname.slice(0, -'index.html'.length);
+      } else if (!target.pathname.endsWith('/') && !hasFileExtension(target.pathname)) {
+        // /foo → /foo/, but only if /foo/ exists; unknown paths fall through to a real 404.
+        const withSlash = new URL(url);
+        withSlash.pathname += '/';
+        if (await pageExists(env, withSlash)) target.pathname += '/';
+      }
+
+      if (target.href !== url.href) {
+        return Response.redirect(target.href, 301);
+      }
+
+      // Unknown paths get dist/404.html with a 404 status (not_found_handling = "404-page").
+      const response = await env.ASSETS.fetch(request);
+      if (response.status >= 500) {
+        return await serve500(env, request);
+      }
+      return response;
+    } catch {
+      return await serve500(env, request);
     }
-
-    // /foo/index.html → /foo/
-    if (target.pathname.endsWith('/index.html')) {
-      target.pathname = target.pathname.slice(0, -'index.html'.length);
-    } else if (!target.pathname.endsWith('/') && !hasFileExtension(target.pathname)) {
-      // /foo → /foo/, but only if /foo/ exists; unknown paths fall through to a real 404.
-      const withSlash = new URL(url);
-      withSlash.pathname += '/';
-      if (await pageExists(env, withSlash)) target.pathname += '/';
-    }
-
-    if (target.href !== url.href) {
-      return Response.redirect(target.href, 301);
-    }
-
-    // Unknown paths get dist/404.html with a 404 status (not_found_handling = "404-page").
-    return env.ASSETS.fetch(request);
   },
 };
+

@@ -1,0 +1,163 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const themes: { name: string; look: string; bestFor: string }[] = [
+  { name: 'Minimal', look: 'Black and white, thin gray lines, square check boxes', bestFor: 'Frames, entryways, shared homes' },
+  { name: 'Pastel', look: 'Soft pinks and blues with small clouds', bestFor: 'Nurseries and younger kids' },
+  { name: 'Ocean', look: 'Deep blue with waves and bubbles', bestFor: 'Bathrooms and blue or gray kitchens' },
+];
+
+const faq: FaqItem[] = [
+  {
+    question: 'Which theme looks the most elegant?',
+    answer:
+      'Minimal is the most understated: black text, thin gray lines and no decoration beyond a single thin rule. Pastel and Ocean are softer, colored options. Turn off the extra details you do not need, and the chart will look calmer whichever theme you pick.',
+  },
+  {
+    question: 'Can I put the chart in a picture frame?',
+    answer:
+      'Yes. Print it on Letter or A4 and it fits a standard 8.5 × 11 inch or A4 frame, with or without a mat. The glass works like a whiteboard: check off chores with a dry-erase marker and wipe it clean at the end of the week.',
+  },
+  {
+    question: 'Will an elegant chart still work for young kids?',
+    answer:
+      'Yes. Every chore keeps its picture icon on every theme, so children who cannot read yet can still follow it. For kids under 5, keep the list short and turn on large text so the pictures and labels are easy to see from a distance.',
+  },
+  {
+    question: 'What paper gives the nicest finish?',
+    answer:
+      'A smooth, bright white cardstock around 65–80 lb (about 175–215 gsm) looks crisp and does not curl on the fridge. Matte paper hides fingerprints better than glossy and takes pencil or marker well if you check chores off directly on the sheet.',
+  },
+  {
+    question: 'Is the elegant chore chart free?',
+    answer:
+      'Yes. Every theme, including Minimal, is free with no sign-up. Your names and chores are saved only in your browser and are never uploaded.',
+  },
+];
+---
+
+<ToolLayout page={PAGES.elegantChoreChart} faq={faq}>
+  <Fragment slot="intro">
+    An elegant chore chart uses one quiet theme, thin lines and plenty of white space, so it suits the room instead of
+    shouting from the fridge. This elegant chore chart maker opens in the black-and-white Minimal theme, ready for your
+    own names and chores, and prints cleanly on cardstock or in a frame.
+  </Fragment>
+
+  <h2>What makes a chore chart look elegant</h2>
+  <p>
+    Most printable chore charts are designed to grab a 5-year-old's attention: bright colors, cartoon borders, stars
+    everywhere. That is fine on a playroom wall, but many families want a chart that sits in the kitchen or hallway
+    and looks like it belongs there. A few design choices make the difference:
+  </p>
+  <ul>
+    <li>
+      <strong>One color, or none.</strong> A single accent color, or plain black on white, looks deliberate. Several
+      bright colors fighting for attention look busy.
+    </li>
+    <li>
+      <strong>Thin lines and white space.</strong> Light grid lines let the chores stand out. Fewer rows with more room
+      between them read as calm and organized.
+    </li>
+    <li>
+      <strong>A short, plain title.</strong> "Household Chores" or "This Week" ages better than a long, punny headline.
+    </li>
+    <li>
+      <strong>Fewer chores.</strong> Six to eight chores fill a page well. Twenty squeezed into tiny rows looks like a
+      spreadsheet.
+    </li>
+    <li>
+      <strong>Consistent icons.</strong> Every chore uses the same family of picture icons, so the chart stays tidy
+      even with several people on it.
+    </li>
+  </ul>
+
+  <h2>Choosing a theme</h2>
+  <p>
+    Pick a theme in the Style step. These three suit an understated look best; the others, like Space and Dinosaur, are
+    deliberately playful.
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr><th scope="col">Theme</th><th scope="col">Look</th><th scope="col">Works well for</th></tr>
+      </thead>
+      <tbody>
+        {
+          themes.map((theme) => (
+            <tr>
+              <th scope="row">{theme.name}</th>
+              <td>{theme.look}</td>
+              <td>{theme.bestFor}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Every theme keeps its text readable against its background, so a soft palette never comes at the cost of a chart
+    that is hard to read.
+  </p>
+
+  <h2>Elegant charts for every kind of household</h2>
+  <p>
+    The chart above starts as a household chart for two adults and a child. It is a useful default when grown-ups
+    share chores too, and it shows kids that everyone in the house helps.
+  </p>
+  <ul>
+    <li>
+      <strong>Families.</strong> Keep everyone on one combined page, or print one page per person in the
+      <a href={PAGES.familyChoreChart.path}>family chore chart</a> layout. Each person gets their own color, so it stays
+      easy to see whose chore is whose.
+    </li>
+    <li>
+      <strong>Couples and roommates.</strong> A rotating schedule avoids arguments about who cleaned the bathroom last.
+      The <a href={PAGES.roommateChoreChart.path}>roommate chore chart</a> moves each chore to the next person every
+      week, and pairs well with the Minimal theme in a shared hallway.
+    </li>
+    <li>
+      <strong>One child.</strong> Switch the chart type to Weekly, and add a small reward goal if it helps. The
+      <a href={PAGES.rewardChartMaker.path}>reward chart maker</a> uses plain square stickers on the Minimal theme.
+    </li>
+  </ul>
+
+  <h2>Print and display it well</h2>
+  <p>The design is only half of it. How you print and hang the chart decides whether it looks finished:</p>
+  <ul>
+    <li>
+      <strong>Use cardstock.</strong> Bright white, matte cardstock gives crisp lines and stays flat. Copy paper curls
+      and shows marker through the back.
+    </li>
+    <li>
+      <strong>Print at 100%.</strong> Choose Letter or A4 in the Style step, then print at actual size so the margins
+      stay even on every side.
+    </li>
+    <li>
+      <strong>Frame it.</strong> A simple black or wood frame turns the chart into something that belongs on the wall.
+      Write on the glass with a dry-erase marker, then wipe it clean on Sunday.
+    </li>
+    <li>
+      <strong>Hang it at the right height.</strong> At adult eye level for a household chart; lower for a child's own
+      chart, so they can reach it to check things off.
+    </li>
+    <li>
+      <strong>Use a PNG on screens.</strong> Download a PNG for a tablet stand or a kitchen display, where a clean
+      black-and-white chart is easy to read across the room.
+    </li>
+  </ul>
+
+  <h2>Customize it in four steps</h2>
+  <ol>
+    <li><strong>Who is it for?</strong> Replace the placeholder names and title with your own.</li>
+    <li><strong>Chores.</strong> Keep the list to a page's worth, set the days for each and assign them to people.</li>
+    <li><strong>Style.</strong> Pick your theme, paper size and orientation. Landscape suits wide frames.</li>
+    <li><strong>Download.</strong> Save the PDF for printing or the PNG for a screen.</li>
+  </ol>
+  <p>
+    Every option, including allowance amounts and age-based chore suggestions, is explained in the main
+    <a href={PAGES.choreChartMaker.path}>printable chore chart maker</a> guide. To start from a plain editable layout
+    instead, browse the <a href={PAGES.freeChoreChartTemplate.path}>free chore chart templates</a>.
+  </p>
+</ToolLayout>

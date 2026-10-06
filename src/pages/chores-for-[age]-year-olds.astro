@@ -12,6 +12,7 @@ const page = agePage(age);
 
 <ArticleLayout
   page={page}
+  preset={`age-${age}`}
   breadcrumbs={[
     { name: PAGES.choresByAge.label, path: PAGES.choresByAge.path },
     { name: page.label, path: page.path },

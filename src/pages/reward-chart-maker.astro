@@ -1,9 +1,37 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'How does a reward chart work?',
+    answer:
+      'Your child earns a sticker or a check mark each time they do the chosen task. When the sticker track is full, they get the reward you agreed on together.',
+  },
+  {
+    question: 'How many stickers should a reward chart have?',
+    answer:
+      'You can set a goal from 5 to 30 stickers. Young children need a short track, around 5 to 10, so the reward comes within a few days. Older kids can work toward a longer goal.',
+  },
+  {
+    question: 'What are good rewards for kids?',
+    answer:
+      'Experiences often work better than toys: a trip to the park, choosing dinner, an extra bedtime story, baking together or a family movie night. Choose the reward with your child.',
+  },
+  {
+    question: 'Should a reward chart focus on one behavior?',
+    answer:
+      'Yes, at first. One clear goal, such as getting dressed without reminders, is easier for a child to understand. Once the habit sticks, phase out the chart and start a new one.',
+  },
+  {
+    question: 'Can I make reward charts for several children?',
+    answer:
+      'Yes. Add each child in step 1 and the reward chart maker prints one page per child, each with their own name and sticker track.',
+  },
+];
 ---
 
-<ToolLayout page={PAGES.rewardChartMaker}>
+<ToolLayout page={PAGES.rewardChartMaker} faq={faq}>
   <Fragment slot="intro">Set a goal, choose a reward and print a sticker chart your child can fill in. Free, no sign-up, and private by design.</Fragment>
-  <p>Placeholder: how-to steps, printable examples and FAQs go here.</p>
 </ToolLayout>

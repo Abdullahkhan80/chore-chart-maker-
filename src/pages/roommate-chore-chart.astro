@@ -1,9 +1,30 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'How does a rotating roommate chore chart work?',
+    answer:
+      'Each chore moves to the next person every week, so everyone takes a turn at every job and nobody is stuck with the bathroom.',
+  },
+  {
+    question: 'How many roommates can share one chart?',
+    answer: 'Up to eight people and twenty chores fit on one chart, enough for most shared houses and dorm suites.',
+  },
+  {
+    question: 'Can every roommate get a copy?',
+    answer:
+      'Yes. Print copies, or use Copy share link and send it to the group so each person can open and print the same chart.',
+  },
+  {
+    question: 'Is the roommate chore chart maker free?',
+    answer: 'Yes. It is free with no sign-up, and names and chores stay in your browser instead of being uploaded.',
+  },
+];
 ---
 
-<ToolLayout page={PAGES.roommateChoreChart}>
-  <Fragment slot="intro">Share the housework fairly. List everyone in the home, rotate chores each week and print the schedule for the fridge.</Fragment>
-  <p>Placeholder: how-to steps, printable examples and FAQs go here.</p>
+<ToolLayout page={PAGES.roommateChoreChart} faq={faq}>
+  <Fragment slot="intro">Share the housework fairly with this free roommate chore chart maker. List everyone in the home, rotate chores each week and print the schedule for the fridge.</Fragment>
 </ToolLayout>

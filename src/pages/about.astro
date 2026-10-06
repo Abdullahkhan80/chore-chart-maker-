@@ -9,5 +9,66 @@ import { SITE_CONFIG, buildPerson } from '../lib/seo.ts';
     {SITE_CONFIG.name} makes free, privacy-first printable tools for parents, teachers, roommates and caregivers.
     Everything runs in your browser: no accounts, no uploads.
   </p>
-  <p>The site is made by {SITE_CONFIG.author.name}. Placeholder: the full story is coming soon.</p>
+
+  <h2 class="pt-4 text-xl font-bold">Why we built it</h2>
+  <p>
+    Most chore chart sites ask you to sign up, upload your kids' names, or pay to remove a watermark before you can print
+    anything. We wanted the opposite: a tool that opens fast, makes a clean chart in a few minutes and gets out of the
+    way.
+  </p>
+  <p>
+    {SITE_CONFIG.name} is an independent site made by {SITE_CONFIG.author.name}. It's built and run as a small project
+    with no investors and no data to sell.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">What we believe</h2>
+  <ul class="list-disc space-y-2 pl-6">
+    <li>
+      <strong>Your family's details are yours.</strong> Names, chores and rewards stay on your device. We have no
+      backend that could store them. <a href={PAGES.privacyPolicy.path} class="text-brand underline">Read how privacy works</a>.
+    </li>
+    <li>
+      <strong>Free means free.</strong> Every chart type, theme and export is included, with no trial and no sign-up.
+    </li>
+    <li>
+      <strong>Made for paper.</strong> Charts are designed to print well on US Letter or A4, in color or with ink saver
+      mode.
+    </li>
+    <li>
+      <strong>Pictures for little ones.</strong> Every chore can have a picture so kids who can't read yet can still
+      follow along.
+    </li>
+  </ul>
+
+  <h2 class="pt-4 text-xl font-bold">Who it's for</h2>
+  <p>
+    Mostly parents of kids aged 2 to 14, plus teachers running classroom jobs, caregivers keeping routines steady and
+    roommates sharing a home. Start with the <a href={PAGES.choreChartMaker.path} class="text-brand underline"
+      >chore chart maker</a
+    > or browse <a href={PAGES.choresByAge.path} class="text-brand underline">chores by age</a>.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Credits</h2>
+  <ul class="list-disc space-y-2 pl-6">
+    <li>
+      Chart icons are from
+      <a href="https://github.com/microsoft/fluentui-emoji" class="text-brand underline" rel="noopener">Microsoft Fluent Emoji</a>
+      (flat style) by Microsoft, used under the MIT License.
+      <a href="/icons/LICENSE.txt" class="text-brand underline">Read the icon license</a>.
+    </li>
+    <li>
+      Text is set in
+      <a href="https://github.com/googlefonts/nunito" class="text-brand underline" rel="noopener">Nunito</a>
+      by The Nunito Project Authors, used under the SIL Open Font License 1.1.
+      <a href="/fonts/LICENSE.txt" class="text-brand underline">Read the font license</a>.
+    </li>
+    <li>Chart themes and decorations are original artwork made for this site.</li>
+  </ul>
+
+  <h2 class="pt-4 text-xl font-bold">Say hello</h2>
+  <p>
+    Found a bug, or want a chart we don't make yet? <a href={PAGES.contact.path} class="text-brand underline"
+      >Get in touch</a
+    >. We read every message.
+  </p>
 </InfoLayout>

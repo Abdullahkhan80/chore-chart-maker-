@@ -4,7 +4,7 @@ import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import type { PageMeta } from '../lib/pages.ts';
+import { pageOgImagePath, type PageMeta } from '../lib/pages.ts';
 import { SITE_CONFIG, buildBreadcrumbList, type BreadcrumbItem, type JsonLd } from '../lib/seo.ts';
 
 interface Props {
@@ -18,6 +18,8 @@ interface Props {
 const { page, breadcrumbs, jsonLd = [], ogType } = Astro.props;
 const trail = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : undefined;
 const structuredData = trail ? [...jsonLd, buildBreadcrumbList(trail)] : jsonLd;
+const ogImagePath = pageOgImagePath(page);
+const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: `${page.h1}: ${SITE_CONFIG.name}` } : undefined;
 ---
 
 <!doctype html>
@@ -25,12 +27,15 @@ const structuredData = trail ? [...jsonLd, buildBreadcrumbList(trail)] : jsonLd;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href="/fonts/nunito-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
     <SEO
       title={page.title}
       description={page.description}
       path={page.path}
       noindex={page.noindex}
       ogType={ogType}
+      ogImage={ogImage}
+      article={ogType === 'article' ? { published: page.published, modified: page.lastmod } : undefined}
       jsonLd={structuredData}
     />
     <meta name="theme-color" content={SITE_CONFIG.themeColor.light} media="(prefers-color-scheme: light)" />

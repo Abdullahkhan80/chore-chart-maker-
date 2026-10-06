@@ -1,0 +1,173 @@
+---
+// The chart editor. Server-renders a finished chart for the preset so the first
+// paint shows a real chart; src/scripts/editor.ts then makes it interactive.
+// No heading tags inside the tool: sections use <fieldset>/<legend> and <p>.
+import { choreListHtml, iconImg, kidListHtml, renderPreviewHtml, suggestionAge, suggestionChipsHtml } from '../lib/editorMarkup.ts';
+import { getPreset } from '../lib/presets.ts';
+import { createDefaultConfig } from '../lib/state.ts';
+import { THEMES } from '../lib/themes.ts';
+import { CHART_TYPES, CURRENCIES, LIMITS } from '../lib/types.ts';
+
+interface Props {
+  /** Preset id from src/lib/presets.ts, e.g. "weekly", "reward", "age-5". */
+  preset: string;
+}
+
+const { preset } = Astro.props;
+const config = getPreset(preset) ?? createDefaultConfig();
+const age = suggestionAge(config);
+const steps = ['Who', 'Chores', 'Style', 'Download'];
+const typeLabels: Record<(typeof CHART_TYPES)[number], string> = {
+  weekly: 'Weekly',
+  routine: 'Routine',
+  reward: 'Reward',
+  family: 'Family',
+  rotation: 'Rotation',
+};
+---
+
+<div class="ccm" data-ccm data-preset={preset}>
+  <p class="sr-only" aria-live="polite" data-ccm-announce></p>
+  <div class="grid gap-6 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:items-start">
+    <section aria-label="Chart preview" class="lg:sticky lg:top-4 lg:order-last">
+      <div class="ccm-preview" data-ccm-preview set:html={renderPreviewHtml(config)} />
+      <p class="mt-1 min-h-5 text-sm text-muted" data-ccm-pages></p>
+    </section>
+
+    <form class="ccm-controls" data-ccm-form novalidate>
+      <nav aria-label="Steps" class="ccm-steps lg:hidden">
+        <ol class="grid grid-cols-4 gap-1">
+          {
+            steps.map((label, i) => (
+              <li>
+                <button type="button" class="ccm-step-btn" data-action="go-step" data-target={i + 1} aria-current={i === 0 ? 'step' : undefined}>
+                  <span aria-hidden="true">{i + 1}</span> {label}
+                </button>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <fieldset class="ccm-step" data-step="1" data-active tabindex="-1">
+        <legend class="ccm-legend">1. Who is it for?</legend>
+        <label class="ccm-label">Chart title<input class="ccm-input" name="title" value={config.title} maxlength={LIMITS.titleLength} autocomplete="off" /></label>
+        <ul class="mt-3 grid gap-2" data-ccm-kids set:html={kidListHtml(config)} />
+        <button type="button" class="ccm-btn mt-2" data-action="add-kid" disabled={config.kids.length >= LIMITS.maxKids}>+ Add a child</button>
+      </fieldset>
+
+      <fieldset class="ccm-step" data-step="2" tabindex="-1">
+        <legend class="ccm-legend">2. Chores</legend>
+        <div class="flex flex-wrap items-center gap-2">
+          <p class="ccm-label">Suggested for age</p>
+          <label class="sr-only" for="ccm-suggest-age">Suggestions for age</label>
+          <select id="ccm-suggest-age" class="ccm-input w-20" data-ccm-suggest-age>
+            {Array.from({ length: 13 }, (_, i) => i + 2).map((a) => <option value={a} selected={a === age}>{a}</option>)}
+          </select>
+        </div>
+        <div class="mt-2 flex flex-wrap gap-1" data-ccm-suggestions set:html={suggestionChipsHtml(age, config)} />
+        <p class="mt-4 text-sm text-muted" data-ccm-chore-count>{config.chores.length} of {LIMITS.maxChores} chores</p>
+        <ul class="mt-2 grid gap-2" data-ccm-chores set:html={choreListHtml(config)} />
+        <div class="mt-3 flex items-end gap-2">
+          <button type="button" class="ccm-btn px-1" data-action="pick-icon" data-index="new" aria-label="Choose an icon for the new chore">
+            <span data-ccm-custom-icon set:html={iconImg('star', 32)} />
+          </button>
+          <label class="ccm-label min-w-0 flex-1">Add your own chore<input class="ccm-input" data-ccm-custom-label maxlength={LIMITS.choreLabelLength} autocomplete="off" /></label>
+          <button type="button" class="ccm-btn" data-action="add-custom-chore" disabled={config.chores.length >= LIMITS.maxChores}>Add</button>
+        </div>
+        <button type="button" class="ccm-btn mt-3" data-action="open-library" aria-expanded="false">Browse all chores</button>
+        <div class="mt-2" data-ccm-library hidden></div>
+      </fieldset>
+
+      <fieldset class="ccm-step" data-step="3" tabindex="-1">
+        <legend class="ccm-legend">3. Style</legend>
+        <fieldset>
+          <legend class="ccm-label">Chart type</legend>
+          <div class="mt-1 flex flex-wrap gap-1">
+            {CHART_TYPES.map((t) => <label class="ccm-chip"><input type="radio" name="type" value={t} checked={config.type === t} />{typeLabels[t]}</label>)}
+          </div>
+        </fieldset>
+        <fieldset class="mt-3" data-ccm-themes>
+          <legend class="ccm-label">Theme</legend>
+          <div class="mt-1 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {
+              Object.values(THEMES).map((t) => (
+                <label class="ccm-theme">
+                  <input type="radio" name="theme" value={t.id} class="peer sr-only" checked={config.theme === t.id} />
+                  <span class="ccm-theme-thumb" data-theme-thumb={t.id} />
+                  <span class="text-sm font-semibold">{t.name}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <label class="ccm-label">Paper<select class="ccm-input" name="paper"><option value="letter">Letter (US)</option><option value="a4">A4</option></select></label>
+          <label class="ccm-label">Week starts on<select class="ccm-input" name="weekStart"><option value="sun">Sunday</option><option value="mon">Monday</option></select></label>
+        </div>
+        <fieldset class="mt-3">
+          <legend class="ccm-label">Orientation</legend>
+          <div class="mt-1 flex gap-1">
+            <label class="ccm-chip"><input type="radio" name="orientation" value="landscape" />Landscape</label>
+            <label class="ccm-chip"><input type="radio" name="orientation" value="portrait" />Portrait</label>
+          </div>
+        </fieldset>
+        <fieldset class="mt-3" data-when="type:family" hidden>
+          <legend class="ccm-label">Family layout</legend>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <label class="ccm-chip"><input type="radio" name="familyLayout" value="combined" />One chart for everyone</label>
+            <label class="ccm-chip"><input type="radio" name="familyLayout" value="perKid" />One page per child</label>
+          </div>
+        </fieldset>
+        <div class="mt-3 grid gap-2" data-when="type:reward" hidden>
+          <label class="ccm-label">Stickers to earn the reward ({LIMITS.rewardGoal.min}–{LIMITS.rewardGoal.max})<input class="ccm-input w-24" type="number" name="rewardGoal" min={LIMITS.rewardGoal.min} max={LIMITS.rewardGoal.max} inputmode="numeric" /></label>
+          <label class="ccm-label">Reward<input class="ccm-input" name="prizeText" maxlength={LIMITS.prizeTextLength} placeholder="A trip to the park" autocomplete="off" /></label>
+        </div>
+        <div class="mt-3 grid gap-1">
+          <label class="ccm-check"><input type="checkbox" name="showDates" />Show dates</label>
+          <label class="ccm-label" data-when="dates" hidden>Week starting<input class="ccm-input" type="date" name="startDate" /></label>
+          <label class="ccm-check"><input type="checkbox" name="allowanceEnabled" />Track allowance</label>
+          <label class="ccm-label" data-when="allowance" hidden>Currency<select class="ccm-input" name="currency">{CURRENCIES.map((c) => <option value={c}>{c}</option>)}</select></label>
+          <label class="ccm-check"><input type="checkbox" name="largeText" />Large text</label>
+          <label class="ccm-check"><input type="checkbox" name="inkSaver" />Ink saver (white background, outlines only)</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="ccm-step" data-step="4" tabindex="-1">
+        <legend class="ccm-legend">4. Download</legend>
+        <div class="grid gap-2 sm:grid-cols-2">
+          <button type="button" class="ccm-btn ccm-btn-primary sm:col-span-2" data-action="export-pdf">Download PDF</button>
+          <button type="button" class="ccm-btn" data-action="export-png">Download PNG</button>
+          <button type="button" class="ccm-btn" data-action="print">Print</button>
+          <button type="button" class="ccm-btn" data-action="copy-link">Copy share link</button>
+          <button type="button" class="ccm-btn" data-action="start-over">Start over</button>
+        </div>
+        <label class="sr-only" for="ccm-share-output">Share link</label>
+        <input id="ccm-share-output" class="ccm-input mt-2" data-ccm-share-output readonly hidden />
+        <p class="mt-2 text-sm text-muted">Your chart is saved in this browser only. Share links carry the chart inside the link itself.</p>
+      </fieldset>
+
+      <div class="mt-4 flex justify-between gap-2 lg:hidden">
+        <button type="button" class="ccm-btn" data-action="step-prev" disabled>Back</button>
+        <button type="button" class="ccm-btn ccm-btn-primary" data-action="step-next">Next</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ccm-bar lg:hidden">
+    <button type="button" class="ccm-btn flex-1" data-action="show-preview">Preview</button>
+    <button type="button" class="ccm-btn ccm-btn-primary flex-1" data-action="show-download">Download</button>
+  </div>
+
+  <dialog class="ccm-dialog" data-ccm-icon-dialog aria-label="Choose an icon">
+    <div class="flex items-center justify-between gap-2">
+      <p class="font-semibold">Choose an icon</p>
+      <button type="button" class="ccm-btn" data-action="close-icon-picker" aria-label="Close">✕</button>
+    </div>
+    <div class="mt-2 grid grid-cols-6 gap-1 sm:grid-cols-8" data-ccm-icon-grid></div>
+  </dialog>
+</div>
+
+<script>
+  import '../scripts/editor.ts';
+</script>

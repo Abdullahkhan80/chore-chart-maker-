@@ -20,7 +20,7 @@ function fullConfig(): ChartConfig {
     type: 'family',
     title: 'Ölçü family 🏡 chores',
     kids: [
-      { id: 'a', name: 'Zoë', color: 'purple', avatarIcon: 'avatar-fox' },
+      { id: 'a', name: 'Zoë', color: 'purple', avatarIcon: 'avatar-fox', age: 7 },
       { id: 'b', name: '李小龙', color: 'green', avatarIcon: 'avatar-owl' },
       { id: 'c', name: 'Sam 👨‍👩‍👧', color: 'red', avatarIcon: 'avatar-rocket' },
     ],
@@ -35,6 +35,7 @@ function fullConfig(): ChartConfig {
     reward: { enabled: true, goal: 25, prizeText: 'Movie night' },
     allowance: { enabled: true, currency: 'GBP' },
     theme: 'pastel',
+    familyLayout: 'perKid',
     paper: 'a4',
     orientation: 'portrait',
     inkSaver: true,
@@ -102,6 +103,7 @@ test('validateConfig clamps oversized and out-of-range values', () => {
     allowance: { enabled: true, currency: 'BTC' },
     startDate: '2026-02-31',
     paper: 'tabloid',
+    familyLayout: 'sideways',
   });
   assertWithinLimits(config);
   assert.equal(config.kids.length, LIMITS.maxKids);
@@ -120,6 +122,10 @@ test('validateConfig clamps oversized and out-of-range values', () => {
   assert.equal(config.allowance.currency, 'USD');
   assert.equal(config.startDate, null);
   assert.equal(config.paper, 'letter');
+  assert.equal(config.familyLayout, 'combined');
+  assert.equal(config.kids[0]!.age, undefined);
+  assert.equal(validateConfig({ kids: [{ age: 99 }] }).kids[0]!.age, LIMITS.kidAge.max);
+  assert.equal(validateConfig({ kids: [{ age: 6.6 }] }).kids[0]!.age, 7);
   assert.equal(validateConfig({ reward: { goal: 1 } }).reward.goal, LIMITS.rewardGoal.min);
   assert.equal(validateConfig({ reward: { goal: Number.NaN } }).reward.goal, LIMITS.rewardGoal.default);
 });

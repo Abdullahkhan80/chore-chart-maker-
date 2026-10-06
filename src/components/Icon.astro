@@ -1,0 +1,17 @@
+---
+// One icon as a lazily loaded external <img>. Never inline icon SVG markup.
+import type { IconId } from '../lib/icons.ts';
+import { iconImgAttrs } from '../lib/iconManifest.ts';
+
+interface Props {
+  id: IconId;
+  size?: number;
+  /** Override alt text; pass "" when the icon is decorative next to a text label. */
+  alt?: string;
+  class?: string;
+}
+
+const { id, size, alt, class: className } = Astro.props;
+---
+
+<img {...iconImgAttrs(id, size, alt)} class={className} />

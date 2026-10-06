@@ -1,9 +1,37 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'How do I make a chore chart for the whole family?',
+    answer:
+      'Add each family member in step 1, choose the Family chart type, then assign every chore to one person, several people or everyone. The chart color-codes each person so it is easy to see whose job is whose.',
+  },
+  {
+    question: 'Can I print a separate page for each child?',
+    answer:
+      'Yes. Switch the family layout from one combined chart to one page per person. Each page shows only that person\'s chores, which helps siblings who argue about the shared chart.',
+  },
+  {
+    question: 'Should parents be on the family chore chart too?',
+    answer:
+      'It helps. When kids see that adults have jobs on the same chart, chores feel like part of running the home rather than a punishment. Add grown-ups like anyone else.',
+  },
+  {
+    question: 'How do I split chores fairly between kids of different ages?',
+    answer:
+      'Fair does not have to mean equal. Give younger children shorter, simpler jobs and older children bigger ones, and add each child\'s age so the tool suggests chores that suit it.',
+  },
+  {
+    question: 'How many people can be on one family chart?',
+    answer:
+      'Up to eight people and twenty chores. For large families, one page per person keeps each chart readable.',
+  },
+];
 ---
 
-<ToolLayout page={PAGES.familyChoreChart}>
+<ToolLayout page={PAGES.familyChoreChart} faq={faq}>
   <Fragment slot="intro">Give everyone in the house their own jobs on one weekly chart, from toddlers to grown-ups.</Fragment>
-  <p>Placeholder: how-to steps, printable examples and FAQs go here.</p>
 </ToolLayout>

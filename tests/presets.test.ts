@@ -20,12 +20,13 @@ test('every preset is already valid, non-empty and shareable', () => {
 });
 
 test('there is a preset for each chart type and the required landing presets', () => {
-  for (const id of [...CHART_TYPES, 'reward', 'roommates', 'morning-routine', 'age-5']) {
+  for (const id of [...CHART_TYPES, 'reward', 'roommates', 'morning-routine', 'elegant', 'age-5']) {
     assert.ok(PRESET_IDS.includes(id), `missing preset ${id}`);
   }
   for (const type of CHART_TYPES) assert.equal(getPreset(type)!.type, type);
   assert.equal(getPreset('reward')!.reward.enabled, true);
   assert.equal(getPreset('roommates')!.type, 'rotation');
+  assert.equal(getPreset('elegant')!.theme, 'minimal');
 });
 
 test('every landing page maps to an existing preset', () => {

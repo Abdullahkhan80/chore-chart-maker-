@@ -1,9 +1,37 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'What should be on a morning routine chart for kids?',
+    answer:
+      'Keep it to the steps your child actually needs before leaving the house: get dressed, eat breakfast, brush teeth, brush hair, pack the backpack and put on shoes. Five or six steps is plenty.',
+  },
+  {
+    question: 'At what age does a morning routine chart help?',
+    answer:
+      'Routine charts work best from about age 3 to 8. Picture steps let pre-readers follow along, and older kids like checking off each step on their own.',
+  },
+  {
+    question: 'Can my child use the chart without reading?',
+    answer:
+      'Yes. Every step has a picture icon, so children who cannot read yet can follow the chart from the pictures alone. Turn on large text to make it easier to see.',
+  },
+  {
+    question: 'Where should I hang a morning routine chart?',
+    answer:
+      'Put it where the routine happens, at your child\'s eye level: on their bedroom door, by the bathroom sink or next to the front door where shoes and backpacks go.',
+  },
+  {
+    question: 'Can I make a bedtime routine chart as well?',
+    answer:
+      'Yes. Keep the Routine chart type and swap the steps for evening ones like bath, pajamas, brushing teeth and reading a book, then print it as a second chart.',
+  },
+];
 ---
 
-<ToolLayout page={PAGES.morningRoutineChart}>
+<ToolLayout page={PAGES.morningRoutineChart} faq={faq}>
   <Fragment slot="intro">Help kids get out the door with a simple step-by-step morning routine chart they can follow on their own.</Fragment>
-  <p>Placeholder: how-to steps, printable examples and FAQs go here.</p>
 </ToolLayout>

@@ -1,38 +1,235 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { PAGES } from '../lib/pages.ts';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { AGE_PAGE_AGES, PAGES, agePage } from '../lib/pages.ts';
+import { buildFaqPage, type FaqItem } from '../lib/seo.ts';
 
 const page = PAGES.home;
-const tools = [
-  PAGES.choreChartMaker,
+// Live tools only: add a card here when a new tool ships, never a "coming soon" placeholder.
+const chartTypes = [
   PAGES.rewardChartMaker,
   PAGES.familyChoreChart,
-  PAGES.roommateChoreChart,
   PAGES.morningRoutineChart,
+  PAGES.roommateChoreChart,
+  PAGES.freeChoreChartTemplate,
+  PAGES.elegantChoreChart,
+];
+
+const features: { feature: string; included: string }[] = [
+  { feature: 'Chart types', included: 'Weekly, routine, reward, family and rotation' },
+  { feature: 'People and chores', included: 'Up to 8 people and 20 chores per chart' },
+  { feature: 'Chore library', included: 'Age-appropriate chores for ages 2 to 14, each with a picture' },
+  { feature: 'Themes', included: '8, from playful Dinosaur and Space to a black-and-white Minimal' },
+  { feature: 'Paper', included: 'US Letter or A4, portrait or landscape' },
+  { feature: 'Downloads', included: 'PDF, PNG, direct printing and a share link' },
+  { feature: 'Extras', included: 'Sticker rewards, points, allowance amounts, large text, ink saver' },
+  { feature: 'Price and sign-up', included: 'Free, with no account, trial or upgrade' },
+];
+
+const faq: FaqItem[] = [
+  {
+    question: 'Is Chore Chart Maker free to use online?',
+    answer:
+      'Yes. The online chore chart maker is completely free, with every chart type, theme and download included. There is no account to create, no trial that runs out and no premium plan.',
+  },
+  {
+    question: 'Do I need to download an app?',
+    answer:
+      'No. The chore chart maker runs in any modern web browser on a phone, tablet or computer. Open the page, make your chart and print it or save it as a PDF or PNG.',
+  },
+  {
+    question: 'How long does it take to make a chore chart?',
+    answer:
+      'About two minutes for a first chart. Add a name and age, tap a few suggested chores and the chart is ready to print. You can spend longer choosing a theme, rewards or an allowance amount for each chore if you like.',
+  },
+  {
+    question: 'Can I make a chore chart for adults or roommates?',
+    answer:
+      'Yes. The rotation chart moves each chore to the next person every week, which suits roommates, couples and teenagers, and the family chart can include every adult in the house as well as the kids.',
+  },
+  {
+    question: 'Where is my chart saved?',
+    answer:
+      'In your own browser, on the device you made it on. Nothing is uploaded to a server and there are no accounts. To open the chart on another device, use Copy share link and open that link there.',
+  },
 ];
 ---
 
-<MainLayout page={page}>
-  <h1 class="max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">{page.h1}</h1>
+<MainLayout page={page} jsonLd={[buildFaqPage(faq)]}>
+  <h1 class="text-3xl font-bold tracking-tight sm:text-5xl">{page.h1}</h1>
   <p class="mt-4 max-w-prose text-lg text-muted">
-    Make a chart in minutes and print it at home. Free, no sign-up, and everything you type stays in your browser.
+    Chore Chart Maker is a free online chore chart maker: add your kids, pick chores with pictures and print a finished
+    chart in about two minutes. It runs in your browser with no sign-up, and nothing you type is ever uploaded.
   </p>
-  <a
-    href={PAGES.choreChartMaker.path}
-    class="mt-6 inline-block rounded-lg bg-brand px-5 py-3 font-semibold text-brand-fg hover:bg-brand-strong"
-  >
-    Make a chore chart
-  </a>
-  <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      tools.map((tool) => (
-        <li>
-          <a href={tool.path} class="block h-full rounded-xl border border-line p-5 hover:border-brand">
-            <span class="font-semibold text-fg">{tool.label}</span>
-            <span class="mt-1 block text-sm text-muted">{tool.description}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+
+  <div class="mt-8 max-w-xl rounded-xl border border-line p-6">
+    <Icon id="broom" size={48} alt="" class="mb-3 size-12" />
+    <a href={PAGES.choreChartMaker.path} class="text-xl font-bold text-fg underline-offset-4 hover:text-brand hover:underline">
+      {PAGES.choreChartMaker.label}
+    </a>
+    <p class="mt-2 text-muted">
+      Build a printable chore chart with picture chores chosen by age. Weekly, routine, reward, family and roommate
+      layouts, on Letter or A4.
+    </p>
+    <p class="mt-3 text-sm text-muted">
+      Start from:
+      {
+        chartTypes.map((tool, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={tool.path} class="text-brand underline">{tool.label}</a>
+          </>
+        ))
+      }
+    </p>
+    <a
+      href={PAGES.choreChartMaker.path}
+      class="mt-5 inline-block rounded-lg bg-brand px-5 py-3 font-semibold text-brand-fg hover:bg-brand-strong"
+    >
+      Make a chore chart
+    </a>
+  </div>
+
+  <div class="prose-content mt-4 max-w-prose">
+    <h2>How the online chore chart maker works</h2>
+    <p>
+      Everything happens on one page, and the preview updates as you type, so what you see is exactly what prints.
+    </p>
+    <ol>
+      <li>
+        <strong>Add who the chart is for.</strong> Type a name for each child or person, up to eight. Add a child's
+        age and the tool suggests chores that suit it.
+      </li>
+      <li>
+        <strong>Choose the chores.</strong> Tap suggestions, browse the full chore library or type your own. Every
+        chore gets a picture, a set of days and the people who do it.
+      </li>
+      <li>
+        <strong>Pick a style.</strong> Choose a chart type, a theme, Letter or A4 paper and portrait or landscape.
+        Turn on sticker rewards, points or allowance if you want them.
+      </li>
+      <li>
+        <strong>Print or download.</strong> Print straight from the browser, save a PDF, save a PNG for a tablet, or
+        copy a share link for another parent.
+      </li>
+    </ol>
+    <p>
+      Ready to try it? Open the <a href={PAGES.choreChartMaker.path}>chore chart maker</a> and your first chart will
+      be on the fridge in minutes.
+    </p>
+
+    <h2>What you can make</h2>
+    <p>
+      One tool covers the charts most homes need. Each link below opens the same editor with a ready-made starting
+      point, and you can switch chart types at any time without losing your chores.
+    </p>
+    <ul>
+      <li>
+        <strong>Weekly chore charts</strong> with chores down the side and days across the top. This is the best first
+        chart for most kids from about age 4.
+      </li>
+      <li>
+        <strong>Reward charts</strong> with a sticker track of 5 to 30 stickers that leads to a prize you choose. Try
+        the <a href={PAGES.rewardChartMaker.path}>reward chart maker</a>.
+      </li>
+      <li>
+        <strong>Routine charts</strong> that show the steps of a busy part of the day in order. Start with the
+        <a href={PAGES.morningRoutineChart.path}>morning routine chart</a>.
+      </li>
+      <li>
+        <strong>Family charts</strong> that put everyone on one color-coded chart, or print one page per person. See
+        the <a href={PAGES.familyChoreChart.path}>family chore chart</a>.
+      </li>
+      <li>
+        <strong>Rotation charts</strong> that move each chore to the next person every week. Our
+        <a href={PAGES.roommateChoreChart.path}>roommate chore chart maker</a> sets one up for shared homes.
+      </li>
+    </ul>
+    <p>
+      Prefer something calm enough for a living room? The
+      <a href={PAGES.elegantChoreChart.path}>elegant chore chart maker</a> starts with a minimal black-and-white theme.
+      Want a quick start? Browse the <a href={PAGES.freeChoreChartTemplate.path}>free chore chart templates</a> and
+      pick the one that fits your home.
+    </p>
+
+    <h2>An easy chore chart maker for busy parents</h2>
+    <p>
+      Most parents make a chore chart in a spare five minutes, often on a phone. The tool is built around that.
+    </p>
+    <ul>
+      <li>
+        <strong>Chores suggested by age.</strong> You don't have to think up a list. The library covers ages 2 to 14,
+        from putting toys in a bin to cooking a family meal. Our guide to
+        <a href={PAGES.choresByAge.path}>age-appropriate chores for kids</a> explains what to expect at each age.
+      </li>
+      <li>
+        <strong>Pictures for pre-readers.</strong> Every chore has an icon, so a 3-year-old can read the chart without
+        help.
+      </li>
+      <li>
+        <strong>Large text and ink saver.</strong> Make the chart readable from across the room, or print it with
+        outlines only to save color ink.
+      </li>
+      <li>
+        <strong>Your chart is remembered.</strong> Come back next week on the same device and your chart is still
+        there, ready to update and reprint.
+      </li>
+    </ul>
+
+    <h2>Everything included in the free chore chart maker</h2>
+    <p>Nothing on this list is locked behind a paywall or an email sign-up.</p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr><th scope="col">Feature</th><th scope="col">What you get</th></tr>
+        </thead>
+        <tbody>
+          {
+            features.map((row) => (
+              <tr>
+                <th scope="row">{row.feature}</th>
+                <td>{row.included}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Private by design</h2>
+    <p>
+      A chore chart holds your children's names and ages, so it should stay with you. This chore chart maker online
+      works entirely in your browser: there are no accounts and no server that stores charts. Your chart is saved on
+      your own device, and share links keep it in the part of the link after the # sign, which browsers never send to a
+      server. We never record what you type. Read the <a href={PAGES.privacyPolicy.path}>privacy policy</a> for the
+      details.
+    </p>
+
+    <h2>Who uses it</h2>
+    <p>
+      Parents of kids aged 2 to 14 make most of the charts here, from toddler routines to teen laundry schedules. Teachers
+      use it for classroom jobs, grandparents and caregivers use it to keep routines the same across homes, and
+      roommates use the rotation chart to share the cleaning fairly. Whoever you are making a chart for, the tool and
+      every printable are free.
+    </p>
+
+    <h2>Guides</h2>
+    <ul>
+      <li><a href={PAGES.choresByAge.path}>{PAGES.choresByAge.h1}</a></li>
+      <li>
+        Chores by age:
+        {
+          AGE_PAGE_AGES.map(agePage).map((guide, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={guide.path}>{guide.label.replace('Chores for ', '')}</a>
+            </>
+          ))
+        }
+      </li>
+    </ul>
+
+    <Faq items={faq} />
+  </div>
 </MainLayout>

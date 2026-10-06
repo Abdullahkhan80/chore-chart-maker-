@@ -1,8 +1,85 @@
 ---
 import InfoLayout from '../layouts/InfoLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import { SITE_CONFIG } from '../lib/seo.ts';
+
+const page = PAGES.terms;
+const link = 'text-brand underline';
 ---
 
-<InfoLayout page={PAGES.terms}>
-  <p>Placeholder: the full terms of use are coming soon.</p>
+<InfoLayout page={page}>
+  <p class="text-sm text-muted">Last updated <time datetime={page.lastmod}>{page.lastmod}</time></p>
+  <p>
+    These terms cover your use of {SITE_CONFIG.name} at {SITE_CONFIG.domain} (the "site"). By using the site, you agree
+    to them. If you don't agree, please don't use the site.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Using the site</h2>
+  <p>
+    The site is free to use for personal, family, classroom and other non-commercial purposes. You don't need an
+    account. Please don't misuse it: don't try to break, overload or interfere with the site, and don't use it for
+    anything unlawful.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Your charts</h2>
+  <p>
+    The text you put on a chart belongs to you, and it stays on your device (see our
+    <a href={PAGES.privacyPolicy.path} class={link}>privacy policy</a>). You may print, save, copy and share the charts
+    you make, including for use with your kids, students or household, at no cost.
+  </p>
+  <p>
+    You may not resell the site's themes, templates or artwork as your own product, or present the site's charts as a
+    paid template pack. If you're unsure whether a use is allowed, <a href={PAGES.contact.path} class={link}>ask us</a>.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Our content and third-party assets</h2>
+  <p>
+    The site's design, code, themes and written guides belong to {SITE_CONFIG.name}. Chart icons are Microsoft Fluent
+    Emoji, used under the MIT License, and the Nunito font is used under the SIL Open Font License; their licenses also
+    apply to those assets. See our <a href={PAGES.about.path} class={link}>About page</a> for credits.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Chore suggestions</h2>
+  <p>
+    Chores and age suggestions on the site are general ideas, not professional advice. Every child is different. You
+    know your kids best, so choose tasks that suit them and supervise anything involving heat, sharp objects, chemicals
+    or heavy items.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Share links</h2>
+  <p>
+    Anyone with a share link can see the chart it contains. You're responsible for who you share links with.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">No warranty</h2>
+  <p>
+    The site is provided "as is" and "as available", without warranties of any kind, express or implied. We don't
+    promise it will always be available or error-free, or that charts saved in your browser will never be lost. Keep a
+    PDF or printed copy of charts you care about.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Limitation of liability</h2>
+  <p>
+    To the fullest extent allowed by law, {SITE_CONFIG.name} and its maker are not liable for any indirect, incidental,
+    special or consequential damages, or for any loss of data, arising from your use of the site. Because the site is
+    free, our total liability for any claim is limited to US $50.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Changes</h2>
+  <p>
+    We may update the site or these terms from time to time. When we change the terms, we'll update the date at the top
+    of this page. Continuing to use the site after a change means you accept the updated terms.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Governing law</h2>
+  <p>
+    These terms are governed by the laws of the State of Delaware, United States, without regard to its conflict-of-law
+    rules. Any dispute will be handled in the state or federal courts located in Delaware, unless the law where you live
+    gives you the right to bring it elsewhere.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Contact</h2>
+  <p>
+    Questions about these terms? Email <a href={`mailto:${SITE_CONFIG.email}`} class={link}>{SITE_CONFIG.email}</a>.
+  </p>
 </InfoLayout>

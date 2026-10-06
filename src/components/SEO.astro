@@ -16,11 +16,21 @@ interface Props {
   noindex?: boolean;
   ogType?: 'website' | 'article';
   ogImage?: { path: string; width: number; height: number; alt: string };
+  /** Article dates (ISO YYYY-MM-DD) for og:type "article". */
+  article?: { published: string; modified: string };
   jsonLd?: JsonLd[];
 }
 
-const { title, description, path, noindex = false, ogType = 'website', ogImage = SITE_CONFIG.ogImage, jsonLd = [] } =
-  Astro.props;
+const {
+  title,
+  description,
+  path,
+  noindex = false,
+  ogType = 'website',
+  ogImage = SITE_CONFIG.ogImage,
+  article,
+  jsonLd = [],
+} = Astro.props;
 
 const canonical = buildCanonicalUrl(path);
 const imageUrl = buildAssetUrl(ogImage.path);
@@ -41,9 +51,20 @@ const structuredData = isHome ? [buildWebSite(), buildOrganization(), ...jsonLd]
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content={String(ogImage.width)} />
 <meta property="og:image:height" content={String(ogImage.height)} />
 <meta property="og:image:alt" content={ogImage.alt} />
+
+{
+  ogType === 'article' && article && (
+    <>
+      <meta property="article:published_time" content={article.published} />
+      <meta property="article:modified_time" content={article.modified} />
+      <meta property="article:author" content={buildCanonicalUrl(SITE_CONFIG.author.path)} />
+    </>
+  )
+}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />

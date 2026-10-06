@@ -1,8 +1,31 @@
 ---
 import InfoLayout from '../layouts/InfoLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import { SITE_CONFIG } from '../lib/seo.ts';
 ---
 
 <InfoLayout page={PAGES.contact}>
-  <p>Placeholder: contact details are coming soon. We read every message about bugs, ideas and new printable charts.</p>
+  <p>
+    We'd love to hear from you. Email us at
+    <a href={`mailto:${SITE_CONFIG.email}`} class="font-semibold text-brand underline">{SITE_CONFIG.email}</a>
+    and we'll do our best to reply within a few business days.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">What to write about</h2>
+  <ul class="list-disc space-y-2 pl-6">
+    <li><strong>Bugs:</strong> tell us what you clicked, what you expected and what happened instead.</li>
+    <li><strong>Printing problems:</strong> include your browser, paper size (Letter or A4) and printer if you know it.</li>
+    <li><strong>Ideas:</strong> new chart types, chores, pictures or themes you'd like to see.</li>
+    <li><strong>Privacy or legal questions:</strong> about our <a href={PAGES.privacyPolicy.path} class="text-brand underline">privacy policy</a> or <a href={PAGES.terms.path} class="text-brand underline">terms of use</a>.</li>
+  </ul>
+
+  <h2 class="pt-4 text-xl font-bold">Please keep kids' details out of your email</h2>
+  <p>
+    You don't need to send us your child's name or your chart to report a problem. A description or a screenshot with
+    names covered is enough. Remember that a share link contains the whole chart, including any names on it, so only send
+    one if you're comfortable with us seeing it.
+  </p>
+  <p>
+    When you email us, we only use your address and message to reply to you. We never add you to a mailing list.
+  </p>
 </InfoLayout>

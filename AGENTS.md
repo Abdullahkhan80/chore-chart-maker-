@@ -23,10 +23,12 @@ Guidance for all work in this repo. Read it before every change.
 
 | Path | Contents |
 | --- | --- |
-| `src/lib/*.ts` | Pure logic: state, chore library, SVG renderer. **No Astro/Vite-only syntax** (no `astro:*` imports, `import.meta.env`, `?raw`/`?url` imports or path aliases), so Node can import these files directly in tests. Use explicit `.ts` extensions in relative imports. |
+| `src/lib/*.ts` | Pure logic: state, chore library, SVG renderer (`renderChart.ts` is the single source of truth for preview, PNG, PDF and print). **No Astro/Vite-only syntax** (no `astro:*` imports, `import.meta.env`, `?raw`/`?url` imports or path aliases), so Node can import these files directly in tests. Use explicit `.ts` extensions in relative imports. |
+| `src/scripts/` | Browser-only code: `editor.ts` (chart editor), `export.ts` (PDF/PNG/print, loaded on click), lazy `librarySearch.ts` and `themeThumbnails.ts`. The only network access allowed is `fetchAsset()` for our own `/icons/` and `/fonts/` (enforced by `tests/privacy-audit.test.ts`). |
 | `src/pages/` | Routes, one directory per URL. |
 | `src/layouts/`, `src/components/` | Shared shell and UI. |
 | `public/` | Static assets: icons as individual files, the self-hosted font. |
+| `scripts/` | One-off asset generators: `fetch-icons.mjs` (Fluent Emoji → `public/icons/` + generated `src/lib/iconManifest.ts`), `generate-icons.mjs` (favicons, OG image). |
 | `tests/*.test.ts` | Node test runner tests: logic plus build-output budget/SEO checks. |
 
 ## Privacy invariant (non-negotiable)
@@ -46,6 +48,8 @@ Enforce these with tests where possible.
 - Icons load as external files and are never inlined in bulk.
 - Mobile **LCP < 2.0 s**, **CLS < 0.05**. Reserve space for anything that loads late.
 - Font: self-hosted and subset, with `font-display: swap`.
+
+**Append-only lists:** share-link hashes encode icons, themes and other enums by index, so never reorder or remove entries in `src/lib/icons.ts` or the enum arrays in `src/lib/types.ts` once released. Themes must keep every text/background pair at WCAG AA (tested).
 
 ## SEO rules
 
@@ -68,6 +72,8 @@ Enforce these with tests where possible.
 /roommate-chore-chart/
 /morning-routine-chart/
 /family-chore-chart/
+/free-chore-chart-template/
+/elegant-chore-chart/
 /about/
 /contact/
 /privacy-policy/

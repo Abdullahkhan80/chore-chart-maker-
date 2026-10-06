@@ -1,0 +1,165 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const templates: { situation: string; template: string; link?: { label: string; path: string } }[] = [
+  { situation: 'One child, daily jobs', template: 'Weekly chart (opens on this page)' },
+  {
+    situation: 'Building one new habit',
+    template: 'Reward chart with a sticker track',
+    link: { label: 'reward chart template', path: PAGES.rewardChartMaker.path },
+  },
+  {
+    situation: 'Busy school mornings',
+    template: 'Routine chart with picture steps',
+    link: { label: 'morning routine template', path: PAGES.morningRoutineChart.path },
+  },
+  {
+    situation: 'Several kids or the whole house',
+    template: 'Family chart, combined or one page each',
+    link: { label: 'family chore chart template', path: PAGES.familyChoreChart.path },
+  },
+  {
+    situation: 'Roommates or teens sharing jobs',
+    template: 'Rotation chart that moves chores weekly',
+    link: { label: 'roommate chore chart template', path: PAGES.roommateChoreChart.path },
+  },
+];
+
+const faq: FaqItem[] = [
+  {
+    question: 'Are these chore chart templates completely free?',
+    answer:
+      'Yes. Every template, theme and download format is free to use as often as you like. There is no sign-up, no free trial that runs out and no premium version. Each printed chart carries only a small site address in the bottom corner.',
+  },
+  {
+    question: 'Do I need to create an account to save my chart?',
+    answer:
+      'No. Your chart saves automatically in the browser you made it in, so it is still there when you come back on the same device. To move it to another phone or computer, use Copy share link and open that link on the other device.',
+  },
+  {
+    question: 'Can I edit the template after I download it?',
+    answer:
+      'The PDF and PNG files are finished images, so make changes in the chart maker instead. Open this page again in the same browser, edit the chores or names, and download a fresh copy. It takes a few seconds.',
+  },
+  {
+    question: 'Will the template print correctly on A4 paper?',
+    answer:
+      'Yes. Choose A4 or Letter in the Style step before you download, and the chart is laid out for that exact page size. When you print, set the scale to 100% or actual size so the edges are not cut off.',
+  },
+  {
+    question: 'Can I use the free templates in a classroom or daycare?',
+    answer:
+      'Yes. Teachers and caregivers can make and print charts for their own groups at no cost. Use first names or initials only, and remember that a share link contains the whole chart, so send it only to people who should see it.',
+  },
+];
+---
+
+<ToolLayout page={PAGES.freeChoreChartTemplate} faq={faq}>
+  <Fragment slot="intro">
+    Yes, the chore chart maker template below is completely free: change every chore, name and color, then
+    print it or download a PDF or PNG. There is no sign-up and no paid tier, and nothing you type ever leaves your
+    browser.
+  </Fragment>
+
+  <h2>What "free" means here</h2>
+  <p>
+    Plenty of "free" chore chart templates turn out to be a blank image you can't edit, or a download that asks for
+    your email first. This one is free in the ways that matter when you just want a chart on the fridge tonight:
+  </p>
+  <ul>
+    <li><strong>No account or email.</strong> Open the page and start typing. Nothing asks who you are.</li>
+    <li>
+      <strong>Every feature included.</strong> All five chart types, eight themes, sticker rewards, points and
+      allowance amounts work without an upgrade.
+    </li>
+    <li>
+      <strong>Three ways to get it out.</strong> Save a PDF to print, a PNG for a tablet or phone, or print straight
+      from your browser.
+    </li>
+    <li><strong>Unlimited reprints.</strong> Make a new copy every week, or one for every child.</li>
+    <li>
+      <strong>Your data stays put.</strong> Names and chores are kept in your browser, not on our server, so there is
+      nothing to delete later.
+    </li>
+  </ul>
+
+  <h2>Pick the right template for your home</h2>
+  <p>
+    The editor above opens with a weekly chart because it suits most kids from about age 4. If your situation is
+    different, start from one of the other templates. Your chores carry over when you switch chart types in the Style
+    step, so you can compare them in the preview.
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr><th scope="col">Your situation</th><th scope="col">Best template</th><th scope="col">Start here</th></tr>
+      </thead>
+      <tbody>
+        {
+          templates.map((row) => (
+            <tr>
+              <th scope="row">{row.situation}</th>
+              <td>{row.template}</td>
+              <td>{row.link ? <a href={row.link.path}>{row.link.label}</a> : 'Use the editor above'}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Want something calmer than bright colors and cartoon stickers? Our
+    <a href={PAGES.elegantChoreChart.path}>elegant chore chart designs</a> use the Minimal theme with thin lines and
+    plenty of white space.
+  </p>
+
+  <h2>How to turn the template into your own chart</h2>
+  <ol>
+    <li>
+      <strong>Rename it.</strong> Replace "Child 1" with your child's name and change the title to something they will
+      recognize, like "Maya's Jobs." Add their age to get chore suggestions that fit it.
+    </li>
+    <li>
+      <strong>Trim the chores.</strong> The template starts with six. For kids under 6, cut it to three or four; a
+      short list that gets finished beats a long one that gets ignored.
+    </li>
+    <li>
+      <strong>Set the days.</strong> Not every chore happens daily. Feeding a pet might be every day, while tidying a
+      bedroom might be Saturday only.
+    </li>
+    <li>
+      <strong>Choose a look and paper size.</strong> Pick a theme, Letter or A4, and portrait or landscape. Turn on
+      large text for early readers.
+    </li>
+    <li><strong>Download or print.</strong> The preview shows exactly what will print.</li>
+  </ol>
+  <p>
+    For a full walkthrough of every option, including rewards and allowance, see the main
+    <a href={PAGES.choreChartMaker.path}>printable chore chart maker</a> guide.
+  </p>
+
+  <h2>Before you print: a quick checklist</h2>
+  <ul>
+    <li>Paper size in the Style step matches the paper in your printer.</li>
+    <li>Print scale is set to 100% or "actual size," not "fit to page."</li>
+    <li>Ink saver is on if you print in black and white or are low on color ink.</li>
+    <li>Cardstock is loaded if the chart will live on the fridge for more than a week.</li>
+    <li>Every chore has a picture your child can recognize without reading.</li>
+    <li>The week start (Monday or Sunday) matches how your family plans its week.</li>
+  </ul>
+
+  <h2>Reuse the template week after week</h2>
+  <p>
+    A chore chart template is most useful when you don't have to rebuild it. Because your chart is saved in this
+    browser, you can come back each Sunday, tick "show dates" for the new week and print a fresh copy in under a
+    minute. If you would rather print once, slip the chart into a sheet protector or laminate it and use a dry-erase
+    marker, wiping it clean every weekend.
+  </p>
+  <p>
+    Sharing is free too. Copy share link puts the whole chart into the part of the link after the # sign, which
+    browsers never send to a server. A co-parent or grandparent can open it, print the same chart at their house and
+    keep both homes on the same routine.
+  </p>
+</ToolLayout>

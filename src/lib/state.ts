@@ -6,6 +6,7 @@ import {
   CHART_TYPES,
   CURRENCIES,
   DAYS,
+  FAMILY_LAYOUTS,
   KID_COLORS,
   LIMITS,
   ORIENTATIONS,
@@ -46,6 +47,7 @@ export function createDefaultConfig(type: ChartType = 'weekly'): ChartConfig {
     reward: { enabled: type === 'reward', goal: LIMITS.rewardGoal.default, prizeText: '' },
     allowance: { enabled: false, currency: 'USD' },
     theme: 'classic',
+    familyLayout: 'combined',
     paper: 'letter',
     orientation: type === 'routine' ? 'portrait' : 'landscape',
     inkSaver: false,
@@ -129,11 +131,13 @@ export function validateConfig(input: unknown): ChartConfig {
   const kids: Kid[] = rawKids.filter(isRecord).map((kid, index) => {
     const id = `k${index + 1}`;
     if (typeof kid.id === 'string' && !kidIdMap.has(kid.id)) kidIdMap.set(kid.id, id);
+    const age = clampNumber(kid.age, LIMITS.kidAge.min, LIMITS.kidAge.max);
     return {
       id,
       name: sanitizeText(kid.name, LIMITS.kidNameLength),
       color: pick(kid.color, KID_COLORS, KID_COLORS[index % KID_COLORS.length]!),
       avatarIcon: pick<AvatarIconId>(kid.avatarIcon, AVATAR_ICON_IDS, AVATAR_ICON_IDS[index % AVATAR_ICON_IDS.length]!),
+      ...(age === undefined ? {} : { age: Math.round(age) }),
     };
   });
 
@@ -188,6 +192,7 @@ export function validateConfig(input: unknown): ChartConfig {
       currency: pick(allowance.currency, CURRENCIES, base.allowance.currency),
     },
     theme: pick(raw.theme, THEMES, base.theme),
+    familyLayout: pick(raw.familyLayout, FAMILY_LAYOUTS, base.familyLayout),
     paper: pick(raw.paper, PAPER_SIZES, base.paper),
     orientation: pick(raw.orientation, ORIENTATIONS, base.orientation),
     inkSaver: bool(raw.inkSaver, base.inkSaver),
@@ -272,7 +277,12 @@ function toCompact(config: ChartConfig): Compact {
   return {
     t: enumIndex(CHART_TYPES, config.type),
     n: config.title,
-    k: config.kids.map((kid) => [kid.name, enumIndex(KID_COLORS, kid.color), enumIndex(AVATAR_ICON_IDS, kid.avatarIcon)]),
+    k: config.kids.map((kid) => [
+      kid.name,
+      enumIndex(KID_COLORS, kid.color),
+      enumIndex(AVATAR_ICON_IDS, kid.avatarIcon),
+      kid.age ?? -1,
+    ]),
     c: config.chores.map((chore) => [
       chore.label,
       enumIndex(CHORE_ICON_IDS, chore.iconId),
@@ -288,6 +298,7 @@ function toCompact(config: ChartConfig): Compact {
     r: [config.reward.enabled ? 1 : 0, config.reward.goal, config.reward.prizeText],
     a: [config.allowance.enabled ? 1 : 0, enumIndex(CURRENCIES, config.allowance.currency)],
     h: enumIndex(THEMES, config.theme),
+    y: enumIndex(FAMILY_LAYOUTS, config.familyLayout),
     p: enumIndex(PAPER_SIZES, config.paper),
     o: enumIndex(ORIENTATIONS, config.orientation),
     f: (config.inkSaver ? 1 : 0) | (config.largeText ? 2 : 0),
@@ -305,6 +316,7 @@ function fromCompact(compact: unknown): unknown {
     name: at(kid, 0),
     color: enumAt(KID_COLORS, at(kid, 1)),
     avatarIcon: enumAt(AVATAR_ICON_IDS, at(kid, 2)),
+    age: (at(kid, 3) as number) >= 0 ? at(kid, 3) : undefined,
   }));
   const choresRaw = Array.isArray(compact.c) ? compact.c.slice(0, LIMITS.maxChores) : [];
   const chores = choresRaw.map((chore) => {
@@ -331,6 +343,7 @@ function fromCompact(compact: unknown): unknown {
     reward: { enabled: flag(at(compact.r, 0)), goal: at(compact.r, 1), prizeText: at(compact.r, 2) },
     allowance: { enabled: flag(at(compact.a, 0)), currency: enumAt(CURRENCIES, at(compact.a, 1)) },
     theme: enumAt(THEMES, compact.h),
+    familyLayout: enumAt(FAMILY_LAYOUTS, compact.y),
     paper: enumAt(PAPER_SIZES, compact.p),
     orientation: enumAt(ORIENTATIONS, compact.o),
     inkSaver: (flags & 1) !== 0,

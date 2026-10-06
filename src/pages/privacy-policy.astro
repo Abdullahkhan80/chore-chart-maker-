@@ -1,12 +1,91 @@
 ---
 import InfoLayout from '../layouts/InfoLayout.astro';
 import { PAGES } from '../lib/pages.ts';
+import { SITE_CONFIG } from '../lib/seo.ts';
+
+const page = PAGES.privacyPolicy;
+const link = 'text-brand underline';
 ---
 
-<InfoLayout page={PAGES.privacyPolicy}>
-  <p>Placeholder: the full privacy policy is coming soon.</p>
+<InfoLayout page={page}>
+  <p class="text-sm text-muted">Last updated <time datetime={page.lastmod}>{page.lastmod}</time></p>
   <p>
-    In short: the names, chores and chart content you enter stay in your browser. There is no backend and there are no
-    accounts. Analytics only count anonymous events, such as which chart type was printed, and never see what you type.
+    {SITE_CONFIG.name} ({SITE_CONFIG.domain}) is built so that we don't need your personal information. This policy
+    explains what that means in practice.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">The short version</h2>
+  <ul class="list-disc space-y-2 pl-6">
+    <li>The names, chores, rewards and other text you put on a chart never leave your browser.</li>
+    <li>There are no accounts, no sign-up and no backend that stores charts.</li>
+    <li>We don't sell data, show personalized ads or use tracking cookies.</li>
+  </ul>
+
+  <h2 class="pt-4 text-xl font-bold">Your charts stay on your device</h2>
+  <p>
+    Charts are built, previewed and exported (PDF, PNG and print) entirely in your browser. To keep your work between
+    visits, the chart is saved in your browser's local storage on your own device. We can't see it. You can delete it at
+    any time with the editor's "Start over" button or by clearing your browser's site data.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Share links</h2>
+  <p>
+    When you copy a share link, the chart is packed into the part of the address after the <code>#</code> sign. Browsers
+    don't send that part to any server, so the chart isn't uploaded to us. However, anyone who has the link can open the
+    chart and see everything on it, including names. Only share links with people you trust.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Anonymous usage counts</h2>
+  <p>
+    To learn which features are useful, the site may count anonymous events such as "a reward chart was printed". These
+    events can only carry fixed categories: chart type, theme, paper size, orientation and export format. The code is
+    built so that text you type can't be included, and our automated tests check this. We don't use these counts to
+    identify you.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Hosting and server logs</h2>
+  <p>
+    The site is served by Cloudflare. Like any web host, Cloudflare processes technical request data, such as your IP
+    address, browser type and the page requested, to deliver the site and protect it from abuse. This data is handled
+    under <a href="https://www.cloudflare.com/privacypolicy/" class={link} rel="noopener">Cloudflare's privacy policy</a>.
+    All fonts, icons and scripts are served from our own domain, with no third-party trackers.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Cookies</h2>
+  <p>
+    We don't set advertising or tracking cookies. The only thing the site stores in your browser is the chart you are
+    working on, as described above.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Children's privacy</h2>
+  <p>
+    The site is meant to be used by parents, teachers and other adults, often to make charts for children. We don't
+    knowingly collect personal information from anyone, including children under 13. A child's name typed onto a chart
+    stays on the device where it was typed.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">If you email us</h2>
+  <p>
+    If you contact us, we receive your email address and whatever you write. We use it only to reply and keep it only as
+    long as needed to help you. You can ask us to delete your messages at any time.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Your rights</h2>
+  <p>
+    Because we don't hold chart data or accounts, there is usually nothing about you for us to access, correct or delete.
+    If you've emailed us, you can ask for a copy or deletion of those messages, whichever privacy laws apply to you (such
+    as the GDPR or US state privacy laws).
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Changes to this policy</h2>
+  <p>
+    If we change how the site handles data, we'll update this page and the date at the top. We won't start collecting
+    chart content without changing how the site works and saying so clearly here first.
+  </p>
+
+  <h2 class="pt-4 text-xl font-bold">Contact</h2>
+  <p>
+    Questions about privacy? Email <a href={`mailto:${SITE_CONFIG.email}`} class={link}>{SITE_CONFIG.email}</a> or visit
+    our <a href={PAGES.contact.path} class={link}>contact page</a>.
   </p>
 </InfoLayout>

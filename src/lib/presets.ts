@@ -56,7 +56,7 @@ export function choresForAgePreset(age: number, count = AGE_PRESET_CHORE_COUNT):
 function agePreset(age: number): ChartConfig {
   return build('weekly', {
     title: `My Chores (Age ${age})`,
-    kids: kids(['Child 1']),
+    kids: [{ ...kids(['Child 1'])[0]!, age }],
     chores: chores(choresForAgePreset(age), { assignees: ['k1'] }),
   });
 }
@@ -124,6 +124,17 @@ const BASE_PRESETS = {
         days: ['sun'],
       }),
     }),
+  elegant: () =>
+    build('family', {
+      title: 'Household Chores',
+      kids: kids(['Grown-up 1', 'Grown-up 2', 'Child 1']),
+      chores: [
+        ...chores(['wipe-counters', 'take-out-trash'], { assignees: ['k1'] }),
+        ...chores(['fold-laundry', 'water-plants'], { assignees: ['k2'] }),
+        ...chores(['make-bed', 'set-table'], { assignees: ['k3'] }),
+      ],
+      theme: 'minimal',
+    }),
 } satisfies Record<string, () => ChartConfig>;
 
 const AGE_PRESETS = Object.fromEntries(
@@ -150,5 +161,7 @@ export const PAGE_PRESETS: Readonly<Record<string, string>> = {
   [PAGES.roommateChoreChart.path]: 'roommates',
   [PAGES.morningRoutineChart.path]: 'morning-routine',
   [PAGES.familyChoreChart.path]: 'family',
+  [PAGES.freeChoreChartTemplate.path]: 'weekly',
+  [PAGES.elegantChoreChart.path]: 'elegant',
   ...Object.fromEntries(AGE_PAGE_AGES.map((age) => [agePagePath(age), `age-${age}`])),
 };

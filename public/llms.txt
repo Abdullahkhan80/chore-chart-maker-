@@ -1,22 +1,45 @@
 # Chore Chart Maker
 
-> Free, privacy-first printable tools for parents, teachers, roommates and caregivers. Charts are made in the browser: names and chores never leave the device, and there are no accounts.
+> Chore Chart Maker (https://chorechartmaker.com) is a free website for making printable chore charts, reward charts and routine charts in the browser. It is built mainly for parents of kids aged 2 to 14, mostly in the US, and also suits teachers, caregivers and roommates. There is no sign-up, no account, no paid tier and no backend: charts are made, saved and exported entirely on the user's device, and names and chores are never uploaded.
 
-<!-- Placeholder: expand with page summaries once the tools and guides are live. -->
+## Tool capabilities
+
+- Chart types: weekly chore chart, routine chart (steps in order, e.g. morning or bedtime), reward chart (sticker track of 5 to 30 stickers toward a chosen prize), family chart (everyone on one color-coded chart, or one page per person) and rotation chart (chores rotate to the next person each week, for roommates or teens).
+- Content: up to 8 people and 20 chores per chart. A built-in library of age-appropriate chores (ages 2 to 14), each with a picture icon so pre-readers can follow along, plus custom chores. Each chore can be set for specific days and assigned to one or more people, with optional points or allowance amounts (USD, CAD, GBP, EUR, AUD, NZD).
+- Design: 8 themes (Classic, Pastel, Ocean, Space, Dinosaur, Jungle, Sports, Minimal), large text, an ink saver mode, Monday or Sunday week start, and optional dates.
+- Paper: US Letter (default) and A4, in portrait or landscape.
+- Exports: PDF download, PNG download, direct browser printing, and a copyable share link.
+- Privacy model: the chart is saved in the browser's localStorage. Share links store the chart in the URL hash (after #), which browsers do not send to servers. Analytics are limited to categorical events such as chart type, theme, paper size and export format; text the user types is never sent anywhere.
+- Price: free, with every chart type, theme and export included. No sign-up, trial or watermark across the chart; printed charts carry a small site address in one corner.
 
 ## Tools
 
-- [Chore Chart Maker](https://chorechartmaker.com/chore-chart-maker/): make a printable chore chart (Letter or A4)
-- [Reward Chart Maker](https://chorechartmaker.com/reward-chart-maker/): make a printable reward chart
-- [Roommate Chore Chart](https://chorechartmaker.com/roommate-chore-chart/)
-- [Morning Routine Chart](https://chorechartmaker.com/morning-routine-chart/)
-- [Family Chore Chart](https://chorechartmaker.com/family-chore-chart/)
+- [Chore Chart Maker](https://chorechartmaker.com/chore-chart-maker/): the main tool, opening with a weekly chore chart for one child, with a guide to every option, chores by age and printing tips.
+- [Reward Chart Maker](https://chorechartmaker.com/reward-chart-maker/): the tool preset to a sticker reward chart with a custom goal and prize.
+- [Family Chore Chart](https://chorechartmaker.com/family-chore-chart/): the tool preset to a color-coded chart for several children and adults.
+- [Roommate Chore Chart](https://chorechartmaker.com/roommate-chore-chart/): the tool preset to a weekly rotation chart for shared homes.
+- [Morning Routine Chart](https://chorechartmaker.com/morning-routine-chart/): the tool preset to a picture-step morning routine for young kids.
+- [Free Chore Chart Templates](https://chorechartmaker.com/free-chore-chart-template/): what the free templates include, which template fits which situation, and a pre-print checklist.
+- [Elegant Chore Chart](https://chorechartmaker.com/elegant-chore-chart/): minimal, understated chart designs, with theme choices and tips on cardstock and framing.
 
 ## Guides
 
-- [Age-appropriate chores for kids, by age](https://chorechartmaker.com/chores-for-kids-by-age/)
+- [Age-appropriate chores for kids, by age](https://chorechartmaker.com/chores-for-kids-by-age/): overview of which chores suit children from 2 to 14.
+- [Chores for 3-year-olds](https://chorechartmaker.com/chores-for-3-year-olds/): chore ideas for age 3 with a ready-made chart.
+- [Chores for 4-year-olds](https://chorechartmaker.com/chores-for-4-year-olds/): chore ideas for age 4 with a ready-made chart.
+- [Chores for 5-year-olds](https://chorechartmaker.com/chores-for-5-year-olds/): chore ideas for age 5 with a ready-made chart.
+- [Chores for 6-year-olds](https://chorechartmaker.com/chores-for-6-year-olds/): chore ideas for age 6 with a ready-made chart.
+- [Chores for 7-year-olds](https://chorechartmaker.com/chores-for-7-year-olds/): chore ideas for age 7 with a ready-made chart.
+- [Chores for 8-year-olds](https://chorechartmaker.com/chores-for-8-year-olds/): chore ideas for age 8 with a ready-made chart.
+- [Chores for 9-year-olds](https://chorechartmaker.com/chores-for-9-year-olds/): chore ideas for age 9 with a ready-made chart.
+- [Chores for 10-year-olds](https://chorechartmaker.com/chores-for-10-year-olds/): chore ideas for age 10 with a ready-made chart.
+- [Chores for 11-year-olds](https://chorechartmaker.com/chores-for-11-year-olds/): chore ideas for age 11 with a ready-made chart.
+- [Chores for 12-year-olds](https://chorechartmaker.com/chores-for-12-year-olds/): chore ideas for age 12 with a ready-made chart.
 
 ## About
 
-- [About](https://chorechartmaker.com/about/)
-- [Privacy policy](https://chorechartmaker.com/privacy-policy/)
+- [Home](https://chorechartmaker.com/): overview of the site's tools and guides.
+- [About](https://chorechartmaker.com/about/): who makes the site, how it keeps data private, and credits for the icons and font.
+- [Contact](https://chorechartmaker.com/contact/): how to send feedback, bug reports or ideas.
+- [Privacy policy](https://chorechartmaker.com/privacy-policy/): what data the site does and does not collect.
+- [Terms of use](https://chorechartmaker.com/terms/): acceptable use and the limits of the site's responsibility.

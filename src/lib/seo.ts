@@ -5,6 +5,7 @@ export const SITE_CONFIG = {
   name: 'Chore Chart Maker',
   alternateName: 'chorechartmaker.com',
   domain: 'chorechartmaker.com',
+  email: 'hello@chorechartmaker.com',
   url: 'https://chorechartmaker.com',
   defaultTitle: 'Free Printable Chore Charts for Kids & Families',
   defaultDescription:
@@ -71,6 +72,7 @@ function organizationNode(): JsonLd {
       '@id': ORGANIZATION_ID,
       name: SITE_CONFIG.name,
       url: buildCanonicalUrl('/'),
+      email: SITE_CONFIG.email,
       logo: {
         '@type': 'ImageObject',
         url: buildAssetUrl(SITE_CONFIG.logo.path),

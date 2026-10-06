@@ -76,3 +76,61 @@ test('preview hosts are not forced to https or the apex', async () => {
   await assertRedirect('http://localhost:8787/about', 'http://localhost:8787/about/');
   await assertServed('https://chorechartmaker.example.workers.dev/', 200);
 });
+
+test('asset server that throws returns 500 page with status 500', async () => {
+  const throwingEnv: Env = {
+    ASSETS: {
+      async fetch(request: Request) {
+        const { pathname } = new URL(request.url);
+        if (pathname === '/500.html') {
+          return new Response('<!doctype html><title>Error 500</title>', {
+            status: 200,
+            headers: { 'content-type': 'text/html' },
+          });
+        }
+        throw new Error('asset server failure');
+      },
+    },
+  };
+  const response = await worker.fetch(new Request('https://chorechartmaker.com/'), throwingEnv);
+  assert.equal(response.status, 500);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal(await response.text(), '<!doctype html><title>Error 500</title>');
+});
+
+test('asset server returning 503 returns 500 page with status 500', async () => {
+  const failingEnv: Env = {
+    ASSETS: {
+      async fetch(request: Request) {
+        const { pathname } = new URL(request.url);
+        if (pathname === '/500.html') {
+          return new Response('<!doctype html><title>Error 500</title>', {
+            status: 200,
+            headers: { 'content-type': 'text/html' },
+          });
+        }
+        return new Response('Service Unavailable', { status: 503 });
+      },
+    },
+  };
+  const response = await worker.fetch(new Request('https://chorechartmaker.com/'), failingEnv);
+  assert.equal(response.status, 500);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal(await response.text(), '<!doctype html><title>Error 500</title>');
+});
+
+test('falls back to plain-text 500 if fetching /500.html also fails', async () => {
+  const completelyFailingEnv: Env = {
+    ASSETS: {
+      async fetch() {
+        throw new Error('total storage crash');
+      },
+    },
+  };
+  const response = await worker.fetch(new Request('https://chorechartmaker.com/'), completelyFailingEnv);
+  assert.equal(response.status, 500);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.match(response.headers.get('content-type') ?? '', /^text\/plain/);
+  assert.equal(await response.text(), 'Internal Server Error');
+});
+

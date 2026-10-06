@@ -17,7 +17,8 @@ export type TimeOfDay = (typeof TIMES_OF_DAY)[number];
 export const KID_COLORS = ['teal', 'blue', 'purple', 'pink', 'red', 'orange', 'yellow', 'green'] as const;
 export type KidColor = (typeof KID_COLORS)[number];
 
-export const THEMES = ['classic', 'bright', 'pastel', 'mono'] as const;
+// Order is part of the share-hash format: append only. Definitions live in themes.ts.
+export const THEMES = ['classic', 'pastel', 'ocean', 'space', 'dinosaur', 'jungle', 'sports', 'minimal'] as const;
 export type Theme = (typeof THEMES)[number];
 
 export const PAPER_SIZES = ['letter', 'a4'] as const;
@@ -26,12 +27,16 @@ export type PaperSize = (typeof PAPER_SIZES)[number];
 export const ORIENTATIONS = ['portrait', 'landscape'] as const;
 export type Orientation = (typeof ORIENTATIONS)[number];
 
+export const FAMILY_LAYOUTS = ['combined', 'perKid'] as const;
+export type FamilyLayout = (typeof FAMILY_LAYOUTS)[number];
+
 export const CURRENCIES = ['USD', 'CAD', 'GBP', 'EUR', 'AUD', 'NZD'] as const;
 export type Currency = (typeof CURRENCIES)[number];
 
 export const LIMITS = {
   maxKids: 8,
   kidNameLength: 20,
+  kidAge: { min: 2, max: 18 },
   maxChores: 20,
   choreLabelLength: 40,
   titleLength: 50,
@@ -47,6 +52,8 @@ export interface Kid {
   name: string;
   color: KidColor;
   avatarIcon: AvatarIconId;
+  /** Drives chore suggestions; optional. */
+  age?: number;
 }
 
 export interface Chore {
@@ -87,6 +94,8 @@ export interface ChartConfig {
   reward: RewardSettings;
   allowance: AllowanceSettings;
   theme: Theme;
+  /** Family charts: one combined grid, or one page per kid. */
+  familyLayout: FamilyLayout;
   paper: PaperSize;
   orientation: Orientation;
   inkSaver: boolean;

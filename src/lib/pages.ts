@@ -25,18 +25,18 @@ export const PAGES = {
   home: page({
     path: '/',
     label: 'Home',
-    title: 'Free Printable Chore Charts for Kids & Families',
-    h1: 'Free printable chore charts for kids and families',
+    title: 'Chore Chart Maker – Free, Easy Online Chore Charts',
+    h1: 'Free online chore chart maker',
     description:
-      'Make free printable chore charts, reward charts and routine charts for kids and families. No sign-up, nothing to install, and your info stays in your browser.',
+      'Chore Chart Maker is a free online chore chart maker for kids, families and roommates. Make an easy printable chart in minutes, with no sign-up or upload.',
   }),
   choreChartMaker: page({
     path: '/chore-chart-maker/',
     label: 'Chore Chart Maker',
-    title: 'Chore Chart Maker – Free Printable Chore Charts',
-    h1: 'Chore Chart Maker',
+    title: 'Free Chore Chart Maker – Printable Chore Charts for Kids',
+    h1: 'Free Printable Chore Chart Maker',
     description:
-      'Create a free printable chore chart in minutes. Add kids, choose chores by age, pick a layout and print on Letter or A4. Everything stays in your browser.',
+      'Use this free chore chart maker to build a printable chore chart for kids in minutes: picture chores by age, weekly, routine or reward layouts. No sign-up.',
   }),
   rewardChartMaker: page({
     path: '/reward-chart-maker/',
@@ -57,10 +57,10 @@ export const PAGES = {
   roommateChoreChart: page({
     path: '/roommate-chore-chart/',
     label: 'Roommate Chore Chart',
-    title: 'Roommate Chore Chart – Free Printable Chore Schedule',
-    h1: 'Roommate chore chart',
+    title: 'Roommate Chore Chart Maker – Free Printable Schedule',
+    h1: 'Roommate chore chart maker',
     description:
-      'Split housework fairly with a free printable roommate chore chart. Rotate chores weekly, add everyone in the house, then print or share it. No sign-up required.',
+      'Use this free roommate chore chart maker to split housework fairly. Rotate chores weekly, add everyone in the house, then print or share it. No sign-up needed.',
   }),
   morningRoutineChart: page({
     path: '/morning-routine-chart/',
@@ -77,6 +77,22 @@ export const PAGES = {
     h1: 'Family chore chart',
     description:
       'Plan housework for the whole family with a free printable family chore chart. Assign chores to each person, set a weekly schedule and print on Letter or A4.',
+  }),
+  freeChoreChartTemplate: page({
+    path: '/free-chore-chart-template/',
+    label: 'Free Chore Chart Templates',
+    title: 'Free Chore Chart Template Maker – Print, No Sign-Up',
+    h1: 'Free chore chart templates to edit and print',
+    description:
+      'Free chore chart maker templates you can edit online and print on Letter or A4. Get a PDF or PNG with no sign-up, no trial and nothing uploaded to a server.',
+  }),
+  elegantChoreChart: page({
+    path: '/elegant-chore-chart/',
+    label: 'Elegant Chore Chart',
+    title: 'Elegant Chore Chart Maker – Minimal Printable Designs',
+    h1: 'Elegant chore chart maker',
+    description:
+      'An elegant chore chart maker for minimal charts that look good on the fridge or in a frame. Calm themes, clean lines and cardstock tips. Free, with no sign-up.',
   }),
   about: page({
     path: '/about/',
@@ -119,6 +135,15 @@ export const PAGES = {
       "Sorry, we couldn't find that page. Head back to Chore Chart Maker to make free printable chore charts, reward charts and routine charts for kids and families.",
     noindex: true,
   }),
+  serverError: page({
+    path: '/500/',
+    label: 'Something went wrong',
+    title: 'Something Went Wrong | Chore Chart Maker',
+    h1: 'Something went wrong',
+    description:
+      'Something went wrong on our end. Your saved chart is safe in your browser. Please try again in a moment, or go back to the Chore Chart Maker home page.',
+    noindex: true,
+  }),
 } as const satisfies Record<string, PageMeta>;
 
 /** Ages with a published /chores-for-[N]-year-olds/ page. Add ages here as pages go live. */
@@ -144,4 +169,27 @@ export function allPages(): PageMeta[] {
 
 export function indexablePages(): PageMeta[] {
   return allPages().filter((p) => !p.noindex);
+}
+
+/** Supporting pages that share the site-wide social image instead of having their own. */
+const SHARED_OG_IMAGE_PATHS: ReadonlySet<string> = new Set([
+  PAGES.about.path,
+  PAGES.contact.path,
+  PAGES.privacyPolicy.path,
+  PAGES.terms.path,
+]);
+
+/** Main pages: indexable pages that get their own 1200×630 social image. */
+export function ogImagePages(): PageMeta[] {
+  return indexablePages().filter((p) => !SHARED_OG_IMAGE_PATHS.has(p.path));
+}
+
+/**
+ * Public path of a page's own social image (made by scripts/generate-og-images.mjs),
+ * or undefined when the page uses the site default.
+ */
+export function pageOgImagePath(page: PageMeta): string | undefined {
+  if (page.noindex || SHARED_OG_IMAGE_PATHS.has(page.path)) return undefined;
+  const slug = page.path === '/' ? 'home' : page.path.replace(/^\/|\/$/g, '');
+  return `/og/${slug}.png`;
 }

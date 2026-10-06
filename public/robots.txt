@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chorechartmaker.com/sitemap-index.xml
+Sitemap: https://chorechartmaker.com/sitemap.xml
