@@ -26,7 +26,7 @@ export const PAGES = {
     path: '/',
     label: 'Home',
     title: 'Chore Chart Maker – Free, Easy Online Chore Charts',
-    h1: 'Free online chore chart maker',
+    h1: 'Create a Chore Chart in Minutes',
     description:
       'Chore Chart Maker is a free online chore chart maker for kids, families and roommates. Make an easy printable chart in minutes, with no sign-up or upload.',
   }),

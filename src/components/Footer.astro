@@ -5,7 +5,15 @@ import { SITE_CONFIG } from '../lib/seo.ts';
 const columns = [
   {
     label: 'Tools',
-    links: [PAGES.choreChartMaker, PAGES.rewardChartMaker, PAGES.familyChoreChart, PAGES.roommateChoreChart, PAGES.morningRoutineChart, PAGES.freeChoreChartTemplate, PAGES.elegantChoreChart],
+    links: [
+      PAGES.choreChartMaker,
+      { ...PAGES.rewardChartMaker, label: 'Reward Chart Maker' },
+      { ...PAGES.freeChoreChartTemplate, label: 'Templates' },
+      PAGES.familyChoreChart,
+      PAGES.roommateChoreChart,
+      PAGES.morningRoutineChart,
+      PAGES.elegantChoreChart,
+    ],
   },
   {
     label: 'Guides',
@@ -20,24 +28,26 @@ const columns = [
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-16 border-t border-line bg-surface print:hidden">
-  <div class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
-    <div>
-      <p class="font-semibold text-fg">{SITE_CONFIG.name}</p>
-      <p class="mt-2 text-sm text-muted">
-        Our privacy promise: names, chores and charts stay in your browser. No accounts, nothing uploaded.
+<footer class="site-footer print:hidden">
+  <div class="container-page site-footer-grid">
+    <div class="max-w-sm">
+      <a href="/" class="site-logo !text-fg !no-underline">
+        <img src="/ui/logo.svg" alt="" width="28" height="28" loading="lazy" />
+        <span>{SITE_CONFIG.name}</span>
+      </a>
+      <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">
+        Free printable chore charts, reward charts and routines for families, classrooms and shared homes. Charts are
+        made in your browser: no accounts, and nothing you type is uploaded.
       </p>
     </div>
     {
       columns.map((column) => (
         <nav aria-label={column.label}>
-          <p class="text-sm font-semibold text-fg">{column.label}</p>
-          <ul class="mt-2 space-y-1 text-sm">
+          <p class="text-sm font-bold text-fg">{column.label}</p>
+          <ul class="mt-3 space-y-1 text-[0.95rem]">
             {column.links.map((link) => (
               <li>
-                <a href={link.path} class="text-muted hover:text-brand">
-                  {link.label}
-                </a>
+                <a href={link.path}>{link.label}</a>
               </li>
             ))}
           </ul>
@@ -45,5 +55,7 @@ const year = new Date().getFullYear();
       ))
     }
   </div>
-  <p class="mx-auto max-w-5xl px-4 pb-8 text-xs text-muted">© {year} {SITE_CONFIG.name}. Free printable tools.</p>
+  <div class="container-page border-t border-line py-6 text-sm text-muted">
+    © {year} {SITE_CONFIG.name}. Free printable tools, made for busy homes.
+  </div>
 </footer>

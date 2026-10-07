@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
     'Make free printable chore charts, reward charts and routine charts for kids and families. No sign-up, nothing to install, and your info stays in your browser.',
   locale: 'en_US',
   language: 'en-US',
-  themeColor: { light: '#0f766e', dark: '#0b1220' },
+  themeColor: { light: '#fafaf7', dark: '#fafaf7' },
   logo: { path: '/logo.png', width: 512, height: 512 },
   ogImage: { path: '/og-default.png', width: 1200, height: 630, alt: 'Chore Chart Maker: free printable chore charts' },
   // TODO: add the brand's social profile URLs once they exist.

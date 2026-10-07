@@ -1,0 +1,17 @@
+---
+// A UI line icon from public/ui/ as an external <img>. Decorative by default.
+// Inline <svg> is reserved for the rendered chart preview (tests/build-output.test.ts).
+const UI_ICON_IDS = ['award', 'calendar', 'download', 'file-text', 'gift', 'home', 'key', 'list-check', 'printer', 'ruler', 'shield', 'sliders', 'smile', 'sprout', 'sun', 'user-check', 'users'] as const;
+export type UiIconId = (typeof UI_ICON_IDS)[number];
+
+interface Props {
+  id: UiIconId;
+  size?: number;
+  alt?: string;
+  class?: string;
+}
+
+const { id, size = 24, alt = '', class: className } = Astro.props;
+---
+
+<img src={`/ui/${id}.svg`} width={size} height={size} alt={alt} loading="lazy" decoding="async" class={className} />

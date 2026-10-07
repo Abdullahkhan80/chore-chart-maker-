@@ -37,45 +37,62 @@
   --font-sans: 'Nunito', 'Nunito Fallback', ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Color tokens: light by default, dark via prefers-color-scheme. Use these
-   (bg-bg, text-fg, text-muted, border-line, bg-surface, text-brand, ...) instead
-   of raw palette colors so every component is dark-mode safe. */
+/* Design tokens: a light, warm palette shared by every page. Use the Tailwind
+   names (bg-bg, bg-card, text-fg, text-muted, border-line, text-brand,
+   bg-primary, ...) or var(--token) instead of raw colors.
+   Contrast notes: --primary (#22B8A7) is a fill color; text on it uses
+   --on-primary (dark ink, 6.6:1). Teal text and links use --brand (5:1 on --bg).
+   --text-faint is 3.5:1, so keep it for large or decorative text only. */
 :root {
-  color-scheme: light dark;
-  --bg: #ffffff;
-  --surface: #f0fdfa;
-  --fg: #0f172a;
-  --muted: #475569;
-  --line: #d6e4e1;
-  --brand: #0f766e;
-  --brand-strong: #115e59;
+  color-scheme: light;
+  --bg: #fafaf7;
+  --surface: #f4f7f5;
+  --card: #ffffff;
+  --accent-soft: #eaf8f5;
+  --fg: #17202a;
+  --muted: #52606d;
+  --text-faint: #7b8794;
+  --line: #e1e7e5;
+  --line-strong: #ccd6d2;
+  --brand: #0e7a6e;
+  --brand-strong: #0a5f56;
   --brand-fg: #ffffff;
+  --primary: #22b8a7;
+  --primary-hover: #179c8e;
+  --primary-soft: #e4f7f4;
+  --on-primary: #17202a;
+  --secondary: #f2b84b;
+  --secondary-soft: #fff5dc;
+  --success: #4ea56b;
+  --danger: #d65f5f;
   --focus: #b45309;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b1220;
-    --surface: #111c2e;
-    --fg: #e2e8f0;
-    --muted: #a3b1c4;
-    --line: #23324a;
-    --brand: #2dd4bf;
-    --brand-strong: #5eead4;
-    --brand-fg: #042f2a;
-    --focus: #fbbf24;
-  }
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px rgb(23 32 42 / 0.05);
+  --shadow: 0 1px 2px rgb(23 32 42 / 0.04), 0 8px 24px -12px rgb(23 32 42 / 0.14);
+  --shadow-lg: 0 2px 4px rgb(23 32 42 / 0.04), 0 24px 48px -20px rgb(23 32 42 / 0.25);
+  --page-max: 76rem;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-accent-soft: var(--accent-soft);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
+  --color-faint: var(--text-faint);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-fg: var(--brand-fg);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-secondary-soft: var(--secondary-soft);
   --color-focus: var(--focus);
 }
 
@@ -89,6 +106,11 @@
 
   body {
     overflow-x: clip;
+  }
+
+  /* Keep in-page anchor targets clear of the sticky header. */
+  [id] {
+    scroll-margin-top: 5rem;
   }
 
   :focus-visible {
@@ -105,13 +127,261 @@
   }
 }
 
+/* Site shell shared by every page: container, buttons, header and footer. */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (width >= 40rem) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s,
+      box-shadow 0.15s,
+      transform 0.15s;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-lg {
+    min-height: 3.25rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.0625rem;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: 0 1px 0 rgb(23 32 42 / 0.08), 0 6px 16px -8px rgb(23 184 167 / 0.7);
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+  }
+  .btn-secondary {
+    border-color: var(--line-strong);
+    background: var(--card);
+    color: var(--fg);
+  }
+  .btn-secondary:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+  /* Arrow drawn in CSS: the font subset has no U+2192. */
+  .btn-arrow::after {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--line);
+    background: rgb(250 250 247 / 0.94);
+    backdrop-filter: saturate(1.4) blur(8px);
+  }
+  .site-header-bar {
+    display: flex;
+    min-height: 4rem;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .site-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .site-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .site-nav-list {
+    display: none;
+  }
+  .site-nav-list a,
+  .site-menu-panel a:not(.btn) {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    border-radius: 10px;
+    padding-inline: 0.7rem;
+    font-size: 0.975rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .site-nav-list a:hover,
+  .site-menu-panel a:not(.btn):hover {
+    background: var(--surface);
+    color: var(--fg);
+  }
+  .site-nav-list a[aria-current='page'],
+  .site-menu-panel a[aria-current='page'] {
+    color: var(--brand);
+  }
+  .site-header .btn {
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+  .site-header-cta {
+    display: none;
+  }
+  .site-menu {
+    position: relative;
+  }
+  .site-menu > summary {
+    display: inline-flex;
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+    cursor: pointer;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: var(--card);
+    padding-inline: 0.8rem;
+    font-weight: 700;
+  }
+  .site-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+  .site-menu-icon,
+  .site-menu-icon::before,
+  .site-menu-icon::after {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.15s;
+  }
+  .site-menu-icon {
+    position: relative;
+  }
+  .site-menu-icon::before,
+  .site-menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .site-menu-icon::before {
+    top: -6px;
+  }
+  .site-menu-icon::after {
+    top: 6px;
+  }
+  .site-menu[open] .site-menu-icon {
+    background: transparent;
+  }
+  .site-menu[open] .site-menu-icon::before {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .site-menu[open] .site-menu-icon::after {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  .site-menu-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    display: grid;
+    width: min(18rem, calc(100vw - 2rem));
+    gap: 0.125rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    padding: 0.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .site-menu-panel a:not(.btn) {
+    display: flex;
+    min-height: 2.75rem;
+    font-size: 1rem;
+  }
+  .site-menu-panel .btn {
+    margin-top: 0.375rem;
+    min-height: 2.75rem;
+  }
+  @media (width >= 64rem) {
+    .site-nav-list {
+      display: flex;
+      gap: 0.125rem;
+    }
+    .site-header-cta {
+      display: inline-flex;
+      margin-left: 0.5rem;
+    }
+    .site-menu {
+      display: none;
+    }
+  }
+
+  .site-footer {
+    margin-top: 4rem;
+    border-top: 1px solid var(--line);
+    background: var(--card);
+  }
+  .site-footer-grid {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3rem 2rem;
+  }
+  @media (width >= 40rem) {
+    .site-footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (width >= 64rem) {
+    .site-footer-grid {
+      grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr));
+    }
+  }
+  .site-footer a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .site-footer a:hover {
+    color: var(--brand);
+    text-decoration: underline;
+  }
+}
+
 /* Long-form copy under the tools and on the hub. Styling descendants here keeps
    the HTML free of repeated utility classes (60 KB page budget). */
 @layer components {
-  header nav a {
-    @apply inline-flex min-h-9 items-center py-1;
-  }
-
   footer nav a {
     @apply inline-block py-1;
   }
@@ -168,7 +438,7 @@
     @apply inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-lg border border-line bg-bg px-3 font-semibold text-fg hover:border-brand disabled:cursor-not-allowed disabled:opacity-50;
   }
   .ccm-btn-primary {
-    @apply border-brand bg-brand text-brand-fg hover:bg-brand-strong;
+    @apply border-primary bg-primary text-on-primary hover:border-primary-hover hover:bg-primary-hover;
   }
   .ccm-chip {
     @apply inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line bg-bg px-3 text-sm text-fg hover:border-brand has-checked:border-brand has-checked:bg-surface has-checked:font-semibold disabled:opacity-50;

@@ -13,9 +13,11 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   jsonLd?: JsonLd[];
   ogType?: 'website' | 'article';
+  /** Full-width <main> for pages that lay out their own sections (the homepage). */
+  wide?: boolean;
 }
 
-const { page, breadcrumbs, jsonLd = [], ogType } = Astro.props;
+const { page, breadcrumbs, jsonLd = [], ogType, wide = false } = Astro.props;
 const trail = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : undefined;
 const structuredData = trail ? [...jsonLd, buildBreadcrumbList(trail)] : jsonLd;
 const ogImagePath = pageOgImagePath(page);
@@ -62,7 +64,11 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
       Skip to main content
     </a>
     <Header currentPath={page.path} />
-    <main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 py-8 focus:outline-none">
+    <main
+      id="main"
+      tabindex="-1"
+      class:list={['w-full flex-1 focus:outline-none', !wide && 'mx-auto max-w-5xl px-4 py-8']}
+    >
       {trail && <Breadcrumbs items={trail} />}
       <slot />
     </main>
