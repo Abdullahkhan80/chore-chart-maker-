@@ -29,7 +29,7 @@ const typeLabels: Record<(typeof CHART_TYPES)[number], string> = {
 <div class="ccm" data-ccm data-preset={preset}>
   <p class="sr-only" aria-live="polite" data-ccm-announce></p>
   <div class="grid gap-6 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:items-start">
-    <section aria-label="Chart preview" class="lg:sticky lg:top-4 lg:order-last">
+    <section aria-label="Chart preview" class="lg:sticky lg:top-20 lg:order-last">
       <div class="ccm-preview" data-ccm-preview set:html={renderPreviewHtml(config)} />
       <p class="mt-1 min-h-5 text-sm text-muted" data-ccm-pages></p>
     </section>

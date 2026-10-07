@@ -498,6 +498,10 @@
   }
   .ccm-page svg {
     @apply block h-auto w-full rounded-md shadow-md ring-1 ring-line;
+    /* Desktop: the preview is sticky below the 4rem site header, so cap each page
+       at the viewport height (minus header, gaps and the page-count line) so the
+       whole page stays in view. Width follows the SVG aspect ratio. */
+    @apply lg:mx-auto lg:max-h-[calc(100dvh-8rem)] lg:w-auto lg:max-w-full;
   }
   .ccm-bar {
     @apply sticky bottom-0 z-20 -mx-4 mt-6 flex gap-2 border-t border-line bg-bg/95 px-4 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur;
