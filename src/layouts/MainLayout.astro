@@ -27,18 +27,17 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MNZ7RR8HG8"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href="/fonts/nunito-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Google tag (gtag.js) - non-blocking -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-MNZ7RR8HG8');
     </script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preload" href="/fonts/nunito-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline defer src="https://www.googletagmanager.com/gtag/js?id=G-MNZ7RR8HG8"></script>
     <SEO
       title={page.title}
       description={page.description}

@@ -70,6 +70,23 @@ export default {
       if (response.status >= 500) {
         return await serve500(env, request);
       }
+      if (response.ok) {
+        const headers = new Headers(response.headers);
+        if (target.pathname.startsWith('/_astro/')) {
+          headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+        } else if (target.pathname.startsWith('/fonts/')) {
+          headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+        } else if (target.pathname.startsWith('/icons/') || target.pathname.startsWith('/ui/')) {
+          headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+        } else if (target.pathname.endsWith('/') || target.pathname.endsWith('.html') || !hasFileExtension(target.pathname)) {
+          headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+        }
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers,
+        });
+      }
       return response;
     } catch {
       return await serve500(env, request);

@@ -45,16 +45,7 @@ export function kidDisplayName(kid: Kid, index: number): string {
 export function kidItemHtml(kid: Kid, index: number): string {
   const id = `ccm-kid-${index}`;
   const name = kidDisplayName(kid, index);
-  return `<li class="ccm-card" data-index="${index}">
-<div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span>
-<label class="sr-only" for="${id}-name">Child ${index + 1} name</label>
-<input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off">
-<button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div>
-<div class="mt-2 grid grid-cols-3 gap-2">
-<label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label>
-<label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label>
-<label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label>
-</div></li>`;
+  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span><label class="sr-only" for="${id}-name">Child ${index + 1} name</label><input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div><div class="mt-2 grid grid-cols-3 gap-2"><label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label><label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label><label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label></div></li>`;
 }
 
 export function kidListHtml(config: ChartConfig): string {
@@ -78,18 +69,7 @@ export function choreItemHtml(chore: Chore, index: number, config: ChartConfig):
   const allowance = config.allowance.enabled
     ? `<label class="ccm-label inline-flex items-center gap-2">Pay<input type="number" class="ccm-input w-24" data-chore-field="allowance" min="0" max="${LIMITS.allowance.max}" step="0.05" inputmode="decimal" value="${chore.allowance ?? ''}"></label>`
     : '';
-  return `<li class="ccm-card" data-index="${index}">
-<div class="flex items-center gap-2"><span class="ccm-handle" draggable="true" data-drag-handle aria-hidden="true">⠿</span>
-<button type="button" class="ccm-btn px-1" data-action="pick-icon" data-index="${index}" aria-label="Change icon for ${label}">${iconImg(chore.iconId, 32)}</button>
-<label class="sr-only" for="${id}">Chore ${index + 1}</label>
-<input id="${id}" class="ccm-input min-w-0 flex-1" data-chore-field="label" value="${esc(chore.label)}" maxlength="${LIMITS.choreLabelLength}" autocomplete="off">
-<button type="button" class="ccm-btn" data-action="remove-chore" data-index="${index}" aria-label="Remove ${label}">✕</button></div>
-<fieldset class="mt-2" data-days><legend class="sr-only">Days for ${label}</legend><div class="flex flex-wrap gap-1">${days}</div></fieldset>
-${assignees}<div class="mt-2 flex flex-wrap items-center gap-2">
-<button type="button" class="ccm-btn" data-action="move-chore" data-dir="-1" data-index="${index}" aria-label="Move ${label} up"${index === 0 ? ' disabled' : ''}>↑</button>
-<button type="button" class="ccm-btn" data-action="move-chore" data-dir="1" data-index="${index}" aria-label="Move ${label} down"${index === last ? ' disabled' : ''}>↓</button>
-<label class="ccm-label inline-flex items-center gap-2">Points<input type="number" class="ccm-input w-20" data-chore-field="points" min="0" max="${LIMITS.points.max}" inputmode="numeric" value="${chore.points ?? ''}"></label>
-${allowance}</div></li>`;
+  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2"><span class="ccm-handle" draggable="true" data-drag-handle aria-hidden="true">⠿</span><button type="button" class="ccm-btn px-1" data-action="pick-icon" data-index="${index}" aria-label="Change icon for ${label}">${iconImg(chore.iconId, 32)}</button><label class="sr-only" for="${id}">Chore ${index + 1}</label><input id="${id}" class="ccm-input min-w-0 flex-1" data-chore-field="label" value="${esc(chore.label)}" maxlength="${LIMITS.choreLabelLength}" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-chore" data-index="${index}" aria-label="Remove ${label}">✕</button></div><fieldset class="mt-2" data-days><legend class="sr-only">Days for ${label}</legend><div class="flex flex-wrap gap-1">${days}</div></fieldset>${assignees}<div class="mt-2 flex flex-wrap items-center gap-2"><button type="button" class="ccm-btn" data-action="move-chore" data-dir="-1" data-index="${index}" aria-label="Move ${label} up"${index === 0 ? ' disabled' : ''}>↑</button><button type="button" class="ccm-btn" data-action="move-chore" data-dir="1" data-index="${index}" aria-label="Move ${label} down"${index === last ? ' disabled' : ''}>↓</button><label class="ccm-label inline-flex items-center gap-2">Points<input type="number" class="ccm-input w-20" data-chore-field="points" min="0" max="${LIMITS.points.max}" inputmode="numeric" value="${chore.points ?? ''}"></label>${allowance}</div></li>`;
 }
 
 export function choreListHtml(config: ChartConfig): string {
