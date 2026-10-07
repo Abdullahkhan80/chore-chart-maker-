@@ -26,9 +26,11 @@ ${rows}
 }
 
 export function renderThemeThumbnails(container: ParentNode): void {
-  for (const el of container.querySelectorAll<HTMLElement>('[data-theme-thumb]')) {
-    const id = el.dataset.themeThumb as Theme;
-    if (el.childElementCount || !(id in THEMES)) continue;
+  // Each thumbnail follows its theme's radio input; the id comes from the input's value.
+  for (const input of container.querySelectorAll<HTMLInputElement>('input[name="theme"]')) {
+    const el = input.nextElementSibling;
+    const id = input.value as Theme;
+    if (!el || el.childElementCount || !(id in THEMES)) continue;
     el.innerHTML = themeThumbnailSvg(THEMES[id]);
   }
 }

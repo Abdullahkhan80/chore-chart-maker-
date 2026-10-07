@@ -18,7 +18,7 @@ export const KID_COLORS = ['teal', 'blue', 'purple', 'pink', 'red', 'orange', 'y
 export type KidColor = (typeof KID_COLORS)[number];
 
 // Order is part of the share-hash format: append only. Definitions live in themes.ts.
-export const THEMES = ['classic', 'pastel', 'ocean', 'space', 'dinosaur', 'jungle', 'sports', 'minimal'] as const;
+export const THEMES = ['classic', 'pastel', 'ocean', 'space', 'dinosaur', 'jungle', 'sports', 'minimal', 'rainbow', 'construction', 'snowy', 'castle'] as const;
 export type Theme = (typeof THEMES)[number];
 
 export const PAPER_SIZES = ['letter', 'a4'] as const;

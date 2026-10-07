@@ -476,7 +476,7 @@
     @apply outline-3 outline-offset-2 outline-focus;
   }
   .ccm-theme {
-    @apply flex cursor-pointer flex-col gap-1;
+    @apply flex cursor-pointer flex-col gap-1 text-sm font-semibold;
   }
   .ccm-theme-thumb {
     @apply block aspect-[8/5] w-full overflow-hidden rounded-lg border-2 border-line bg-surface peer-checked:border-brand peer-checked:ring-2 peer-checked:ring-brand peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus;

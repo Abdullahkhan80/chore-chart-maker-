@@ -6,7 +6,7 @@
 
 - Chart types: weekly chore chart, routine chart (steps in order, e.g. morning or bedtime), reward chart (sticker track of 5 to 30 stickers toward a chosen prize), family chart (everyone on one color-coded chart, or one page per person) and rotation chart (chores rotate to the next person each week, for roommates or teens).
 - Content: up to 8 people and 20 chores per chart. A built-in library of age-appropriate chores (ages 2 to 14), each with a picture icon so pre-readers can follow along, plus custom chores. Each chore can be set for specific days and assigned to one or more people, with optional points or allowance amounts (USD, CAD, GBP, EUR, AUD, NZD).
-- Design: 8 themes (Classic, Pastel, Ocean, Space, Dinosaur, Jungle, Sports, Minimal), large text, an ink saver mode, Monday or Sunday week start, and optional dates.
+- Design: 12 themes (Classic, Pastel, Ocean, Space, Dinosaur, Jungle, Sports, Minimal, Rainbow, Construction, Snowy, Castle), large text, an ink saver mode, Monday or Sunday week start, and optional dates.
 - Paper: US Letter (default) and A4, in portrait or landscape.
 - Exports: PDF download, PNG download, direct browser printing, and a copyable share link.
 - Privacy model: the chart is saved in the browser's localStorage. Share links store the chart in the URL hash (after #), which browsers do not send to servers. Analytics are limited to categorical events such as chart type, theme, paper size and export format; text the user types is never sent anywhere.

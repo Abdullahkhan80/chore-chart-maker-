@@ -19,9 +19,9 @@ test('contrastRatio matches known WCAG values', () => {
   assert.throws(() => parseHex('red'));
 });
 
-test('there are exactly the 8 themes listed in types.ts, each complete', () => {
+test('there are exactly the 12 themes listed in types.ts, each complete', () => {
   assert.deepEqual(Object.keys(THEMES), [...THEME_IDS]);
-  assert.equal(allThemes.length, 8);
+  assert.equal(allThemes.length, 12);
   for (const theme of allThemes) {
     assert.ok(theme.name && theme.description, `${theme.id} needs a name and description`);
     for (const [key, value] of Object.entries(theme.palette)) {

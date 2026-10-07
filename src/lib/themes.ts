@@ -26,9 +26,33 @@ export interface ThemePalette {
   decor: readonly string[];
 }
 
-export type DecorationKind = 'confetti' | 'clouds' | 'waves' | 'stars' | 'spikes' | 'leaves' | 'pennants' | 'rule';
+export type DecorationKind =
+  | 'confetti'
+  | 'clouds'
+  | 'waves'
+  | 'stars'
+  | 'spikes'
+  | 'leaves'
+  | 'pennants'
+  | 'rule'
+  | 'arcs'
+  | 'hazard'
+  | 'snowflakes'
+  | 'battlements';
 export type BorderStyle = 'solid' | 'dashed' | 'dotted' | 'double';
-export type StickerShape = 'star' | 'heart' | 'circle' | 'sparkle' | 'egg' | 'leaf' | 'hexagon' | 'square';
+export type StickerShape =
+  | 'star'
+  | 'heart'
+  | 'circle'
+  | 'sparkle'
+  | 'egg'
+  | 'leaf'
+  | 'hexagon'
+  | 'square'
+  | 'cloud'
+  | 'cone'
+  | 'snowflake'
+  | 'crown';
 
 export interface ChartTheme {
   id: ThemeId;
@@ -245,6 +269,102 @@ export const THEMES: Readonly<Record<ThemeId, ChartTheme>> = {
     sticker: 'square',
     inkSaver: true,
   },
+  rainbow: {
+    id: 'rainbow',
+    name: 'Rainbow',
+    description: 'Sky blue header with a row of bright rainbows.',
+    palette: {
+      page: '#ffffff',
+      text: '#1f2937',
+      mutedText: '#4b5563',
+      headerBg: '#0369a1',
+      headerText: '#ffffff',
+      cellBg: '#f0f9ff',
+      cellText: '#1f2937',
+      accent: '#fecdd3',
+      accentText: '#881337',
+      border: '#a5b4fc',
+      stickerFill: '#ffffff',
+      stickerStroke: '#0369a1',
+      decor: ['#ef4444', '#f97316', '#facc15', '#22c55e', '#3b82f6', '#a855f7'],
+    },
+    decoration: 'arcs',
+    border: { style: 'solid', width: 2, radius: 20 },
+    sticker: 'cloud',
+    inkSaver: false,
+  },
+  construction: {
+    id: 'construction',
+    name: 'Construction',
+    description: 'Work-zone yellow and black with hazard stripes.',
+    palette: {
+      page: '#ffffff',
+      text: '#1c1917',
+      mutedText: '#57534e',
+      headerBg: '#facc15',
+      headerText: '#1c1917',
+      cellBg: '#fefce8',
+      cellText: '#1c1917',
+      accent: '#292524',
+      accentText: '#fde047',
+      border: '#a8a29e',
+      stickerFill: '#fb923c',
+      stickerStroke: '#c2410c',
+      decor: ['#1c1917', '#facc15'],
+    },
+    decoration: 'hazard',
+    border: { style: 'solid', width: 3, radius: 2 },
+    sticker: 'cone',
+    inkSaver: false,
+  },
+  snowy: {
+    id: 'snowy',
+    name: 'Snowy',
+    description: 'Cool winter blues with falling snowflakes.',
+    palette: {
+      page: '#f8fafc',
+      text: '#0f2942',
+      mutedText: '#3b5670',
+      headerBg: '#1d4e89',
+      headerText: '#ffffff',
+      cellBg: '#eef6fc',
+      cellText: '#0f2942',
+      accent: '#bfdbfe',
+      accentText: '#1e3a8a',
+      border: '#93c5fd',
+      stickerFill: '#e0f2fe',
+      stickerStroke: '#2563eb',
+      decor: ['#60a5fa', '#93c5fd', '#3b82f6'],
+    },
+    decoration: 'snowflakes',
+    border: { style: 'double', width: 3, radius: 10 },
+    sticker: 'snowflake',
+    inkSaver: false,
+  },
+  castle: {
+    id: 'castle',
+    name: 'Castle',
+    description: 'Royal purple and gold with castle towers.',
+    palette: {
+      page: '#fdfbff',
+      text: '#2e1065',
+      mutedText: '#5b4b7a',
+      headerBg: '#5b21b6',
+      headerText: '#fef3c7',
+      cellBg: '#f5f3ff',
+      cellText: '#2e1065',
+      accent: '#fcd34d',
+      accentText: '#451a03',
+      border: '#c4b5fd',
+      stickerFill: '#fcd34d',
+      stickerStroke: '#a16207',
+      decor: ['#a78bfa', '#fcd34d', '#7c3aed'],
+    },
+    decoration: 'battlements',
+    border: { style: 'solid', width: 3, radius: 6 },
+    sticker: 'crown',
+    inkSaver: false,
+  },
 };
 
 export function getTheme(id: ThemeId): ChartTheme {
@@ -328,6 +448,42 @@ export function stickerPath(shape: StickerShape, cx: number, cy: number, size: n
         `Q${fmt(cx - r)} ${fmt(cy - r)} ${fmt(cx + r * 0.8)} ${fmt(cy - r * 0.8)}`,
         `Q${fmt(cx + r)} ${fmt(cy + r)} ${fmt(cx - r * 0.8)} ${fmt(cy + r * 0.8)}Z`,
       ].join('');
+    case 'cloud': {
+      // Three lobes on a flat base, nudged down so the shape sits centered in its box.
+      const y = cy + r * 0.12;
+      return [
+        `M${fmt(cx - r * 0.55)} ${fmt(y + r * 0.5)}`,
+        `H${fmt(cx + r * 0.55)}`,
+        `A${fmt(r * 0.4)} ${fmt(r * 0.4)} 0 0 0 ${fmt(cx + r * 0.55)} ${fmt(y - r * 0.3)}`,
+        `A${fmt(r * 0.56)} ${fmt(r * 0.56)} 0 0 0 ${fmt(cx - r * 0.55)} ${fmt(y - r * 0.3)}`,
+        `A${fmt(r * 0.4)} ${fmt(r * 0.4)} 0 0 0 ${fmt(cx - r * 0.55)} ${fmt(y + r * 0.5)}Z`,
+      ].join('');
+    }
+    case 'cone':
+      return polygon(
+        ([[-0.9, 0.85], [0.9, 0.85], [0.9, 0.62], [0.55, 0.62], [0.15, -0.85], [-0.15, -0.85], [-0.55, 0.62], [-0.9, 0.62]] as const).map(
+          ([x, y]) => [cx + x * r, cy + y * r] as [number, number],
+        ),
+      );
+    case 'snowflake': {
+      // Six straight arms of width `w`; neighboring arms meet at distance `w` along their bisector.
+      const w = r * 0.3;
+      const points: [number, number][] = [];
+      for (let k = 0; k < 6; k++) {
+        const a = (Math.PI / 3) * k - Math.PI / 2;
+        const [ux, uy, nx, ny] = [Math.cos(a), Math.sin(a), -Math.sin(a), Math.cos(a)];
+        points.push([cx + r * ux - (w / 2) * nx, cy + r * uy - (w / 2) * ny]);
+        points.push([cx + r * ux + (w / 2) * nx, cy + r * uy + (w / 2) * ny]);
+        points.push([cx + w * Math.cos(a + Math.PI / 6), cy + w * Math.sin(a + Math.PI / 6)]);
+      }
+      return polygon(points);
+    }
+    case 'crown':
+      return polygon(
+        ([[-0.8, 0.6], [0.8, 0.6], [0.92, -0.5], [0.45, 0], [0, -0.75], [-0.45, 0], [-0.92, -0.5]] as const).map(
+          ([x, y]) => [cx + x * r, cy + y * r] as [number, number],
+        ),
+      );
     case 'square': {
       const corner = r * 0.2;
       const s = size - corner * 2;
@@ -442,6 +598,61 @@ export function headerDecorationSvg(theme: ChartTheme, width: number, height: nu
         shapes.push(
           `<path d="${polygon([[x + flag * 0.1, top], [x + flag * 0.9, top], [x + flag / 2, top + height * 0.6]])}" fill="${color(i)}" stroke="${theme.palette.border}" stroke-width="${fmt(height * 0.02)}"/>`,
         );
+      }
+      break;
+    }
+    case 'arcs': {
+      const n = Math.max(1, Math.ceil(count / 3));
+      const outer = height * 0.8;
+      const band = (outer * 0.5) / Math.max(1, colors.length);
+      const y = height * 0.95;
+      for (let i = 0; i < n; i++) {
+        const x = (i + 0.5) * (width / n);
+        for (let k = 0; k < colors.length; k++) {
+          const r = outer - band * (k + 0.5);
+          shapes.push(
+            `<path d="M${fmt(x - r)} ${fmt(y)}A${fmt(r)} ${fmt(r)} 0 0 1 ${fmt(x + r)} ${fmt(y)}" fill="none" stroke="${color(k)}" stroke-width="${fmt(band)}"/>`,
+          );
+        }
+      }
+      break;
+    }
+    case 'hazard': {
+      const top = height * 0.25;
+      const bottom = height * 0.75;
+      const slant = bottom - top;
+      shapes.push(`<rect x="0" y="${fmt(top)}" width="${fmt(width)}" height="${fmt(slant)}" fill="${color(1)}"/>`);
+      for (let x = -slant; x < width; x += slant * 2) {
+        shapes.push(`<path d="${polygon([[x, bottom], [x + slant, bottom], [x + slant * 2, top], [x + slant, top]])}" fill="${color(0)}"/>`);
+      }
+      break;
+    }
+    case 'snowflakes':
+      for (let i = 0; i < count; i++) {
+        const x = (i + 0.2 + random() * 0.6) * (width / count);
+        const y = height * (0.3 + random() * 0.4);
+        const r = height * (0.18 + random() * 0.14);
+        const arms = [0, 60, 120].map((deg) => {
+          const dx = r * Math.cos((deg * Math.PI) / 180);
+          const dy = r * Math.sin((deg * Math.PI) / 180);
+          return `<line x1="${fmt(x - dx)}" y1="${fmt(y - dy)}" x2="${fmt(x + dx)}" y2="${fmt(y + dy)}"/>`;
+        });
+        shapes.push(`<g stroke="${color(i)}" stroke-width="${fmt(height * 0.06)}" stroke-linecap="round">${arms.join('')}</g>`);
+      }
+      break;
+    case 'battlements': {
+      const merlon = height * 0.35;
+      shapes.push(`<rect x="0" y="${fmt(height * 0.6)}" width="${fmt(width)}" height="${fmt(height * 0.4)}" fill="${color(0)}"/>`);
+      for (let x = 0; x < width; x += merlon * 2) {
+        shapes.push(`<rect x="${fmt(x)}" y="${fmt(height * 0.35)}" width="${fmt(merlon)}" height="${fmt(height * 0.3)}" fill="${color(0)}"/>`);
+      }
+      const towers = Math.max(1, Math.floor(count / 4));
+      for (let i = 0; i < towers; i++) {
+        const x = (i + 0.5) * (width / towers);
+        const w = height * 0.6;
+        shapes.push(`<rect x="${fmt(x - w / 2)}" y="${fmt(height * 0.25)}" width="${fmt(w)}" height="${fmt(height * 0.75)}" fill="${color(0)}"/>`);
+        shapes.push(`<path d="${polygon([[x - w * 0.65, height * 0.27], [x, height * 0.02], [x + w * 0.65, height * 0.27]])}" fill="${color(2)}"/>`);
+        shapes.push(`<rect x="${fmt(x - w * 0.12)}" y="${fmt(height * 0.5)}" width="${fmt(w * 0.24)}" height="${fmt(height * 0.3)}" rx="${fmt(w * 0.12)}" fill="${color(1)}"/>`);
       }
       break;
     }
