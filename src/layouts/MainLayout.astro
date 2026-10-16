@@ -50,7 +50,10 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
     />
     <meta name="theme-color" content={SITE_CONFIG.themeColor.light} media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content={SITE_CONFIG.themeColor.dark} media="(prefers-color-scheme: dark)" />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />

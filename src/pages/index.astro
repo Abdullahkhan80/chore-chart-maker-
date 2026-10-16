@@ -341,7 +341,17 @@ const faq: FaqItem[] = [
           bin and clothes in the hamper. Four- and five-year-olds can set the table, match socks and water plants. By
           seven or eight, most kids can sweep, feed pets and pack their own backpack, and from around ten they can run a
           load of laundry or cook a simple meal. Our list of
-          <a href={PAGES.choresByAge.path}>age-appropriate chores for kids</a> goes through each age in detail.
+          <a href={PAGES.choresByAge.path}>age-appropriate chores for kids</a> goes through each age in detail:
+        </p>
+        <p class="mt-3 flex flex-wrap gap-2 text-sm font-medium">
+          <span class="text-muted">Browse by age:</span>
+          {
+            AGE_PAGE_AGES.map((age) => (
+              <a href={agePage(age).path} class="text-brand underline">
+                {age}-year-olds
+              </a>
+            ))
+          }
         </p>
         <p>
           Start small: three to five daily chores is plenty for children under eight. A short chart that gets done every

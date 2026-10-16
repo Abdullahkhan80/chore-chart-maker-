@@ -4,16 +4,92 @@ import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
 ---
 
 <ArticleLayout page={PAGES.choresByAge}>
-  <p>Placeholder: an age-by-age guide to chores for kids from 2 to 14 is coming soon.</p>
-  <ul class="list-disc space-y-1 pl-6">
-    {
-      AGE_PAGE_AGES.map(agePage).map((page) => (
-        <li>
-          <a href={page.path} class="text-brand underline">
-            {page.label}
+  <p>
+    Children love to feel capable and helpful. Giving them age-appropriate chores builds independence, confidence, and
+    practical life skills. Use this guide to find the right chores for each stage from toddlerhood to the teen years, or
+    jump straight to any age below:
+  </p>
+
+  <section class="my-6 rounded-xl border border-line bg-card p-6">
+    <h2 class="text-xl font-bold text-fg">Chores by specific age</h2>
+    <p class="mt-1 text-sm text-muted">
+      Select an age for a dedicated guide, chore examples, and a printable chart preview ready to customize:
+    </p>
+    <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+      {
+        AGE_PAGE_AGES.map((age) => (
+          <a
+            href={agePage(age).path}
+            class="flex flex-col items-center justify-center rounded-lg border border-line bg-bg p-3 text-center transition hover:border-brand hover:shadow-xs"
+          >
+            <span class="text-lg font-bold text-fg">{age} Years</span>
+            <span class="mt-1 text-xs text-muted">Chores & Chart</span>
           </a>
-        </li>
-      ))
-    }
-  </ul>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-8 space-y-4">
+    <h2 class="text-2xl font-bold text-fg">General chore milestones by age group</h2>
+
+    <div>
+      <h3 class="text-lg font-semibold text-fg">Toddlers & Preschoolers (Ages 2–4)</h3>
+      <p class="text-muted">
+        Focus on simple one-step tasks with immediate outcomes: putting toys in bins, throwing away napkins, and putting
+        dirty clothes in the hamper.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-fg">Early Elementary (Ages 5–7)</h3>
+      <p class="text-muted">
+        Kids can handle multi-step routines: making their bed, setting the dinner table, watering houseplants, and feeding
+        household pets.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-fg">Upper Elementary (Ages 8–10)</h3>
+      <p class="text-muted">
+        Capable of more independent chores: loading or unloading the dishwasher, vacuuming rooms, sweeping floors, and
+        taking out the trash.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold text-fg">Middle School & Tweens (Ages 11–14)</h3>
+      <p class="text-muted">
+        Responsible household contributions: doing their own laundry, cleaning bathrooms, preparing simple meals, and
+        caring for younger siblings or pets.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-10 border-t border-line pt-8 space-y-3">
+    <h2 class="text-xl font-bold text-fg">Make a printable chart</h2>
+    <p class="text-base text-muted">Turn any chore routine into a free printable chart for the fridge or wall:</p>
+    <ul class="list-disc space-y-2 pl-6 text-base">
+      <li>
+        <a href={PAGES.choreChartMaker.path} class="text-brand underline font-medium">Free Chore Chart Maker</a>:
+        build a weekly picture chart with customized icons.
+      </li>
+      <li>
+        <a href={PAGES.rewardChartMaker.path} class="text-brand underline font-medium">Reward Chart Maker</a>:
+        motivate habits with sticker tracks and fun milestone rewards.
+      </li>
+      <li>
+        <a href={PAGES.morningRoutineChart.path} class="text-brand underline font-medium">Morning Routine Chart</a>:
+        smooth out hectic school mornings with picture steps.
+      </li>
+      <li>
+        <a href={PAGES.familyChoreChart.path} class="text-brand underline font-medium">Family Chore Chart</a>:
+        organize household responsibilities across parents and siblings.
+      </li>
+      <li>
+        <a href={PAGES.freeChoreChartTemplate.path} class="text-brand underline font-medium">Free Chore Chart Templates</a>:
+        ready-to-print starting points for busy families.
+      </li>
+    </ul>
+  </section>
 </ArticleLayout>

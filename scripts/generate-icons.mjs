@@ -156,6 +156,8 @@ const out = (name, buf) => writeFileSync(new URL(`../public/${name}`, import.met
 
 out('favicon.ico', encodeIco([16, 32, 48].map((size) => ({ size, png: iconPng(size) }))));
 out('apple-touch-icon.png', iconPng(180, { fullBleed: true }));
+out('icon-48.png', iconPng(48));
+out('icon-96.png', iconPng(96));
 out('icon-192.png', iconPng(192));
 out('icon-512.png', iconPng(512));
 out('icon-maskable-512.png', (() => {

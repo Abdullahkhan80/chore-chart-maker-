@@ -76,7 +76,15 @@ export default {
           headers.set('Cache-Control', 'public, max-age=31536000, immutable');
         } else if (target.pathname.startsWith('/fonts/')) {
           headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-        } else if (target.pathname.startsWith('/icons/') || target.pathname.startsWith('/ui/')) {
+        } else if (
+          target.pathname.startsWith('/icons/') ||
+          target.pathname.startsWith('/ui/') ||
+          target.pathname === '/favicon.ico' ||
+          target.pathname === '/favicon.svg' ||
+          target.pathname.startsWith('/icon-') ||
+          target.pathname === '/apple-touch-icon.png' ||
+          target.pathname === '/logo.png'
+        ) {
           headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
         } else if (target.pathname.endsWith('/') || target.pathname.endsWith('.html') || !hasFileExtension(target.pathname)) {
           headers.set('Cache-Control', 'public, max-age=0, must-revalidate');

@@ -7,24 +7,29 @@ const faq: FaqItem[] = [
   {
     question: 'How does a rotating roommate chore chart work?',
     answer:
-      'Each chore moves to the next person every week, so everyone takes a turn at every job and nobody is stuck with the bathroom.',
+      'Chores rotate weekly so everyone takes turns and nobody is stuck with the bathroom.',
   },
   {
-    question: 'How many roommates can share one chart?',
-    answer: 'Up to eight people and twenty chores fit on one chart, enough for most shared houses and dorm suites.',
+    question: 'How many roommates can share a chart?',
+    answer: 'Up to eight people and twenty chores fit on one chart, ideal for apartments and dorms.',
   },
   {
-    question: 'Can every roommate get a copy?',
+    question: 'Can roommates share the chart online?',
     answer:
-      'Yes. Print copies, or use Copy share link and send it to the group so each person can open and print the same chart.',
+      'Yes. Use Copy share link to send to flatmates, or print copies for the fridge.',
   },
   {
     question: 'Is the roommate chore chart maker free?',
-    answer: 'Yes. It is free with no sign-up, and names and chores stay in your browser instead of being uploaded.',
+    answer: 'Yes. Completely free with no sign-up; data stays private in your browser.',
   },
 ];
 ---
 
 <ToolLayout page={PAGES.roommateChoreChart} faq={faq}>
-  <Fragment slot="intro">Share the housework fairly with this free roommate chore chart maker. List everyone in the home, rotate chores each week and print the schedule for the fridge.</Fragment>
+  <Fragment slot="intro">
+    Free roommate chore chart maker: rotate chores weekly and print for the fridge. Also see our
+    <a href={PAGES.familyChoreChart.path} class="underline">family chore chart</a>,
+    <a href={PAGES.elegantChoreChart.path} class="underline">elegant chore chart</a>, or
+    <a href={PAGES.choreChartMaker.path} class="underline">chore chart maker</a>.
+  </Fragment>
 </ToolLayout>

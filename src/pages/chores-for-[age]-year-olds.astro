@@ -8,6 +8,8 @@ export const getStaticPaths = (() =>
 
 const age = Number(Astro.params.age);
 const page = agePage(age);
+const prevAge = age > 3 ? age - 1 : null;
+const nextAge = age < 12 ? age + 1 : null;
 ---
 
 <ArticleLayout
@@ -18,6 +20,82 @@ const page = agePage(age);
     { name: page.label, path: page.path },
   ]}
 >
-  <p>Placeholder: a list of chores for {age}-year-olds, with tips for teaching each one, is coming soon.</p>
-  <p><a href={PAGES.choreChartMaker.path} class="text-brand underline">Make a chore chart</a> with these chores.</p>
+  <p>
+    Discover age-appropriate chores for {age}-year-olds. You can customize the ready-made chore chart above with icons,
+    names, and a weekly routine, then print it out on US Letter or A4 paper.
+  </p>
+  <p>
+    <a href={PAGES.choreChartMaker.path} class="font-semibold text-brand underline">Open the full Chore Chart Maker</a>
+    to add rewards, points, or multiple children.
+  </p>
+
+  <nav class="my-6 border-y border-line py-4" aria-label="Age navigation">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      {prevAge ? (
+        <a href={agePage(prevAge).path} class="text-sm font-medium text-brand underline">
+          ← Chores for {prevAge}-year-olds
+        </a>
+      ) : (
+        <span />
+      )}
+      <a href={PAGES.choresByAge.path} class="text-sm font-medium text-muted hover:text-fg">
+        All Ages Guide (2–14)
+      </a>
+      {nextAge ? (
+        <a href={agePage(nextAge).path} class="text-sm font-medium text-brand underline">
+          Chores for {nextAge}-year-olds →
+        </a>
+      ) : (
+        <span />
+      )}
+    </div>
+    <div class="mt-4">
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted">Browse chores by other ages:</p>
+      <div class="mt-2 flex flex-wrap gap-2 text-sm">
+        {AGE_PAGE_AGES.map((a) =>
+          a === age ? (
+            <span class="rounded bg-brand px-2.5 py-1 text-xs font-bold text-brand-fg">{a} years</span>
+          ) : (
+            <a
+              href={agePage(a).path}
+              class="rounded border border-line bg-card px-2.5 py-1 text-xs font-medium text-fg hover:border-brand"
+            >
+              {a} years
+            </a>
+          ),
+        )}
+      </div>
+    </div>
+  </nav>
+
+  <section class="mt-8 space-y-3">
+    <h2 class="text-xl font-bold text-fg">Related printable chart tools</h2>
+    <p class="text-base text-muted">Explore our sibling tools designed for families, routines, and positive habits:</p>
+    <ul class="list-disc space-y-2 pl-6 text-base">
+      <li>
+        <a href={PAGES.choreChartMaker.path} class="text-brand underline font-medium">Free Printable Chore Chart Maker</a>:
+        build a weekly picture chart for kids of any age.
+      </li>
+      <li>
+        <a href={PAGES.rewardChartMaker.path} class="text-brand underline font-medium">Reward Chart Maker</a>:
+        motivate new habits with a custom sticker track and goals.
+      </li>
+      <li>
+        <a href={PAGES.morningRoutineChart.path} class="text-brand underline font-medium">Morning Routine Chart</a>:
+        step-by-step visual schedule for smoother school mornings.
+      </li>
+      <li>
+        <a href={PAGES.familyChoreChart.path} class="text-brand underline font-medium">Family Chore Chart</a>:
+        keep everyone in the house organized on one shared grid.
+      </li>
+      <li>
+        <a href={PAGES.freeChoreChartTemplate.path} class="text-brand underline font-medium">Free Chore Chart Templates</a>:
+        pre-filled starting points ready to edit and print in seconds.
+      </li>
+      <li>
+        <a href={PAGES.elegantChoreChart.path} class="text-brand underline font-medium">Elegant Chore Chart</a>:
+        minimalist black-and-white charts that look beautiful framed or on the fridge.
+      </li>
+    </ul>
+  </section>
 </ArticleLayout>
