@@ -4,15 +4,16 @@ import type { FaqItem } from '../lib/seo.ts';
 
 interface Props {
   items: FaqItem[];
+  title?: string;
 }
 
-const { items } = Astro.props;
+const { items, title = 'Frequently asked questions' } = Astro.props;
 ---
 
 {
   items.length > 0 && (
     <section aria-labelledby="faq">
-      <h2 id="faq">Frequently asked questions</h2>
+      <h2 id="faq">{title}</h2>
       {items.map((item) => (
         <>
           <h3>{item.question}</h3>

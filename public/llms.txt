@@ -15,6 +15,8 @@
 ## Tools
 
 - [Chore Chart Maker](https://chorechartmaker.com/chore-chart-maker/): the main tool, opening with a weekly chore chart for one child, with a guide to every option, chores by age and printing tips.
+- [Tabela de Tarefas](https://chorechartmaker.com/pt/): o gerador de tabela de tarefas para crianças em português, com rotinas semanais para imprimir e figuras por idade.
+- [Tableau de Tâches](https://chorechartmaker.com/fr/): le générateur de tableau de tâches pour enfants en français, avec routines hebdomadaires à imprimer et illustrations.
 - [Reward Chart Maker](https://chorechartmaker.com/reward-chart-maker/): the tool preset to a sticker reward chart with a custom goal and prize.
 - [Family Chore Chart](https://chorechartmaker.com/family-chore-chart/): the tool preset to a color-coded chart for several children and adults.
 - [Roommate Chore Chart](https://chorechartmaker.com/roommate-chore-chart/): the tool preset to a weekly rotation chart for shared homes.

@@ -1,6 +1,11 @@
 // Registry of every page: path, SEO text, H1 and lastmod.
 // Single source of truth for page metadata, navigation and sitemap lastmod.
 
+export interface AlternateLink {
+  lang: string;
+  path: string;
+}
+
 export interface PageMeta {
   path: string;
   title: string;
@@ -13,6 +18,9 @@ export interface PageMeta {
   /** ISO date first published; used for Article JSON-LD. */
   published: string;
   noindex?: boolean;
+  lang?: string;
+  locale?: string;
+  alternates?: AlternateLink[];
 }
 
 const LAUNCH = '2026-10-06';
@@ -20,6 +28,12 @@ const LAUNCH = '2026-10-06';
 function page(meta: Omit<PageMeta, 'lastmod' | 'published'> & Partial<PageMeta>): PageMeta {
   return { lastmod: LAUNCH, published: LAUNCH, ...meta };
 }
+
+export const CHORE_CHART_ALTERNATES: AlternateLink[] = [
+  { lang: 'en', path: '/chore-chart-maker/' },
+  { lang: 'pt', path: '/pt/' },
+  { lang: 'fr', path: '/fr/' },
+];
 
 export const PAGES = {
   home: page({
@@ -37,6 +51,29 @@ export const PAGES = {
     h1: 'Free Printable Chore Chart Maker',
     description:
       'Use this free chore chart maker to build a printable chore chart for kids in minutes: picture chores by age, weekly, routine or reward layouts. No sign-up.',
+    alternates: CHORE_CHART_ALTERNATES,
+  }),
+  ptChoreChartMaker: page({
+    path: '/pt/',
+    label: 'Tabela de Tarefas',
+    lang: 'pt',
+    locale: 'pt_PT',
+    alternates: CHORE_CHART_ALTERNATES,
+    title: 'Tabela de Tarefas Grátis para Imprimir | Crianças',
+    h1: 'Tabela de tarefas infantil para imprimir',
+    description:
+      'Crie uma tabela de tarefas infantil grátis para imprimir: rotinas semanais com figuras para crianças de todas as idades. Sem cadastro e direto no navegador.',
+  }),
+  frChoreChartMaker: page({
+    path: '/fr/',
+    label: 'Tableau de Tâches',
+    lang: 'fr',
+    locale: 'fr_FR',
+    alternates: CHORE_CHART_ALTERNATES,
+    title: 'Tableau de Tâches Gratuit à Imprimer pour Enfants',
+    h1: 'Tableau de tâches enfant gratuit à imprimer',
+    description:
+      'Créez un tableau de tâches gratuit à imprimer pour enfants: routines hebdomadaires avec images par âge. Simple, sans inscription et directement en ligne.',
   }),
   rewardChartMaker: page({
     path: '/reward-chart-maker/',

@@ -25,7 +25,7 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={page.lang ?? 'en'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,6 +45,7 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
       noindex={page.noindex}
       ogType={ogType}
       ogImage={ogImage}
+      alternates={page.alternates}
       article={ogType === 'article' ? { published: page.published, modified: page.lastmod } : undefined}
       jsonLd={structuredData}
     />

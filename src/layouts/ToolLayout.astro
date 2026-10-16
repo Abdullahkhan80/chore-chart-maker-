@@ -13,9 +13,10 @@ interface Props {
   preset?: string;
   /** Rendered as the visible FAQ and as FAQPage JSON-LD from the same text. */
   faq?: FaqItem[];
+  faqTitle?: string;
 }
 
-const { page, preset = PAGE_PRESETS[page.path] ?? 'weekly', faq = [] } = Astro.props;
+const { page, preset = PAGE_PRESETS[page.path] ?? 'weekly', faq = [], faqTitle } = Astro.props;
 const jsonLd = [buildWebApplication({ name: page.label, path: page.path, description: page.description })];
 if (faq.length > 0) jsonLd.push(buildFaqPage(faq));
 ---
@@ -29,6 +30,6 @@ if (faq.length > 0) jsonLd.push(buildFaqPage(faq));
   <div class="prose-content mt-12 max-w-prose">
     <Byline lastmod={page.lastmod} />
     <slot />
-    <Faq items={faq} />
+    <Faq items={faq} title={faqTitle} />
   </div>
 </MainLayout>

@@ -17,6 +17,18 @@ const nav = [
 ];
 const cta = { href: PAGES.choreChartMaker.path, label: 'Create a Chart' };
 const current = (href: string) => (currentPath === href ? 'page' : undefined);
+
+const currentLang = currentPath === PAGES.ptChoreChartMaker.path
+  ? { code: 'PT', label: 'Português' }
+  : currentPath === PAGES.frChoreChartMaker.path
+    ? { code: 'FR', label: 'Français' }
+    : { code: 'EN', label: 'English' };
+
+const languages = [
+  { code: 'EN', label: 'English', href: PAGES.choreChartMaker.path },
+  { code: 'PT', label: 'Português', href: PAGES.ptChoreChartMaker.path },
+  { code: 'FR', label: 'Français', href: PAGES.frChoreChartMaker.path },
+];
 ---
 
 <header class="site-header print:hidden">
@@ -29,6 +41,20 @@ const current = (href: string) => (currentPath === href ? 'page' : undefined);
       <ul class="site-nav-list">
         {nav.map((item) => <li><a href={item.href} aria-current={current(item.href)}>{item.label}</a></li>)}
       </ul>
+      <details class="site-lang-dropdown">
+        <summary aria-label="Select language">
+          <span class="site-lang-globe" aria-hidden="true">🌐</span>
+          <span>{currentLang.code}</span>
+          <span class="site-lang-arrow" aria-hidden="true">▾</span>
+        </summary>
+        <div class="site-lang-menu">
+          {languages.map((l) => (
+            <a href={l.href} class={`site-lang-item${currentPath === l.href ? ' is-active' : ''}`} hreflang={l.code.toLowerCase()}>
+              <strong>{l.code}</strong> {l.label}
+            </a>
+          ))}
+        </div>
+      </details>
       <a href={cta.href} class="btn btn-primary site-header-cta">{cta.label}</a>
       <details class="site-menu">
         <summary><span class="site-menu-icon" aria-hidden="true"></span>Menu</summary>

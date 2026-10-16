@@ -20,8 +20,15 @@ const columns = [
     links: [PAGES.choresByAge, ...AGE_PAGE_AGES.map((age) => ({ path: agePagePath(age), label: `Age ${age}` }))],
   },
   {
-    label: 'Site',
-    links: [PAGES.about, PAGES.contact, PAGES.privacyPolicy, PAGES.terms],
+    label: 'Site & Languages',
+    links: [
+      PAGES.about,
+      PAGES.contact,
+      PAGES.privacyPolicy,
+      PAGES.terms,
+      { path: PAGES.ptChoreChartMaker.path, label: 'Português (Tabela)' },
+      { path: PAGES.frChoreChartMaker.path, label: 'Français (Tableau)' },
+    ],
   },
 ];
 

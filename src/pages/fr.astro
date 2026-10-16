@@ -1,0 +1,166 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'Comment créer un tableau de tâches pour enfants à imprimer ?',
+    answer:
+      'Indiquez le prénom de votre enfant, sélectionnez des corvées adaptées avec des icônes illustrées, choisissez les jours de la semaine et téléchargez votre tableau en PDF ou PNG prêt à imprimer.',
+  },
+  {
+    question: 'Combien de tâches ménagères donner à un enfant ?',
+    answer:
+      'Pour les tout-petits de 2 à 7 ans, 3 à 5 petites tâches quotidiennes suffisent. Pour les enfants de 8 à 14 ans, 5 à 7 tâches permettent d’encourager l’autonomie sans surcharger leur journée.',
+  },
+  {
+    question: 'Le générateur de tableau de tâches est-il gratuit ?',
+    answer:
+      'Oui, 100% gratuit, sans inscription, sans publicité intrusive et sans abonnement. Tous les thèmes graphiques, options et téléchargements sont accessibles immédiatement.',
+  },
+  {
+    question: 'Les prénoms de mes enfants sont-ils enregistrés sur Internet ?',
+    answer:
+      'Non. La confidentialité est totale : aucun prénom ni corvée ne quitte votre navigateur. Toutes les informations restent sur votre appareil grâce au stockage local sécurisé.',
+  },
+  {
+    question: 'Comment faire pour un jeune enfant qui ne sait pas encore lire ?',
+    answer:
+      'Chaque tâche dispose d’une icône visuelle en couleur. Les jeunes enfants peuvent ainsi reconnaître facilement leurs activités (ranger les jouets, brosser les dents) grâce aux dessins.',
+  },
+  {
+    question: 'Puis-je créer un tableau pour plusieurs enfants ou pour la famille ?',
+    answer:
+      'Tout à fait ! Vous pouvez ajouter jusqu’à 8 prénoms dans la première étape et choisir le format Tableau Familial pour attribuer les corvées par couleur sur une même feuille.',
+  },
+];
+---
+
+<ToolLayout page={PAGES.frChoreChartMaker} faq={faq} faqTitle="Foire aux questions">
+  <div slot="intro">
+    <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-[var(--surface)] px-3 py-1.5 text-xs text-muted border border-[var(--line)]">
+      <span class="font-medium text-fg">Langue / Language :</span>
+      <a href={PAGES.choreChartMaker.path} class="hover:text-fg hover:underline">English</a>
+      <span>·</span>
+      <a href={PAGES.ptChoreChartMaker.path} class="hover:text-fg hover:underline">Português</a>
+      <span>·</span>
+      <span class="font-bold text-brand">Français</span>
+    </div>
+    <p>
+      Créez un tableau de tâches personnalisé pour vos enfants en quelques clics : choisissez des corvées adaptées à leur
+      âge avec de jolies icônes, personnalisez le style et imprimez en format A4 ou Lettre. Gratuit et sans inscription.
+    </p>
+  </div>
+
+  <h2>Comment créer votre tableau de tâches en 4 étapes</h2>
+  <p>L’outil interactif ci-dessus actualise la prévisualisation en direct au fil de vos choix :</p>
+  <ol>
+    <li>
+      <strong>Pour qui est le tableau ?</strong> Donnez un titre et ajoutez le prénom et l’âge de vos enfants (jusqu’à 8 personnes). L’outil propose automatiquement des tâches adaptées à leur âge.
+    </li>
+    <li>
+      <strong>Sélectionnez les tâches.</strong> Cliquez sur les suggestions ou saisissez vos propres corvées. Chaque tâche est accompagnée d’une icône colorée que vous pouvez modifier à tout moment.
+    </li>
+    <li>
+      <strong>Personnalisez le style.</strong> Choisissez un modèle (hebdomadaire, routine ou récompense), appliquez un thème parmi 12 univers graphiques et sélectionnez le format de papier (A4 ou Lettre).
+    </li>
+    <li>
+      <strong>Imprimez ou téléchargez.</strong> Générez un PDF prêt à l’impression, une image PNG pour tablette ou copiez le lien de partage pour le rouvrir facilement sur un autre appareil.
+    </li>
+  </ol>
+
+  <h2>Idées de tâches ménagères adaptées par tranche d’âge</h2>
+  <p>
+    Participer aux tâches du quotidien développe la confiance en soi et l’esprit d’entraide. Voici un guide de référence rapide :
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Âge</th>
+          <th scope="col">Tâches recommandées</th>
+          <th scope="col">Objectif d'autonomie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">2–3 ans</th>
+          <td>Ranger les doudous dans un bac, mettre le linge sale au panier, aider à nourrir l’animal.</td>
+          <td>Motricité globale et imitation positive des gestes du quotidien.</td>
+        </tr>
+        <tr>
+          <th scope="row">4–5 ans</th>
+          <td>Faire son lit simplement, arroser une plante, poser les serviettes sur la table, ranger ses chaussures.</td>
+          <td>Responsabilisation sur l’espace personnel et la chambre.</td>
+        </tr>
+        <tr>
+          <th scope="row">6–7 ans</th>
+          <td>Balayer sous la table, préparer son cartable pour l’école, plier les serviettes, nourrir les animaux.</td>
+          <td>Organisation personnelle et respect des horaires scolaires.</td>
+        </tr>
+        <tr>
+          <th scope="row">8–9 ans</th>
+          <td>Remplir ou vider le lave-vaisselle, passer l’aspirateur dans une pièce, sortir la poubelle.</td>
+          <td>Collaboration active à la vie de la maison et entraide familiale.</td>
+        </tr>
+        <tr>
+          <th scope="row">10–14 ans</th>
+          <td>Préparer un repas simple, nettoyer la salle de bain, lancer une machine à laver, désherber le jardin.</td>
+          <td>Apprentissage de l’indépendance et gestion de ses affaires.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-sm text-muted">
+    Pour consulter notre guide pédagogique complet en anglais, découvrez notre page
+    <a href={PAGES.choresByAge.path}>chores for kids by age</a>.
+  </p>
+
+  <h2>Différents modèles de tableaux selon vos besoins</h2>
+  <p>Vous pouvez tester tous les types de tableaux à l’étape 3 sans perdre vos informations enregistrées :</p>
+  <ul>
+    <li>
+      <strong>Tableau hebdomadaire classique :</strong> Les corvées à gauche et les 7 jours de la semaine avec des cases à cocher. Idéal pour instaurer une habitude durable dès 4 ans.
+    </li>
+    <li>
+      <strong>Tableau de routine imagée :</strong> Les étapes chronologiques d’un moment clé (lever, coucher). Découvrez également notre modèle de
+      <a href={PAGES.morningRoutineChart.path}>morning routine chart</a>.
+    </li>
+    <li>
+      <strong>Tableau de récompenses à gommettes :</strong> Un parcours d’étoiles menant à un objectif défini pour encourager une nouvelle habitude. Essayez notre
+      <a href={PAGES.rewardChartMaker.path}>reward chart maker</a>.
+    </li>
+    <li>
+      <strong>Tableau pour toute la famille :</strong> Tous les membres du foyer sur une même feuille avec code couleur individuel. Consultez la page
+      <a href={PAGES.familyChoreChart.path}>family chore chart</a>.
+    </li>
+    <li>
+      <strong>Modèles vierges et prêts à imprimer :</strong> Retrouvez des gabarits à remplir à la main sur notre page
+      <a href={PAGES.freeChoreChartTemplate.path}>free chore chart template</a>.
+    </li>
+  </ul>
+
+  <h2>Conseils pour que le tableau soit un succès à la maison</h2>
+  <ul>
+    <li>
+      <strong>Affichez-le à hauteur d’enfant :</strong> Placez le tableau sur le réfrigérateur ou la porte de la chambre pour qu’il soit toujours visible.
+    </li>
+    <li>
+      <strong>Montrez l’exemple d’abord :</strong> Effectuez la tâche avec l’enfant les premières fois avec bienveillance avant de le laisser faire seul.
+    </li>
+    <li>
+      <strong>Faites un bilan hebdomadaire :</strong> Félicitez les progrès chaque fin de semaine et ajustez ensemble les tâches si nécessaire.
+    </li>
+    <li>
+      <strong>Plastifiez pour réutiliser :</strong> Glissez la feuille dans une pochette transparente et utilisez un feutre effaçable à sec pour plusieurs mois d’utilisation.
+    </li>
+  </ul>
+
+  <h2>Respect de votre vie privée : zéro collecte de données</h2>
+  <p>
+    Toutes les données saisies (prénoms, tâches, paramètres) restent uniquement dans le navigateur de votre appareil.
+    Aucune information n’est transmise à nos serveurs ni partagée. Pour en savoir plus, consultez notre
+    <a href={PAGES.privacyPolicy.path}>politique de confidentialité</a>.
+  </p>
+</ToolLayout>

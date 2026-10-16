@@ -1,4 +1,5 @@
 ---
+import type { AlternateLink } from '../lib/pages.ts';
 import {
   SITE_CONFIG,
   buildAssetUrl,
@@ -16,6 +17,7 @@ interface Props {
   noindex?: boolean;
   ogType?: 'website' | 'article';
   ogImage?: { path: string; width: number; height: number; alt: string };
+  alternates?: AlternateLink[];
   /** Article dates (ISO YYYY-MM-DD) for og:type "article". */
   article?: { published: string; modified: string };
   jsonLd?: JsonLd[];
@@ -28,6 +30,7 @@ const {
   noindex = false,
   ogType = 'website',
   ogImage = SITE_CONFIG.ogImage,
+  alternates,
   article,
   jsonLd = [],
 } = Astro.props;
@@ -43,6 +46,12 @@ const structuredData = isHome ? [buildWebSite(), buildOrganization(), ...jsonLd]
 <meta name="description" content={description} />
 <meta name="robots" content={robots} />
 {!noindex && <link rel="canonical" href={canonical} />}
+{
+  !noindex && alternates && alternates.map((alt) => (
+    <link rel="alternate" hreflang={alt.lang} href={buildCanonicalUrl(alt.path)} />
+  ))
+}
+{!noindex && alternates && <link rel="alternate" hreflang="x-default" href={buildCanonicalUrl('/chore-chart-maker/')} />}
 
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={SITE_CONFIG.name} />

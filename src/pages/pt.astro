@@ -1,0 +1,166 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'Como funciona a tabela de tarefas infantil para imprimir?',
+    answer:
+      'Você escolhe o nome da criança, seleciona tarefas adequadas com ilustrações coloridas, define os dias da semana e baixa o arquivo em PDF ou PNG de alta qualidade para imprimir em casa.',
+  },
+  {
+    question: 'Quantas tarefas devo colocar para meu filho?',
+    answer:
+      'Para crianças de 2 a 7 anos, recomendamos de 3 a 5 tarefas diárias. Para crianças maiores (8 a 14 anos), de 5 a 7 tarefas. Comece com poucas atividades para garantir motivação e consistência.',
+  },
+  {
+    question: 'É necessário pagar ou criar uma conta para usar?',
+    answer:
+      'Não. O gerador é 100% gratuito, sem anúncios intrusivos e sem cadastro. Todos os modelos, temas e formatos de exportação são liberados imediatamente no seu navegador.',
+  },
+  {
+    question: 'Os dados e nomes dos meus filhos ficam salvos na internet?',
+    answer:
+      'Não. Respeitamos total privacidade: nenhum nome ou tarefa sai do seu navegador. Os dados são salvos apenas no seu próprio dispositivo através do armazenamento local seguro.',
+  },
+  {
+    question: 'Como fazer uma tabela para crianças que ainda não sabem ler?',
+    answer:
+      'Todas as tarefas incluem ícones ilustrativos com figuras claras. As crianças pequenas identificam visualmente suas rotinas diárias (como escovar os dentes ou guardar brinquedos) mesmo sem ler.',
+  },
+  {
+    question: 'Posso criar uma tabela para mais de uma criança?',
+    answer:
+      'Sim! Adicione até 8 crianças no primeiro passo e selecione o modelo de Tabela Familiar para organizar as tarefas de todos os irmãos em uma única folha ou em páginas individuais.',
+  },
+];
+---
+
+<ToolLayout page={PAGES.ptChoreChartMaker} faq={faq} faqTitle="Perguntas frequentes">
+  <div slot="intro">
+    <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-[var(--surface)] px-3 py-1.5 text-xs text-muted border border-[var(--line)]">
+      <span class="font-medium text-fg">Idioma / Language:</span>
+      <a href={PAGES.choreChartMaker.path} class="hover:text-fg hover:underline">English</a>
+      <span>·</span>
+      <span class="font-bold text-brand">Português</span>
+      <span>·</span>
+      <a href={PAGES.frChoreChartMaker.path} class="hover:text-fg hover:underline">Français</a>
+    </div>
+    <p>
+      Crie uma tabela de tarefas personalizada para seus filhos em minutos: escolha rotinas adequadas para cada idade,
+      adicione ícones ilustrativos e imprima em formato A4 ou Carta. Sem cadastro e 100% gratuito.
+    </p>
+  </div>
+
+  <h2>Como criar sua tabela de tarefas em 4 passos</h2>
+  <p>O gerador acima atualiza a prévia em tempo real enquanto você personaliza cada detalhe:</p>
+  <ol>
+    <li>
+      <strong>Para quem é a tabela?</strong> Dê um título à folha e adicione os nomes e idades das crianças (até 8 participantes). O gerador sugere tarefas perfeitas para cada faixa etária.
+    </li>
+    <li>
+      <strong>Escolha as tarefas.</strong> Clique nas sugestões automáticas ou escreva suas próprias atividades. Cada tarefa recebe um ícone colorido e pode ser atribuída a dias específicos da semana.
+    </li>
+    <li>
+      <strong>Estilo e formato.</strong> Selecione o tipo de tabela (semanal, rotina ou recompensas), escolha entre 12 temas visuais e defina o papel (A4 ou Carta) e orientação (retrato ou paisagem).
+    </li>
+    <li>
+      <strong>Imprimir ou baixar.</strong> Gere o PDF para impressão imediata, salve em imagem PNG ou copie o link direto para editar em outro aparelho quando desejar.
+    </li>
+  </ol>
+
+  <h2>Tarefas sugeridas por faixa etária</h2>
+  <p>
+    Envolver as crianças nas tarefas domésticas desenvolve autonomia e senso de cooperação. Confira nossa tabela de referência rápida:
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Idade</th>
+          <th scope="col">Tarefas recomendadas</th>
+          <th scope="col">Foco de aprendizado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">2–3 anos</th>
+          <td>Guardar brinquedos na caixa, colocar roupas no cesto, ajudar a alimentar o animal de estimação.</td>
+          <td>Coordenação motora e imitação de rotinas simples.</td>
+        </tr>
+        <tr>
+          <th scope="row">4–5 anos</th>
+          <td>Arrumar a cama, regar plantinhas, colocar guardanapos na mesa, guardar sapatos.</td>
+          <td>Senso de pertencimento e autonomia nas tarefas do quarto.</td>
+        </tr>
+        <tr>
+          <th scope="row">6–7 anos</th>
+          <td>Varrer pequenos espaços, arrumar a mochila escolar, dobrar toalhas, cuidar dos pets.</td>
+          <td>Responsabilidade com objetos pessoais e horários.</td>
+        </tr>
+        <tr>
+          <th scope="row">8–9 anos</th>
+          <td>Lavar a louça ou colocar na máquina, passar aspirador, recolher o lixo da casa.</td>
+          <td>Trabalho em equipe e manutenção das áreas comuns da casa.</td>
+        </tr>
+        <tr>
+          <th scope="row">10–14 anos</th>
+          <td>Preparar lanches simples, limpar o banheiro, lavar e estender roupas, cuidar do jardim.</td>
+          <td>Preparação para a vida adulta e gerenciamento de tempo.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-sm text-muted">
+    Para ver a lista detalhada em inglês com dicas pedagógicas, consulte nosso guia completo de
+    <a href={PAGES.choresByAge.path}>chores for kids by age</a>.
+  </p>
+
+  <h2>Modelos de tabelas disponíveis</h2>
+  <p>Você pode alternar livremente entre os diferentes modelos no passo 3 sem perder o que já preencheu:</p>
+  <ul>
+    <li>
+      <strong>Tabela semanal clássica:</strong> As tarefas na lateral e os 7 dias da semana no topo com caixas para marcar a cada dia cumprido. Ideal para a maioria das famílias.
+    </li>
+    <li>
+      <strong>Tabela de rotina diária:</strong> Passos sequenciais de um momento do dia (como rotina matinal ou rotina antes de dormir). Veja também nosso modelo de
+      <a href={PAGES.morningRoutineChart.path}>morning routine chart</a>.
+    </li>
+    <li>
+      <strong>Quadro de recompensas com estrelas:</strong> Trilha de incentivo com metas e adesivos para motivar novos hábitos. Acesse o nosso
+      <a href={PAGES.rewardChartMaker.path}>reward chart maker</a>.
+    </li>
+    <li>
+      <strong>Tabela familiar compartilhada:</strong> Reúne pais e vários filhos em um só painel organizado por cores. Veja o modelo
+      <a href={PAGES.familyChoreChart.path}>family chore chart</a>.
+    </li>
+    <li>
+      <strong>Tabela de modelo grátis para preencher:</strong> Modelos limpos e prontos para impressão. Conheça as opções em
+      <a href={PAGES.freeChoreChartTemplate.path}>free chore chart template</a>.
+    </li>
+  </ul>
+
+  <h2>Dicas para fazer a tabela funcionar no dia a dia</h2>
+  <ul>
+    <li>
+      <strong>Mantenha a tabela visível:</strong> Cole na altura dos olhos da criança, como na porta da geladeira ou no guarda-roupa.
+    </li>
+    <li>
+      <strong>Ensine com paciência:</strong> Faça a tarefa junto com a criança nas primeiras vezes antes de exigir que ela faça sozinha.
+    </li>
+    <li>
+      <strong>Celebre as conquistas:</strong> Reconheça o esforço semanalmente e faça ajustes sempre que uma rotina estiver muito fácil ou difícil.
+    </li>
+    <li>
+      <strong>Dureza e reutilização:</strong> Coloque a folha impressa em uma pasta plástica ou plastifique para usar canetas apagáveis a seco por vários meses.
+    </li>
+  </ul>
+
+  <h2>Privacidade total: seus dados ficam no seu aparelho</h2>
+  <p>
+    Nenhum dado digitado (como nomes dos seus filhos ou tarefas) é enviado aos nossos servidores. Tudo é processado e
+    armazenado exclusivamente no navegador do seu dispositivo. Saiba mais na nossa
+    <a href={PAGES.privacyPolicy.path}>política de privacidade</a>.
+  </p>
+</ToolLayout>

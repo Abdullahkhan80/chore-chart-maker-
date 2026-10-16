@@ -5,22 +5,16 @@ import type { FaqItem } from '../lib/seo.ts';
 
 const faq: FaqItem[] = [
   {
-    question: 'How does a rotating roommate chore chart work?',
-    answer:
-      'Chores rotate weekly so everyone takes turns and nobody is stuck with the bathroom.',
+    question: 'How does a roommate chore chart work?',
+    answer: 'Chores rotate weekly so everyone takes turns fairly.',
   },
   {
-    question: 'How many roommates can share a chart?',
-    answer: 'Up to eight people and twenty chores fit on one chart, ideal for apartments and dorms.',
+    question: 'How many people can share a chart?',
+    answer: 'Up to eight people and twenty chores fit on one chart.',
   },
   {
-    question: 'Can roommates share the chart online?',
-    answer:
-      'Yes. Use Copy share link to send to flatmates, or print copies for the fridge.',
-  },
-  {
-    question: 'Is the roommate chore chart maker free?',
-    answer: 'Yes. Completely free with no sign-up; data stays private in your browser.',
+    question: 'Is the roommate chore chart free?',
+    answer: 'Yes. 100% free with no sign-up; data stays private in your browser.',
   },
 ];
 ---
@@ -28,8 +22,6 @@ const faq: FaqItem[] = [
 <ToolLayout page={PAGES.roommateChoreChart} faq={faq}>
   <Fragment slot="intro">
     Free roommate chore chart maker: rotate chores weekly and print for the fridge. Also see our
-    <a href={PAGES.familyChoreChart.path} class="underline">family chore chart</a>,
-    <a href={PAGES.elegantChoreChart.path} class="underline">elegant chore chart</a>, or
     <a href={PAGES.choreChartMaker.path} class="underline">chore chart maker</a>.
   </Fragment>
 </ToolLayout>

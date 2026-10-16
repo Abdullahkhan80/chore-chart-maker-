@@ -157,6 +157,8 @@ export function getPreset(id: unknown): ChartConfig | null {
 /** Default preset for each landing page path. */
 export const PAGE_PRESETS: Readonly<Record<string, string>> = {
   [PAGES.choreChartMaker.path]: 'weekly',
+  [PAGES.ptChoreChartMaker.path]: 'weekly',
+  [PAGES.frChoreChartMaker.path]: 'weekly',
   [PAGES.rewardChartMaker.path]: 'reward',
   [PAGES.roommateChoreChart.path]: 'roommates',
   [PAGES.morningRoutineChart.path]: 'morning-routine',
