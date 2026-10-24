@@ -6,22 +6,141 @@ import type { FaqItem } from '../lib/seo.ts';
 const faq: FaqItem[] = [
   {
     question: 'How does a roommate chore chart work?',
-    answer: 'Chores rotate weekly so everyone takes turns fairly.',
+    answer:
+      'A rotation chart assigns each chore to a specific person for one week, then moves it to the next person the following week. Everyone takes turns with every chore over time, so nobody gets stuck with the least popular jobs permanently. You set up the chart once, print a fresh copy each week, and chores are always clearly assigned.',
   },
   {
-    question: 'How many people can share a chart?',
-    answer: 'Up to eight people and twenty chores fit on one chart.',
+    question: 'How do we divide chores fairly between roommates?',
+    answer:
+      'Fair division usually means equal total effort, not identical tasks. List every recurring chore, estimate how long each one takes, and divide the total time roughly equally across roommates. If one person has a longer commute or works longer hours, a rotating schedule naturally rebalances over time without anyone having to argue about it.',
+  },
+  {
+    question: 'What chores work best on a rotation?',
+    answer:
+      "Rotation works best for shared-space recurring tasks that nobody particularly wants but everyone benefits from—cleaning the bathroom, taking out bins, vacuuming common areas, and mopping floors. Personal spaces like each person's bedroom and their own laundry are usually best kept as individual responsibilities rather than rotated.",
+  },
+  {
+    question: 'What if a roommate consistently skips their chores?',
+    answer:
+      'A printed chart makes accountability visible without requiring confrontation—you can both see what was agreed and whether it happened. If issues persist, a house meeting to review and re-agree the chart is usually more effective than escalating one-on-one. Point to the chart, not at each other.',
+  },
+  {
+    question: 'How many people can share one chart?',
+    answer: 'Up to eight people and twenty chores fit on one printable chart. For larger households, split shared spaces into zones and assign zones rather than individual surfaces.',
   },
   {
     question: 'Is the roommate chore chart free?',
-    answer: 'Yes. 100% free with no sign-up; data stays private in your browser.',
+    answer:
+      'Yes. 100% free with no sign-up, no trial, and no paywall. All chart types, themes and download formats are included. Your names and chore list are saved only in your browser and are never uploaded to a server.',
   },
 ];
 ---
 
 <ToolLayout page={PAGES.roommateChoreChart} faq={faq}>
   <Fragment slot="intro">
-    Free roommate chore chart maker: rotate chores weekly and print for the fridge. Also see our
-    <a href={PAGES.choreChartMaker.path} class="underline">chore chart maker</a>.
+    A free roommate chore chart that rotates weekly so everyone takes turns fairly. No more arguments about whose turn it is—the chart decides.
   </Fragment>
+
+  <h2>Why shared homes need a chore system</h2>
+  <p>
+    Informal agreements about chores almost always fall apart over time. When responsibility is vague, the person who cares most about cleanliness ends up doing the most work—and resenting it. A written, rotating chart removes the ambiguity: every week, the chart shows exactly who is responsible for what, and that shared visibility is what makes it fair.
+  </p>
+  <p>
+    The rotation element is the key ingredient. Permanently assigning the bathroom to one person breeds resentment faster than almost any other living arrangement issue. Rotating it weekly means everyone experiences every chore, nobody gets permanently stuck with the worst ones, and conversations about fairness shift from emotional to logistical.
+  </p>
+
+  <h2>How to set up a roommate chore chart in four steps</h2>
+  <ol>
+    <li>
+      <strong>Add everyone.</strong> Enter each roommate's name in step 1. You can add up to eight people on one chart.
+    </li>
+    <li>
+      <strong>List the shared chores.</strong> Focus on shared spaces: kitchen, bathroom, hallway, living room. Leave bedrooms and personal laundry off the shared rotation—those stay as individual responsibilities.
+    </li>
+    <li>
+      <strong>Choose Rotation as the chart type.</strong> Select the Rotation option in the Style step. Chores automatically shift to the next person each week, cycling through everyone in order.
+    </li>
+    <li>
+      <strong>Print or share weekly.</strong> Print a fresh copy each Sunday, or download a PNG to post in your group chat. Stick it somewhere everyone walks past daily—the fridge, the bathroom door, the front hallway.
+    </li>
+  </ol>
+
+  <h2>Which chores belong on a roommate chart</h2>
+  <p>
+    The best candidates for rotation are shared-space, recurring tasks that nobody particularly wants but everyone benefits from. Here is a practical starting list for a shared apartment or house:
+  </p>
+  <h3>Kitchen</h3>
+  <ul>
+    <li>Wipe counters and stovetop after cooking</li>
+    <li>Clean the sink and taps</li>
+    <li>Sweep or mop the kitchen floor</li>
+    <li>Empty and wipe the fridge shelves weekly</li>
+    <li>Take out food waste and the kitchen bin</li>
+  </ul>
+  <h3>Bathroom</h3>
+  <ul>
+    <li>Clean the toilet, sink, and mirror</li>
+    <li>Scrub the tub or shower</li>
+    <li>Replace toilet paper and hand soap</li>
+    <li>Mop or wipe the bathroom floor</li>
+  </ul>
+  <h3>Common areas</h3>
+  <ul>
+    <li>Vacuum the living room and hallway</li>
+    <li>Dust surfaces and window sills</li>
+    <li>Clean the entry area or shared mudroom</li>
+    <li>Take out all recycling and rubbish bins on collection day</li>
+  </ul>
+  <p>
+    Keep bedrooms, personal laundry, and individual food preparation off the shared chart. Mixing personal responsibilities into the rotation creates resentment faster than it solves problems.
+  </p>
+
+  <h2>Tips for making the chart actually work</h2>
+  <ul>
+    <li>
+      <strong>Define the standard, not just the task.</strong> "Clean the bathroom" means different things to different people. Agree on what "done" looks like before the first week—toilet bowl white, sink wiped dry, mirror streak-free, floor mopped. Write it down if you need to.
+    </li>
+    <li>
+      <strong>Fix a day, not just a week.</strong> "Kitchen floor gets mopped every Sunday before noon" is far clearer than "whenever this week." Shared routines work better with shared timing.
+    </li>
+    <li>
+      <strong>Put the chart where everyone sees it daily.</strong> The fridge door, inside the bathroom cabinet, or pinned in the group chat. Out of sight genuinely means out of mind.
+    </li>
+    <li>
+      <strong>Review and adjust after the first month.</strong> Some chores will need a clearer description. Some might need redistributing if the time estimate was wrong. A brief house meeting at four weeks is much easier than a blowup at four months.
+    </li>
+    <li>
+      <strong>Allow trades, not skipping.</strong> If someone has a genuinely busy week, a straight swap with another roommate is reasonable. Permanent exemptions are not.
+    </li>
+    <li>
+      <strong>Let the chart absorb the confrontation.</strong> When a disagreement comes up, point to the chart rather than at each other. "According to the chart, this week's bathroom is yours" is far easier to hear than a personal accusation.
+    </li>
+  </ul>
+
+  <h2>Common roommate chore problems—and solutions</h2>
+  <h3>"We have completely different cleanliness standards."</h3>
+  <p>
+    This is the most common issue and the one a chart alone won't fully solve. Write a shared one-page "house standards" document when you first set up the chart—what clean means in each room, in specific terms. Refer to it when there's a dispute, not to each other's habits or history.
+  </p>
+  <h3>"One person always ends up doing more than their share."</h3>
+  <p>
+    If someone is consistently doing extra cleaning on top of their assigned chores, the chart may simply need more tasks added. If someone is skipping their assigned chores, the chart makes that visible and gives you a factual basis for a conversation rather than an emotional one.
+  </p>
+  <h3>"The chart feels unfair because our schedules are very different."</h3>
+  <p>
+    Consider weighting by time spent in the shared space rather than by head count. A roommate who works long hours and is rarely home contributes less mess and can reasonably do fewer shared chores. Acknowledge this openly in the chart setup rather than pretending equal occupancy means equal contribution.
+  </p>
+  <h3>"Nobody remembers to print a new chart each week."</h3>
+  <p>
+    Use the share link feature to send the chart URL to your group chat once. Anyone can open it from the link, see the current week's rotation in the preview, and either print a copy or screenshot it. You only need to build the chart once.
+  </p>
+
+  <h2>Explore other chart makers</h2>
+  <ul>
+    <li><a href={PAGES.choreChartMaker.path}>Chore Chart Maker</a>: picture charts for kids with points and allowance tracking.</li>
+    <li><a href={PAGES.familyChoreChart.path}>Family Chore Chart</a>: color-coded charts for households with kids and adults combined.</li>
+    <li><a href={PAGES.morningRoutineChart.path}>Morning Routine Chart</a>: step-by-step visual schedule for busy school mornings.</li>
+    <li><a href={PAGES.rewardChartMaker.path}>Reward Chart Maker</a>: sticker tracks for building one positive habit at a time.</li>
+    <li><a href={PAGES.freeChoreChartTemplate.path}>Free Chore Chart Templates</a>: ready-made printable layouts to edit and download instantly.</li>
+  </ul>
 </ToolLayout>

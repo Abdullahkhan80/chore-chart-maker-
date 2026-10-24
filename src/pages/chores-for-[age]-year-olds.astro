@@ -6,8 +6,291 @@ import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
 export const getStaticPaths = (() =>
   AGE_PAGE_AGES.map((age) => ({ params: { age: String(age) } }))) satisfies GetStaticPaths;
 
+interface AgeChore {
+  name: string;
+  desc: string;
+}
+
+interface AgeData {
+  intro: string;
+  whatTheyCanDo: string;
+  chores: AgeChore[];
+  tips: string[];
+  notYet: string;
+}
+
+const AGE_CONTENT: Record<number, AgeData> = {
+  3: {
+    intro:
+      "Three-year-olds are at peak 'me do it!' energy. They want to copy everything you do, and that enthusiasm is pure gold if you catch it early. Chores at this age are less about a tidy house and more about building a habit of helping before the 'I don't wanna' years arrive.",
+    whatTheyCanDo:
+      'A typical 3-year-old can follow a single simple instruction, stay on task for about 5 minutes, and use basic gross motor movements like sweeping and carrying. Fine motor control is still developing, so anything requiring precision—folding, pouring into small openings—will need your hands alongside theirs.',
+    chores: [
+      { name: 'Put toys in a bin', desc: 'The classic first chore. A large, open bin with no lid is easiest. Try making it a race, a song, or a countdown from ten.' },
+      { name: 'Put dirty clothes in the hamper', desc: 'One step, an immediate visible result, and a clear "right place." Kids this age love knowing exactly where something belongs.' },
+      { name: 'Wipe up small spills', desc: 'Hand them a cloth and show them the circular wiping motion. Most 3-year-olds genuinely love this—it feels very grown-up.' },
+      { name: 'Carry light groceries', desc: 'Give them a small bag with one or two items—a bag of bread, a small box of crackers. Makes a big shopping trip feel like teamwork.' },
+      { name: 'Help sort laundry into dark and light piles', desc: "Turn it into a color sorting game: 'Is this dark or light?' Simple sorting is well within reach and they get it faster than you expect." },
+      { name: 'Dust low surfaces with a cloth', desc: 'A slightly damp cloth over the coffee table. Quick, visible, and very satisfying for them to complete.' },
+      { name: 'Water one designated plant', desc: 'A small watering can and one specific plant. They will take surprising ownership of "their" plant over time.' },
+      { name: 'Put shoes in their spot', desc: 'One specific location, every time. The consistency is the real lesson, not the tidiness.' },
+    ],
+    tips: [
+      "Do it alongside them every time for at least the first month. 'We' before 'you.'",
+      'Keep every task under 5 minutes. Their attention window is real and cannot be negotiated away.',
+      "Praise immediately and specifically: 'You put all the blocks in the bin!' beats 'Good job!' every time.",
+      'Use a picture chart—they cannot read yet, but they can recognise icons for their tasks.',
+      'Expect imperfection and accept it warmly. A lumpy put-away still teaches the habit.',
+    ],
+    notYet:
+      'Multi-step tasks without you guiding each step, anything unsupervised near water such as washing dishes, and precision tasks like neatly folding clothes or pouring liquids into small openings.',
+  },
+
+  4: {
+    intro:
+      "Four-year-olds are natural helpers who still need close guidance but are now starting to understand cause and effect. 'If I put my shoes away, I'll find them in the morning' actually lands at this age—and that is new, and useful.",
+    whatTheyCanDo:
+      'A 4-year-old can reliably follow 2-step instructions, sustain effort for about 10 minutes, and manage basic fine motor tasks like matching and simple sorting. They understand the concept of "finished" and genuinely want your approval when they complete something.',
+    chores: [
+      { name: 'Make their bed (roughly)', desc: "Show them the pull-and-straighten method. It won't be crisp. A duvet cover is much easier to straighten than a sheet-and-blanket setup at this age." },
+      { name: 'Set the table with guidance', desc: 'Teach one piece at a time: plate here, fork here. A laminated placemat diagram works brilliantly as a reference during the learning phase.' },
+      { name: 'Match and pair socks', desc: 'A favourite for this age because it is essentially a puzzle. Start with obviously different socks to build early confidence.' },
+      { name: 'Feed the pet under supervision', desc: 'Measure the food together, pour together, then gradually reduce your involvement week by week as trust builds.' },
+      { name: 'Put away silverware from the dishwasher', desc: 'Freshly run and fully cooled only. Knives stay yours. Everything else they can sort and slot into the drawer.' },
+      { name: 'Wipe the kitchen table after meals', desc: 'A damp sponge, a clear start and a clear finish. Follow up if needed, but always let them lead.' },
+      { name: 'Tidy their bedroom to a defined standard', desc: "Define 'tidy' out loud every time: toys in bins, books on shelf, clothes off the floor. Vague instructions produce vague results." },
+      { name: 'Put books back on the shelf', desc: 'One shelf, one clear rule. Alphabetical order comes years later.' },
+      { name: 'Help carry and put away groceries', desc: 'Slightly heavier than at age 3—a bag of bread, a small box of cereal, a tin of tomatoes.' },
+    ],
+    tips: [
+      "Show them the completed result first—'This is what a made bed looks like'—so they have a real target to aim for.",
+      'Use the show-tell-do sequence: you demonstrate it, explain it out loud, then watch them try it themselves.',
+      "Celebrate finishing, not just attempting: 'You set the whole table! Now everyone can sit down.'",
+      'A short picture chart on their bedroom door with 3–4 daily tasks is both manageable and motivating.',
+      'Never redo their work in front of them. If it needs fixing, do it quietly later.',
+    ],
+    notYet:
+      'Sharp kitchen tools, carrying very heavy loads, tasks with more than 2–3 steps without active guidance, and anything requiring significant physical strength or sustained coordination.',
+  },
+
+  5: {
+    intro:
+      "Five-year-olds are entering the 'I can do it myself' phase in full force, and starting school brings daily routine—which makes chores significantly easier to establish. This is an ideal age to anchor chores to existing rhythms like breakfast and bedtime.",
+    whatTheyCanDo:
+      'Most 5-year-olds can follow 3-step instructions, stay focused for up to 15 minutes, read simple words, and handle increasingly precise motor tasks. They are developing a real sense of pride in completed work and will often want to show you the finished result.',
+    chores: [
+      { name: 'Make bed independently', desc: 'With a year of practice, this becomes entirely theirs. Switch to a duvet cover if you have not already—it is far easier to straighten than sheets.' },
+      { name: 'Clear and rinse their own plate', desc: 'Scrape scraps into the bin, rinse under the tap, place in the dishwasher. Three clear steps they can execute without any prompting.' },
+      { name: 'Water multiple plants on a schedule', desc: 'A regular weekly schedule they can help track. Give each plant a name if that helps them remember which one needs water.' },
+      { name: 'Fold washcloths and hand towels', desc: 'The easiest fold in the house. Always start here before moving on to shirts and pillowcases.' },
+      { name: 'Sort the recycling', desc: 'Paper here, plastic there, glass in its spot. Kids this age genuinely enjoy sorting tasks—it plays to their love of categories.' },
+      { name: 'Sweep with a child-sized broom', desc: 'Getting dirt into a dustpan is the harder half—practice that part together for the first few weeks.' },
+      { name: 'Unload non-breakable dishwasher items', desc: 'Plastic cups, pots and pans they can reach, plastic cutting boards, and silverware to the drawer.' },
+      { name: 'Wipe bathroom sink and counter', desc: 'A damp cloth, five wipes, clearly done. Fast, visible, and satisfying for a 5-year-old.' },
+      { name: 'Set the table independently', desc: 'No longer guided—they know where everything goes. Let them run the whole thing from start to finish.' },
+    ],
+    tips: [
+      'Let them choose the order of their daily chores. Even a small amount of autonomy is genuinely motivating at this age.',
+      'Give specific, genuine praise—they can sense when you are just going through the motions.',
+      'Review the chart together for 2 minutes each evening. Make it a brief ritual, not a performance review.',
+      "If they push back, ask 'which chore do you want to start with?' instead of 'will you do your chores?'",
+      'A simple sticker chart works well for building brand-new habits—target one behavior at a time.',
+    ],
+    notYet:
+      'Loading the full dishwasher, cooking on the stove, cleaning toilets, and using strong cleaning chemicals of any kind.',
+  },
+
+  6: {
+    intro:
+      "Six-year-olds are developing a strong sense of fairness. They notice when work is not distributed evenly, and they respond well when chores are framed as everyone's contribution to the home. 'This is how we take care of our house, and everyone's part matters' actually works at 6.",
+    whatTheyCanDo:
+      'A 6-year-old can read a basic chore chart independently, sustain effort for 20 or more minutes, and handle physical tasks that require more strength and coordination than a year ago. They understand that effort leads to results—a powerful connection to reinforce through chores.',
+    chores: [
+      { name: 'Sweep and mop small areas', desc: 'Kitchen floor or bathroom. Teach the sweep-before-mop rule and explain why—so you are not just pushing wet dirt around the room.' },
+      { name: 'Help cook simple foods', desc: 'Stirring, pouring, measuring dry ingredients, tearing lettuce, spreading butter. Always supervised and always hands-on.' },
+      { name: 'Walk the pet alongside an adult', desc: 'They hold the lead while you stay close. Real responsibility for a living thing—a big deal for a 6-year-old.' },
+      { name: 'Put away their own clean laundry', desc: 'Washed and folded clothes go back into the right drawers. This task is theirs to manage from here.' },
+      { name: 'Pack their own school bag the night before', desc: 'With a laminated checklist to tick through. This single habit pays dividends for years.' },
+      { name: 'Empty small waste bins around the house', desc: 'Bedroom bin, bathroom bin, office bin—all tipped into the main kitchen bag.' },
+      { name: 'Vacuum a room with initial guidance', desc: 'Show them the edges-first, stripes-second pattern. They will enjoy having a repeatable system to follow.' },
+      { name: 'Help unload and put away groceries', desc: 'They know where most things live now. Let them take the lead and ask when genuinely unsure.' },
+      { name: 'Wipe lower kitchen cabinet fronts', desc: 'A damp cloth on the cabinets within their reach. Fast, noticeable, and genuinely useful.' },
+    ],
+    tips: [
+      "Explain the why behind each chore: 'We mop so nobody slips on crumbs' or 'We pack tonight so mornings are not rushed.'",
+      'Let them try to problem-solve when they forget a chore rather than jumping straight in to remind them.',
+      'If a chore is not done to standard, wait before mentioning it—then show rather than tell how to improve it.',
+      "Introduce the concept of a 'do-over' instead of a consequence for forgotten chores.",
+      'A small weekly allowance tied to completed chores is worth introducing at this age.',
+    ],
+    notYet:
+      'Unsupervised cooking on the stove, strong chemical cleaners, carrying heavy loads up stairs, and deep-cleaning appliances of any kind.',
+  },
+
+  7: {
+    intro:
+      "Seven-year-olds can handle multi-step tasks independently and are starting to think ahead. Chores work best at this age when children have clear ownership of specific areas—'you are in charge of the dishwasher' is far more motivating than a daily checklist someone else controls.",
+    whatTheyCanDo:
+      'A 7-year-old can follow a written or pictured multi-step sequence, sustain focused effort for 20–30 minutes, and plan ahead within a day. Physical strength and coordination have improved significantly over the past year.',
+    chores: [
+      { name: 'Load the dishwasher', desc: 'Teach the logic: plates face inward in the bottom rack, cups upside-down on top, silverware points-down in the basket. Then step back and let them own it.' },
+      { name: 'Clean the bathroom sink and mirror', desc: 'Spray a non-toxic cleaner, wipe the sink thoroughly, then buff the mirror with a dry cloth for streak-free results. A satisfying 3-step sequence.' },
+      { name: 'Vacuum their bedroom weekly', desc: 'Full room, edges first, then back-and-forth stripes across the middle. Show them to shift light furniture to reach the edges underneath.' },
+      { name: 'Rake leaves', desc: 'A seasonal task they can handle from start to finish with a correctly sized rake. Give them ownership of a specific section of the garden.' },
+      { name: 'Prepare cold meals independently', desc: 'Sandwiches, cereal, fruit salad, cheese and crackers. With you nearby but not directing each step.' },
+      { name: 'Feed and water pets independently', desc: 'Full ownership of the daily routine—right amounts, on time, noting any changes to the animal to report back.' },
+      { name: 'Sort and fold laundry', desc: 'Socks, underwear, and simple flat items first. T-shirts and trousers follow with practice over the coming months.' },
+      { name: 'Help with grocery shopping', desc: 'Give them a short list of their own items in the store. Let them find the items and put them in the trolley independently.' },
+      { name: 'Clean their bedroom top to bottom weekly', desc: 'A defined list: make bed, tidy desk, vacuum, clear any clutter. One weekly task, fully theirs to execute.' },
+    ],
+    tips: [
+      "Assign ownership rather than tasks—'you are in charge of the dishwasher' creates far more buy-in than 'load the dishwasher tonight.'",
+      "Use a timer challenge for tasks they resist: 'can you finish before the timer beeps?'",
+      'Let them choose their own system for remembering their chores—a personal checklist, a phone reminder, their own method.',
+      'A weekly review of the chart together lets you catch what is not working before it becomes a pattern.',
+    ],
+    notYet:
+      'Operating the washing machine alone, mowing the lawn, using sharp knives without supervision, and deep cleaning any appliances.',
+  },
+
+  8: {
+    intro:
+      "Eight-year-olds are capable of genuine independence in household tasks. Their executive function is maturing noticeably—they can plan, sequence, and self-monitor. This is the age to start handing over real ownership of outcomes, not just supervised help with individual steps.",
+    whatTheyCanDo:
+      'An 8-year-old can plan and execute a multi-step task independently, notice when something needs doing without being prompted, and sustain effort for 30–45 minutes. They are motivated by fairness, pride in their work, and doing things the right way.',
+    chores: [
+      { name: 'Run the dishwasher start to finish', desc: 'Load it, add the tablet, select the right cycle, start it. They can own the entire process—including unloading when the cycle finishes.' },
+      { name: 'Clean the toilet and full bathroom', desc: 'Toilet brush, surface cleaner on sink and countertop, mirror, floor wipe. Walk them through once—then hand it over completely.' },
+      { name: 'Vacuum and mop a room', desc: 'The full cleaning sequence in the right order. Let them decide when it looks finished, within an agreed weekly window.' },
+      { name: 'Do their own laundry with guidance', desc: 'Sort, load, select cycle, switch to dryer, fold, and put away—every step. This is one of the most valuable life skills you can teach at this age.' },
+      { name: 'Prepare simple cooked meals', desc: 'Scrambled eggs, pasta with sauce, a basic stir-fry. With you in the same kitchen but not directing every step they take.' },
+      { name: 'Wash and dry dishes by hand', desc: 'Full sink wash, thorough rinse, dry, and put away—for when the dishwasher is full or broken.' },
+      { name: 'Help wash the car', desc: 'Sponge, bucket, chamois to dry. Works well as a shared task and most 8-year-olds genuinely enjoy the process.' },
+      { name: 'Take out and bring in rubbish bins', desc: 'Weekly, independent, including knowing which bin goes out on which day of the week.' },
+      { name: 'Weed a garden bed', desc: 'Supervised initially to identify which plants are weeds versus intentional. After that, manageable independently for 20–30 minutes at a time.' },
+    ],
+    tips: [
+      "Define quality standards clearly and specifically: 'The toilet is clean when the bowl is white and the seat is dry, not just wiped once.'",
+      'Give autonomy over when a chore happens—before or after school, morning or evening—as long as it is done by the agreed time.',
+      'Stop reminding. If the chore does not happen, apply a calm, consistent consequence rather than repeated verbal requests.',
+      'Involve them in checking each other\'s work if siblings are on the same chart—teaches standards without making it parent versus child.',
+      'Start framing these openly as life skills, not punishments or extra work imposed on them.',
+    ],
+    notYet:
+      'Operating lawn mowers or power tools, unsupervised use of ladders, managing finances alone, and cooking with hot oil.',
+  },
+
+  9: {
+    intro:
+      "Nine-year-olds are close to teen territory in capability—many can execute household tasks to a genuine adult standard when they have had enough practice. The biggest shift at this age is from doing the task to owning the outcome.",
+    whatTheyCanDo:
+      'A 9-year-old can anticipate consequences, plan ahead across multiple days, and take real pride in doing something well. They understand fairness deeply and respond far better to logical explanations than to authority-based demands.',
+    chores: [
+      { name: 'Clean the bathroom completely and independently', desc: 'Toilet, sink, mirror, tub or shower surround, floor. Weekly, to a real standard—not just wiped once and called done.' },
+      { name: 'Vacuum the whole house', desc: 'All rooms in a logical sequence. Let them decide the order. Check the result, not the method.' },
+      { name: 'Run a complete laundry cycle independently', desc: 'Sort, wash, dry, fold, put away. Every single step, with no supervision or reminders from you.' },
+      { name: 'Prepare meals from simple written recipes', desc: 'Pasta dishes, soups, basic stir-fries—reading a recipe and executing it independently, with you available if genuinely needed.' },
+      { name: 'Babysit younger siblings for short periods', desc: 'With you in the same house and accessible. Suitable for 30–60 minutes at a time. Build this responsibility up gradually over several months.' },
+      { name: 'Garden maintenance', desc: 'Weeding, watering, deadheading flowers. Real outdoor ownership with visible, satisfying results they can point to.' },
+      { name: 'Clean out and organise a cupboard or drawer', desc: 'Sort, discard what is not needed, organise what remains—and make those decisions themselves. Give them a space and let them solve it.' },
+      { name: 'Contribute to the grocery shopping list', desc: 'Check the pantry for what is running low, note it, and add items to the family list before the weekly shop.' },
+      { name: 'Iron simple clothes on a low setting', desc: 'A T-shirt or pillowcase, supervised for the first few sessions. A genuinely useful skill most adults wish they had learned earlier.' },
+    ],
+    tips: [
+      'Involve them in planning the weekly chore schedule, not just executing the one you have already decided.',
+      'Gradually reduce supervision—check the outcome, not the process.',
+      'Ask for their opinion on how to improve a household system. They often have good ideas, and being asked builds genuine investment.',
+      'Have the allowance conversation: which chores are paid, which are just family contributions, and why that distinction matters.',
+      "Praise the outcome directly: 'That bathroom is spotless' rather than 'you worked so hard on it.'",
+    ],
+    notYet:
+      'Being home alone for extended periods, operating outdoor power equipment, and managing household finances independently.',
+  },
+
+  10: {
+    intro:
+      "Ten-year-olds can handle genuine household management tasks. At this age, the goal shifts from chores as learning to chores as real contribution. Many 10-year-olds are capable of running a household for a full day if the adults are away.",
+    whatTheyCanDo:
+      'A 10-year-old can manage their own time, plan tasks across a full day, take complete ownership of an outcome, and self-correct when something is not right. They value being treated as capable—and genuine responsibility is one of the most powerful things you can offer them.',
+    chores: [
+      { name: 'Cook a family dinner from a recipe', desc: 'A real, complete meal—protein, vegetable, and a starch. Reading the recipe, gathering the ingredients, cooking and serving it to the family.' },
+      { name: 'Deep clean the kitchen', desc: 'All surfaces wiped, stovetop cleaned, floor mopped, cabinet fronts wiped, rubbish taken out. The whole room done properly.' },
+      { name: 'Manage their own laundry start to finish with no reminders', desc: 'No prompting from you. Their clothes are their full responsibility for the week, from sorting to folding and putting away.' },
+      { name: 'Mow the lawn with supervision', desc: 'Full safety briefing before starting. Supervised for the first few sessions, then monitored from a distance as confidence builds.' },
+      { name: 'Clean out the car', desc: 'Vacuum the interior, wipe all surfaces, collect rubbish, organise the boot. Surprisingly satisfying for a 10-year-old.' },
+      { name: 'Grocery shop with a list and a budget', desc: 'Go to the store with a specific list and a set amount of money. Navigate the shop, find items, compare prices, and return with the change.' },
+      { name: 'Help care for younger siblings', desc: 'Reading to them, helping with simple homework, supervising play while you are in the same house.' },
+      { name: 'Organise a shared household space', desc: 'A cluttered cupboard, the junk drawer, the mudroom. Give them the decision-making power—they will take genuine pride in the result.' },
+      { name: 'Manage all their own morning and evening routines independently', desc: 'No reminders needed. They track their own time and readiness for school, sport, or whatever the day holds.' },
+    ],
+    tips: [
+      'Treat them as a junior partner in running the household. Ask for their input when a problem comes up.',
+      "Give them a standing household responsibility rather than just a rotating task—'you own the kitchen floor' builds different accountability than 'mop when I ask.'",
+      'Let natural consequences happen. If their laundry does not get done, they have nothing clean to wear.',
+      'Have an honest conversation about why these skills matter for adult life. At 10, they can genuinely engage with that.',
+      'Consider letting them plan and cook dinner once a week as a standing, regular contribution to the household.',
+    ],
+    notYet:
+      'Power tools and outdoor machinery unsupervised, extended sole childcare of young siblings, and managing household finances independently.',
+  },
+
+  11: {
+    intro:
+      "Eleven-year-olds are on the cusp of adolescence, and chores take on a new dimension. They are no longer just household tasks—they are life skills. The conversation can and should shift from 'you need to do this' to 'you are learning how to run your own home one day.'",
+    whatTheyCanDo:
+      'An 11-year-old can manage complex, multi-day tasks, anticipate what needs doing before being asked, and execute tasks to a genuinely high standard when they care about the outcome. They are starting to develop their own personal standards and can self-motivate when the framing respects their growing maturity.',
+    chores: [
+      { name: 'Plan and cook a full weekly meal independently', desc: 'Choose the recipe, check ingredients, buy what is missing, cook and serve. Fully independent—they ask only if genuinely stuck.' },
+      { name: 'Contribute to the grocery list and lead the shopping', desc: 'Check pantry levels, plan needs for the week, build the list, and either shop independently or lead the shared trip.' },
+      { name: 'Take on a major seasonal cleaning task', desc: 'Cleaning out the garage, deep-organising a storage room, clearing gutters—a real, significant project with a visible before-and-after.' },
+      { name: 'Teach a younger sibling a new chore', desc: 'A genuine leadership task requiring patience, clear explanation, and real follow-through. One of the best things you can ask an 11-year-old to do.' },
+      { name: 'Handle their own full schedule independently', desc: 'School, sports, social commitments, and household chores—managed and tracked by them, without parental prompting.' },
+      { name: 'Perform basic home maintenance tasks', desc: 'Replacing a light bulb, tightening a loose screw, unclogging a drain, swapping batteries. With initial guidance, then independently.' },
+      { name: 'Fully manage their personal space', desc: 'Cleaning, organising, laundry, bedding changes—their room, their full responsibility, their standard to maintain.' },
+      { name: 'Help with household financial awareness', desc: 'Comparing prices while shopping, understanding what the grocery receipt says, having a working sense of what everyday things cost.' },
+    ],
+    tips: [
+      "Negotiate chore trades with them: 'I'll do the bins this week if you take the kitchen floor.' It teaches flexibility and forward planning.",
+      "Involve them in high-level household budget discussions: 'Groceries cost X this month—more than last month. Any ideas why?'",
+      'Respect their increasing need for autonomy. Give control over the how and the when, not just the what.',
+      'Frame mistakes as learning, not failures. Everyone burns a batch of pasta at some point.',
+      'Acknowledge their good work adult-to-adult. A genuine specific thank-you lands very differently at 11 than a sticker ever did.',
+    ],
+    notYet:
+      'Unsupervised use of power tools, sole legal responsibility for younger children, and financial independence.',
+  },
+
+  12: {
+    intro:
+      "Twelve-year-olds are at the edge of genuine adult capability for most household tasks. Many can, and should, be genuine contributors to running the home—not helpers waiting for instruction, but partners with standing responsibilities. Every skill built now is a foundation for every year of independence ahead.",
+    whatTheyCanDo:
+      'A 12-year-old can plan, execute, and self-assess complex tasks to an adult standard. They can manage their time across a full week, take initiative without prompting, teach others effectively, and handle setbacks without falling apart. The gap between what a capable 12-year-old can do and what an adult can do is mostly experience, not ability.',
+    chores: [
+      { name: 'Cook for the family regularly and independently', desc: 'Full meals with multiple components, on schedule, using increasingly complex recipes. Not an occasional treat—a regular, reliable contribution to the household.' },
+      { name: 'Manage a full laundry day independently', desc: "Not just their own clothes. A full laundry day: sort everyone's laundry, run loads in sequence, dry, fold, and return it all to the right rooms." },
+      { name: 'Deep clean any room in the house', desc: 'Top to bottom—surfaces, floors, windows, behind furniture. To a real adult standard, not a cursory wipe that looks done from a distance.' },
+      { name: 'Maintain the lawn and garden', desc: 'Mowing, edging, weeding, watering—a complete outdoor maintenance routine with consistent ownership of the whole space over time.' },
+      { name: 'Teach and supervise younger siblings doing chores', desc: 'Genuine leadership: explaining the standard, showing the method, checking the result, and giving useful feedback.' },
+      { name: 'Run multi-stop household errands', desc: 'Grocery store, post office, pharmacy—with a list, a budget, and the responsibility to get everything done and report back.' },
+      { name: 'Handle basic home maintenance tasks', desc: 'Fixing a sticking door, replacing washers, assembling flat-pack furniture, basic caulking around a sink—with initial guidance, then independently.' },
+      { name: 'Plan and execute a household project', desc: 'Reorganising a room, setting up a storage system, decluttering and arranging donations, preparing a space for a seasonal change.' },
+    ],
+    tips: [
+      "Frame everything explicitly as life skills: 'By the time you leave home, you will know how to...' They are ready to hear this and often respond well to it.",
+      'Give real responsibilities with real stakes—not pretend ones where you quietly fix the outcome behind the scenes.',
+      "Discuss household costs openly: 'Do you know what our groceries cost each week? What about electricity and gas?'",
+      'Let them negotiate their chore list. Teach them to make a clear case for changes and then honour reasonable agreements.',
+      'Be explicit about what you are proud of. Specific, adult-level acknowledgement matters more at 12 than any reward chart ever did.',
+      'Start talking openly about what living independently looks like—and acknowledge that everything they are doing right now is the foundation for all of it.',
+    ],
+    notYet:
+      'Unsupervised operation of power tools, sole legal care of young children for extended periods—but all of this is closer than it has ever been, and the direction of travel is clear.',
+  },
+};
+
 const age = Number(Astro.params.age);
 const page = agePage(age);
+const content = AGE_CONTENT[age];
 const prevAge = age > 3 ? age - 1 : null;
 const nextAge = age < 12 ? age + 1 : null;
 ---
@@ -20,14 +303,37 @@ const nextAge = age < 12 ? age + 1 : null;
     { name: page.label, path: page.path },
   ]}
 >
+  <p>{content.intro}</p>
   <p>
-    Discover age-appropriate chores for {age}-year-olds. You can customize the ready-made chore chart above with icons,
-    names, and a weekly routine, then print it out on US Letter or A4 paper.
+    <a href={PAGES.choreChartMaker.path} class="font-semibold text-brand underline">Open the chore chart maker</a>
+    {' '}to build a printable chart with these chores, add rewards, points, or multiple children.
   </p>
+
+  <h2>What most {age}-year-olds can do</h2>
+  <p>{content.whatTheyCanDo}</p>
+
+  <h2>Age-appropriate chores for {age}-year-olds</h2>
   <p>
-    <a href={PAGES.choreChartMaker.path} class="font-semibold text-brand underline">Open the full Chore Chart Maker</a>
-    to add rewards, points, or multiple children.
+    These are tasks most {age}-year-olds can manage with the right guidance and tools. Start with two or three
+    and add more once the first ones become routine.
   </p>
+  <ul>
+    {content.chores.map((chore) => (
+      <li>
+        <strong>{chore.name}:</strong> {chore.desc}
+      </li>
+    ))}
+  </ul>
+
+  <h2>Teaching tips for {age}-year-olds</h2>
+  <ul>
+    {content.tips.map((tip) => (
+      <li>{tip}</li>
+    ))}
+  </ul>
+
+  <h2>Not quite yet</h2>
+  <p>{content.notYet}</p>
 
   <nav class="my-6 border-y border-line py-4" aria-label="Age navigation">
     <div class="flex flex-wrap items-center justify-between gap-4">
@@ -70,7 +376,7 @@ const nextAge = age < 12 ? age + 1 : null;
 
   <section class="mt-8 space-y-3">
     <h2 class="text-xl font-bold text-fg">Related printable chart tools</h2>
-    <p class="text-base text-muted">Explore our sibling tools designed for families, routines, and positive habits:</p>
+    <p class="text-base text-muted">Explore our free tools for families, routines, and positive habits:</p>
     <ul class="list-disc space-y-2 pl-6 text-base">
       <li>
         <a href={PAGES.choreChartMaker.path} class="text-brand underline font-medium">Free Printable Chore Chart Maker</a>:
@@ -86,7 +392,7 @@ const nextAge = age < 12 ? age + 1 : null;
       </li>
       <li>
         <a href={PAGES.familyChoreChart.path} class="text-brand underline font-medium">Family Chore Chart</a>:
-        keep everyone in the house organized on one shared grid.
+        keep everyone in the house organised on one shared grid.
       </li>
       <li>
         <a href={PAGES.freeChoreChartTemplate.path} class="text-brand underline font-medium">Free Chore Chart Templates</a>:
@@ -94,7 +400,7 @@ const nextAge = age < 12 ? age + 1 : null;
       </li>
       <li>
         <a href={PAGES.elegantChoreChart.path} class="text-brand underline font-medium">Elegant Chore Chart</a>:
-        minimalist black-and-white charts that look beautiful framed or on the fridge.
+        minimalist designs that look at home framed on a wall.
       </li>
     </ul>
   </section>

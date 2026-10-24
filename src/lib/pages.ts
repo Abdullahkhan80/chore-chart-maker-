@@ -24,6 +24,7 @@ export interface PageMeta {
 }
 
 const LAUNCH = '2026-10-06';
+const CONTENT_UPDATE = '2026-10-22';
 
 function page(meta: Omit<PageMeta, 'lastmod' | 'published'> & Partial<PageMeta>): PageMeta {
   return { lastmod: LAUNCH, published: LAUNCH, ...meta };
@@ -39,10 +40,11 @@ export const PAGES = {
   home: page({
     path: '/',
     label: 'Home',
-    title: 'Chore Chart Maker – Free, Easy Online Chore Charts',
-    h1: 'Create a Chore Chart in Minutes',
+    title: 'Free Printable Chore Charts for Kids & Families | Chore Chart Maker',
+    h1: 'Free Printable Chore Charts for Every Family',
     description:
-      'Chore Chart Maker is a free online chore chart maker for kids, families and roommates. Make an easy printable chart in minutes, with no sign-up or upload.',
+      'Browse free printable chore charts, reward charts and routine charts for kids, families and roommates. Made in your browser, no sign-up, and ready to print in minutes.',
+    lastmod: CONTENT_UPDATE,
   }),
   choreChartMaker: page({
     path: '/chore-chart-maker/',
@@ -98,6 +100,7 @@ export const PAGES = {
     h1: 'Roommate chore chart maker',
     description:
       'Use this free roommate chore chart maker to split housework fairly. Rotate chores weekly, add everyone in the house, then print or share it. No sign-up needed.',
+    lastmod: CONTENT_UPDATE,
   }),
   morningRoutineChart: page({
     path: '/morning-routine-chart/',
@@ -197,6 +200,7 @@ export function agePage(age: number): PageMeta {
     title: `Chores for ${age}-Year-Olds: Age-Appropriate Chore List`,
     h1: `Chores for ${age}-year-olds`,
     description: `Age-appropriate chores for ${age}-year-olds, with daily and weekly ideas, tips for teaching each job, and a free printable chore chart you can customize.`,
+    lastmod: CONTENT_UPDATE,
   });
 }
 
