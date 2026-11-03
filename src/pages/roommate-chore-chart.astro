@@ -5,30 +5,95 @@ import type { FaqItem } from '../lib/seo.ts';
 
 const faq: FaqItem[] = [
   {
-    question: 'How does a roommate chore chart work?',
+    question: 'How does a roommate chore chart rotation work?',
     answer:
-      'A rotation chart assigns tasks weekly, cycling each chore automatically so turns are shared fairly.',
+      'A rotation chore chart lists shared household duties and cycles them weekly among housemates. If you clean the kitchen this week, you rotate to the bathroom next week and taking out trash the following week. This prevents resentment because no single roommate gets stuck with the most unpleasant jobs.',
+  },
+  {
+    question: 'What is the best day to reset and complete roommate chores?',
+    answer:
+      'Most shared apartments find Sunday evening (such as 6:00 PM or 8:00 PM) works best. It gives everyone the weekend to complete their assigned responsibilities and ensures the house starts the new school or work week clean and organized.',
+  },
+  {
+    question: 'What should we do if a roommate consistently misses their chores?',
+    answer:
+      'Address missed chores early and calmly during a brief house check-in. Agree in advance on house rules: for example, if someone is traveling or swamped with exams, they must arrange a direct chore swap beforehand or cover a shared expense like trash bags or detergent in exchange for coverage.',
+  },
+  {
+    question: 'How should roommates handle cleaning supplies and consumable costs?',
+    answer:
+      'Set up a shared household kitty or use an expense-splitting app for communal supplies: paper towels, dish soap, mop pads, trash bags, and bathroom cleaners. The roommate assigned to inventory duty flags what is running low each week.',
+  },
+  {
+    question: 'Can we share the finished roommate chore chart digitally?',
+    answer:
+      'Yes. In addition to downloading a clean PDF or PNG for your fridge or hallway, you can click "Copy share link" to send an exact copy into your roommate group chat. Everything stays private in your browser without accounts.',
   },
 ];
+
+const link = 'text-brand underline font-medium';
 ---
 
 <ToolLayout page={PAGES.roommateChoreChart} faq={faq}>
   <Fragment slot="intro">
-    A free printable roommate chore chart that rotates weekly so flatmates share tasks fairly.
+    A free printable roommate chore chart maker that rotates duties weekly so housemates share cleaning fairly. Customize names, tasks, and print on Letter or A4 in seconds.
   </Fragment>
 
-  <h2>Rotating chores for shared homes</h2>
+  <h2>How a rotating roommate chore schedule keeps shared homes peaceful</h2>
   <p>
-    A weekly rotation ensures everyone shares cleaning duties, keeping expectations clear and fair.
+    Living with roommates is more affordable and fun, but unclean shared spaces are the number one cause of friction in student flats and shared houses. When responsibilities are vague, everyone assumes someone else will wipe down the counters or take out the overflowing recycling.
+  </p>
+  <p>
+    A visual rotation chart eliminates ambiguity. By assigning concrete zones and rotating them every seven days, everyone contributes equally to the upkeep of shared spaces, and no single person feels like the house parent.
   </p>
 
-  <h2>Related chart makers</h2>
+  <h2>Essential chores to include on a shared apartment chart</h2>
   <p>
-    Explore our other free tools:
-    <a href={PAGES.choreChartMaker.path}>Chore Chart Maker</a>,
-    <a href={PAGES.familyChoreChart.path}>Family Chore Chart</a>,
-    <a href={PAGES.morningRoutineChart.path}>Morning Routine</a>,
-    <a href={PAGES.rewardChartMaker.path}>Reward Chart</a>, and
-    <a href={PAGES.freeChoreChartTemplate.path}>Free Templates</a>.
+    Keep roommate duties focused on <strong>common areas</strong> rather than private bedrooms. The most effective roommate charts group chores into 4 to 6 comprehensive weekly zones:
   </p>
+  <ul>
+    <li>
+      <strong>Kitchen deep clean:</strong> Wipe down stove surfaces, clean microwave interior, sanitize countertops, empty sink drain, and run kitchen trash.
+    </li>
+    <li>
+      <strong>Bathroom sanitation:</strong> Scrub toilet bowl and exterior, sanitize sink basin, wipe vanity mirror, wipe shower walls, and replace hand towels.
+    </li>
+    <li>
+      <strong>Living room & hallway floors:</strong> Vacuum carpets and rugs, sweep and mop entryway and hardwood areas, and shake out floor mats.
+    </li>
+    <li>
+      <strong>Trash, recycling & compost:</strong> Empty all shared bins, haul wheelie bins to the curb on collection morning, and replace can liners.
+    </li>
+    <li>
+      <strong>Fridge & pantry audit:</strong> Toss expired leftovers, wipe sticky shelves, and compile a quick grocery list for communal essentials like salt, oil, and dish soap.
+    </li>
+  </ul>
+
+  <h2>Four house ground rules that make chore charts work</h2>
+  <ol>
+    <li>
+      <strong>Agree on "clean-as-you-go" versus "weekly rotation":</strong> The chore chart does not replace basic daily courtesy. Everyone washes their own dishes after eating and wipes up immediate cooking spills. The rotation covers deep maintenance.
+    </li>
+    <li>
+      <strong>Establish a set deadline:</strong> Vague timelines lead to procrastination. Agree that all weekly chores must be finished by Sunday at 7:00 PM before the new rotation begins.
+    </li>
+    <li>
+      <strong>Allow swaps with explicit confirmation:</strong> If a roommate has midterms or travels for the weekend, they are free to swap with a housemate, but they are responsible for arranging the trade in advance.
+    </li>
+    <li>
+      <strong>Keep supplies stocked together:</strong> Nothing stalls bathroom cleaning faster than an empty bottle of spray cleaner. Pool five dollars each per semester for cleaning supplies or rotate buying communal essentials.
+    </li>
+  </ol>
+
+  <h2>Related printable tools for households and families</h2>
+  <p>
+    Need other printable organizational schedules? Explore our free companion makers:
+  </p>
+  <ul>
+    <li><a href={PAGES.choreChartMaker.path} class={link}>Chore Chart Maker</a>: the full tool for custom daily, weekly, or reward routines.</li>
+    <li><a href={PAGES.familyChoreChart.path} class={link}>Family Chore Chart</a>: organize tasks for households with children and parents.</li>
+    <li><a href={PAGES.morningRoutineChart.path} class={link}>Morning Routine Chart</a>: visual checklists for smooth morning habits.</li>
+    <li><a href={PAGES.bedtimeRoutineChart.path} class={link}>Bedtime Routine Chart</a>: structured evening checklists for calm nights.</li>
+    <li><a href={PAGES.elegantChoreChart.path} class={link}>Elegant Chore Chart</a>: minimalist monochrome charts designed to look great framed on a wall.</li>
+  </ul>
 </ToolLayout>

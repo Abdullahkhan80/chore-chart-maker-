@@ -8,26 +8,49 @@ interface Props {
 
 const { currentPath } = Astro.props;
 
-const nav = [
-  { href: PAGES.choreChartMaker.path, label: 'Chore Chart Maker' },
-  { href: PAGES.rewardChartMaker.path, label: 'Reward Chart' },
-  { href: PAGES.choresByAge.path, label: 'Chores by Age' },
-  { href: PAGES.freeChoreChartTemplate.path, label: 'Templates' },
-  { href: PAGES.about.path, label: 'About' },
-];
-const cta = { href: PAGES.choreChartMaker.path, label: 'Create a Chart' };
+const isPt = currentPath === PAGES.ptChoreChartMaker.path;
+const isFr = currentPath === PAGES.frChoreChartMaker.path;
+
+const nav = isPt
+  ? [
+      { href: PAGES.ptChoreChartMaker.path, label: 'Criador de Quadro' },
+      { href: PAGES.rewardChartMaker.path, label: 'Quadro de Recompensas' },
+      { href: PAGES.choresByAge.path, label: 'Tarefas por Idade' },
+      { href: PAGES.freeChoreChartTemplate.path, label: 'Modelos' },
+      { href: PAGES.about.path, label: 'Sobre' },
+    ]
+  : isFr
+    ? [
+        { href: PAGES.frChoreChartMaker.path, label: 'Tableau de Tâches' },
+        { href: PAGES.rewardChartMaker.path, label: 'Tableau de Récompenses' },
+        { href: PAGES.choresByAge.path, label: 'Tâches par Âge' },
+        { href: PAGES.freeChoreChartTemplate.path, label: 'Modèles' },
+        { href: PAGES.about.path, label: 'À propos' },
+      ]
+    : [
+        { href: PAGES.choreChartMaker.path, label: 'Chore Chart Maker' },
+        { href: PAGES.rewardChartMaker.path, label: 'Reward Chart' },
+        { href: PAGES.choresByAge.path, label: 'Chores by Age' },
+        { href: PAGES.freeChoreChartTemplate.path, label: 'Templates' },
+        { href: PAGES.about.path, label: 'About' },
+      ];
+const cta = isPt
+  ? { href: PAGES.ptChoreChartMaker.path, label: 'Criar Quadro' }
+  : isFr
+    ? { href: PAGES.frChoreChartMaker.path, label: 'Créer un Tableau' }
+    : { href: PAGES.choreChartMaker.path, label: 'Create a Chart' };
 const current = (href: string) => (currentPath === href ? 'page' : undefined);
 
-const currentLang = currentPath === PAGES.ptChoreChartMaker.path
+const currentLang = isPt
   ? { code: 'PT', label: 'Português' }
-  : currentPath === PAGES.frChoreChartMaker.path
+  : isFr
     ? { code: 'FR', label: 'Français' }
     : { code: 'EN', label: 'English' };
 
 const languages = [
-  { code: 'EN', label: 'English', href: PAGES.choreChartMaker.path },
-  { code: 'PT', label: 'Português', href: PAGES.ptChoreChartMaker.path },
-  { code: 'FR', label: 'Français', href: PAGES.frChoreChartMaker.path },
+  { code: 'EN', hreflang: 'en', label: 'English', href: PAGES.choreChartMaker.path },
+  { code: 'PT', hreflang: 'pt-BR', label: 'Português', href: PAGES.ptChoreChartMaker.path },
+  { code: 'FR', hreflang: 'fr', label: 'Français', href: PAGES.frChoreChartMaker.path },
 ];
 ---
 
@@ -49,7 +72,7 @@ const languages = [
         </summary>
         <div class="site-lang-menu">
           {languages.map((l) => (
-            <a href={l.href} class={`site-lang-item${currentPath === l.href ? ' is-active' : ''}`} hreflang={l.code.toLowerCase()}>
+            <a href={l.href} class={`site-lang-item${currentPath === l.href ? ' is-active' : ''}`} hreflang={l.hreflang}>
               <strong>{l.code}</strong> {l.label}
             </a>
           ))}

@@ -1,9 +1,32 @@
 ---
 import ArticleLayout from '../layouts/ArticleLayout.astro';
 import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
+import { buildCanonicalUrl, buildCollectionPage, buildItemList } from '../lib/seo.ts';
+
+const page = PAGES.choresByAge;
+const itemListId = `${buildCanonicalUrl(page.path)}#itemlist`;
+const items = AGE_PAGE_AGES.map((age) => {
+  const p = agePage(age);
+  return {
+    name: p.label,
+    url: buildCanonicalUrl(p.path),
+    description: p.description,
+  };
+});
+const collectionJsonLd = [
+  buildCollectionPage({
+    name: page.label,
+    description: page.description,
+    path: page.path,
+    itemListId,
+    datePublished: page.published,
+    dateModified: page.lastmod,
+  }),
+  buildItemList(items, itemListId),
+];
 ---
 
-<ArticleLayout page={PAGES.choresByAge}>
+<ArticleLayout page={page} jsonLd={collectionJsonLd}>
   <p>
     Children love to feel capable and helpful. Giving them age-appropriate chores builds independence, confidence, and
     practical life skills. Use this guide to find the right chores for each stage from toddlerhood to the teen years, or

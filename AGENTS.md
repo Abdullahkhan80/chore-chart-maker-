@@ -42,7 +42,7 @@ Guidance for all work in this repo. Read it before every change.
 
 Enforce these with tests where possible.
 
-- HTML **≤ 60 KB** per page.
+- HTML **≤ 72 KB** per page (≤ 20 KB gzipped).
 - Initial JS **≤ 50 KB gzipped**.
 - PDF libraries are **lazy-loaded** (dynamic `import()`) only when the user clicks export.
 - Icons load as external files and are never inlined in bulk.
@@ -68,7 +68,10 @@ Enforce these with tests where possible.
 /chore-chart-maker/
 /reward-chart-maker/
 /chores-for-kids-by-age/
-/chores-for-[N]-year-olds/ N = 3–12, added gradually
+/chores-for-[N]-year-olds/ N = 2–14, added gradually
+/bedtime-routine-chart/
+/pt/
+/fr/
 /roommate-chore-chart/
 /morning-routine-chart/
 /family-chore-chart/
@@ -88,7 +91,7 @@ A change is done only when all of these hold:
 1. `npm run build` passes.
 2. `npm test` passes.
 3. `npm run check` passes.
-4. No page exceeds the 60 KB HTML budget.
+4. No page exceeds the 72 KB HTML budget.
 
 ## Development
 

@@ -162,6 +162,7 @@ export const PAGE_PRESETS: Readonly<Record<string, string>> = {
   [PAGES.rewardChartMaker.path]: 'reward',
   [PAGES.roommateChoreChart.path]: 'roommates',
   [PAGES.morningRoutineChart.path]: 'morning-routine',
+  [PAGES.bedtimeRoutineChart.path]: 'bedtime-routine',
   [PAGES.familyChoreChart.path]: 'family',
   [PAGES.freeChoreChartTemplate.path]: 'weekly',
   [PAGES.elegantChoreChart.path]: 'elegant',

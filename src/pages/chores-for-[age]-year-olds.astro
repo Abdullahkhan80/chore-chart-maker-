@@ -11,20 +11,85 @@ interface AgeChore {
   desc: string;
 }
 
+interface AgeFaq {
+  q: string;
+  a: string;
+}
+
 interface AgeData {
   intro: string;
   whatTheyCanDo: string;
   chores: AgeChore[];
+  schedule: {
+    morning: string;
+    afternoon: string;
+    weekend: string;
+  };
+  howToTeach: {
+    step1: string;
+    step2: string;
+    step3: string;
+  };
+  safetyNote: string;
   tips: string[];
   notYet: string;
+  faqs: AgeFaq[];
 }
 
 const AGE_CONTENT: Record<number, AgeData> = {
+  2: {
+    intro:
+      'At age two, toddlers are driven by imitation and gross-motor curiosity. Chores are not about tidy rooms; they are sensory activities that teach that everyone contributes to the household.',
+    whatTheyCanDo:
+      'A 2-year-old can follow simple one-step requests with pointing, deposit toys into open floor bins, carry lightweight unbreakable items, and mimic wiping clean surfaces alongside parents.',
+    chores: [
+      { name: 'Put toys in a basket', desc: 'Toss soft plush toys or large building blocks into an open floor bin.' },
+      { name: 'Put dirty clothes in the hamper', desc: 'Drop socks and pajamas into an open hamper after changing clothes.' },
+      { name: 'Wipe spills with a dry cloth', desc: 'Help wipe water or milk droplets from the table or high chair.' },
+      { name: 'Stack board books', desc: 'Place sturdy cardboard books back into a low floor crate or basket.' },
+      { name: 'Help wipe baseboards', desc: 'Use an old clean sock on their hand to playfully wipe low flat surfaces.' },
+      { name: 'Fetch clean diapers or wipes', desc: 'Hand parents a clean diaper or wipes pack during diaper changing.' },
+    ],
+    schedule: {
+      morning: 'Drop pajama tops and bottoms into the hamper after getting dressed.',
+      afternoon: 'Toss blocks and toys into the storage basket before afternoon nap or dinner.',
+      weekend: 'Carry one light grocery item, like a box of crackers, from the door to the kitchen.',
+    },
+    howToTeach: {
+      step1: 'Demonstrate directly while narrating: say "train goes in the bin" and drop one in together.',
+      step2: 'Hand them one specific object at a time rather than asking them to clean an entire space.',
+      step3: 'Celebrate completion immediately with a high-five or song to build positive associations.',
+    },
+    safetyNote:
+      'Continuous direct visual supervision is necessary. Keep toddlers away from open buckets of water (drowning hazard), small choke hazards, and all chemical cleaning bottles. Pediatric guidelines from the American Academy of Pediatrics (AAP) emphasize continuous visual contact during household activities at this developmental stage.',
+    tips: [
+      'Keep each clean-up activity under 3 to 5 minutes to fit their natural attention span.',
+      'Turn tidying into a song, countdown, or playful race to make participation feel fun.',
+      'Accept imperfection warmly: a lumpy pile of books still successfully establishes the habit.',
+    ],
+    notYet:
+      'Unsupervised chores, carrying ceramic or glass, sorting small pieces, or using spray bottles.',
+    faqs: [
+      {
+        q: 'How do I handle a 2-year-old who refuses to pick up toys?',
+        a: 'Keep the expectation tiny: ask them to put away just one specific item ("can you find the red car?"), and do the rest together as a team game.',
+      },
+      {
+        q: 'Should I use a chore chart with a 2-year-old?',
+        a: 'Yes, provided the chart uses colorful picture icons rather than text. Toddlers love pointing to picture steps and placing a sticker once an activity is finished.',
+      },
+      {
+        q: 'How many daily chores are appropriate for a 2-year-old?',
+        a: 'One or two quick 3-minute tasks per day is ideal. The goal at age 2 is developing a cooperative attitude, not relieving parental workload.',
+      },
+    ],
+  },
+
   3: {
     intro:
-      "Three-year-olds have boundless enthusiasm to copy everything you do. Chores at this age build the habit of helping as part of everyday routines.",
+      'Three-year-olds are natural helpers eager to exercise their developing independence. Chores at this age build motor coordination and establish helpful habits as an ordinary part of daily family life.',
     whatTheyCanDo:
-      'A 3-year-old can follow a simple instruction, sustain effort for 5 minutes, and handle gross-motor tasks like carrying light items or placing toys in bins.',
+      'A 3-year-old can follow simple two-step instructions, carry lightweight bags or groceries, match colors while sorting laundry, and sustain cooperative effort for 5 minutes.',
     chores: [
       { name: 'Put toys in a bin', desc: 'A large, open bin without a lid makes tidying simple and fast.' },
       { name: 'Put dirty clothes in the hamper', desc: 'One clear step with an immediate visible result.' },
@@ -33,219 +98,575 @@ const AGE_CONTENT: Record<number, AgeData> = {
       { name: 'Sort laundry by color', desc: 'Help sort clothes into dark and light piles as a matching game.' },
       { name: 'Put shoes in the shoe rack', desc: 'Returning shoes to one designated spot every time they come inside.' },
     ],
+    schedule: {
+      morning: 'Put pajamas into the laundry hamper and put breakfast bowl on the counter.',
+      afternoon: 'Put shoes and jacket in their designated entryway spot after returning home.',
+      weekend: 'Help sort clean socks or separate dark and light clothes for laundry washing.',
+    },
+    howToTeach: {
+      step1: 'Break the task into two simple sequential steps: "Pick up the truck, then put it in the box."',
+      step2: 'Work side-by-side: "I will gather the books while you collect the plush animals."',
+      step3: 'Connect helping to predictable daily routines: "Shoes in the rack, then we wash hands for snack."',
+    },
+    safetyNote:
+      'Keep 3-year-olds away from hot appliances, open dishwashers, and electrical outlets. The CDC developmental milestones focus heavily on motor and language coordination up to age 5; ensure step stools have wide, slip-resistant rubber bases.',
     tips: [
-      "Do chores alongside them every time. Model the actions with warm encouragement.",
+      'Do chores alongside them every time and model the actions with warm encouragement.',
       'Keep every task under 5 minutes to match their natural attention span.',
-      "Praise specifically: 'Thank you for putting all the blocks in the bin!'",
+      'Praise specifically: "Thank you for putting your sneakers on the rack!" beats generic praise.',
     ],
     notYet:
       'Multi-step tasks without supervision, carrying heavy items, handling glass, or working near hot water.',
+    faqs: [
+      {
+        q: 'Is age 3 too young for regular chores?',
+        a: 'Not when tasks are framed as shared play. Research shows children introduced to simple household tasks by age 3 to 4 develop stronger executive function and empathy.',
+      },
+      {
+        q: 'How can I motivate a 3-year-old without offering food treats?',
+        a: 'Use routine momentum and choices: "Do you want to put away the puzzle or the books first?" Giving them autonomy over order prevents resistance.',
+      },
+      {
+        q: 'What should I do if my 3-year-old makes a bigger mess while helping?',
+        a: 'Acknowledge their helpful intention first. Gently step in to demonstrate technique without criticizing or visibly redoing their effort.',
+      },
+    ],
   },
 
   4: {
     intro:
-      "Four-year-olds are eager helpers who understand cause and effect. They remember regular spots for belongings and take pride in completing tasks.",
+      'Four-year-olds are developing stronger hand-eye coordination and can understand simple cause-and-effect sequences. They thrive when given concrete responsibilities they can complete from start to finish.',
     whatTheyCanDo:
-      'A 4-year-old can follow two-step directions, work for 10 minutes, and handle basic matching and sorting tasks with growing coordination.',
+      'A 4-year-old can follow multi-step routines, use both hands cooperatively, set non-breakable table items, water potted plants with a small can, and feed pets with pre-measured food.',
     chores: [
-      { name: 'Make their bed', desc: 'Pull up the duvet and straighten pillows each morning.' },
-      { name: 'Set napkins and silverware', desc: 'Place forks, spoons, and napkins at each seat with guidance.' },
-      { name: 'Match clean socks', desc: 'Turn matching clean socks from the laundry basket into a fun puzzle.' },
-      { name: 'Feed the family pet', desc: 'Scoop dry kibble into a bowl with supervision.' },
-      { name: 'Wipe the dining table', desc: 'Use a damp sponge to wipe down placemats and table surfaces after meals.' },
-      { name: 'Put books on the shelf', desc: 'Return storybooks to their designated shelf or basket.' },
+      { name: 'Make the bed with help', desc: 'Pull up the sheet and duvet and arrange the pillow neatly.' },
+      { name: 'Set the table', desc: 'Place napkins, placemats, and child-safe utensils on the table.' },
+      { name: 'Feed pets with guidance', desc: 'Scoop dry food from a pre-measured container into the pet bowl.' },
+      { name: 'Water indoor plants', desc: 'Use a small child-sized watering can to water designated house plants.' },
+      { name: 'Clear own plate after meals', desc: 'Carry plastic or melamine plates and cups to the kitchen counter.' },
+      { name: 'Hang towels on low hooks', desc: 'Hang bathroom and kitchen hand towels on accessible low hooks.' },
     ],
+    schedule: {
+      morning: 'Pull up bed covers and place cereal bowl in the sink after breakfast.',
+      afternoon: 'Help set placemats and forks on the table before family dinner.',
+      weekend: 'Water two specific indoor plants using a small child-friendly watering can.',
+    },
+    howToTeach: {
+      step1: 'Walk through the chore step-by-step using a visual picture chart.',
+      step2: 'Practice the physical motion together until they feel confident doing it unassisted.',
+      step3: 'Stand back and allow them to complete the sequence independently before thanking them.',
+    },
+    safetyNote:
+      'Four-year-olds love feeling grown-up, but must never handle knives, hot pots, or chemical cleaners. Ensure step stools in bathrooms and kitchens are stable, and supervise all pet feeding to avoid pet food contamination or animal startles.',
     tips: [
-      'Show what the completed task looks like so they have a clear visual goal.',
-      'Use a show-tell-do approach: demonstrate first, explain aloud, then let them try.',
-      'Avoid redoing their work in front of them—encourage effort over perfection.',
+      'Use a visual picture chore chart with icons they can check off independently.',
+      'Assign tasks with clear visual boundaries: "Put all the wooden blocks in this green tub."',
+      'Rotate chores every couple of weeks so novelty keeps their interest high.',
     ],
     notYet:
-      'Sharp kitchen tools, carrying heavy laundry baskets, or multi-step tasks without visual guidance.',
+      'Carrying breakable ceramic or glassware, using knives or peelers, or reaching high cabinets.',
+    faqs: [
+      {
+        q: 'How many chores should a 4-year-old have daily?',
+        a: 'Aim for 2 or 3 quick daily routines (like making the bed and clearing their plate) taking 10 minutes total.',
+      },
+      {
+        q: 'Should I tie chores to an allowance at age 4?',
+        a: 'Child development experts generally advise against paying 4-year-olds for basic chores. Frame tasks as shared family teamwork rather than paid transactions.',
+      },
+      {
+        q: 'How do I stop morning resistance to chores?',
+        a: 'Anchor chores to existing habits: make the bed immediately upon waking, before pajama changes or breakfast.',
+      },
+    ],
   },
 
   5: {
     intro:
-      "Five-year-olds entering school thrive on daily routines. They manage multi-step personal responsibilities and take pride in completed work.",
+      'Five-year-olds have the focus, motor skills, and enthusiasm to manage multi-step routines independently. Chores at this age build self-reliance and pride in personal competence before school begins.',
     whatTheyCanDo:
-      'A 5-year-old can follow three-step instructions, focus for 15 minutes, recognize words, and perform precise sorting and tidying independently.',
+      'A 5-year-old can complete a three-step routine without supervision, organize personal belongings, use child-safe cleaning tools, and pack simple items into a school bag.',
     chores: [
-      { name: 'Make bed neatly', desc: 'Straighten sheets, pull up the comforter, and arrange pillows each morning.' },
-      { name: 'Rinse their own plate', desc: 'Scrape food scraps into the compost and rinse dishes at the sink.' },
-      { name: 'Water houseplants', desc: 'Use a small watering can to water designated potted plants weekly.' },
-      { name: 'Fold towels and washcloths', desc: 'Fold simple flat items and stack them in linen baskets.' },
-      { name: 'Sort recyclable materials', desc: 'Sort clean paper, plastic, and cardboard into recycling bins.' },
-      { name: 'Wipe bathroom counter and sink', desc: 'Wipe down the faucet and counter with a damp cloth after brushing teeth.' },
+      { name: 'Make bed independently', desc: 'Straighten the sheets, pull up the comforter, and arrange pillows.' },
+      { name: 'Sort and fold washcloths', desc: 'Match pairs of socks and fold small square kitchen or bath towels.' },
+      { name: 'Sweep small areas with a dustpan', desc: 'Use a child-sized broom and hand dustpan to sweep crumbs.' },
+      { name: 'Empty bathroom trash cans', desc: 'Tie and carry lightweight bathroom waste baskets to the main bin.' },
+      { name: 'Pack backpack for kindergarten', desc: 'Pack a water bottle, homework folder, and packed lunchbox.' },
+      { name: 'Wash produce in a colander', desc: 'Rinse apples, carrots, and berries in the sink under cool running water.' },
     ],
+    schedule: {
+      morning: 'Make bed, get dressed into laid-out clothes, and pack water bottle into backpack.',
+      afternoon: 'Empty lunchbox on kitchen counter, hang up coat, and put shoes on the rack.',
+      weekend: 'Pair socks from clean laundry and sweep the entryway floor with a small broom.',
+    },
+    howToTeach: {
+      step1: 'Establish a clear visual standard: show them what a finished bed or backpack looks like.',
+      step2: 'Use the "I do, We do, You do" method: demonstrate once, do it together once, then watch them do it.',
+      step3: 'Institute a predictable checklist so they can verify their own work without verbal prompting.',
+    },
+    safetyNote:
+      'The CDC developmental milestone framework reaches age 5; children at this age have strong balance and hand skills, but still lack hazard foresight. Keep all household cleaning chemicals, medicines, and sharp cutlery locked away.',
     tips: [
-      'Let them choose the order of their chores to give them a sense of ownership.',
-      'Anchor chores to existing habits, like clearing dishes immediately after breakfast.',
-      'Use a colorful sticker chart to track consistency across the week.',
+      'Give them ownership of one specific family zone: "You are our official napkin and utensil helper."',
+      'Use a timer challenge: "Can we finish our 3 morning tasks before the 10-minute music ends?"',
+      'Never criticize minor flaws in folding or bed-making; focus on their independence and initiative.',
     ],
     notYet:
-      'Operating the stove or microwave alone, cleaning toilets, or using chemical household cleaners.',
+      'Operating electrical appliances, handling sharp scissors or knives, or washing sharp silverware in the sink.',
+    faqs: [
+      {
+        q: 'What is the best way to handle unfinished chores at age 5?',
+        a: 'Use neutral "when-then" statements: "When your shoes and backpack are in their cubby, then we can head to the playground."',
+      },
+      {
+        q: 'Can 5-year-olds do chores without being reminded?',
+        a: 'They still need visual environmental prompts (like a chore chart on the fridge) to stay on track without verbal nagging.',
+      },
+      {
+        q: 'What chores are most beneficial for kindergarten readiness?',
+        a: 'Dressing independently, packing and zipping a backpack, and clearing their own eating area build essential school autonomy.',
+      },
+    ],
   },
 
   6: {
     intro:
-      "Six-year-olds have a growing sense of responsibility and fairness. They thrive when chores are framed as teamwork where everyone contributes.",
+      'Six-year-olds understand rules, routines, and fair distribution of work. They can handle chores involving multiple steps and take genuine pride in measurable household achievements.',
     whatTheyCanDo:
-      'A 6-year-old can read their chore chart, sustain effort for 20 minutes, and complete physical routines with good coordination and minimal supervision.',
+      'A 6-year-old can follow a daily checklist, use lightweight vacuum wands or handheld vacuums, wipe bathroom counters, and care for family pets with gentle oversight.',
     chores: [
-      { name: 'Sweep kitchen floors', desc: 'Sweep along baseboards and gather debris into a dustpan.' },
-      { name: 'Help prepare simple snacks', desc: 'Wash vegetables, tear lettuce, spread butter, or measure dry ingredients.' },
-      { name: 'Walk family pets with an adult', desc: 'Hold the lead alongside an adult and practice responsible pet care.' },
-      { name: 'Put away folded clothes', desc: 'Sort their own clean clothes into the correct bedroom drawers.' },
-      { name: 'Pack their school backpack', desc: 'Check books, folders, and water bottle against a night-before checklist.' },
-      { name: 'Empty small wastebaskets', desc: 'Empty bedroom and bathroom bins into the central kitchen trash.' },
+      { name: 'Wipe bathroom sink and mirror', desc: 'Use a damp microfiber cloth to wipe soap spots and buff mirrors.' },
+      { name: 'Empty dishwasher utensil basket', desc: 'Sort spoons, butter knives, and forks into the kitchen drawer.' },
+      { name: 'Use a handheld vacuum for crumbs', desc: 'Spot-clean breakfast crumbs and pet fur on rugs and dining chairs.' },
+      { name: 'Fold towels and t-shirts', desc: 'Fold bath towels and basic shirts and place them into bedroom drawers.' },
+      { name: 'Water garden beds and outdoor pots', desc: 'Use a gentle hose spray or watering can to water garden plants.' },
+      { name: 'Collect recycling around the house', desc: 'Gather clean cardboard and paper into the household recycling bin.' },
     ],
+    schedule: {
+      morning: 'Make bed neatly, brush teeth, and place breakfast dishes in the sink.',
+      afternoon: 'Unpack school papers, hang backpack, and empty utensil basket from the dishwasher.',
+      weekend: 'Fold own clean t-shirts and vacuum bedroom rug with a handheld vacuum.',
+    },
+    howToTeach: {
+      step1: 'Break multi-step cleaning jobs into clear zones (e.g., sink basin first, then counter, then mirror).',
+      step2: 'Teach proper body mechanics: demonstrate how to hold a dustpan or towel firmly.',
+      step3: 'Celebrate consistency over a full week with positive milestone check-ins.',
+    },
+    safetyNote:
+      'Ensure knives and forks are sorted with points down. Use only mild, non-toxic household cleaning solutions (such as diluted dish soap or vinegar and water). Never allow 6-year-olds to plug in heavy electrical appliances without supervision.',
     tips: [
-      "Explain the purpose behind tasks: 'We pack tonight so morning departures are calm.'",
-      'Allow them to problem-solve when they forget a step before stepping in.',
-      'Offer do-overs with gentle guidance instead of criticism when work falls short.',
+      'Transition from verbal reminders to a printed visual chore chart hanging at eye level.',
+      'Allow them to listen to an audio story or upbeat music while doing their 15-minute chore block.',
+      'Acknowledge mature effort: "I really appreciate how carefully you sorted the forks and spoons today."',
     ],
     notYet:
-      'Stovetop cooking, handling harsh cleaning chemicals, or carrying heavy laundry baskets down stairs.',
+      'Using the stove or microwave unassisted, handling heavy loads of wet laundry, or cleaning with chemical bleaches.',
+    faqs: [
+      {
+        q: 'How long should a 6-year-old spend on chores each day?',
+        a: 'About 10 to 15 minutes of focused effort is appropriate for a first grader.',
+      },
+      {
+        q: 'What if my 6-year-old complains that chores are unfair?',
+        a: 'Show them how everyone contributes: "Mom is doing the laundry, Dad is making dinner, and your job is setting the table so we can all eat together."',
+      },
+      {
+        q: 'Can 6-year-olds manage their own chore chart?',
+        a: 'Yes! Six-year-olds love ticking off boxes or moving clips on a visual chart to track their own progress.',
+      },
+    ],
   },
 
   7: {
     intro:
-      "Seven-year-olds manage multi-step projects independently. Giving them clear ownership of a specific area builds strong intrinsic motivation.",
+      'Seven-year-olds have the cognitive ability to plan ahead and manage several responsibilities in sequence. They are ready for chores that require attention to detail and care for shared family spaces.',
     whatTheyCanDo:
-      'A 7-year-old can follow detailed routines for 25–30 minutes, organize spaces logically, and take pride in executing jobs reliably from start to finish.',
+      'A 7-year-old can sweep floors thoroughly, pack simple lunches, manage personal hygiene routines independently, and take responsibility for pet care routines.',
     chores: [
-      { name: 'Load and unload dishwasher', desc: 'Load plates, cups, and utensils properly and unload clean items.' },
-      { name: 'Clean bathroom sink and mirror', desc: 'Wipe the basin with non-toxic spray and buff the mirror streak-free.' },
-      { name: 'Vacuum bedrooms weekly', desc: 'Move lightweight items and vacuum room edges and carpets thoroughly.' },
+      { name: 'Sweep kitchen or hallway floors', desc: 'Sweep dirt into a pile and guide it cleanly into a dustpan.' },
+      { name: 'Pack lunch with pre-prepped items', desc: 'Pack a sandwich, piece of fruit, snack, and water bottle into a lunchbox.' },
+      { name: 'Strip bed sheets on laundry day', desc: 'Remove pillowcases, fitted sheet, and duvet cover for the wash.' },
       { name: 'Rake leaves or sweep patio', desc: 'Help maintain outdoor living areas with appropriately sized tools.' },
-      { name: 'Prepare cold lunches independently', desc: 'Make sandwiches, pack fruit, and prep snacks for school days.' },
-      { name: 'Fold and organize laundry', desc: 'Fold shirts, pants, and underwear and put them away in closets.' },
+      { name: 'Brush and groom family pets', desc: 'Brush dogs or cats gently with appropriate pet grooming tools.' },
+      { name: 'Put away clean groceries', desc: 'Sort pantry items, canned goods, and boxed items into low cabinets.' },
     ],
+    schedule: {
+      morning: 'Make bed, complete hygiene checklist, and pack lunchbox into school bag.',
+      afternoon: 'Wipe kitchen table after after-school snack and feed family pet.',
+      weekend: 'Sweep kitchen floor after breakfast and strip bed sheets for family laundry day.',
+    },
+    howToTeach: {
+      step1: 'Define what a "finished job" looks like using clear, concrete criteria.',
+      step2: 'Teach self-checking: "Before you check off sweeping, look under the kitchen table chairs."',
+      step3: 'Grant autonomy: give them a 30-minute window to complete tasks on their own timeline.',
+    },
+    safetyNote:
+      'Seven-year-olds are increasingly independent but still need clear physical boundaries. Keep heavy outdoor machinery, pool cleaning chemicals, and high step-ladders strictly off-limits.',
     tips: [
-      "Assign ownership of a domain ('dishwasher lead') rather than one-off commands.",
-      'Use a 15-minute timer challenge if motivation lags for routine tasks.',
-      'Let them manage their own chart check-offs to reinforce self-direction.',
+      'Assign ownership of a domain ("dishwasher helper" or "pet care specialist") rather than piecemeal commands.',
+      'Use a 15-minute countdown challenge if motivation lags for routine maintenance.',
+      'Let them manage their own chart check-offs to reinforce internal locus of control.',
     ],
     notYet:
       'Running laundry machines unsupervised, using sharp chef knives, or mowing the lawn.',
+    faqs: [
+      {
+        q: 'Should chores be tied to privileges like screen time at age 7?',
+        a: 'A natural "work before play" boundary works well: chores and homework are completed before screen time or video games are unlocked for the evening.',
+      },
+      {
+        q: 'How do I handle chores when school homework increases?',
+        a: 'Streamline weekday chores to 10 minutes (hygiene and clearing dishes) and shift larger cleaning tasks to Saturday mornings.',
+      },
+      {
+        q: 'Can a 7-year-old learn to prepare simple snacks?',
+        a: 'Yes, spreading butter or cream cheese, peeling fruit, and pouring milk or water are excellent skills at age 7.',
+      },
+    ],
   },
 
   8: {
     intro:
-      "Eight-year-olds have mature executive functioning and can plan, sequence, and self-check their work. Handing over ownership creates lasting confidence.",
+      'Eight-year-olds are capable of sustained effort, have mature fine motor skills, and can complete multi-step tasks to adult standards when provided with clear expectations and proper tools.',
     whatTheyCanDo:
-      'An 8-year-old can manage multi-step chores for 30–45 minutes, notice when things need cleaning without prompts, and complete detailed household jobs.',
+      'An 8-year-old can manage multi-step chores for 20 to 30 minutes, notice when things need cleaning without repeated prompts, prepare simple meals with guidance, and complete detailed household jobs.',
     chores: [
       { name: 'Run the dishwasher cycle', desc: 'Add detergent, choose the right wash cycle, start the wash, and unload.' },
       { name: 'Clean toilets and countertops', desc: 'Use bathroom cleaner, scrub the bowl, and wipe down countertops cleanly.' },
       { name: 'Mop hard-surface floors', desc: 'Sweep and mop kitchen and bathroom floors with warm water and cleaner.' },
       { name: 'Do personal laundry with guidance', desc: 'Sort clothes, load the washer, transfer to the dryer, and fold.' },
-      { name: 'Cook simple meals', desc: 'Make scrambled eggs, toast, oatmeal, or warm soup with adult oversight.' },
+      { name: 'Cook simple meals with an adult nearby', desc: 'Make scrambled eggs, toast, oatmeal, or warm soup with adult oversight.' },
       { name: 'Take trash bins to the curb', desc: 'Roll waste and recycling bins to the curb on collection days.' },
     ],
+    schedule: {
+      morning: 'Tidy bedroom, make bed, and ensure school backpack and water bottle are ready.',
+      afternoon: 'Unload clean dishwasher and wipe dining table after dinner.',
+      weekend: 'Roll trash bins to the curb and vacuum living room or bedroom rug.',
+    },
+    howToTeach: {
+      step1: 'Walk through appliance controls (dishwasher, washer, microwave) with explicit safety rules.',
+      step2: 'Work through the full cycle together once, emphasizing start and clean-up steps.',
+      step3: 'Hand over full ownership, conducting only a brief final check with constructive feedback.',
+    },
+    safetyNote:
+      'Cooking tasks at age 8 require an adult nearby in the kitchen. Teach stovetop safety: pot handles turned inward, never leaving boiling pots unattended, and keeping hot pads within reach. Supervise curb trash wheelie bins near busy roads.',
     tips: [
       'Define clear quality standards so they know exactly what a finished job looks like.',
-      'Offer flexibility on when chores are done as long as deadlines are respected.',
+      'Offer flexibility on when chores are done as long as established deadlines are respected.',
       'Frame these responsibilities as essential life skills that prepare them for independence.',
     ],
     notYet:
-      'Power lawn tools, unsupervised ladder use, or handling boiling oil on the stove.',
+      'Operating power lawn tools, using ladders unsupervised, or handling hot boiling oil on the stove.',
+    faqs: [
+      {
+        q: 'Should 8-year-olds receive an allowance for chores?',
+        a: 'Many families keep household maintenance (room, dishes) unpaid, while offering an allowance for personal money management or optional bonus tasks.',
+      },
+      {
+        q: 'How can I get an 8-year-old to clean their bedroom without arguing?',
+        a: 'Break the room into categories: "First pick up all dirty clothes, then put all LEGOs in the bin, then make the bed." Concrete steps prevent overwhelm.',
+      },
+      {
+        q: 'What is the most important chore skill to teach at age 8?',
+        a: 'Operating the dishwasher and laundry machines builds enormous self-confidence and practical domestic competence.',
+      },
+    ],
   },
 
   9: {
     intro:
-      "Nine-year-olds achieve near-adult standards on everyday household tasks. The focus shifts from merely following instructions to taking pride in quality.",
+      'Nine-year-olds can coordinate responsibilities around school and extracurriculars. They appreciate being treated as capable contributors whose work has visible value to the entire household.',
     whatTheyCanDo:
-      'A 9-year-old can plan several days ahead, coordinate chores around extracurricular activities, and complete complex household cleaning independently.',
+      'A 9-year-old can plan several days ahead, coordinate chores around extracurricular activities, prepare simple recipes with supervision, and complete complex household cleaning independently.',
     chores: [
       { name: 'Deep clean a bathroom', desc: 'Scrub the sink, toilet, tub, and floor thoroughly to an adult standard.' },
       { name: 'Vacuum entire floors', desc: 'Vacuum living areas and hallways in an organized, methodical sequence.' },
       { name: 'Run complete laundry cycles', desc: 'Manage washing, drying, folding, and putting away personal laundry.' },
-      { name: 'Cook from written recipes', desc: 'Follow simple recipe instructions for pasta dishes, quesadillas, or salads.' },
+      { name: 'Cook from written recipes', desc: 'Follow simple recipe instructions for pasta dishes, quesadillas, or salads with an adult nearby.' },
       { name: 'Assist with younger sibling care', desc: 'Supervise younger siblings during play or assist with simple homework.' },
       { name: 'Yard and garden upkeep', desc: 'Water plants, sweep sidewalks, clear dead leaves, and tidy outdoor toys.' },
     ],
+    schedule: {
+      morning: 'Pack personal school bag, make bed, and take personal dishes to the sink.',
+      afternoon: 'Help prepare simple dinner sides or salad, and clear the table after dinner.',
+      weekend: 'Wash, dry, and fold personal clothing batches and vacuum the family living room.',
+    },
+    howToTeach: {
+      step1: 'Involve them in planning: let them choose which days they handle laundry or cooking.',
+      step2: 'Teach recipe reading and knife safety (claw grip) under close adult supervision.',
+      step3: 'Inspect the final outcome together and praise self-directed problem-solving.',
+    },
+    safetyNote:
+      'Cooking must be done with an adult nearby. Use child-safe chef knives, teach stove burner safety, and ensure chemical cleaners are never mixed. Keep lawn equipment and power tools strictly off-limits.',
     tips: [
-      'Include them when creating the family chore schedule to ensure buy-in.',
+      'Include them when creating the family chore schedule to ensure genuine buy-in.',
       'Inspect the final result rather than hovering over the process as they work.',
       'Give genuine, adult-level praise when they take initiative without being asked.',
     ],
     notYet:
       'Staying home alone for extended periods, operating gas mowers, or handling household finances.',
+    faqs: [
+      {
+        q: 'How do I handle a 9-year-old who procrastinates on chores?',
+        a: 'Agree on a firm deadline rather than a specific time: "As long as your room and laundry are done by 6 PM Sunday, you manage the timing."',
+      },
+      {
+        q: 'Can 9-year-olds do their own laundry completely?',
+        a: 'Yes! Measure detergent amounts together, explain washer settings, and let them take full ownership of their clothing hamper.',
+      },
+      {
+        q: 'What if their standard of cleaning is lower than mine?',
+        a: 'Teach specifically: show how to sweep corners or wipe behind faucets. Focus on improvement rather than demanding adult perfection immediately.',
+      },
+    ],
   },
 
   10: {
     intro:
-      "Ten-year-olds handle household management tasks with genuine autonomy. Chores become true contributions that keep the home functioning smoothly.",
+      'Ten-year-olds are entering the pre-teen years with expanding critical thinking skills. They can understand household logistics, manage weekly deadlines, and execute complex multi-step responsibilities with high consistency.',
     whatTheyCanDo:
-      'A 10-year-old can organize their daily schedule, balance chores with schoolwork, and execute complex multi-step responsibilities with consistent quality.',
+      'A 10-year-old can organize their daily schedule, balance chores with school deadlines, prepare full simple family dinners from recipes, and execute multi-step cleaning jobs independently.',
     chores: [
-      { name: 'Cook family dinners from recipes', desc: 'Plan and prepare full balanced dinners like pasta, skillet meals, or tacos.' },
-      { name: 'Deep clean kitchen surfaces', desc: 'Clean stovetop, wipe down appliance fronts, sanitize counters, and mop.' },
-      { name: 'Manage personal laundry entirely', desc: 'Wash, dry, fold, and store clothes each week without parental reminders.' },
-      { name: 'Mow lawns with supervision', desc: 'Mow flat yard sections after complete safety equipment and tool review.' },
-      { name: 'Detail car interiors', desc: 'Vacuum car seats and floor mats, clean windows, and remove trash.' },
-      { name: 'Shop with a grocery list and budget', desc: 'Find pantry items, compare prices, and manage payments and receipts.' },
+      { name: 'Cook family dinners from recipes', desc: 'Prepare simple balanced dinners like pasta, skillet meals, or tacos with an adult nearby.' },
+      { name: 'Deep clean kitchen surfaces', desc: 'Clean stovetop, wipe appliance fronts, sanitize counters, and mop floors.' },
+      { name: 'Manage personal laundry entirely', desc: 'Wash, dry, fold, and store clothes each week independently.' },
+      { name: 'Yard and garden maintenance', desc: 'Weed garden beds, sweep walks, rake leaves, and trim shrubs with manual tools.' },
+      { name: 'Detail car interiors', desc: 'Vacuum seats and floor mats, clean windows, and empty car trash.' },
+      { name: 'Shop with a grocery list', desc: 'Find pantry items, compare prices, and check items off the list.' },
     ],
+    schedule: {
+      morning: 'Personal hygiene, bed made, and backpack packed with checked homework.',
+      afternoon: 'Wipe kitchen counters after cooking or unpack groceries after school.',
+      weekend: 'Wash and fold personal laundry, vacuum family room, and help with yard maintenance.',
+    },
+    howToTeach: {
+      step1: 'Treat them as a partner: review family schedules and assign meaningful domains of responsibility.',
+      step2: 'Teach meal planning: selecting recipes, auditing pantry ingredients, and creating a shopping list.',
+      step3: 'Conduct weekly family meetings to negotiate chores and recognize dependable contributions.',
+    },
+    safetyNote:
+      'Cooking still requires an adult nearby in the house. Ensure proper footwear and eye protection during yard work. Power tools, lawn mowers, and high ladder climbing remain restricted per pediatric safety guidance.',
     tips: [
       'Treat them as a capable partner in maintaining a comfortable, organized home.',
-      "Assign ongoing areas of responsibility ('you own the kitchen floor') for accountability.",
+      'Assign ongoing areas of responsibility ("you own the kitchen floor") for real accountability.',
       'Discuss how practical household competence builds self-reliance for adulthood.',
     ],
     notYet:
-      'Unsupervised power machinery, sole extended care of infants, or managing household budgets.',
+      'Operating power lawn machinery, sole extended care of infants, or managing household budgets.',
+    faqs: [
+      {
+        q: 'How many weekly chores should a 10-year-old have?',
+        a: 'Around 3 to 5 daily micro-habits plus 1 or 2 larger weekly projects (like laundry or dinner preparation).',
+      },
+      {
+        q: 'Should 10-year-olds be paid for cooking dinner?',
+        a: 'Cooking for the family is a great communal contribution. Some parents offer an allowance if the child plans, budgets, and executes the meal from scratch.',
+      },
+      {
+        q: 'What chores best foster pre-teen independence?',
+        a: 'Meal preparation, managing their own laundry start-to-finish, and keeping their personal study space organized.',
+      },
+    ],
   },
 
   11: {
     intro:
-      "Eleven-year-olds are preparing for adolescence, where household chores transition into foundational life skills for future personal independence.",
+      'Eleven-year-olds are capable of advanced household participation, project planning, and mentoring younger siblings. Chores at eleven directly prepare children for the independence of the teenage years.',
     whatTheyCanDo:
-      'An 11-year-old can anticipate chores before being prompted, manage multi-day tasks, and hold themselves to high personal standards of craftsmanship.',
+      'An 11-year-old can plan and cook family meals, manage grocery shopping lists, tackle seasonal cleaning projects, mentor younger siblings, and organize personal schedules.',
     chores: [
-      { name: 'Plan and cook weekly meals', desc: 'Select recipes, write ingredient lists, cook, and clean up the kitchen.' },
+      { name: 'Plan and cook weekly meals', desc: 'Select recipes, write ingredient lists, cook with an adult nearby, and clean up.' },
       { name: 'Lead grocery shopping trips', desc: 'Audit pantry supplies, compile shopping lists, and compare unit prices.' },
       { name: 'Tackle seasonal cleaning projects', desc: 'Clean garage shelves, organize basement storage, or clean patio furniture.' },
       { name: 'Mentor younger siblings on chores', desc: 'Demonstrate standards and guide younger siblings through chore routines.' },
       { name: 'Manage personal schedules and chores', desc: 'Coordinate school deadlines, sports practices, and household duties.' },
-      { name: 'Perform basic home maintenance', desc: 'Replace light bulbs, tighten loose hinges, or change air filters.' },
+      { name: 'Perform basic home maintenance', desc: 'Replace light bulbs safely, tighten loose cabinet knobs, or change air filters.' },
     ],
+    schedule: {
+      morning: 'Self-directed morning routine: hygiene, bed, breakfast, and device charging management.',
+      afternoon: 'Dishwasher duty and assisting with sibling supervision during after-school snacks.',
+      weekend: 'Plan and cook one family dinner and handle complete personal laundry.',
+    },
+    howToTeach: {
+      step1: 'Offer project-level tasks rather than isolated commands: "Can you own organizing the pantry?"',
+      step2: 'Teach budgeting and price comparison during grocery runs to build financial literacy.',
+      step3: 'Respect their growing need for privacy while keeping shared communal expectations firm.',
+    },
+    safetyNote:
+      'Keep heavy power tools, gasoline-powered lawn equipment, and hazardous chemical strippers off-limits. Maintain adult proximity during stovetop and oven cooking.',
     tips: [
-      'Negotiate chore swaps when busy schedules require flexible arrangements.',
-      'Respect their independence by agreeing on deadlines rather than exact times.',
+      'Negotiate chore swaps when busy academic or sports schedules require flexible arrangements.',
+      'Respect their independence by agreeing on deadlines rather than enforcing exact times.',
       'Treat mistakes as learning opportunities and praise self-directed problem-solving.',
     ],
     notYet:
-      'Operating dangerous power tools, unsupervised sole care of infants, or financial autonomy.',
+      'Operating dangerous power tools, unsupervised sole care of infants, or full financial autonomy.',
+    faqs: [
+      {
+        q: 'How do I handle chores when middle school sports take up all their time?',
+        a: 'Shift the bulk of responsibilities to weekends and keep weekday chores limited to self-care, hygiene, and room tidiness.',
+      },
+      {
+        q: 'Can an 11-year-old babysit younger siblings while parents run errands?',
+        a: 'For short periods (15–30 minutes) during daylight hours, provided emergency protocols and phone contacts are in place.',
+      },
+      {
+        q: 'How can I motivate an 11-year-old who feels chores are a punishment?',
+        a: 'Frame chores as life-skill milestones: connect cooking to teenage freedom, camping, or future apartment living.',
+      },
+    ],
   },
 
   12: {
     intro:
-      "Twelve-year-olds have near-adult capability for standard home tasks. Giving them serious responsibilities prepares them for high school and independent living.",
+      'Twelve-year-olds can take on near-adult domestic competence. They can clean entire rooms to high standards, prepare full family dinners, and take pride in genuine household craftsmanship.',
     whatTheyCanDo:
-      'A 12-year-old can plan, execute, and inspect complex tasks to adult standards, manage weekly deadlines independently, and lead family routines.',
+      'A 12-year-old can plan and inspect complex tasks to adult standards, manage deadlines, lead routines, cook full meals with an adult nearby, and maintain lawns with proper safety gear.',
     chores: [
-      { name: 'Cook diverse family dinners', desc: 'Prepare full multi-dish meals reliably on scheduled cooking nights.' },
+      { name: 'Cook diverse family dinners', desc: 'Prepare full multi-dish meals reliably on scheduled cooking nights with an adult nearby.' },
       { name: 'Run full household laundry days', desc: 'Wash, dry, fold, and sort family linens, towels, and clothing batches.' },
       { name: 'Deep clean any room in the house', desc: 'Clean baseboards, windows, surfaces, and flooring to a spotless standard.' },
-      { name: 'Maintain lawns and garden areas', desc: 'Mow lawns, edge walkways, weed garden beds, and water outdoor plants.' },
+      { name: 'Maintain lawns and garden areas', desc: 'Mow lawns, edge walkways, and weed garden beds with adult supervision and proper safety gear.' },
       { name: 'Supervise siblings during routine chores', desc: 'Provide constructive feedback and support while siblings complete tasks.' },
       { name: 'Handle local neighbourhood errands', desc: 'Walk to local shops with shopping lists or drop mail at the post office.' },
     ],
+    schedule: {
+      morning: 'Independent morning preparation, packed school lunch, and tidy personal bedroom.',
+      afternoon: 'Kitchen reset after dinner, homework completion, and pet care.',
+      weekend: 'Full personal laundry, lawn care or deep vacuuming, and one family cooking night.',
+    },
+    howToTeach: {
+      step1: 'Hand over end-to-end domain ownership: "You are the head chef on Thursday nights."',
+      step2: 'Teach comprehensive safety protocols for lawn maintenance: safety glasses, closed-toe shoes, and adult review.',
+      step3: 'Acknowledge their contributions with adult-level appreciation and commensurate privileges.',
+    },
+    safetyNote:
+      'The American Academy of Pediatrics recommends that children be at least 12 years old before operating a walk-behind power mower, and only with adult supervision, sturdy closed-toe shoes, and eye protection. Cooking with hot oils or ovens requires an adult nearby.',
     tips: [
-      'Frame responsibilities explicitly as essential preparation for independent adult living.',
+      'Frame responsibilities as essential preparation for independent adult living.',
       'Provide authentic ownership where their contribution has visible, appreciated value.',
       'Acknowledge mature contributions with adult-level appreciation and privileges.',
     ],
     notYet:
       'Unsupervised heavy power tools, sole legal responsibility for young kids, or independent finances.',
+    faqs: [
+      {
+        q: 'Is 12 old enough to mow the lawn?',
+        a: 'According to the AAP, 12 is the minimum age for walk-behind mowers, provided the child has shown mature judgment, wears safety glasses and sturdy boots, and works under adult supervision.',
+      },
+      {
+        q: 'Should a 12-year-old have daily or weekly chores?',
+        a: 'A mix of daily self-maintenance (dishes, room, personal laundry) and one larger weekly household responsibility works best.',
+      },
+      {
+        q: 'How do I handle chore resistance in a 12-year-old?',
+        a: 'Treat them as a partner: negotiate chores during family meetings and link completed tasks to weekend privileges or personal allowance.',
+      },
+    ],
+  },
+
+  13: {
+    intro:
+      'Thirteen marks the transition into the teenage years, when kids can take on meaningful responsibility for their own routines and shared family spaces. Giving them ownership of recurring tasks builds confidence and self-reliance.',
+    whatTheyCanDo:
+      'A 13-year-old can prepare family meals, operate all laundry and kitchen appliances safely, clean shared bathrooms, and handle outdoor maintenance with proper safety gear.',
+    chores: [
+      { name: 'Cook simple family meals', desc: 'Prepare scrambled eggs, pasta dishes, grilled cheese, or stir-fries for the household.' },
+      { name: 'Do personal laundry start to finish', desc: 'Wash, dry, fold, and put away clothes independently on a weekly schedule.' },
+      { name: 'Clean the bathroom thoroughly', desc: 'Disinfect sinks, countertops, toilets, and mirrors safely; use only simple cleaners and never mix cleaning products.' },
+      { name: 'Mow lawn or rake leaves', desc: 'Handle yard maintenance and mowing with adult supervision and proper safety gear.' },
+      { name: 'Deep-clean the kitchen', desc: 'Wipe counters, clean stovetop, wipe microwave interior, and take out recycling.' },
+      { name: 'Babysit younger siblings', desc: 'Supervise siblings for short periods while parents run errands.' },
+    ],
+    schedule: {
+      morning: 'Self-managed wake-up, bedroom tidy, and prep for school day independently.',
+      afternoon: 'Empty kitchen dishwasher, walk family pet, and complete daily homework.',
+      weekend: 'Mow lawn or deep-clean bathroom, and manage complete personal laundry cycle.',
+    },
+    howToTeach: {
+      step1: 'Establish clear weekly outcome goals rather than dictating daily time slots.',
+      step2: 'Demonstrate chemical safety: emphasize using simple non-toxic cleaners and never mixing cleaning products.',
+      step3: 'Connect domestic competence to teen independence, social plans, and future adult living.',
+    },
+    safetyNote:
+      'Never mix cleaning products (especially ammonia and bleach). Ensure adult supervision and safety gear (eye protection, ear protection, and sturdy closed-toe shoes) for all lawn mowing. Unsupervised power tools and electrical repairs remain prohibited.',
+    tips: [
+      'Agree on weekly deadlines rather than micromanaging daily schedules.',
+      'Connect chores to independence: cooking and laundry are vital life skills.',
+      'Allow autonomy over when chores get done if deadlines are met.',
+    ],
+    notYet:
+      'Unsupervised power tools, electrical repairs, or chores that conflict with schoolwork.',
+    faqs: [
+      {
+        q: 'How do I balance chores with heavy teen homework and extracurriculars?',
+        a: 'Set weekend deadlines. Teens can complete their laundry and deep-cleaning on Saturday morning, keeping weeknights free for studying.',
+      },
+      {
+        q: 'Can a 13-year-old stay home alone and babysit siblings?',
+        a: 'Yes, for several hours during the day, provided they have taken a certified babysitting course (like Red Cross) and have direct phone access to parents.',
+      },
+      {
+        q: 'What is the best way to handle a teenager who ignores chores?',
+        a: 'Establish clear natural boundaries: household internet access, phone privileges, or weekend outings are tied to meeting agreed-upon household responsibilities.',
+      },
+    ],
+  },
+
+  14: {
+    intro:
+      'At fourteen, teenagers are ready for genuine household responsibility and greater independence. Chores at this age help build practical life skills, from managing meal prep and laundry to helping with simple maintenance around the house.',
+    whatTheyCanDo:
+      'A 14-year-old can manage multi-step responsibilities independently, from cooking dinners to seasonal cleaning, pet care, and helping with simple household fixes like changing light bulbs.',
+    chores: [
+      { name: 'Plan and cook dinner weekly', desc: 'Choose a recipe, make an ingredient list, and cook for the household.' },
+      { name: 'Complete weekly family laundry', desc: 'Wash sheets, towels, and household laundry independently.' },
+      { name: 'Wash and vacuum the family car', desc: 'Rinse the exterior, clean tires, and vacuum carpets and seats.' },
+      { name: 'Clean and organize refrigerator', desc: 'Check expiration dates, discard spoiled food, and wipe shelves.' },
+      { name: 'Pet veterinary and exercise care', desc: 'Walk dogs, administer pet medications, and maintain hygiene.' },
+      { name: 'Trash and recycling management', desc: 'Collect bins from around the house and roll them to the curb.' },
+    ],
+    schedule: {
+      morning: 'Self-sufficient morning departure, bedroom kept in order, and sports gear organized.',
+      afternoon: 'Assist with kitchen prep, pet walking, and post-school tidying.',
+      weekend: 'Lead one family dinner night, wash the family vehicle, and manage personal wardrobe.',
+    },
+    howToTeach: {
+      step1: 'Treat teens as equal household stakeholders: hold family meetings to negotiate duty splits.',
+      step2: 'Teach preventative home care: checking expiration dates, cleaning air vents, and car detailing.',
+      step3: 'Respect their growing academic and social autonomy while holding non-negotiable family responsibilities.',
+    },
+    safetyNote:
+      'Fourteen-year-olds have near-adult physical ability, but still need safety oversight. Roof work, gutter cleaning from high ladders, toxic chemical stripping, and electrical circuit repairs are strictly parental responsibilities.',
+    tips: [
+      'Treat teens as contributing partners; hold family meetings to negotiate duties.',
+      'Consider pairing advanced chores with an allowance or milestone privileges to teach financial management.',
+      'Respect their academic schedule while keeping non-negotiable household duties.',
+    ],
+    notYet:
+      'Ladders or roof gutters, heavy chemical stripping, or taking on full parental household responsibilities.',
+    faqs: [
+      {
+        q: 'Should 14-year-olds have an allowance for doing chores?',
+        a: 'Many families provide a regular allowance tied to learning budgeting and clothing management, with bonus opportunities for large projects like detailing cars.',
+      },
+      {
+        q: 'How can I get my 14-year-old to clean their bedroom without constant fights?',
+        a: 'Set a baseline hygiene standard: dishes, dirty laundry, and trash must be removed daily. Let them organize the rest of the visual space according to their personal aesthetic.',
+      },
+      {
+        q: 'What life skills should every 14-year-old master before high school?',
+        a: 'Cooking 3 balanced meals from scratch, operating the washer and dryer, basic bathroom sanitation, and managing their own calendar.',
+      },
+    ],
   },
 };
 
 const age = Number(Astro.params.age);
 const page = agePage(age);
 const content = AGE_CONTENT[age];
-const prevAge = age > 3 ? age - 1 : null;
-const nextAge = age < 12 ? age + 1 : null;
+const prevAge = age > 2 ? age - 1 : null;
+const nextAge = age < 14 ? age + 1 : null;
 ---
 
 <ArticleLayout
@@ -256,10 +677,10 @@ const nextAge = age < 12 ? age + 1 : null;
     { name: page.label, path: page.path },
   ]}
 >
-  <p>{content.intro}</p>
+  <p class="text-lg leading-relaxed">{content.intro}</p>
   <p>
-    <a href={PAGES.choreChartMaker.path} class="font-semibold text-brand underline">Open the chore chart maker</a>
-    {' '}to customize and print a chart for this age.
+    <a href={PAGES.choreChartMaker.path} class="font-semibold text-brand underline">Customize and print</a>
+    {' '}a free chore chart for this age.
   </p>
 
   <h2>What most {age}-year-olds can do</h2>
@@ -267,7 +688,7 @@ const nextAge = age < 12 ? age + 1 : null;
 
   <h2>Age-appropriate chores for {age}-year-olds</h2>
   <p>Tasks {age}-year-olds can manage with practice. Start with two or three and build from there.</p>
-  <ul>
+  <ul class="space-y-2">
     {content.chores.map((chore) => (
       <li>
         <strong>{chore.name}:</strong> {chore.desc}
@@ -275,15 +696,56 @@ const nextAge = age < 12 ? age + 1 : null;
     ))}
   </ul>
 
+  <h2>Sample weekly routine for a {age}-year-old</h2>
+  <div class="grid gap-4 sm:grid-cols-3">
+    <div class="rounded-xl border border-line bg-surface p-4">
+      <h3 class="font-bold text-fg">Morning routine</h3>
+      <p class="mt-1 text-sm text-muted">{content.schedule.morning}</p>
+    </div>
+    <div class="rounded-xl border border-line bg-surface p-4">
+      <h3 class="font-bold text-fg">Afternoon / Evening</h3>
+      <p class="mt-1 text-sm text-muted">{content.schedule.afternoon}</p>
+    </div>
+    <div class="rounded-xl border border-line bg-surface p-4">
+      <h3 class="font-bold text-fg">Weekend tasks</h3>
+      <p class="mt-1 text-sm text-muted">{content.schedule.weekend}</p>
+    </div>
+  </div>
+
+  <h2>How to teach chores to a {age}-year-old</h2>
+  <ol class="space-y-2">
+    <li><strong>Step 1:</strong> {content.howToTeach.step1}</li>
+    <li><strong>Step 2:</strong> {content.howToTeach.step2}</li>
+    <li><strong>Step 3:</strong> {content.howToTeach.step3}</li>
+  </ol>
+
+  <h2>Safety and supervision guidance</h2>
+  <div class="rounded-xl border border-line bg-surface p-4 text-sm text-muted">
+    <p>{content.safetyNote}</p>
+    <p class="mt-2 text-xs italic">
+      Note on developmental references: Official CDC developmental milestone checklists focus on early childhood development from birth through age 5. For ages 6 and older, chore capabilities reflect guidance from the American Academy of Pediatrics (AAP) and child development standards.
+    </p>
+  </div>
+
   <h2>Teaching tips for {age}-year-olds</h2>
-  <ul>
+  <ul class="space-y-1">
     {content.tips.map((tip) => (
       <li>{tip}</li>
     ))}
   </ul>
 
-  <h2>Not quite yet</h2>
+  <h2>Not quite yet: tasks to avoid at {age}</h2>
   <p>{content.notYet}</p>
+
+  <h2>Frequently asked questions about chores for {age}-year-olds</h2>
+  <div class="space-y-4">
+    {content.faqs.map((faq) => (
+      <div class="rounded-xl border border-line bg-surface p-4">
+        <h3 class="font-bold text-fg">{faq.q}</h3>
+        <p class="mt-1 text-sm text-muted">{faq.a}</p>
+      </div>
+    ))}
+  </div>
 
   <nav class="my-6 border-y border-line py-4" aria-label="Age navigation">
     <div class="flex flex-wrap items-center justify-between gap-4">
@@ -306,17 +768,14 @@ const nextAge = age < 12 ? age + 1 : null;
       )}
     </div>
     <div class="mt-4">
-      <p class="text-xs font-semibold uppercase tracking-wider text-muted">Browse chores by other ages:</p>
-      <div class="mt-2 flex flex-wrap gap-2 text-sm">
+      <p class="text-xs font-semibold text-muted">Other ages:</p>
+      <div class="mt-2 flex flex-wrap gap-1.5 text-xs">
         {AGE_PAGE_AGES.map((a) =>
           a === age ? (
-            <span class="rounded bg-brand px-2 py-0.5 text-xs font-bold text-brand-fg">{a} years</span>
+            <span class="rounded bg-brand px-1.5 py-0.5 font-bold text-brand-fg">Age {a}</span>
           ) : (
-            <a
-              href={agePage(a).path}
-              class="rounded border border-line px-2 py-0.5 text-xs font-medium hover:border-brand"
-            >
-              {a} years
+            <a href={agePage(a).path} class="rounded border border-line px-1.5 py-0.5 hover:border-brand">
+              Age {a}
             </a>
           ),
         )}
@@ -324,16 +783,14 @@ const nextAge = age < 12 ? age + 1 : null;
     </div>
   </nav>
 
-  <section class="mt-8 space-y-2 border-t border-line pt-6">
-    <h2 class="text-lg font-bold text-fg">Related printable chart tools</h2>
-    <p class="text-sm text-muted">
-      Explore our free tools:
-      <a href={PAGES.choreChartMaker.path} class="text-brand underline font-medium">Chore Chart Maker</a>,
-      <a href={PAGES.rewardChartMaker.path} class="text-brand underline font-medium">Reward Chart</a>,
-      <a href={PAGES.morningRoutineChart.path} class="text-brand underline font-medium">Morning Routine</a>,
-      <a href={PAGES.familyChoreChart.path} class="text-brand underline font-medium">Family Chart</a>,
-      <a href={PAGES.freeChoreChartTemplate.path} class="text-brand underline font-medium">Templates</a>, and
-      <a href={PAGES.elegantChoreChart.path} class="text-brand underline font-medium">Elegant Charts</a>.
+  <section class="mt-8 border-t border-line pt-4 text-sm text-muted">
+    <p>
+      Related tools:
+      <a href={PAGES.choreChartMaker.path} class="text-brand underline font-medium">Chore Chart Maker</a> ·
+      <a href={PAGES.rewardChartMaker.path} class="text-brand underline font-medium">Reward Chart</a> ·
+      <a href={PAGES.morningRoutineChart.path} class="text-brand underline font-medium">Morning Routine</a> ·
+      <a href={PAGES.bedtimeRoutineChart.path} class="text-brand underline font-medium">Bedtime Routine</a> ·
+      <a href={PAGES.familyChoreChart.path} class="text-brand underline font-medium">Family Chart</a>.
     </p>
   </section>
 </ArticleLayout>

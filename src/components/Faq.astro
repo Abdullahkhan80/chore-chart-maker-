@@ -17,7 +17,7 @@ const { items, title = 'Frequently asked questions' } = Astro.props;
       {items.map((item) => (
         <>
           <h3>{item.question}</h3>
-          <p>{item.answer}</p>
+          <p set:html={item.answer} />
         </>
       ))}
     </section>

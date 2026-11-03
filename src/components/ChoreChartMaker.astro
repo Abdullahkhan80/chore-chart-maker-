@@ -50,18 +50,22 @@ const typeLabels: Record<(typeof CHART_TYPES)[number], string> = {
       </nav>
 
       <fieldset class="ccm-step" data-step="1" data-active tabindex="-1">
-        <legend class="ccm-legend">1. Who is it for?</legend>
+        <legend class="ccm-legend">1. {config.type === 'rotation' ? 'Who is sharing chores?' : 'Who is it for?'}</legend>
         <label class="ccm-label">Chart title<input class="ccm-input" name="title" value={config.title} maxlength={LIMITS.titleLength} autocomplete="off" /></label>
         <ul class="mt-3 grid gap-2" data-ccm-kids set:html={kidListHtml(config)} />
-        <button type="button" class="ccm-btn mt-2" data-action="add-kid" disabled={config.kids.length >= LIMITS.maxKids}>+ Add a child</button>
+        <button type="button" class="ccm-btn mt-2" data-action="add-kid" disabled={config.kids.length >= LIMITS.maxKids}>{config.type === 'rotation' ? '+ Add a roommate' : '+ Add a child'}</button>
       </fieldset>
 
       <fieldset class="ccm-step" data-step="2" tabindex="-1">
         <legend class="ccm-legend">2. Chores</legend>
         <div class="flex flex-wrap items-center gap-2">
-          <p class="ccm-label">Suggested for age</p>
+          {config.type === 'rotation' ? (
+            <p class="ccm-label font-medium">Suggested shared chores</p>
+          ) : (
+            <p class="ccm-label">Suggested for age</p>
+          )}
           <label class="sr-only" for="ccm-suggest-age">Suggestions for age</label>
-          <select id="ccm-suggest-age" class="ccm-input w-20" data-ccm-suggest-age>
+          <select id="ccm-suggest-age" class:list={['ccm-input w-20', config.type === 'rotation' && 'hidden']} data-ccm-suggest-age>
             {Array.from({ length: 13 }, (_, i) => i + 2).map((a) => <option value={a} selected={a === age}>{a}</option>)}
           </select>
         </div>
@@ -125,7 +129,7 @@ const typeLabels: Record<(typeof CHART_TYPES)[number], string> = {
           <label class="ccm-check"><input type="checkbox" name="allowanceEnabled" />Track allowance</label>
           <label class="ccm-label" data-when="allowance" hidden>Currency<select class="ccm-input" name="currency">{CURRENCIES.map((c) => <option value={c}>{c}</option>)}</select></label>
           <label class="ccm-check"><input type="checkbox" name="largeText" />Large text</label>
-          <label class="ccm-check"><input type="checkbox" name="inkSaver" />Ink saver (white background, outlines only)</label>
+          <label class="ccm-check"><input type="checkbox" name="inkSaver" />Ink saver (outlines only)</label>
         </div>
       </fieldset>
 
@@ -140,7 +144,7 @@ const typeLabels: Record<(typeof CHART_TYPES)[number], string> = {
         </div>
         <label class="sr-only" for="ccm-share-output">Share link</label>
         <input id="ccm-share-output" class="ccm-input mt-2" data-ccm-share-output readonly hidden />
-        <p class="mt-2 text-sm text-muted">Your chart is saved in this browser only. Share links carry the chart inside the link itself.</p>
+        <p class="mt-2 text-sm text-muted">Saved in this browser only. Share links carry the chart in the URL hash.</p>
       </fieldset>
 
       <div class="mt-4 flex justify-between gap-2 lg:hidden">

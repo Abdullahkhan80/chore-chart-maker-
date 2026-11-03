@@ -10,9 +10,17 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   /** When set, the chart editor is shown under the headline with this preset. */
   preset?: string;
+  jsonLd?: import('../lib/seo.ts').JsonLd[];
+  ogType?: 'website' | 'article';
 }
 
-const { page, breadcrumbs = [{ name: page.label, path: page.path }], preset } = Astro.props;
+const {
+  page,
+  breadcrumbs = [{ name: page.label, path: page.path }],
+  preset,
+  jsonLd: customJsonLd,
+  ogType = customJsonLd ? undefined : 'article',
+} = Astro.props;
 const article = buildArticle({
   headline: page.h1,
   description: page.description,
@@ -20,10 +28,12 @@ const article = buildArticle({
   datePublished: page.published,
   dateModified: page.lastmod,
   imagePath: pageOgImagePath(page),
+  lang: page.lang,
 });
+const structuredData = customJsonLd ?? [article];
 ---
 
-<MainLayout page={page} breadcrumbs={breadcrumbs} jsonLd={[article]} ogType="article">
+<MainLayout page={page} breadcrumbs={breadcrumbs} jsonLd={structuredData} ogType={ogType}>
   <article class="max-w-prose">
     <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
     <p class="mt-2 text-sm text-muted">Updated <time datetime={page.lastmod}>{page.lastmod}</time></p>

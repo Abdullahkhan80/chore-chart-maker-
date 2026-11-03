@@ -11,17 +11,32 @@ interface Props {
   page: PageMeta;
   /** Editor preset; defaults to the page's entry in PAGE_PRESETS. */
   preset?: string;
+  /** Breadcrumb trail after "Home"; defaults to just this page. */
+  breadcrumbs?: import('../lib/seo.ts').BreadcrumbItem[];
   /** Rendered as the visible FAQ and as FAQPage JSON-LD from the same text. */
   faq?: FaqItem[];
   faqTitle?: string;
 }
 
-const { page, preset = PAGE_PRESETS[page.path] ?? 'weekly', faq = [], faqTitle } = Astro.props;
-const jsonLd = [buildWebApplication({ name: page.label, path: page.path, description: page.description })];
+const {
+  page,
+  preset = PAGE_PRESETS[page.path] ?? 'weekly',
+  breadcrumbs = [{ name: page.label, path: page.path }],
+  faq = [],
+  faqTitle,
+} = Astro.props;
+const jsonLd = [
+  buildWebApplication({
+    name: page.label,
+    path: page.path,
+    description: page.description,
+    lang: page.lang,
+  }),
+];
 if (faq.length > 0) jsonLd.push(buildFaqPage(faq));
 ---
 
-<MainLayout page={page} breadcrumbs={[{ name: page.label, path: page.path }]} jsonLd={jsonLd}>
+<MainLayout page={page} breadcrumbs={breadcrumbs} jsonLd={jsonLd}>
   <h1 class="text-2xl font-bold tracking-tight sm:text-4xl">{page.h1}</h1>
   <p class="mt-2 max-w-prose text-muted"><slot name="intro" /></p>
   <div class="mt-4">

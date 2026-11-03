@@ -1,0 +1,107 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import { PAGES } from '../lib/pages.ts';
+import type { FaqItem } from '../lib/seo.ts';
+
+const faq: FaqItem[] = [
+  {
+    question: 'What belongs on a bedtime routine chart for kids?',
+    answer:
+      'Focus on 4 to 6 consistent evening steps in order: pick up toys, bath or wash up, put on pajamas, brush teeth, read a story together, and lights out. Keeping the sequence identical every night trains your child’s body to anticipate sleep.',
+  },
+  {
+    question: 'How does a visual bedtime chart end bedtime battles and stalling?',
+    answer:
+      'Visual charts externalize authority: instead of parents constantly nagging or repeating commands, the chart becomes the neutral roadmap. Children take pride in checking off steps themselves, turning a power struggle into a predictable game.',
+  },
+  {
+    question: 'How long should a healthy bedtime routine take?',
+    answer:
+      'Aim for 30 to 45 minutes total. Routines that stretch past an hour often lead to overtiredness and second winds, while rushed routines under 15 minutes don’t provide enough sensory down-regulation for a child’s nervous system to relax.',
+  },
+  {
+    question: 'When should screens be turned off before bedtime?',
+    answer:
+      'Pediatric sleep guidelines recommend turning off tablets, televisions, and smartphones at least 60 minutes before bedtime. Blue light from screens suppresses natural melatonin production and keeps children’s brains in an alert state.',
+  },
+  {
+    question: 'Where should we display the bedtime routine chart at home?',
+    answer:
+      'Hang the chart at your child’s eye level either on the bathroom mirror where hygiene steps happen or right next to their bed where the final steps conclude. Laminating or putting it in a plastic sleeve allows them to use dry-erase markers.',
+  },
+];
+
+const link = 'text-brand underline font-medium';
+---
+
+<ToolLayout
+  page={PAGES.bedtimeRoutineChart}
+  preset="bedtime-routine"
+  faq={faq}
+  breadcrumbs={[
+    { name: PAGES.choreChartMaker.label, path: PAGES.choreChartMaker.path },
+    { name: PAGES.bedtimeRoutineChart.label, path: PAGES.bedtimeRoutineChart.path },
+  ]}
+>
+  <Fragment slot="intro">
+    Make a free printable bedtime routine chart with picture steps for kids: tidy toys, bath, pajamas, brushing teeth, bedtime stories, and lights out. Customize and print in minutes.
+  </Fragment>
+
+  <h2>Building peaceful evenings with predictable visual routines</h2>
+  <p>
+    Evenings can easily turn into the most exhausting part of parenting when bedtime resistance, stalling, and requests for "just one more drink of water" drag bedtime late into the night. Children crave predictability, especially when transitioning from daytime stimulation to nighttime rest.
+  </p>
+  <p>
+    A visual bedtime routine chart gives children a clear, comforting roadmap. By pairing recognizable icons with simple sequential steps, young kids know exactly what comes next without parents having to give repeated verbal reminders.
+  </p>
+
+  <h2>The 4 stages of an effective evening wind-down</h2>
+  <ol>
+    <li>
+      <strong>Stage 1: Transition & environment reset (10 minutes).</strong> Signal that playtime has ended. Have your child put away toys, help pack tomorrow's school bag, and lay out tomorrow's clothes. Dim the overhead lights in the living room and turn off all screens.
+    </li>
+    <li>
+      <strong>Stage 2: Hygiene & body comfort (15 minutes).</strong> A warm bath or shower relaxes muscles. Follow up with pajamas, teeth brushing, face washing, and an optional sip of water before entering the bedroom.
+    </li>
+    <li>
+      <strong>Stage 3: Quiet connection & storytime (15 minutes).</strong> Move into the bedroom under warm, soft lighting. Reading one or two stories together, singing a quiet song, or talking through the best part of the day allows children to feel emotionally secure and calm.
+    </li>
+    <li>
+      <strong>Stage 4: Sleep cues & lights out (2 minutes).</strong> Establish consistent sleep cues: turn on the sound machine or nightlight, tuck in with a favorite blanket or stuffed animal, give goodnight hugs, and turn lights off.
+    </li>
+  </ol>
+
+  <h2>Tailoring evening routines to your child's age</h2>
+  <ul>
+    <li>
+      <strong>Toddlers & Preschoolers (Ages 2–4):</strong> Keep it short (20–30 minutes) with 4 or 5 visual steps. Focus on physical transitions: toys in the bin, bath, pajamas, teeth, and one board book.
+    </li>
+    <li>
+      <strong>Early Elementary (Ages 5–8):</strong> Encourage independence in hygiene. Children can brush teeth and dress themselves in pajamas, followed by 15–20 minutes of shared or independent chapter book reading.
+    </li>
+    <li>
+      <strong>Pre-Teens (Ages 9–12):</strong> Emphasize healthy boundaries: personal devices stay plugged into a charger outside the bedroom overnight, showers are taken before 8:30 PM, and quiet reading replaces social media.
+    </li>
+  </ul>
+
+  <h2>Related printable tools for morning and family routines</h2>
+  <p>Explore our free companion tools designed for healthy habits and calm homes:</p>
+  <ul>
+    <li>
+      <a href={PAGES.morningRoutineChart.path} class={link}>Morning Routine Chart</a>: picture steps for smooth, punctual school mornings.
+    </li>
+    <li>
+      <a href={PAGES.choreChartMaker.path} class={link}>Chore Chart Maker</a>: weekly household chore schedules with illustrated icons.
+    </li>
+    <li>
+      <a href={PAGES.rewardChartMaker.path} class={link}>Reward Chart Maker</a>: sticker tracks and milestone goals for positive habits.
+    </li>
+    <li>
+      <a href={PAGES.familyChoreChart.path} class={link}>Family Chore Chart</a>: organize daily and weekly responsibilities for the whole household.
+    </li>
+    <li>
+      <a href={PAGES.roommateChoreChart.path} class={link}>Roommate Chore Chart</a>: rotating schedules for shared apartments and houses.
+    </li>
+  </ul>
+</ToolLayout>
+

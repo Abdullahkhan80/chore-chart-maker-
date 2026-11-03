@@ -2,7 +2,7 @@
 // templates shared by the server render (ChoreChartMaker.astro) and the browser
 // (editor.ts), so the first paint and later updates are identical. All user
 // text goes through escapeXml(). No heading tags: labels use <label>/<legend>.
-import { getChoresForAge } from './choreLibrary.ts';
+import { getChoreById, getChoresForAge, type LibraryChore } from './choreLibrary.ts';
 import { AVATAR_ICON_IDS, type IconId } from './icons.ts';
 import { ICON_MANIFEST } from './iconManifest.ts';
 import { KID_COLOR_HEX, escapeXml as esc, orderedDays, renderChartPages } from './renderChart.ts';
@@ -18,6 +18,27 @@ const DAY_FULL: Record<Day, string> = {
   sat: 'Saturday',
   sun: 'Sunday',
 };
+
+export const ADULT_ROTATION_CHORE_IDS: readonly string[] = [
+  'take-out-trash',
+  'clean-bathroom',
+  'vacuum-room',
+  'mop-floor',
+  'wipe-counters',
+  'clean-fridge',
+  'load-dishwasher',
+  'empty-dishwasher',
+  'clean-microwave',
+  'clean-toilet',
+  'scrub-bathtub',
+  'sort-recycling',
+  'wash-windows',
+  'sweep-porch',
+  'bring-in-bins',
+  'mow-lawn',
+  'clean-mirrors',
+  'change-sheets',
+];
 
 /** Preview markup: every chart page, with icons as plain URLs (cached by the browser). */
 export function renderPreviewHtml(config: ChartConfig): string {
@@ -38,18 +59,23 @@ function options(values: readonly { value: string; label: string }[], selected: 
     .join('');
 }
 
-export function kidDisplayName(kid: Kid, index: number): string {
-  return kid.name || `Child ${index + 1}`;
+export function kidDisplayName(kid: Kid, index: number, config?: ChartConfig): string {
+  if (kid.name) return kid.name;
+  if (config?.type === 'rotation') return `Roommate ${index + 1}`;
+  return `Child ${index + 1}`;
 }
 
-export function kidItemHtml(kid: Kid, index: number): string {
+export function kidItemHtml(kid: Kid, index: number, config?: ChartConfig): string {
   const id = `ccm-kid-${index}`;
-  const name = kidDisplayName(kid, index);
-  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span><label class="sr-only" for="${id}-name">Child ${index + 1} name</label><input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div><div class="mt-2 grid grid-cols-3 gap-2"><label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label><label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label><label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label></div></li>`;
+  const isRotation = config?.type === 'rotation';
+  const fallbackLabel = isRotation ? `Roommate ${index + 1}` : `Child ${index + 1}`;
+  const name = kid.name || fallbackLabel;
+  const labelText = isRotation ? `Roommate ${index + 1} name` : `Child ${index + 1} name`;
+  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span><label class="sr-only" for="${id}-name">${labelText}</label><input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div><div class="mt-2 grid grid-cols-3 gap-2"><label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label><label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label><label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label></div></li>`;
 }
 
 export function kidListHtml(config: ChartConfig): string {
-  return config.kids.map(kidItemHtml).join('');
+  return config.kids.map((kid, i) => kidItemHtml(kid, i, config)).join('');
 }
 
 /** One chore row. Controls find their chore through the <li data-index>. */
@@ -62,8 +88,8 @@ export function choreItemHtml(chore: Chore, index: number, config: ChartConfig):
     .join('');
   const assignees =
     config.kids.length > 1
-      ? `<fieldset class="mt-2" data-assignees><legend class="ccm-label">Who does it? <span class="font-normal text-muted">(none = everyone)</span></legend><div class="flex flex-wrap gap-1">${config.kids
-          .map((kid, k) => `<label class="ccm-chip"><input type="checkbox" value="${kid.id}"${chore.assignees.includes(kid.id) ? ' checked' : ''}>${esc(kidDisplayName(kid, k))}</label>`)
+      ? `<fieldset class="mt-2" data-assignees><legend class="ccm-label">Who does this chore? <span class="font-normal text-muted">(leave unselected for everyone)</span></legend><div class="flex flex-wrap gap-1">${config.kids
+          .map((kid, k) => `<label class="ccm-chip"><input type="checkbox" value="${kid.id}"${chore.assignees.includes(kid.id) ? ' checked' : ''}>${esc(kidDisplayName(kid, k, config))}</label>`)
           .join('')}</div></fieldset>`
       : '';
   const allowance = config.allowance.enabled
@@ -84,13 +110,19 @@ export function suggestionAge(config: ChartConfig, fallback = 6): number {
 export function suggestionChipsHtml(age: number, config: ChartConfig, limit = 8): string {
   const existing = new Set(config.chores.map((c) => c.label.toLowerCase()));
   const full = config.chores.length >= LIMITS.maxChores;
-  const chips = getChoresForAge(age)
+  const isRotation = config.type === 'rotation';
+  const candidates: LibraryChore[] = isRotation
+    ? (ADULT_ROTATION_CHORE_IDS.map((id) => getChoreById(id)).filter(Boolean) as LibraryChore[])
+    : getChoresForAge(age).sort((a, b) => b.minAge - a.minAge);
+
+  const chips = candidates
     .filter((c) => !existing.has(c.label.toLowerCase()))
-    .sort((a, b) => b.minAge - a.minAge)
     .slice(0, limit)
     .map(
       (c) =>
         `<button type="button" class="ccm-chip" data-action="add-library-chore" data-chore-id="${c.id}"${full ? ' disabled' : ''}>${iconImg(c.iconId, 24)}<span>${esc(c.label)}</span><span class="sr-only">, add</span></button>`,
     );
-  return chips.length ? chips.join('') : '<p class="text-sm text-muted">All suggestions for this age are on your chart.</p>';
+  return chips.length
+    ? chips.join('')
+    : `<p class="text-sm text-muted">${isRotation ? 'All suggested shared chores are on your chart.' : 'All suggestions for this age are on your chart.'}</p>`;
 }

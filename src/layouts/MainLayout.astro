@@ -18,26 +18,23 @@ interface Props {
 }
 
 const { page, breadcrumbs, jsonLd = [], ogType, wide = false } = Astro.props;
-const trail = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : undefined;
+const homeLabel = page.lang?.startsWith('fr')
+  ? 'Accueil'
+  : page.lang?.startsWith('pt')
+    ? 'Início'
+    : 'Home';
+const trail = breadcrumbs ? [{ name: homeLabel, path: '/' }, ...breadcrumbs] : undefined;
 const structuredData = trail ? [...jsonLd, buildBreadcrumbList(trail)] : jsonLd;
 const ogImagePath = pageOgImagePath(page);
 const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: `${page.h1}: ${SITE_CONFIG.name}` } : undefined;
 ---
 
 <!doctype html>
-<html lang={page.lang ?? 'en'}>
+<html lang={page.lang ?? 'en-US'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preload" href="/fonts/nunito-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Google tag (gtag.js) - non-blocking -->
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-MNZ7RR8HG8');
-    </script>
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MNZ7RR8HG8"></script>
     <SEO
       title={page.title}
       description={page.description}
@@ -45,15 +42,16 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
       noindex={page.noindex}
       ogType={ogType}
       ogImage={ogImage}
+      locale={page.locale ?? 'en_US'}
       alternates={page.alternates}
       article={ogType === 'article' ? { published: page.published, modified: page.lastmod } : undefined}
+      datePublished={page.published}
+      dateModified={page.lastmod}
       jsonLd={structuredData}
     />
     <meta name="theme-color" content={SITE_CONFIG.themeColor.light} media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content={SITE_CONFIG.themeColor.dark} media="(prefers-color-scheme: dark)" />
-    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

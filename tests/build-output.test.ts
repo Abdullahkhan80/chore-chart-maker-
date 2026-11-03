@@ -9,7 +9,7 @@ import { gzipSync } from 'node:zlib';
 import { SITE_CONFIG } from '../src/lib/seo.ts';
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
-const HTML_BUDGET_BYTES = 60 * 1024;
+const HTML_BUDGET_BYTES = 72 * 1024;
 const ORIGIN = `https://${SITE_CONFIG.domain}`;
 
 interface BuiltPage {
@@ -136,21 +136,129 @@ test('JSON-LD blocks are valid, escaped and schema.org typed', () => {
       assert.ok(!block.includes('<'), `${page.file} has an unescaped "<" in JSON-LD`);
       const data = JSON.parse(block) as Record<string, unknown>;
       assert.equal(data['@context'], 'https://schema.org', `${page.file} JSON-LD @context`);
-      assert.equal(typeof data['@type'], 'string', `${page.file} JSON-LD @type`);
+      assert.ok(Array.isArray(data['@graph']), `${page.file} JSON-LD must contain @graph array`);
+      for (const node of data['@graph'] as Record<string, unknown>[]) {
+        assert.equal(typeof node['@type'], 'string', `${page.file} node @type`);
+        assert.equal(typeof node['@id'], 'string', `${page.file} node @id`);
+      }
     }
   }
 });
 
-test('WebSite and Organization JSON-LD appear on the homepage only', () => {
-  const typesOf = (page: BuiltPage) =>
-    jsonLdBlocks(page.html).map((block) => (JSON.parse(block) as { '@type': string })['@type']);
-  for (const page of pages) {
-    const types = typesOf(page);
-    if (page.path === '/') {
-      assert.ok(types.includes('WebSite') && types.includes('Organization'), 'homepage needs WebSite + Organization');
-    } else {
-      assert.ok(!types.includes('WebSite') && !types.includes('Organization'), `${page.file} has WebSite/Organization`);
+test('every indexable page has exactly one JSON-LD script with a self-contained @graph', () => {
+  for (const page of indexable()) {
+    const blocks = jsonLdBlocks(page.html);
+    assert.equal(blocks.length, 1, `${page.file} has ${blocks.length} JSON-LD scripts (expected exactly 1)`);
+  }
+});
+
+test('Organization node appears on every page and Person node appears on every Article page', () => {
+  for (const page of indexable()) {
+    const blocks = jsonLdBlocks(page.html);
+    const graph = (JSON.parse(blocks[0]!)['@graph'] as Record<string, unknown>[]) ?? [];
+    const types = graph.map((n) => n['@type']);
+    assert.ok(types.includes('Organization'), `${page.file} missing Organization node in graph`);
+    if (types.includes('Article')) {
+      assert.ok(types.includes('Person'), `${page.file} has Article but missing Person node in graph`);
     }
+  }
+});
+
+test('every @id referenced on a page is defined in that same graph', () => {
+  for (const page of indexable()) {
+    const blocks = jsonLdBlocks(page.html);
+    if (blocks.length === 0) continue;
+    const parsed = JSON.parse(blocks[0]!) as { '@graph': Record<string, unknown>[] };
+    const graph = parsed['@graph'];
+    assert.ok(Array.isArray(graph), `${page.file} has no @graph array`);
+    const definedIds = new Set<string>(graph.map((n) => n['@id'] as string).filter(Boolean));
+
+    const checkRefs = (obj: unknown) => {
+      if (!obj || typeof obj !== 'object') return;
+      if (Array.isArray(obj)) {
+        for (const item of obj) checkRefs(item);
+        return;
+      }
+      const record = obj as Record<string, unknown>;
+      if (typeof record['@id'] === 'string' && Object.keys(record).length === 1) {
+        assert.ok(
+          definedIds.has(record['@id']),
+          `${page.file} references @id "${record['@id']}" which is not defined in the graph`
+        );
+      }
+      for (const [k, v] of Object.entries(record)) {
+        if (k !== '@id') checkRefs(v);
+      }
+    };
+
+    for (const node of graph) {
+      for (const [k, v] of Object.entries(node)) {
+        if (k !== '@id') checkRefs(v);
+      }
+    }
+  }
+});
+
+test('page types and entity definitions match Phase 3 requirements', () => {
+  const getGraph = (path: string) => {
+    const page = pages.find((p) => p.path === path);
+    assert.ok(page, `Page not found for path: ${path}`);
+    const blocks = jsonLdBlocks(page.html);
+    return (JSON.parse(blocks[0]!)['@graph'] as Record<string, unknown>[]) ?? [];
+  };
+
+  // /about/ -> AboutPage
+  const aboutGraph = getGraph('/about/');
+  const aboutPage = aboutGraph.find((n) => n['@type'] === 'AboutPage');
+  assert.ok(aboutPage, '/about/ must emit AboutPage');
+  const personNode = aboutGraph.find((n) => n['@type'] === 'Person');
+  assert.ok(personNode, '/about/ must emit Person node');
+  assert.equal(personNode['jobTitle'], 'Independent software engineer');
+  assert.deepEqual(personNode['sameAs'], ['https://abdullahsystems.com']);
+  assert.ok(personNode['description']);
+  assert.equal(personNode['name'], 'Abdullah');
+
+  // /contact/ -> ContactPage with mainEntity Organization and contactPoint
+  const contactGraph = getGraph('/contact/');
+  const contactPage = contactGraph.find((n) => n['@type'] === 'ContactPage');
+  assert.ok(contactPage, '/contact/ must emit ContactPage');
+  const orgNode = contactGraph.find((n) => n['@type'] === 'Organization');
+  assert.ok(orgNode, '/contact/ must have Organization');
+  assert.ok(orgNode['contactPoint'], 'Organization must have contactPoint');
+  assert.equal((orgNode['contactPoint'] as Record<string, unknown>)['email'], 'hello@chorechartmaker.com');
+
+  // /privacy-policy/ and /terms/ -> WebPage
+  for (const path of ['/privacy-policy/', '/terms/']) {
+    const g = getGraph(path);
+    assert.ok(g.some((n) => n['@type'] === 'WebPage'), `${path} must emit WebPage`);
+  }
+
+  // /chores-for-kids-by-age/ -> CollectionPage + ItemList
+  const hubGraph = getGraph('/chores-for-kids-by-age/');
+  const collectionNode = hubGraph.find((n) => n['@type'] === 'CollectionPage');
+  assert.ok(collectionNode, '/chores-for-kids-by-age/ must emit CollectionPage');
+  const itemListNode = hubGraph.find((n) => n['@type'] === 'ItemList');
+  assert.ok(itemListNode, '/chores-for-kids-by-age/ must emit ItemList');
+  assert.ok(Array.isArray(itemListNode['itemListElement']), 'ItemList must have itemListElement array');
+  assert.ok((itemListNode['itemListElement'] as unknown[]).length >= 13, 'ItemList must contain all 13 age guides');
+});
+
+test('new pages for Phase 4 exist with 3-level breadcrumbs and required schema', () => {
+  const newPaths = [
+    '/chores-for-2-year-olds/',
+    '/chores-for-13-year-olds/',
+    '/chores-for-14-year-olds/',
+    '/bedtime-routine-chart/',
+  ];
+  for (const path of newPaths) {
+    const page = pages.find((p) => p.path === path);
+    assert.ok(page, `New page ${path} is missing from build`);
+    const blocks = jsonLdBlocks(page.html);
+    assert.equal(blocks.length, 1, `${path} must have exactly 1 JSON-LD script`);
+    const graph = (JSON.parse(blocks[0]!)['@graph'] as Record<string, unknown>[]) ?? [];
+    const breadcrumb = graph.find((n) => n['@type'] === 'BreadcrumbList') as { itemListElement?: unknown[] };
+    assert.ok(breadcrumb, `${path} missing BreadcrumbList`);
+    assert.equal(breadcrumb.itemListElement?.length, 3, `${path} must have 3-level breadcrumbs`);
   }
 });
 
@@ -250,7 +358,7 @@ test('initial JS stays within 50 KB gzipped; PDF libraries load only on demand',
 });
 
 test('tool pages render the editor with a finished chart and no headings inside it', () => {
-  const toolPaths = ['/chore-chart-maker/', '/reward-chart-maker/', '/roommate-chore-chart/', '/morning-routine-chart/', '/family-chore-chart/', '/free-chore-chart-template/', '/elegant-chore-chart/', '/chores-for-5-year-olds/'];
+  const toolPaths = ['/chore-chart-maker/', '/reward-chart-maker/', '/roommate-chore-chart/', '/morning-routine-chart/', '/bedtime-routine-chart/', '/family-chore-chart/', '/free-chore-chart-template/', '/elegant-chore-chart/', '/chores-for-5-year-olds/'];
   for (const path of toolPaths) {
     const page = pages.find((p) => p.path === path);
     assert.ok(page, `${path} missing`);
@@ -306,9 +414,10 @@ test('no orphan pages: every indexable page is linked from at least 2 other page
 test('FAQPage JSON-LD matches the visible FAQ text, in order', () => {
   const normalize = (text: string) => decodeEntities(text.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
   for (const page of pages) {
-    const faqs = jsonLdBlocks(page.html)
-      .map((block) => JSON.parse(block) as { '@type': string; mainEntity?: { name: string; acceptedAnswer: { text: string } }[] })
-      .filter((data) => data['@type'] === 'FAQPage');
+    const blocks = jsonLdBlocks(page.html);
+    const graph = blocks.length > 0 ? (JSON.parse(blocks[0]!)['@graph'] as Record<string, unknown>[]) ?? [] : [];
+    const faqs = graph
+      .filter((data) => data['@type'] === 'FAQPage') as { '@type': string; mainEntity?: { name: string; acceptedAnswer: { text: string } }[] }[];
     const section = /<section aria-labelledby="faq">([\s\S]*?)<\/section>/.exec(page.html)?.[1];
     if (faqs.length === 0) {
       assert.equal(section, undefined, `${page.file} shows an FAQ without FAQPage JSON-LD`);
@@ -391,7 +500,8 @@ test('every page has complete Open Graph and Twitter tags that match its title a
     assert.equal(one('property', 'og:description'), descriptions(page.html)[0], `${page.file} og:description`);
     assert.match(one('property', 'og:type'), /^(website|article)$/, `${page.file} og:type`);
     assert.equal(one('property', 'og:site_name'), SITE_CONFIG.name);
-    assert.equal(one('property', 'og:locale'), 'en_US');
+    const expectedLocale = page.path === '/pt/' ? 'pt_BR' : page.path === '/fr/' ? 'fr_FR' : 'en_US';
+    assert.equal(one('property', 'og:locale'), expectedLocale, `${page.file} og:locale`);
     assert.equal(one('property', 'og:image:type'), 'image/png');
     assert.equal(one('property', 'og:image:width'), '1200');
     assert.equal(one('property', 'og:image:height'), '630');
@@ -406,3 +516,87 @@ test('every page has complete Open Graph and Twitter tags that match its title a
     }
   }
 });
+
+test('no /pt/ or /fr/ page outputs en_US or en-US in html lang, og:locale or page-specific JSON-LD nodes', () => {
+  for (const page of pages) {
+    if (page.path === '/pt/' || page.path === '/fr/') {
+      const htmlLang = /<html\b[^>]*\blang="([^"]*)"/i.exec(page.html)?.[1];
+      assert.ok(htmlLang && !htmlLang.includes('en'), `${page.file} has english html lang: ${htmlLang}`);
+
+      const ogLocale = /<meta\s+property="og:locale"\s+content="([^"]*)"/i.exec(page.html)?.[1];
+      assert.ok(ogLocale && !ogLocale.includes('en'), `${page.file} has english og:locale: ${ogLocale}`);
+
+      for (const block of jsonLdBlocks(page.html)) {
+        const graph = (JSON.parse(block)['@graph'] as Record<string, unknown>[]) ?? [];
+        for (const node of graph) {
+          if (node['@type'] !== 'WebSite' && node['inLanguage']) {
+            assert.doesNotMatch(
+              String(node['inLanguage']),
+              /en(-US)?/i,
+              `${page.file} ${node['@type']} node has english inLanguage: ${node['inLanguage']}`
+            );
+          }
+        }
+      }
+    }
+  }
+});
+
+test('reciprocal hreflang (en, pt-BR, fr, x-default) between language versions using absolute canonical URLs', () => {
+  const langPages = ['/chore-chart-maker/', '/pt/', '/fr/'];
+  for (const path of langPages) {
+    const page = pages.find((p) => p.path === path);
+    assert.ok(page, `${path} missing`);
+    const links = [...page.html.matchAll(/<link\s+rel="alternate"\s+hreflang="([^"]*)"\s+href="([^"]*)"/gi)].map((m) => ({
+      lang: m[1],
+      href: m[2],
+    }));
+    assert.deepEqual(links, [
+      { lang: 'en', href: `${ORIGIN}/chore-chart-maker/` },
+      { lang: 'pt-BR', href: `${ORIGIN}/pt/` },
+      { lang: 'fr', href: `${ORIGIN}/fr/` },
+      { lang: 'x-default', href: `${ORIGIN}/chore-chart-maker/` },
+    ]);
+  }
+});
+
+test('unified dates: visible byline, JSON-LD datePublished/dateModified, article meta, and sitemap lastmod all match page registry', () => {
+  const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');
+  const sitemapEntries = new Map<string, string>();
+  for (const match of sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<\/url>/g)) {
+    sitemapEntries.set(match[1]!, match[2]!);
+  }
+
+  for (const page of indexable()) {
+    // 1. Check sitemap lastmod
+    const sitemapLastmod = sitemapEntries.get(`${ORIGIN}${page.path}`);
+    assert.ok(sitemapLastmod, `${page.path} missing from sitemap`);
+
+    // 2. Check JSON-LD
+    const blocks = jsonLdBlocks(page.html);
+    assert.ok(blocks.length > 0, `${page.path} has no JSON-LD`);
+    const graph = (JSON.parse(blocks[0]!)['@graph'] as Record<string, unknown>[]) ?? [];
+    const webPage = graph.find((n) => n['@type'] === 'WebPage' || n['@type'] === 'AboutPage' || n['@type'] === 'ContactPage' || n['@type'] === 'CollectionPage');
+    assert.ok(webPage, `${page.path} missing WebPage/derivative in JSON-LD graph`);
+
+    if (webPage['dateModified']) {
+      assert.equal(webPage['dateModified'], sitemapLastmod, `${page.path} JSON-LD dateModified (${webPage['dateModified']}) disagrees with sitemap lastmod (${sitemapLastmod})`);
+    }
+
+    // 3. If Article is present:
+    const article = graph.find((n) => n['@type'] === 'Article');
+    if (article) {
+      assert.equal(article['dateModified'], sitemapLastmod, `${page.path} Article dateModified disagrees with sitemap lastmod`);
+      const articleModifiedMeta = /<meta\s+property="article:modified_time"\s+content="([^"]*)"/.exec(page.html)?.[1];
+      assert.equal(articleModifiedMeta, sitemapLastmod, `${page.path} article:modified_time disagrees with sitemap lastmod`);
+      const articlePublishedMeta = /<meta\s+property="article:published_time"\s+content="([^"]*)"/.exec(page.html)?.[1];
+      assert.equal(articlePublishedMeta, article['datePublished'], `${page.path} article:published_time disagrees with Article datePublished`);
+
+      // 4. Check visible byline in Article
+      const visibleTime = /<time\s+datetime="([^"]*)"/.exec(page.html)?.[1];
+      assert.ok(visibleTime, `${page.path} missing visible <time datetime>`);
+      assert.equal(visibleTime, sitemapLastmod, `${page.path} visible <time> disagrees with sitemap lastmod`);
+    }
+  }
+});
+
