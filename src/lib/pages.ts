@@ -85,6 +85,7 @@ export const PAGES = {
     h1: 'Reward Chart Maker',
     description:
       'Build a free printable reward chart with sticker boxes, custom goals and rewards for kids. Print on Letter or A4. No sign-up, and nothing you type is uploaded.',
+    lastmod: '2026-11-04',
   }),
   choresByAge: page({
     path: '/chores-for-kids-by-age/',
@@ -93,7 +94,7 @@ export const PAGES = {
     h1: 'Age-appropriate chores for kids, by age',
     description:
       'A practical list of age-appropriate chores for kids from 2 to 14, with what to expect at each age and tips to get started. Turn any list into a printable chart.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   roommateChoreChart: page({
     path: '/roommate-chore-chart/',
@@ -102,7 +103,7 @@ export const PAGES = {
     h1: 'Roommate chore chart maker',
     description:
       'Use this free roommate chore chart maker to split housework fairly. Rotate chores weekly, add everyone in the house, then print or share it. No sign-up needed.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   morningRoutineChart: page({
     path: '/morning-routine-chart/',
