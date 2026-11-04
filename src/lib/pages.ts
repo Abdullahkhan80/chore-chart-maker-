@@ -220,7 +220,7 @@ export function agePage(age: number): PageMeta {
     h1: `Chores for ${age}-year-olds`,
     description: `Age-appropriate chores for ${age}-year-olds, with daily and weekly ideas, tips for teaching each job, and a free printable chore chart you can customize.`,
     published: isNew ? DEPLOY_DATE : LAUNCH,
-    lastmod: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11].includes(age) ? '2026-11-04' : DEPLOY_DATE,
+    lastmod: '2026-11-04',
   });
 }
 
