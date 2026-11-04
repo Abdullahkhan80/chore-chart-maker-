@@ -28,15 +28,15 @@ Guidance for all work in this repo. Read it before every change.
 | `src/pages/` | Routes, one directory per URL. |
 | `src/layouts/`, `src/components/` | Shared shell and UI. |
 | `public/` | Static assets: icons as individual files, the self-hosted font. |
-| `scripts/` | One-off asset generators: `fetch-icons.mjs` (Fluent Emoji → `public/icons/` + generated `src/lib/iconManifest.ts`), `generate-icons.mjs` (favicons, OG image). |
+| `scripts/` | One-off asset generators: `fetch-icons.mjs` (Fluent Emoji → `public/icons/` + generated `src/lib/iconManifest.ts`), `generate-icons.mjs` (favicons, default OG image), `generate-og-images.mjs` (per-page 1200×630 OG images → `public/og/`; re-run after changing a page H1 or preset). |
 | `tests/*.test.ts` | Node test runner tests: logic plus build-output budget/SEO checks. |
 
 ## Privacy invariant (non-negotiable)
 
 - Kids' names, chores and chart content **never leave the browser**. There is no backend and there are no accounts.
 - Chart state lives in `localStorage` and can be shared through the **URL hash**. Never put it in the query string, because the hash is never sent to the server.
-- Analytics receive **categorical events only** (e.g. `chart_type`, `export_format`), never user-entered text.
-- No third-party scripts that could read page content.
+- No third-party scripts, tracking cookies, or external analytics (zero trackers). Internal event layer is categorical only and transport is disconnected.
+- All fonts, icons and scripts are self-hosted from our own domain.
 
 ## Performance budget
 
@@ -51,15 +51,17 @@ Enforce these with tests where possible.
 
 **Append-only lists:** share-link hashes encode icons, themes and other enums by index, so never reorder or remove entries in `src/lib/icons.ts` or the enum arrays in `src/lib/types.ts` once released. Themes must keep every text/background pair at WCAG AA (tested).
 
-## SEO rules
+## SEO & Content rules
 
 - Exactly **one `<h1>`** per page.
 - Unique `<title>` (**≤ 60 chars**) and meta description (**140–160 chars**) on every page.
 - A self-referencing **https canonical with a trailing slash**.
 - Tool UI must **not** use `h1`–`h6` for control labels. Use `<label>`, `<legend>` or styled text instead.
 - Every page is in the sitemap with `lastmod`.
-- JSON-LD comes only from **shared builders**. Never hand-write it per page.
+- JSON-LD comes only from **shared builders** in `src/lib/seo.ts`. Never hand-write it per page.
 - No fake reviews or ratings, no trademarked characters, no medical claims.
+- **Date registry:** all dates come from the single registry in `src/lib/pages.ts`: visible byline, JSON-LD `datePublished`/`dateModified`, `article:*` meta, and sitemap `lastmod` must strictly agree.
+- **Content depth:** answer the primary query within the first 100 words. Provide specific, practical guidance with no filler, no duplicate paragraphs across pages, and no invented statistics or medical claims. Age guides include how-to-teach notes, weekly schedule HTML tables, supervision/safety guidelines, common mistakes, and visible FAQs matching `buildFaqPage` JSON-LD.
 
 ## URL map (v1)
 
@@ -91,7 +93,7 @@ A change is done only when all of these hold:
 1. `npm run build` passes.
 2. `npm test` passes.
 3. `npm run check` passes.
-4. No page exceeds the 72 KB HTML budget.
+4. No page exceeds the 72 KB raw / 20 KB gzipped HTML budget.
 
 ## Development
 

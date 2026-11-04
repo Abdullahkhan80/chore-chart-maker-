@@ -40,7 +40,7 @@ export const PAGES = {
   home: page({
     path: '/',
     label: 'Home',
-    title: 'Free Printable Chore Charts | Chore Chart Maker',
+    title: 'Free Printable Chore Charts for Kids | Chore Chart Maker',
     h1: 'Free Printable Chore Charts for Every Family',
     description:
       'Browse free printable chore charts, reward charts and routine charts for kids, families and roommates. Customise in your browser, no sign-up, print in minutes.',

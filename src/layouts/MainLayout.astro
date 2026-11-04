@@ -73,6 +73,6 @@ const ogImage = ogImagePath ? { ...SITE_CONFIG.ogImage, path: ogImagePath, alt: 
       {trail && <Breadcrumbs items={trail} />}
       <slot />
     </main>
-    <Footer />
+    <Footer currentPath={page.path} lang={page.lang} />
   </body>
 </html>
