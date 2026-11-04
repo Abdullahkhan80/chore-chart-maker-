@@ -757,144 +757,303 @@ const AGE_CONTENT: Record<number, AgeData> = {
 
   9: {
     intro:
-      'Nine-year-olds can coordinate responsibilities around school and extracurriculars. They appreciate being treated as capable contributors whose work has visible value to the entire household.',
+      'Nine-year-olds are entering late childhood with expanding logical abilities, strong reading fluency, and a growing desire to be treated as capable household partners. Children at age nine can coordinate chores around school commitments, sports, and hobbies. They are ready to manage multi-step household cleaning jobs independently, follow written recipes with supervision, and operate standard appliances. Establishing an organized routine with a printable chore chart helps nine-year-olds take authentic responsibility for their living environment, building life skills and reducing daily friction over homework and housework.',
     whatTheyCanDo:
-      'A 9-year-old can plan several days ahead, coordinate chores around extracurricular activities, prepare simple recipes with supervision, and complete complex household cleaning independently.',
+      'Most nine-year-olds can follow a comprehensive daily checklist without step-by-step supervision. They can vacuum entire living areas, wash and fold their own laundry, prepare simple warm meals on the stovetop with an adult nearby, clean bathroom surfaces thoroughly, and walk family pets around the block. They can stay focused on a task for fifteen to twenty-five minutes when expectations are clear.',
     chores: [
-      { name: 'Deep clean a bathroom', desc: 'Scrub the sink, toilet, tub, and floor thoroughly to an adult standard.' },
-      { name: 'Vacuum entire floors', desc: 'Vacuum living areas and hallways in an organized, methodical sequence.' },
-      { name: 'Run complete laundry cycles', desc: 'Manage washing, drying, folding, and putting away personal laundry.' },
-      { name: 'Cook from written recipes', desc: 'Follow simple recipe instructions for pasta dishes, quesadillas, or salads with an adult nearby.' },
-      { name: 'Assist with younger sibling care', desc: 'Supervise younger siblings during play or assist with simple homework.' },
-      { name: 'Yard and garden upkeep', desc: 'Water plants, sweep sidewalks, clear dead leaves, and tidy outdoor toys.' },
+      {
+        name: 'Deep-clean personal bedroom and study area',
+        desc: 'Dust bookshelves, wipe down the study desk, vacuum the carpet, and organize school supplies neatly.',
+        howToTeach:
+          'Teach them a top-to-bottom cleaning strategy: dust high shelves first so debris falls down, wipe the desk next, clear the floor, and finish by vacuuming out to the doorway.',
+      },
+      {
+        name: 'Sort, wash, and dry personal laundry loads',
+        desc: 'Check clothing pockets, measure liquid or powder detergent, select washer cycles, and transfer damp clothes to the dryer.',
+        howToTeach:
+          'Walk through detergent dosage together, emphasizing that more soap does not equal cleaner clothes. Show them how to clean the lint trap before every drying cycle.',
+      },
+      {
+        name: 'Prepare simple stovetop meals with an adult in the kitchen',
+        desc: 'Cook scrambled eggs, grilled cheese sandwiches, quesadillas, or warm pasta bowls with adult supervision.',
+        howToTeach:
+          'Emphasize heat safety first: always turn skillet handles inward over the counter, use dry silicone oven mitts, and never leave an active stove unattended.',
+      },
+      {
+        name: 'Vacuum high-traffic family living rooms',
+        desc: 'Clear floor obstacles, move light chairs, and vacuum in steady overlapping paths across rugs and hardwood.',
+        howToTeach:
+          'Demonstrate checking the floor for coins, hair ties, and cords before turning on the vacuum. Show them how to maneuver around sofa corners and empty the canister into the outdoor bin.',
+      },
+      {
+        name: 'Wash, dry, and put away hand-wash dishes',
+        desc: 'Wash pots, baking pans, and delicate kitchenware with warm soapy water and dry them thoroughly.',
+        howToTeach:
+          'Show them how to soak stubborn baked-on pans with warm soapy water before scrubbing with a non-scratch sponge. Teach them to wipe pans dry with a tea towel before stacking.',
+      },
+      {
+        name: 'Walk the family dog on a neighborhood route',
+        desc: 'Leash the dog securely, carry waste bags, walk on sidewalks, and clean up responsibly along the way.',
+        howToTeach:
+          'Practice walking together on quiet neighborhood streets. Emphasize stopping at every driveway, keeping a firm two-handed grip on the leash, and giving other dogs plenty of space.',
+      },
     ],
     schedule: {
-      morning: 'Pack personal school bag, make bed, and take personal dishes to the sink.',
-      afternoon: 'Help prepare simple dinner sides or salad, and clear the table after dinner.',
-      weekend: 'Wash, dry, and fold personal clothing batches and vacuum the family living room.',
+      morning: 'Make bed, tidy desk, complete hygiene routine, and pack backpack with checked homework.',
+      afternoon: 'Unload clean dishwasher, wipe kitchen island, and walk or play with family pet.',
+      weekend: 'Wash and fold personal clothing batches and vacuum family room rugs.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Make bed & pack backpack', afternoon: 'Unload dishwasher top rack', evening: 'Wipe kitchen island clean' },
+      { day: 'Tuesday', morning: 'Make bed & hygiene check', afternoon: 'Fold personal laundry load', evening: 'Help chop salad vegetables' },
+      { day: 'Wednesday', morning: 'Make bed & pack backpack', afternoon: 'Vacuum bedroom floor', evening: 'Clear and wipe dinner table' },
+      { day: 'Thursday', morning: 'Make bed & brush teeth', afternoon: 'Walk family dog on sidewalk', evening: 'Sort clean socks & underwear' },
+      { day: 'Friday', morning: 'Make bed & pack backpack', afternoon: 'Unpack Friday school folder', evening: 'Prep pizza toppings with parent' },
+      { day: 'Saturday', morning: 'Strip bedroom bed sheets', afternoon: 'Vacuum family room rug', evening: 'Help wash cooking pans' },
+      { day: 'Sunday', morning: 'Put fresh sheets on mattress', afternoon: 'Wash & dry school clothes', evening: 'Review week schedule on chart' },
+    ],
     howToTeach: {
-      step1: 'Involve them in planning: let them choose which days they handle laundry or cooking.',
-      step2: 'Teach recipe reading and knife safety (claw grip) under close adult supervision.',
-      step3: 'Inspect the final outcome together and praise self-directed problem-solving.',
+      step1: 'Involve them in scheduling: sit down together on Sunday to negotiate which days chores will happen around sports and extracurricular activities.',
+      step2: 'Teach kitchen and tool safety explicitly: demonstrate the flat-palm cutting grip and stovetop pan handling before stepping back to observe.',
+      step3: 'Review the finished work together at agreed checkpoints: praise self-directed problem-solving and discuss any adjustments constructively.',
     },
     safetyNote:
-      'Cooking must be done with an adult nearby. Use child-safe chef knives, teach stove burner safety, and ensure chemical cleaners are never mixed. Keep lawn equipment and power tools strictly off-limits.',
+      'Cooking at age nine always requires an adult present in the room. Review kitchen fire protocols, turning stove handles inward, and using dry heat-resistant mitts. Sharp chef knives and peelers require close supervision and proper finger curling. Power lawn equipment, hedge trimmers, ladders, and caustic chemical drain cleaners remain strictly off-limits.',
+    commonMistakes: [
+      'Nagging about exact timing instead of setting deadlines: Saying "do your chores now" breeds resentment. Agreeing on a deadline like "everything done before 5 PM dinner" gives nine-year-olds the autonomy they crave.',
+      'Assuming they remember every multi-step sequence: Even capable nine-year-olds forget steps when distracted by school or friends. Keep a written checklist visible in the kitchen or bedroom.',
+      'Criticizing honest mistakes harshly: Spilling a cup of detergent or burning a piece of toast is part of learning. Focus on the clean-up steps rather than expressing annoyance.',
+      'Dropping all expectations during busy school weeks: Completely abandoning chores during busy periods creates inconsistency. Scale down to five-minute essentials instead of canceling routines.',
+    ],
     tips: [
-      'Include them when creating the family chore schedule to ensure genuine buy-in.',
-      'Inspect the final result rather than hovering over the process as they work.',
-      'Give genuine, adult-level praise when they take initiative without being asked.',
+      'Allow them to listen to audiobooks, educational podcasts, or favorite music while cleaning to make maintenance enjoyable.',
+      'Give them ownership over a specific household domain (like "Lead Dishwasher Specialist") to foster genuine accountability.',
+      'Praise their resourcefulness and initiative when they notice a messy area and take action without being prompted.',
     ],
     notYet:
-      'Staying home alone for extended periods, operating gas mowers, or handling household finances.',
+      'Operating gas or electric lawn mowers, staying home alone for hours, using heavy power tools, or handling chemical drain cleaners.',
     faqs: [
       {
-        q: 'How do I handle a 9-year-old who procrastinates on chores?',
-        a: 'Agree on a firm deadline rather than a specific time: "As long as your room and laundry are done by 6 PM Sunday, you manage the timing."',
+        q: 'How do I handle a 9-year-old who constantly puts off their chores?',
+        a: 'Shift from micromanaging start times to agreeing on firm completion deadlines. For example, establish: "As long as your room is vacuumed and laundry is folded by 5 PM, you decide when to start." When privileges depend on meeting the deadline, procrastination drops significantly.',
       },
       {
-        q: 'Can 9-year-olds do their own laundry completely?',
-        a: 'Yes! Measure detergent amounts together, explain washer settings, and let them take full ownership of their clothing hamper.',
+        q: 'Can a 9-year-old do their own laundry completely independently?',
+        a: 'Yes, with initial guidance. Walk through sorting colors, measuring detergent, selecting washer cycles, and cleaning the lint trap together two or three times. Once they master the machine controls, nine-year-olds can take full ownership of their laundry hamper.',
       },
       {
-        q: 'What if their standard of cleaning is lower than mine?',
-        a: 'Teach specifically: show how to sweep corners or wipe behind faucets. Focus on improvement rather than demanding adult perfection immediately.',
+        q: 'What kitchen tasks can a 9-year-old handle safely?',
+        a: 'With an adult nearby, nine-year-olds can safely prepare scrambled eggs, boil pasta, make toasted sandwiches, blend smoothies, rinse produce, and peel carrots using a swivel peeler. Always supervise heat sources and cutting tools.',
+      },
+      {
+        q: 'How many daily chores should a 9-year-old have?',
+        a: 'Aim for three daily routine tasks taking about fifteen minutes total, plus one larger project on the weekend (like doing personal laundry or deep-vacuuming a room). This balance teaches responsibility without crowding out homework and sports.',
+      },
+      {
+        q: 'Should 9-year-olds receive an allowance tied to their chores?',
+        a: 'Many families keep basic everyday household maintenance (dishes, room, personal laundry) unpaid as shared family teamwork. Offering pocket money for optional bonus chores (like detailing car mats or clearing garden beds) is a great way to teach money management.',
       },
     ],
   },
 
   10: {
     intro:
-      'Ten-year-olds are entering the pre-teen years with expanding critical thinking skills. They can understand household logistics, manage weekly deadlines, and execute complex multi-step responsibilities with high consistency.',
+      'Ten-year-olds are stepping into the pre-teen years with developing critical thinking, greater physical endurance, and a strong sense of personal identity. At age ten, children can understand household logistics, grasp the financial and time costs of running a home, and execute complex multi-step projects from start to finish. Establishing consistent chore expectations with a customizable printable chart helps ten-year-olds build executive function, master self-care habits, and gain the self-assurance that comes with genuine domestic competence.',
     whatTheyCanDo:
-      'A 10-year-old can organize their daily schedule, balance chores with school deadlines, prepare full simple family dinners from recipes, and execute multi-step cleaning jobs independently.',
+      'Most ten-year-olds can prepare simple, complete meals from written recipes, clean kitchen counters and stovetops after cooking, manage their entire laundry cycle independently, weed garden beds with hand tools, and detail car interiors with a vacuum. They can manage weekly schedules, balance chores with school deadlines, and sustain focused effort for twenty to thirty minutes.',
     chores: [
-      { name: 'Cook family dinners from recipes', desc: 'Prepare simple balanced dinners like pasta, skillet meals, or tacos with an adult nearby.' },
-      { name: 'Deep clean kitchen surfaces', desc: 'Clean stovetop, wipe appliance fronts, sanitize counters, and mop floors.' },
-      { name: 'Manage personal laundry entirely', desc: 'Wash, dry, fold, and store clothes each week independently.' },
-      { name: 'Yard and garden maintenance', desc: 'Weed garden beds, sweep walks, rake leaves, and trim shrubs with manual tools.' },
-      { name: 'Detail car interiors', desc: 'Vacuum seats and floor mats, clean windows, and empty car trash.' },
-      { name: 'Shop with a grocery list', desc: 'Find pantry items, compare prices, and check items off the list.' },
+      {
+        name: 'Cook a complete family dinner with supervision',
+        desc: 'Follow a written recipe to prepare simple family meals like tacos, baked pasta, skillet chicken, or homemade soup.',
+        howToTeach:
+          'Pick a recipe together on Sunday, check the pantry for ingredients, and prep everything on the counter before turning on the heat. Guide their seasoning choices and supervise heat management.',
+      },
+      {
+        name: 'Deep-clean kitchen counters and wipe appliance fronts',
+        desc: 'Clear food prep areas, sanitize surfaces with a mild cleaner, wipe down microwave doors, and clean stovetops.',
+        howToTeach:
+          'Teach them to move items off the counter first rather than wiping around them. Show how to use a microfiber cloth with circular strokes and dry surfaces to prevent streaks on stainless steel.',
+      },
+      {
+        name: 'Manage weekly clothing laundry from wash to drawer',
+        desc: 'Wash, dry, fold, and organize personal clothes and sports uniforms into dressers and closets each week.',
+        howToTeach:
+          'Establish a set laundry day each week so clothes do not pile up. Show them how to hang collared shirts on hangers and roll socks to save drawer space.',
+      },
+      {
+        name: 'Maintain garden beds and outdoor living spaces',
+        desc: 'Pull weeds by the roots, sweep patio pavers, water garden beds, and stow outdoor cushions or toys.',
+        howToTeach:
+          'Show them how to grip weeds near the base of the stem and pull slowly so the root comes out cleanly. Provide garden gloves and a bucket for collecting pulled weeds.',
+      },
+      {
+        name: 'Clean and detail family car interiors',
+        desc: 'Remove trash, vacuum floor mats and seat crevices, and wipe down interior door panels and cup holders.',
+        howToTeach:
+          'Take out removable floor mats first and shake them out on the driveway. Show them how to use brush vacuum attachments in seat seams and wipe cup holders with a damp cloth.',
+      },
+      {
+        name: 'Audit pantry supplies and compile a grocery list',
+        desc: 'Check milk, eggs, bread, and snack levels, write down missing staples, and assist during shopping trips.',
+        howToTeach:
+          'Post a magnetic notepad on the refrigerator. Teach them to check expiration dates and note when an item has one serving remaining before it runs completely empty.',
+      },
     ],
     schedule: {
-      morning: 'Personal hygiene, bed made, and backpack packed with checked homework.',
-      afternoon: 'Wipe kitchen counters after cooking or unpack groceries after school.',
-      weekend: 'Wash and fold personal laundry, vacuum family room, and help with yard maintenance.',
+      morning: 'Personal hygiene checklist, make bed neatly, and verify homework and sports gear are packed.',
+      afternoon: 'Unpack lunchbox, wipe down kitchen counters, and complete 15-minute daily chore block.',
+      weekend: 'Complete personal laundry batch, vacuum living room, and assist with yard or dinner prep.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Make bed & pack school gear', afternoon: 'Unpack backpack & snack', evening: 'Wipe kitchen counters after dinner' },
+      { day: 'Tuesday', morning: 'Make bed & hygiene checklist', afternoon: 'Fold clean laundry batch', evening: 'Empty kitchen recycling bin' },
+      { day: 'Wednesday', morning: 'Make bed & pack sports bag', afternoon: 'Vacuum hallway & stairs', evening: 'Help chop dinner ingredients' },
+      { day: 'Thursday', morning: 'Make bed & brush teeth', afternoon: 'Weed garden bed with hand tool', evening: 'Wipe bathroom sink & faucet' },
+      { day: 'Friday', morning: 'Make bed & pack school gear', afternoon: 'Empty backpack & sort papers', evening: 'Help bake weekend dinner pizza' },
+      { day: 'Saturday', morning: 'Strip bedroom bed sheets', afternoon: 'Vacuum car seats & floor mats', evening: 'Fold personal laundry load' },
+      { day: 'Sunday', morning: 'Put fresh sheets on bed', afternoon: 'Audit pantry & write grocery list', evening: 'Review upcoming week chart' },
+    ],
     howToTeach: {
-      step1: 'Treat them as a partner: review family schedules and assign meaningful domains of responsibility.',
-      step2: 'Teach meal planning: selecting recipes, auditing pantry ingredients, and creating a shopping list.',
-      step3: 'Conduct weekly family meetings to negotiate chores and recognize dependable contributions.',
+      step1: 'Treat them as an authentic partner: review family logistics together and assign meaningful domains of ongoing responsibility.',
+      step2: 'Teach meal planning and preparation: walk through recipe selection, ingredient prep, kitchen sanitation, and cooking timing.',
+      step3: 'Conduct brief weekly check-ins: hold a five-minute family meeting on Sunday to negotiate responsibilities and celebrate dependable efforts.',
     },
     safetyNote:
-      'Cooking still requires an adult nearby in the house. Ensure proper footwear and eye protection during yard work. Leave power tools, lawn mowers, and high ladder climbing to adults.',
+      'Ten-year-olds are capable cooks, but stovetops, hot oven racks, and sharp chef knives still require an adult nearby in the house. Ensure they understand how to extinguish small kitchen grease fires with baking soda or a lid, never water. Power lawn mowers, chain saws, gasoline tools, and high ladder climbing remain restricted to adults.',
+    commonMistakes: [
+      'Treating ten-year-olds like younger children: Over-instructing every step causes rebellion in pre-teens. Focus on the end result and give them breathing room to work.',
+      'Failing to adjust routines for extracurriculars: Rigidity creates conflict when sports seasons change. Adjust chore schedules flexibly during tournaments or exam weeks.',
+      'Skipping kitchen clean-up lessons: Teaching kids how to cook without teaching them how to clean as they go leaves chaotic kitchens. Make clean-up part of the cooking task.',
+      'Using money as the only motivator: Tying every domestic contribution to cash creates an attitude where kids say "I don’t need money today, so I won’t help."',
+    ],
     tips: [
-      'Treat them as a capable partner in maintaining a comfortable, organized home.',
-      'Assign ongoing areas of responsibility ("you own the kitchen floor") for real accountability.',
-      'Discuss how practical household competence builds self-reliance for adulthood.',
+      'Assign total domain ownership (e.g., "Dinner Chef on Tuesdays") rather than disconnected random chores.',
+      'Connect household competence to future teen independence, camping trips, and adult capability.',
+      'Offer flexible daily deadlines so ten-year-olds learn self-directed time management.',
     ],
     notYet:
-      'Operating power lawn machinery, sole extended care of infants, or managing household budgets.',
+      'Operating power lawn mowers, sole extended babysitting of infants, or working on high roofs and ladders.',
     faqs: [
       {
-        q: 'How many weekly chores should a 10-year-old have?',
-        a: 'Around 3 to 5 daily micro-habits plus 1 or 2 larger weekly projects (like laundry or dinner preparation).',
+        q: 'How many chores should a 10-year-old have each day?',
+        a: 'Around three daily routine tasks (about fifteen to twenty minutes total) plus one or two deeper weekly responsibilities (like cooking dinner or completing laundry). This establishes solid habits without overwhelming school commitments.',
       },
       {
-        q: 'Should 10-year-olds be paid for cooking dinner?',
-        a: 'Cooking for the family is a great communal contribution. Some parents offer an allowance if the child plans, budgets, and executes the meal from scratch.',
+        q: 'Should 10-year-olds be paid for cooking dinner or doing household chores?',
+        a: 'Most parents keep standard household upkeep unpaid as shared family teamwork. Some families offer an allowance if the child plans, budgets, and executes a full meal independently, treating it as an advanced project.',
       },
       {
-        q: 'What chores best foster pre-teen independence?',
-        a: 'Meal preparation, managing their own laundry start-to-finish, and keeping their personal study space organized.',
+        q: 'How can I get my 10-year-old to do chores without constant arguments?',
+        a: 'Involve them in deciding the schedule during a calm weekend conversation rather than commanding them in the moment. Agree on firm deadlines and allow them to choose when during the day the work gets done.',
+      },
+      {
+        q: 'Can a 10-year-old cook dinner completely safely?',
+        a: 'Yes, with an adult present in the home. Ten-year-olds can safely chop vegetables using proper curling grips, boil pasta, bake casseroles, and saute skillet meals once taught basic kitchen safety rules.',
+      },
+      {
+        q: 'What life skills are most valuable to teach a 10-year-old?',
+        a: 'End-to-end laundry management, preparing two or three simple balanced meals from scratch, and keeping their personal study space organized provide the highest long-term confidence and autonomy.',
       },
     ],
   },
 
   11: {
     intro:
-      'Eleven-year-olds are capable of advanced household participation, project planning, and mentoring younger siblings. Chores at eleven directly prepare children for the independence of the teenage years.',
+      'Eleven-year-olds are preparing for the significant social and academic transitions of middle school, showing greater maturity, analytical thinking, and a desire for real autonomy. Chores at this age bridge childhood routines with genuine life skills, teaching time management, personal discipline, and practical capability. At eleven, children can plan balanced family meals, manage complete grocery shopping lists, mentor younger siblings, and handle home maintenance tasks. With respectful collaboration and a visual chart, eleven-year-olds can take dependable pride in running a smooth, organized household.',
     whatTheyCanDo:
-      'An 11-year-old can plan and cook family meals, manage grocery shopping lists, tackle seasonal cleaning projects, mentor younger siblings, and organize personal schedules.',
+      'Most eleven-year-olds can organize their own weekly schedules, balancing academic deadlines, sports, and household duties. They can cook full family meals from recipes, manage grocery shopping lists, clean shared bathrooms to a high standard, operate washers and dryers, and perform minor home fixes like tightening cabinet screws or changing light bulbs with guidance.',
     chores: [
-      { name: 'Plan and cook weekly meals', desc: 'Select recipes, write ingredient lists, cook with an adult nearby, and clean up.' },
-      { name: 'Lead grocery shopping trips', desc: 'Audit pantry supplies, compile shopping lists, and compare unit prices.' },
-      { name: 'Tackle seasonal cleaning projects', desc: 'Clean garage shelves, organize basement storage, or clean patio furniture.' },
-      { name: 'Mentor younger siblings on chores', desc: 'Demonstrate standards and guide younger siblings through chore routines.' },
-      { name: 'Manage personal schedules and chores', desc: 'Coordinate school deadlines, sports practices, and household duties.' },
-      { name: 'Perform basic home maintenance', desc: 'Replace light bulbs safely, tighten loose cabinet knobs, or change air filters.' },
+      {
+        name: 'Plan, cook, and clean up a weekly family meal',
+        desc: 'Select a healthy recipe, check pantry supplies, prepare ingredients, cook with an adult nearby, and clean the kitchen.',
+        howToTeach:
+          'Guide them through planning on the weekend: write the shopping list, prep ingredients into bowls before heating pans, and practice cleaning preparation bowls while food simmers.',
+      },
+      {
+        name: 'Deep-clean shared family bathrooms',
+        desc: 'Scrub the sink, disinfect counters, sanitize the toilet bowl and rim, wash mirrors, and mop tile floors.',
+        howToTeach:
+          'Provide mild, non-toxic bathroom cleaners and dedicated microfiber cloths. Show them how to clean from cleanest surfaces to dirtiest: mirror and sink first, tub next, toilet and floor last.',
+      },
+      {
+        name: 'Manage weekly family recycling and trash disposal',
+        desc: 'Collect all household room bins, sort paper, glass, and plastics, and wheel bins to the curb on collection mornings.',
+        howToTeach:
+          'Show them how to check local recycling rules on container numbers. Demonstrate proper bin balance when rolling heavy wheelie containers down sloped driveways.',
+      },
+      {
+        name: 'Mentor and assist younger siblings with daily chores',
+        desc: 'Help younger siblings follow their chore charts, demonstrating folding techniques and encouraging cooperative effort.',
+        howToTeach:
+          'Coach your eleven-year-old on positive leadership: teach them to praise progress and show siblings how to do a task rather than doing it for them or barking orders.',
+      },
+      {
+        name: 'Clean and organize kitchen pantry shelves and refrigerator',
+        desc: 'Wipe refrigerator shelves, discard expired condiments, wipe spills, and organize food containers by category.',
+        howToTeach:
+          'Teach them the "first in, first out" principle: check expiration dates, move older jars forward, wipe sticky shelf spots with warm water, and group snacks neatly.',
+      },
+      {
+        name: 'Handle basic household maintenance and tool tasks',
+        desc: 'Tighten loose drawer handles, replace desk lamp bulbs, change furnace air filters, and oil squeaky door hinges.',
+        howToTeach:
+          'Show them how to choose the right screwdriver (Phillips vs. flat-head), ensure lamps are unplugged before changing bulbs, and turn screws clockwise to tighten safely.',
+      },
     ],
     schedule: {
-      morning: 'Self-directed morning routine: hygiene, bed, breakfast, and device charging management.',
-      afternoon: 'Dishwasher duty and assisting with sibling supervision during after-school snacks.',
-      weekend: 'Plan and cook one family dinner and handle complete personal laundry.',
+      morning: 'Self-directed morning routine: hygiene, bed made, breakfast dishes in dishwasher, and school bag ready.',
+      afternoon: 'Unpack school bag, wipe kitchen prep areas, and complete 15-minute afternoon chore block.',
+      weekend: 'Plan and prepare one family dinner, handle personal laundry, and deep-clean bedroom.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Make bed & pack backpack', afternoon: 'Unload dishwasher & tidy island', evening: 'Wipe kitchen counters after dinner' },
+      { day: 'Tuesday', morning: 'Make bed & hygiene check', afternoon: 'Sort clean laundry into drawers', evening: 'Help younger sibling with room tidy' },
+      { day: 'Wednesday', morning: 'Make bed & pack sports bag', afternoon: 'Scrub bathroom sink & mirror', evening: 'Roll trash bins to the curb' },
+      { day: 'Thursday', morning: 'Make bed & brush teeth', afternoon: 'Clean and wipe microwave interior', evening: 'Clear dinner table & sweep' },
+      { day: 'Friday', morning: 'Make bed & pack backpack', afternoon: 'Organize study desk & papers', evening: 'Family movie night snack setup' },
+      { day: 'Saturday', morning: 'Strip bedroom bed sheets', afternoon: 'Deep-clean bathroom toilet & floor', evening: 'Cook family dinner from recipe' },
+      { day: 'Sunday', morning: 'Put fresh sheets on bed', afternoon: 'Wipe refrigerator shelves & audit food', evening: 'Review week schedule on chart' },
+    ],
     howToTeach: {
-      step1: 'Offer project-level tasks rather than isolated commands: "Can you own organizing the pantry?"',
-      step2: 'Teach budgeting and price comparison during grocery runs to build financial literacy.',
-      step3: 'Respect their growing need for privacy while keeping shared communal expectations firm.',
+      step1: 'Offer project-based responsibilities: instead of piecemeal tasks, hand over whole domains like "you are in charge of family breakfast on Saturdays."',
+      step2: 'Teach budgeting and practical economics: involve them in comparing unit prices on grocery runs to build valuable financial literacy.',
+      step3: 'Respect their developing need for privacy: agree on clear weekly standards and inspect the finished results at agreed milestone times.',
     },
     safetyNote:
-      'Keep heavy power tools, gasoline-powered lawn equipment, and hazardous chemical strippers off-limits. Maintain adult proximity during stovetop and oven cooking.',
+      'Cooking still requires an adult nearby in the house. Ensure proper footwear and eye protection during yard work. Leave power tools, lawn mowers, and high ladder climbing to adults. Never allow eleven-year-olds to mix cleaning chemicals or use caustic bleach solutions.',
+    commonMistakes: [
+      'Treating chore reminders like disciplinary interrogations: Eleventh-graders react defensively to accusatory tones. Use neutral, collaborative language: "What is your plan for getting your laundry done before soccer tomorrow?"',
+      'Failing to provide schedule flexibility around middle school demands: Heavy homework nights require adaptability. Allow chores to shift to weekends when schoolwork peaks.',
+      'Ignoring the need for real appreciation: Because eleven-year-olds look older, parents often forget to thank them. Acknowledging their dependable work reinforces their maturity.',
+      'Micromanaging personal bedroom tidiness: As pre-teens seek autonomy, their bedrooms become personal spaces. Focus on hygiene and cleanliness rather than demanding perfection.',
+    ],
     tips: [
-      'Negotiate chore swaps when busy academic or sports schedules require flexible arrangements.',
-      'Respect their independence by agreeing on deadlines rather than enforcing exact times.',
+      'Negotiate chore swaps when busy academic or sports schedules require temporary flexibility.',
+      'Respect their independence by agreeing on completion deadlines rather than enforcing rigid hourly schedules.',
       'Treat mistakes as learning opportunities and praise self-directed problem-solving.',
     ],
     notYet:
-      'Operating dangerous power tools, unsupervised sole care of infants, or full financial autonomy.',
+      'Operating gas power lawn mowers, unsupervised sole care of infants, or full financial independence.',
     faqs: [
       {
-        q: 'How do I handle chores when middle school sports take up all their time?',
-        a: 'Shift the bulk of responsibilities to weekends and keep weekday chores limited to self-care, hygiene, and room tidiness.',
+        q: 'How do I handle chores when middle school sports and homework take up all their time?',
+        a: 'Shift the bulk of responsibilities to weekends and keep weekday chores limited to quick personal maintenance (bedroom, hygiene, and clearing dinner dishes). Flexibility prevents burnout while preserving helpful habits.',
       },
       {
-        q: 'Can an 11-year-old babysit younger siblings while parents run errands?',
-        a: 'For short periods (15–30 minutes) during daylight hours, provided emergency protocols and phone contacts are in place.',
+        q: 'Can an 11-year-old babysit younger siblings while parents run quick errands?',
+        a: 'Many mature eleven-year-olds can watch younger siblings for short periods (15 to 30 minutes) during daylight hours, provided clear emergency contacts, household rules, and neighbor support are in place.',
       },
       {
-        q: 'How can I motivate an 11-year-old who feels chores are a punishment?',
-        a: 'Frame chores as life-skill milestones: connect cooking to teenage freedom, camping, or future apartment living.',
+        q: 'How can I motivate an 11-year-old who feels household chores are a punishment?',
+        a: 'Frame chores as life-skill milestones rather than burdens. Connect cooking, budgeting, and tool use to future teenage freedom, camping trips, and independent living skills.',
+      },
+      {
+        q: 'How much should an 11-year-old be expected to do around the house?',
+        a: 'Around twenty minutes of focused weekday effort plus one or two deeper weekend projects (like cooking dinner or deep-cleaning a bathroom) is a healthy, balanced target.',
+      },
+      {
+        q: 'Should 11-year-olds receive an allowance tied to their chores?',
+        a: 'Many parents maintain unpaid core chores for family membership, while offering pocket money or allowance for independent budgeting, clothing management, or optional larger projects.',
       },
     ],
   },
