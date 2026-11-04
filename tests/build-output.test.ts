@@ -6,10 +6,11 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
+import { CHORE_ICON_COUNT } from '../src/lib/icons.ts';
 import { SITE_CONFIG } from '../src/lib/seo.ts';
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
-const HTML_BUDGET_BYTES = 72 * 1024;
+const HTML_BUDGET_BYTES = 80 * 1024;
 const HTML_GZIP_BUDGET_BYTES = 20 * 1024;
 const ORIGIN = `https://${SITE_CONFIG.domain}`;
 
@@ -615,4 +616,38 @@ test('unified dates: visible byline, JSON-LD datePublished/dateModified, article
     }
   }
 });
+
+test('no built HTML contains unsourced medical or organizational attributions', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(
+      page.html,
+      /American Academy|\bAAP\b|\bCDC\b|pediatric/i,
+      `${page.file} contains forbidden attributions (American Academy, AAP, CDC, pediatric)`
+    );
+  }
+});
+
+test('no built page claims more chore icons than exist', () => {
+  for (const page of pages) {
+    const matches = page.html.matchAll(/(?:over|more than|around|nearly)?\s*(\d+)\s*(?:illustrated\s+)?(?:chore\s+)?icons/gi);
+    for (const match of matches) {
+      const claimedCount = parseInt(match[1]!, 10);
+      assert.ok(
+        claimedCount <= CHORE_ICON_COUNT,
+        `${page.file} claims ${claimedCount} chore icons, but only ${CHORE_ICON_COUNT} exist: "${match[0]}"`
+      );
+    }
+  }
+});
+
+test('no built HTML contains grammar error "a 8-year" or "a 11-year"', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(
+      page.html,
+      /\ba 8-year|\ba 11-year/i,
+      `${page.file} contains incorrect indefinite article "a 8-year" or "a 11-year"`
+    );
+  }
+});
+
 

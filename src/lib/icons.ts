@@ -36,6 +36,7 @@ export type IconId = ChoreIconId | AvatarIconId | RewardIconId;
 
 export const ALL_ICON_IDS: readonly IconId[] = [...CHORE_ICON_IDS, ...AVATAR_ICON_IDS, ...REWARD_ICON_IDS];
 export const ICON_IDS: ReadonlySet<string> = new Set<string>(ALL_ICON_IDS);
+export const CHORE_ICON_COUNT = CHORE_ICON_IDS.length;
 
 export function isIconId(value: unknown): value is IconId {
   return typeof value === 'string' && ICON_IDS.has(value);

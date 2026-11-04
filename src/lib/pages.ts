@@ -44,7 +44,7 @@ export const PAGES = {
     h1: 'Free Printable Chore Charts for Every Family',
     description:
       'Browse free printable chore charts, reward charts and routine charts for kids, families and roommates. Customise in your browser, no sign-up, print in minutes.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   choreChartMaker: page({
     path: '/chore-chart-maker/',
@@ -156,7 +156,7 @@ export const PAGES = {
     h1: 'About Chore Chart Maker',
     description:
       'Chore Chart Maker builds free, privacy-first printable tools for parents, teachers and households. Learn who makes the site and how we keep your data private.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   contact: page({
     path: '/contact/',

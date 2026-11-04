@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
+import { CHORE_ICON_COUNT } from '../lib/icons.ts';
 import { AGE_PAGE_AGES, PAGES, agePagePath } from '../lib/pages.ts';
 import type { FaqItem } from '../lib/seo.ts';
 
@@ -93,7 +94,7 @@ const faq: FaqItem[] = [
       <strong>Total browser privacy:</strong> Your children's names, ages, and chores stay on your own device. Nothing you type is uploaded to remote servers.
     </li>
     <li>
-      <strong>Picture icons for pre-readers:</strong> Over 120 illustrated chore icons allow toddlers and young children to follow their routines independently before they can read.
+      <strong>Picture icons for pre-readers:</strong> More than {Math.floor(CHORE_ICON_COUNT / 10) * 10} illustrated chore icons allow toddlers and young children to follow their routines independently before they can read.
     </li>
     <li>
       <strong>Flexible print & digital formats:</strong> Export print-ready PDFs sized for Letter or A4, PNG images for phone and tablet screens, or copy a private share link.

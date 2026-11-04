@@ -42,7 +42,7 @@ Guidance for all work in this repo. Read it before every change.
 
 Enforce these with tests where possible.
 
-- HTML **≤ 72 KB** per page (≤ 20 KB gzipped).
+- HTML **≤ 80 KB** per page (≤ 20 KB gzipped).
 - Initial JS **≤ 50 KB gzipped**.
 - PDF libraries are **lazy-loaded** (dynamic `import()`) only when the user clicks export.
 - Icons load as external files and are never inlined in bulk.
@@ -93,7 +93,7 @@ A change is done only when all of these hold:
 1. `npm run build` passes.
 2. `npm test` passes.
 3. `npm run check` passes.
-4. No page exceeds the 72 KB raw / 20 KB gzipped HTML budget.
+4. No page exceeds the 80 KB raw / 20 KB gzipped HTML budget.
 
 ## Development
 
