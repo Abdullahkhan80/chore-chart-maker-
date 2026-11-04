@@ -111,7 +111,7 @@ export const PAGES = {
     h1: 'Morning routine chart for kids',
     description:
       'Make a free printable morning routine chart for kids with simple picture steps, from brushing teeth to packing a backpack. Customize it and print it at home.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   bedtimeRoutineChart: page({
     path: '/bedtime-routine-chart/',
@@ -121,7 +121,7 @@ export const PAGES = {
     description:
       'Make a free printable bedtime routine chart with picture steps for kids: brushing teeth, pajamas, books, and lights out. Print or save in minutes.',
     published: DEPLOY_DATE,
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   familyChoreChart: page({
     path: '/family-chore-chart/',
@@ -163,6 +163,7 @@ export const PAGES = {
     h1: 'Contact us',
     description:
       'Get in touch with the Chore Chart Maker team about our free printable chore chart tools: feedback, bug reports or ideas for new printable charts for kids.',
+    lastmod: '2026-11-04',
   }),
   privacyPolicy: page({
     path: '/privacy-policy/',
