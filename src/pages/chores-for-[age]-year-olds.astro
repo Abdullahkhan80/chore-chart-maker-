@@ -50,144 +50,303 @@ interface AgeData {
 const AGE_CONTENT: Record<number, AgeData> = {
   2: {
     intro:
-      'At age two, toddlers are driven by imitation and gross-motor curiosity. Chores are not about tidy rooms; they are sensory activities that teach that everyone contributes to the household.',
+      'Toddlers around age two are driven by imitation and love copying what parents and caregivers do around the house. At this stage, household contributions are not about spotless cleaning or strict standards—they are hands-on, shared activities that teach toddlers that everyone in the family participates in caring for their living space. Participating in quick, structured tasks builds motor coordination, listening skills, and a healthy sense of belonging. Using a visual chart with friendly picture icons allows toddlers to connect specific actions with daily rhythms before they can read written words.',
     whatTheyCanDo:
-      'A 2-year-old can follow simple one-step requests with pointing, deposit toys into open floor bins, carry lightweight unbreakable items, and mimic wiping clean surfaces alongside parents.',
+      'Most two-year-olds can follow simple single-step requests paired with visual gestures, such as placing a soft toy into an open basket or carrying a clean washcloth across the room. Toddlers at this age enjoy gross-motor movements like dropping, stacking, pushing, and carrying lightweight unbreakable objects. Their sustained attention usually lasts just two to four minutes, so tasks must stay short, active, and playful.',
     chores: [
-      { name: 'Put toys in a basket', desc: 'Toss soft plush toys or large building blocks into an open floor bin.' },
-      { name: 'Put dirty clothes in the hamper', desc: 'Drop socks and pajamas into an open hamper after changing clothes.' },
-      { name: 'Wipe spills with a dry cloth', desc: 'Help wipe water or milk droplets from the table or high chair.' },
-      { name: 'Stack board books', desc: 'Place sturdy cardboard books back into a low floor crate or basket.' },
-      { name: 'Help wipe baseboards', desc: 'Use an old clean sock on their hand to playfully wipe low flat surfaces.' },
-      { name: 'Fetch clean diapers or wipes', desc: 'Hand parents a clean diaper or wipes pack during diaper changing.' },
+      {
+        name: 'Deposit soft toys into an open floor bin',
+        desc: 'Gather plush animals, foam blocks, or cloth toys and drop them into an open storage basket.',
+        howToTeach:
+          'Sit on the carpet together and turn tidying into a friendly game. Hand them one plush toy at a time, point directly to the open basket, and cheer when it drops inside.',
+      },
+      {
+        name: 'Drop socks and pajamas into the laundry hamper',
+        desc: 'Carry worn socks, shirts, or pajamas and drop them into a low, open-top laundry basket.',
+        howToTeach:
+          'Make this an automatic step right after morning dressing or evening bath time. Hold the hamper open at their height so they can toss their pajamas directly into the basket.',
+      },
+      {
+        name: 'Wipe small water spills with a dry washcloth',
+        desc: 'Dab water droplets from a high chair tray or low activity table using a small clean cloth.',
+        howToTeach:
+          'Hand your toddler a dry cotton washcloth as soon as a small spill occurs. Place your hand gently over theirs to guide circular wiping motions while praising their helpfulness.',
+      },
+      {
+        name: 'Stack sturdy board books in a low crate',
+        desc: 'Collect thick cardboard picture books from the floor and place them flat inside a floor crate.',
+        howToTeach:
+          'Demonstrate holding a heavy board book with two hands. Show them how to lay the largest book flat at the bottom of the bin first, then set smaller books on top.',
+      },
+      {
+        name: 'Fetch a clean diaper or pack of wipes',
+        desc: 'Retrieve a single clean diaper or wipe package from a low nursery shelf during changing time.',
+        howToTeach:
+          'Keep a small basket of changing supplies on an accessible low shelf. Before changing, ask your child to hand you one diaper, celebrating their cooperation with a smile.',
+      },
+      {
+        name: 'Put daytime shoes into a floor cubby',
+        desc: 'Carry their own sneakers or boots to an entryway floor basket or low shoe mat.',
+        howToTeach:
+          'Establish a single designated parking spot near the entryway. Guide them to carry one shoe in each hand immediately upon stepping through the door before taking off jackets.',
+      },
     ],
     schedule: {
-      morning: 'Drop pajama tops and bottoms into the hamper after getting dressed.',
-      afternoon: 'Toss blocks and toys into the storage basket before afternoon nap or dinner.',
-      weekend: 'Carry one light grocery item, like a box of crackers, from the door to the kitchen.',
+      morning: 'Drop morning pajamas into the open laundry basket after getting dressed.',
+      afternoon: 'Pick up soft floor toys and stack board books before snack time.',
+      weekend: 'Help carry one lightweight box of crackers from the grocery bags.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Drop pajamas into hamper', afternoon: 'Toss plush toys into bin', evening: 'Carry clean bib to table' },
+      { day: 'Tuesday', morning: 'Put daytime shoes in cubby', afternoon: 'Stack board books on rug', evening: 'Wipe table water spill' },
+      { day: 'Wednesday', morning: 'Drop pajamas into hamper', afternoon: 'Toss blocks into basket', evening: 'Fetch diaper for bedtime' },
+      { day: 'Thursday', morning: 'Put daytime shoes in cubby', afternoon: 'Gather soft toys from floor', evening: 'Wipe high chair tray' },
+      { day: 'Friday', morning: 'Drop pajamas into hamper', afternoon: 'Stack cardboard books', evening: 'Carry dry washcloth to sink' },
+      { day: 'Saturday', morning: 'Carry clean socks to room', afternoon: 'Toss floor toys into bin', evening: 'Put shoes on entryway mat' },
+      { day: 'Sunday', morning: 'Drop pajamas into hamper', afternoon: 'Help carry light cereal box', evening: 'Tidy soft toys before bed' },
+    ],
     howToTeach: {
-      step1: 'Demonstrate directly while narrating: say "train goes in the bin" and drop one in together.',
-      step2: 'Hand them one specific object at a time rather than asking them to clean an entire space.',
-      step3: 'Celebrate completion immediately with a high-five or song to build positive associations.',
+      step1: 'Demonstrate with cheerful actions: narrate each movement simply, such as "car goes into the basket," and drop one item together.',
+      step2: 'Offer items individually: hand your toddler one single object at a time instead of gesturing toward a scattered room, which quickly overwhelms little ones.',
+      step3: 'Celebrate immediately with genuine warmth: offer a cheerful high-five, clap, or upbeat song as soon as the task concludes to build positive associations.',
     },
     safetyNote:
-      'Continuous direct visual supervision is necessary. Stay within arm\'s reach and keep toddlers away from buckets of water, small objects and cleaning products.',
+      'Continuous visual supervision is essential at age two. Keep toddlers completely away from open water buckets, pet water bowls, and mop buckets because shallow water presents a serious drowning risk. Never allow toddlers near household cleaning chemicals, spray bottles, small choking hazards, electrical cords, or stove areas. Ensure heavy furniture and bookcases are firmly anchored to the wall.',
+    commonMistakes: [
+      'Expecting clean rooms instead of teaching habits: Toddlers cannot organize a room. Treat two minutes of cooperative effort as a complete victory rather than looking for perfection.',
+      'Giving multi-step spoken instructions: Saying "put your shoes away and wash your hands" is confusing for a two-year-old. Give one clear direction at a time with a pointing gesture.',
+      'Cleaning up after them while they watch: If parents always tidy up silently while toddlers play, children learn that mess magically disappears. Involve them in the final two minutes.',
+      'Using tidying as a consequence for misbehavior: Connecting chores to punishment creates resentment. Household tasks should feel like an ordinary, cheerful part of family teamwork.',
+    ],
     tips: [
-      'Keep each clean-up activity under 3 to 5 minutes to fit their natural attention span.',
-      'Turn tidying into a song, countdown, or playful race to make participation feel fun.',
-      'Accept imperfection warmly: a lumpy pile of books still successfully establishes the habit.',
+      'Sing a predictable clean-up song or play cheerful music to signal the start and end of tidying time.',
+      'Use wide, open storage containers without heavy lids so tiny hands can drop items inside safely.',
+      'Keep every chore session under three minutes to match a toddler’s natural energy and attention span.',
     ],
     notYet:
-      'Unsupervised chores, carrying ceramic or glass, sorting small pieces, or using spray bottles.',
+      'Carrying glass or ceramic dishware, handling spray bottles, cleaning near electrical appliances, climbing on stools unsupervised, or managing small toy parts.',
     faqs: [
       {
-        q: 'How do I handle a 2-year-old who refuses to pick up toys?',
-        a: 'Keep the expectation tiny: ask them to put away just one specific item ("can you find the red car?"), and do the rest together as a team game.',
+        q: 'How do I handle a 2-year-old who runs away when it is time to clean up?',
+        a: 'Turn the task into an interactive game rather than an order. Pick up one toy and ask playful questions like "Can the teddy bear fly into the bin?" When you make the first movement fun and playful, toddlers often join in voluntarily.',
       },
       {
         q: 'Should I use a chore chart with a 2-year-old?',
-        a: 'Yes, provided the chart uses colorful picture icons rather than text. Toddlers love pointing to picture steps and placing a sticker once an activity is finished.',
+        a: 'Yes, as long as the chart uses bright visual picture icons instead of text. Toddlers love routine charts where they can point to pictures of pajamas or toys and celebrate completing their daily habits.',
       },
       {
-        q: 'How many daily chores are appropriate for a 2-year-old?',
-        a: 'One or two quick 3-minute tasks per day is ideal. The goal at age 2 is developing a cooperative attitude, not relieving parental workload.',
+        q: 'How many daily chores are reasonable for a 2-year-old?',
+        a: 'One or two quick daily tasks lasting two to three minutes each is plenty. At age two, the primary goal is nurturing a cooperative attitude and familiarizing them with family routines, not checking off long to-do lists.',
+      },
+      {
+        q: 'What should I do if my toddler dumps toys out while helping?',
+        a: 'Dumping is a normal developmental exploration of gravity and space. Calmly hold the basket, hand them one item, and say "Let us put this one in together." Keep your tone light and patient.',
+      },
+      {
+        q: 'Can a two-year-old help with family pets?',
+        a: 'Toddlers can accompany an adult while feeding pets, but should not handle pet food dishes or litter boxes directly. Supervise all interactions closely to ensure pets are never startled or crowded.',
       },
     ],
   },
 
   3: {
     intro:
-      'Three-year-olds are natural helpers eager to exercise their developing independence. Chores at this age build motor coordination and establish helpful habits as an ordinary part of daily family life.',
+      'Three-year-olds are natural helpers eager to exercise their developing independence and do things on their own. At this age, children possess increasing language skills, greater balance, and budding hand-eye coordination. Involving them in daily family routines channels their natural desire for helpfulness into constructive habits. When tasks are broken down into clear, manageable steps with visual picture cues, three-year-olds learn that their personal contributions are valued, building confidence and self-regulation without bedtime or morning power struggles.',
     whatTheyCanDo:
-      'A 3-year-old can follow simple two-step instructions, carry lightweight bags or groceries, match colors while sorting laundry, and sustain cooperative effort for 5 minutes.',
+      'Most three-year-olds can follow two-step instructions when demonstrated clearly, such as "pick up your shoes and put them on the mat." They can carry lightweight grocery items, sort items by color or size, wipe low surfaces with guidance, and sustain cooperative focus for three to five minutes. They enjoy mastering repetitive physical motions and seeing the immediate visible results of their efforts.',
     chores: [
-      { name: 'Put toys in a bin', desc: 'A large, open bin without a lid makes tidying simple and fast.' },
-      { name: 'Put dirty clothes in the hamper', desc: 'One clear step with an immediate visible result.' },
-      { name: 'Wipe up small spills', desc: 'Hand them a small cloth to wipe table or counter spills.' },
-      { name: 'Carry light groceries', desc: 'Carrying a loaf of bread or box of crackers makes them part of the team.' },
-      { name: 'Sort laundry by color', desc: 'Help sort clothes into dark and light piles as a matching game.' },
-      { name: 'Put shoes in the shoe rack', desc: 'Returning shoes to one designated spot every time they come inside.' },
+      {
+        name: 'Sort clean laundry into color piles',
+        desc: 'Group clean washed laundry into light and dark piles or match pairs of large socks.',
+        howToTeach:
+          'Spread clean clothes across the floor and make it a matching game. Ask them to find all the blue shirts or pair up bright matching socks, praising their sorting accuracy.',
+      },
+      {
+        name: 'Clear unbreakable plates from the table',
+        desc: 'Carry plastic cups, melamine bowls, or paper napkins to the kitchen counter after eating.',
+        howToTeach:
+          'Teach your three-year-old to use two steady hands when carrying one cup or bowl at a time. Designate an accessible spot on a low counter or kitchen stool where they can set their plate safely.',
+      },
+      {
+        name: 'Put outerwear and shoes in designated cubbies',
+        desc: 'Hang low jackets on accessible wall pegs and place boots or sneakers in an entryway tray.',
+        howToTeach:
+          'Install coat hooks at your child’s eye level. Practice stepping out of shoes and hanging up coats together every time you return home from outdoor walks or preschool.',
+      },
+      {
+        name: 'Wipe the dining table with a damp sponge',
+        desc: 'Use a small, squeezed-out damp sponge to clean crumbs and marks off the dining table.',
+        howToTeach:
+          'Show them how to press down firmly with a damp sponge and wipe in long strokes across the table surface. Guide their hand from the far edge toward themselves to capture loose crumbs.',
+      },
+      {
+        name: 'Water patio or garden plants with a small can',
+        desc: 'Pour water around the base of potted patio plants using a lightweight mini watering can.',
+        howToTeach:
+          'Fill a child-sized watering container halfway to prevent heavy sloshing. Point to the soil around outdoor plants and demonstrate pouring slowly without splashing leaves or walkways.',
+      },
+      {
+        name: 'Sort plastic spoons and forks into drawer dividers',
+        desc: 'Place child-safe plastic cutlery into the correct compartments of a low kitchen drawer.',
+        howToTeach:
+          'Remove all sharp knives and metal utensils first. Hand your child the plastic forks and spoons, showing them how the shapes match the compartments in the drawer organizer.',
+      },
     ],
     schedule: {
-      morning: 'Put pajamas into the laundry hamper and put breakfast bowl on the counter.',
-      afternoon: 'Put shoes and jacket in their designated entryway spot after returning home.',
-      weekend: 'Help sort clean socks or separate dark and light clothes for laundry washing.',
+      morning: 'Put pajamas into the laundry hamper and bring breakfast bowl to counter.',
+      afternoon: 'Hang jacket on low hook and place shoes in the entryway basket.',
+      weekend: 'Help match clean socks and water potted patio flowers with a small can.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Put pajamas in hamper', afternoon: 'Hang jacket on low hook', evening: 'Carry plastic plate to sink' },
+      { day: 'Tuesday', morning: 'Make bed (pull sheet up)', afternoon: 'Sort socks by color', evening: 'Wipe dinner table crumbs' },
+      { day: 'Wednesday', morning: 'Put shoes in cubby', afternoon: 'Tidy block tower into bin', evening: 'Carry plastic cup to counter' },
+      { day: 'Thursday', morning: 'Put pajamas in hamper', afternoon: 'Sort plastic spoons in drawer', evening: 'Wipe placemat with sponge' },
+      { day: 'Friday', morning: 'Hang towel on low hook', afternoon: 'Gather stuffed animals', evening: 'Clear napkins from table' },
+      { day: 'Saturday', morning: 'Help make morning bed', afternoon: 'Water patio plants with can', evening: 'Tidy toys into storage bin' },
+      { day: 'Sunday', morning: 'Put pajamas in hamper', afternoon: 'Sort laundry into light/dark', evening: 'Place shoes neatly on mat' },
+    ],
     howToTeach: {
-      step1: 'Break the task into two simple sequential steps: "Pick up the truck, then put it in the box."',
-      step2: 'Work side-by-side: "I will gather the books while you collect the plush animals."',
-      step3: 'Connect helping to predictable daily routines: "Shoes in the rack, then we wash hands for snack."',
+      step1: 'Break chores into paired actions: use concise directions with physical cues, such as "first pick up the truck, then set it inside the wooden crate."',
+      step2: 'Work shoulder-to-shoulder: tackle tasks collaboratively rather than issuing instructions from across the room, providing reassuring companionship.',
+      step3: 'Anchor tasks to daily transitions: link chores directly to existing daily events, such as putting shoes away right before washing hands for an afternoon snack.',
     },
     safetyNote:
-      'Keep 3-year-olds away from hot appliances, open dishwashers, and electrical outlets. Ensure step stools have wide, slip-resistant rubber bases.',
+      'Active adult oversight remains crucial for three-year-olds. Ensure step stools have wide non-slip rubber bases and cannot tip over during hand-washing or counter help. Keep hot appliances, stove burners, kettles, and open dishwashers strictly off-limits. Store all household cleaning fluids, dishwasher detergent pods, and medicines in locked cabinets out of reach.',
+    commonMistakes: [
+      'Expecting sustained focus without parental presence: Three-year-olds need your physical presence and warm interaction to remain engaged with chores.',
+      'Using fragile glass or ceramic items: Even careful three-year-olds drop things easily. Stick entirely to durable plastic, melamine, cloth, or wooden items.',
+      'Correcting imperfect work immediately in front of them: Re-wiping a table or re-stacking books while your child watches sends a signal that their effort was inadequate.',
+      'Offering treats or bribes for basic habits: Relying on sugary rewards or treats weakens intrinsic pride. Warm praise and visual stickers work far better.',
+    ],
     tips: [
-      'Do chores alongside them every time and model the actions with warm encouragement.',
-      'Keep every task under 5 minutes to match their natural attention span.',
-      'Praise specifically: "Thank you for putting your sneakers on the rack!" beats generic praise.',
+      'Give them limited choices to encourage cooperation: "Would you like to put away the blue puzzle or the green books first?"',
+      'Keep chores brief and playful so tasks finish while energy and enthusiasm are still high.',
+      'Acknowledge specific actions rather than giving vague praise: say "Thank you for putting your sneakers in the bin!"',
     ],
     notYet:
-      'Multi-step tasks without supervision, carrying heavy items, handling glass, or working near hot water.',
+      'Carrying glassware or ceramics, using spray bottles, cleaning near electrical appliances, or handling heavy garbage bags.',
     faqs: [
       {
-        q: 'Is age 3 too young for regular chores?',
-        a: 'Not when tasks are framed as shared play. Research shows children introduced to simple household tasks by age 3 to 4 develop stronger executive function and empathy.',
+        q: 'Is age 3 too young to expect regular chore habits?',
+        a: 'Not when tasks are framed as teamwork and shared daily play. Introducing simple, predictable responsibilities around age three builds confidence, motor coordination, and a natural willingness to help around the house.',
       },
       {
-        q: 'How can I motivate a 3-year-old without offering food treats?',
-        a: 'Use routine momentum and choices: "Do you want to put away the puzzle or the books first?" Giving them autonomy over order prevents resistance.',
+        q: 'How can I encourage my 3-year-old without offering food rewards?',
+        a: 'Focus on routine momentum, personal autonomy, and cheerful connection. Offering choices like "Do you want to gather the blocks or the books first?" gives them control over their work without resorting to food incentives.',
       },
       {
-        q: 'What should I do if my 3-year-old makes a bigger mess while helping?',
-        a: 'Acknowledge their helpful intention first. Gently step in to demonstrate technique without criticizing or visibly redoing their effort.',
+        q: 'What should I do if my three-year-old creates extra mess while helping?',
+        a: 'Recognize their helpful intention first with a warm smile. Gently guide their technique together without scolding or redoing the entire chore in front of them, which can discourage future participation.',
+      },
+      {
+        q: 'How long should a 3-year-old spend on chores each day?',
+        a: 'Aim for three to five minutes per task, totaling about five to ten minutes across the entire day. Keeping chores brief ensures tasks fit comfortably within their natural developmental attention span.',
+      },
+      {
+        q: 'Can a 3-year-old manage a visual chore chart?',
+        a: 'Yes, three-year-olds respond eagerly to visual charts with recognizable picture icons. Ticking off an icon or placing a colorful star gives them a tangible sense of accomplishment they can understand.',
       },
     ],
   },
 
   4: {
     intro:
-      'Four-year-olds are developing stronger hand-eye coordination and can understand simple cause-and-effect sequences. They thrive when given concrete responsibilities they can complete from start to finish.',
+      'Four-year-olds bring vibrant curiosity, growing physical coordination, and enthusiasm for feeling like capable helpers to household tasks. Children at age four can follow multi-step directions, manage two-handed motor tasks, and understand cause-and-effect relationships, such as clearing a table so the family can play a board game. Chores at this age provide an outlet for developing motor skills, foster personal responsibility, and help family life run more smoothly. With clear visual expectations and positive encouragement, four-year-olds can take genuine pride in completing their daily responsibilities.',
     whatTheyCanDo:
-      'A 4-year-old can follow multi-step routines, use both hands cooperatively, set non-breakable table items, water potted plants with a small can, and feed pets with pre-measured food.',
+      'A four-year-old can complete a simple sequence of related tasks, such as clearing their plate, wiping their placemat, and pushing in their chair. They have the finger dexterity to match socks, button simple fastenings, set non-breakable table items, and scoop dry pet food with pre-measured tools. They can focus on an engaging task for five to eight minutes with gentle guidance.',
     chores: [
-      { name: 'Make the bed with help', desc: 'Pull up the sheet and duvet and arrange the pillow neatly.' },
-      { name: 'Set the table', desc: 'Place napkins, placemats, and child-safe utensils on the table.' },
-      { name: 'Feed pets with guidance', desc: 'Scoop dry food from a pre-measured container into the pet bowl.' },
-      { name: 'Water indoor plants', desc: 'Use a small child-sized watering can to water designated house plants.' },
-      { name: 'Clear own plate after meals', desc: 'Carry plastic or melamine plates and cups to the kitchen counter.' },
-      { name: 'Hang towels on low hooks', desc: 'Hang bathroom and kitchen hand towels on accessible low hooks.' },
+      {
+        name: 'Make the bed with simple covers',
+        desc: 'Pull the duvet or blanket smooth over the mattress and place the pillow at the headboard.',
+        howToTeach:
+          'Show them how to grab both top corners of the duvet, give it a gentle shake forward, and smooth the fabric flat with open palms before resting their pillow neatly at the top.',
+      },
+      {
+        name: 'Set family placemats and napkins',
+        desc: 'Lay out fabric or vinyl placemats and place cloth or paper napkins at each family dining seat.',
+        howToTeach:
+          'Count the family members together. Show them how to place one mat squarely in front of each chair, then fold napkins into simple triangles or rectangles next to each setting.',
+      },
+      {
+        name: 'Feed family pets with pre-measured food',
+        desc: 'Pour a pre-measured scoop of dry kibble into the pet food bowl and check water levels.',
+        howToTeach:
+          'Pre-measure the exact food portion into a plastic cup or scoop. Supervise as they pour the kibble into the bowl, reminding them to stay gentle and give the pet space while eating.',
+      },
+      {
+        name: 'Water indoor house plants with a small watering can',
+        desc: 'Check soil moisture and pour water carefully around the base of designated house plants.',
+        howToTeach:
+          'Teach your four-year-old to touch the plant soil gently with one finger to see if it feels dry. Show them how to aim the spout close to the soil surface to avoid spilling onto furniture.',
+      },
+      {
+        name: 'Clear plates and cups to the kitchen counter',
+        desc: 'Carry their own plastic plate, cup, and utensils to the counter after finishing meals.',
+        howToTeach:
+          'Demonstrate clearing loose napkins first, then carrying the plate with two steady hands. Provide a reachable counter stool or low surface where they can safely rest items without dropping them.',
+      },
+      {
+        name: 'Hang bath towels and clothes on low pegs',
+        desc: 'Hang damp bath towels and daily jackets securely on low wall hooks or bathroom bars.',
+        howToTeach:
+          'Show them how to locate the hanging loop or top edge of the towel. Guide them to spread the fabric open so it dries thoroughly rather than bunching up on the floor.',
+      },
     ],
     schedule: {
-      morning: 'Pull up bed covers and place cereal bowl in the sink after breakfast.',
-      afternoon: 'Help set placemats and forks on the table before family dinner.',
-      weekend: 'Water two specific indoor plants using a small child-friendly watering can.',
+      morning: 'Smooth bed blankets, get dressed, and bring cereal bowl to the kitchen counter.',
+      afternoon: 'Hang up backpack, put shoes in cubby, and feed the family pet with supervision.',
+      weekend: 'Water two indoor plants and help sort clean socks into pairs.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Pull up bed covers', afternoon: 'Hang up coat & backpack', evening: 'Set dinner placemats' },
+      { day: 'Tuesday', morning: 'Bring breakfast bowl to sink', afternoon: 'Sort clean socks in pairs', evening: 'Clear dinner plate' },
+      { day: 'Wednesday', morning: 'Pull up bed covers', afternoon: 'Feed pet with pre-measured cup', evening: 'Wipe placemats clean' },
+      { day: 'Thursday', morning: 'Put dirty clothes in hamper', afternoon: 'Put shoes in entryway cubby', evening: 'Set napkins at table' },
+      { day: 'Friday', morning: 'Pull up bed covers', afternoon: 'Tidy picture books on shelf', evening: 'Clear dinner plate' },
+      { day: 'Saturday', morning: 'Help change pillowcase', afternoon: 'Water indoor plants with can', evening: 'Tidy playroom toys' },
+      { day: 'Sunday', morning: 'Pull up bed covers', afternoon: 'Pair up clean laundry socks', evening: 'Prepare backpack for Monday' },
+    ],
     howToTeach: {
-      step1: 'Walk through the chore step-by-step using a visual picture chart.',
-      step2: 'Practice the physical motion together until they feel confident doing it unassisted.',
-      step3: 'Stand back and allow them to complete the sequence independently before thanking them.',
+      step1: 'Explain the purpose and walk through the routine visually: show them where items belong using picture chart cues and clear demonstrations.',
+      step2: 'Practice the physical sequence together: guide their hands through new motions like spreading sheets or scooping pet food until they gain muscle memory.',
+      step3: 'Step back and offer independence: let them complete the steps without hovering, then review the finished chore with specific, encouraging feedback.',
     },
     safetyNote:
-      'Four-year-olds love feeling grown-up, but must never handle knives, hot pots, or chemical cleaners. Ensure step stools in bathrooms and kitchens are stable, and supervise all pet feeding to avoid pet food contamination or animal startles.',
+      'Four-year-olds often feel capable and daring, but require clear safety boundaries. Never allow children this age to use sharp knives, open oven doors, touch hot pans, or handle household cleaning chemicals. Ensure bathroom and kitchen step stools are stable and placed on dry floors. Supervise pet feeding closely to avoid startled animals or food spills.',
+    commonMistakes: [
+      'Assigning open-ended chores: Telling a four-year-old to "tidy the bedroom" creates anxiety. Give specific, visual instructions like "put the puzzle pieces in the wooden box."',
+      'Hovering and correcting every step: Stepping in every few seconds undermines their sense of capability. Allow minor imperfections to stand and focus on effort.',
+      'Changing chore expectations daily: Four-year-olds thrive on predictability. Keeping the same two morning and evening chores creates automatic daily habits.',
+      'Turning chores into power struggles: If your child resists, offer a supportive choice of order or make it a cooperative race rather than engaging in arguments.',
+    ],
     tips: [
-      'Use a visual picture chore chart with icons they can check off independently.',
-      'Assign tasks with clear visual boundaries: "Put all the wooden blocks in this green tub."',
-      'Rotate chores every couple of weeks so novelty keeps their interest high.',
+      'Keep chores anchored to the same daily milestones: after waking up, before afternoon playtime, and after dinner.',
+      'Use visual picture checklists so your four-year-old can check off finished tasks independently.',
+      'Celebrate consistency over speed: complimenting their focus builds positive long-term chore habits.',
     ],
     notYet:
-      'Carrying breakable ceramic or glassware, using knives or peelers, or reaching high cabinets.',
+      'Using sharp knives, cooking over stovetops, handling chemical cleaning sprays, emptying heavy trash cans, or handling breakable porcelain.',
     faqs: [
       {
-        q: 'How many chores should a 4-year-old have daily?',
-        a: 'Aim for 2 or 3 quick daily routines (like making the bed and clearing their plate) taking 10 minutes total.',
+        q: 'How many daily chores should a 4-year-old have?',
+        a: 'Two to three short daily tasks taking roughly five to ten minutes total is ideal. Consistent daily micro-habits like making the bed and clearing dishes build life skills without tiring young children.',
       },
       {
-        q: 'Should I tie chores to an allowance at age 4?',
-        a: 'Child development experts generally advise against paying 4-year-olds for basic chores. Frame tasks as shared family teamwork rather than paid transactions.',
+        q: 'Should I pay a 4-year-old an allowance for doing chores?',
+        a: 'Many families keep routine household chores unpaid at age four, framing them as shared teamwork that keeps the family home running. If you choose to introduce money concepts, keep it separate from basic personal tidying.',
       },
       {
-        q: 'How do I stop morning resistance to chores?',
-        a: 'Anchor chores to existing habits: make the bed immediately upon waking, before pajama changes or breakfast.',
+        q: 'What should I do when my 4-year-old refuses to do their chores?',
+        a: 'Keep instructions simple and offer limited choices: "Would you like to clear your plate first or feed the cat?" Giving them control over the sequence often diffuses stubborn resistance.',
+      },
+      {
+        q: 'Can a 4-year-old make their own bed neatly?',
+        a: 'At age four, bed-making means pulling up the blanket or duvet and placing the pillow at the headboard. It will look bumpy and imperfect, but completing it independently fosters great pride.',
+      },
+      {
+        q: 'How can I keep my 4-year-old motivated with chores over time?',
+        a: 'Use a visual chore chart with picture icons where they can track completed steps with colorful stickers. Rotating one or two chores every few weeks also keeps routines fresh and interesting.',
       },
     ],
   },
@@ -752,7 +911,8 @@ function aOrAn(n: number): string {
   return 'a';
 }
 
-const customJsonLd = age === 8 ? [article, buildFaqPage(faqItems, page.path)] : undefined;
+const hasFaqPage = content.faqs && content.faqs.length === 5;
+const customJsonLd = hasFaqPage ? [article, buildFaqPage(faqItems, page.path)] : undefined;
 ---
 
 <ArticleLayout
@@ -866,7 +1026,7 @@ const customJsonLd = age === 8 ? [article, buildFaqPage(faqItems, page.path)] : 
   <h2>Not quite yet: tasks to avoid at {age}</h2>
   <p>{content.notYet}</p>
 
-  {age === 8 ? (
+  {hasFaqPage ? (
     <section aria-labelledby="faq">
       <h2 id="faq">Frequently asked questions about chores for {age}-year-olds</h2>
       <div class="space-y-4">
