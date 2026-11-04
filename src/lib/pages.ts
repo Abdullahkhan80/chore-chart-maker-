@@ -54,7 +54,7 @@ export const PAGES = {
     description:
       'Use this free chore chart maker to build a printable chore chart for kids in minutes: picture chores by age, weekly, routine or reward layouts. No sign-up.',
     alternates: CHORE_CHART_ALTERNATES,
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   ptChoreChartMaker: page({
     path: '/pt/',
@@ -139,6 +139,7 @@ export const PAGES = {
     h1: 'Free chore chart templates to edit and print',
     description:
       'Free chore chart maker templates you can edit online and print on Letter or A4. Get a PDF or PNG with no sign-up, no trial and nothing uploaded to a server.',
+    lastmod: '2026-11-04',
   }),
   elegantChoreChart: page({
     path: '/elegant-chore-chart/',
@@ -219,7 +220,7 @@ export function agePage(age: number): PageMeta {
     h1: `Chores for ${age}-year-olds`,
     description: `Age-appropriate chores for ${age}-year-olds, with daily and weekly ideas, tips for teaching each job, and a free printable chore chart you can customize.`,
     published: isNew ? DEPLOY_DATE : LAUNCH,
-    lastmod: DEPLOY_DATE,
+    lastmod: age === 8 ? '2026-11-04' : DEPLOY_DATE,
   });
 }
 

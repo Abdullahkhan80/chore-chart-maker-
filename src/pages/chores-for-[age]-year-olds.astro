@@ -1,7 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import ArticleLayout from '../layouts/ArticleLayout.astro';
-import { PAGES, AGE_PAGE_AGES, agePage } from '../lib/pages.ts';
+import { PAGES, AGE_PAGE_AGES, agePage, pageOgImagePath } from '../lib/pages.ts';
+import { buildArticle, buildFaqPage, type FaqItem } from '../lib/seo.ts';
 
 export const getStaticPaths = (() =>
   AGE_PAGE_AGES.map((age) => ({ params: { age: String(age) } }))) satisfies GetStaticPaths;
@@ -9,11 +10,19 @@ export const getStaticPaths = (() =>
 interface AgeChore {
   name: string;
   desc: string;
+  howToTeach?: string;
 }
 
 interface AgeFaq {
   q: string;
   a: string;
+}
+
+interface ScheduleRow {
+  day: string;
+  morning: string;
+  afternoon: string;
+  evening: string;
 }
 
 interface AgeData {
@@ -25,12 +34,14 @@ interface AgeData {
     afternoon: string;
     weekend: string;
   };
+  scheduleTable?: ScheduleRow[];
   howToTeach: {
     step1: string;
     step2: string;
     step3: string;
   };
   safetyNote: string;
+  commonMistakes?: string[];
   tips: string[];
   notYet: string;
   faqs: AgeFaq[];
@@ -327,32 +338,77 @@ const AGE_CONTENT: Record<number, AgeData> = {
 
   8: {
     intro:
-      'Eight-year-olds are capable of sustained effort, have mature fine motor skills, and can complete multi-step tasks to adult standards when provided with clear expectations and proper tools.',
+      'Chores for 8-year-olds help children develop real capability, confidence, and responsibility as they transition into middle childhood. At age eight, kids have the physical coordination, reading fluency, and attention span to handle multi-step household tasks independently—such as running the dishwasher, vacuuming living areas, folding personal laundry, and assisting with simple meals. Establishing a predictable chore routine with a customizable chart helps eight-year-olds learn essential life skills while eliminating daily nagging and power struggles.',
     whatTheyCanDo:
-      'An 8-year-old can manage multi-step chores for 20 to 30 minutes, notice when things need cleaning without repeated prompts, prepare simple meals with guidance, and complete detailed household jobs.',
+      'An 8-year-old can comfortably focus on chores for 20 to 30 minutes at a time. They can follow written multi-step checklists, safely operate standard household appliances with initial guidance, sort items into organized categories, and take genuine pride in finished work that matches adult standards.',
     chores: [
-      { name: 'Run the dishwasher cycle', desc: 'Add detergent, choose the right wash cycle, start the wash, and unload.' },
-      { name: 'Clean toilets and countertops', desc: 'Use bathroom cleaner, scrub the bowl, and wipe down countertops cleanly.' },
-      { name: 'Mop hard-surface floors', desc: 'Sweep and mop kitchen and bathroom floors with warm water and cleaner.' },
-      { name: 'Do personal laundry with guidance', desc: 'Sort clothes, load the washer, transfer to the dryer, and fold.' },
-      { name: 'Cook simple meals with an adult nearby', desc: 'Make scrambled eggs, toast, oatmeal, or warm soup with adult oversight.' },
-      { name: 'Take trash bins to the curb', desc: 'Roll waste and recycling bins to the curb on collection days.' },
+      {
+        name: 'Run the dishwasher cycle',
+        desc: 'Scrape plates, arrange dishes facing center, insert detergent tab, and select the wash cycle.',
+        howToTeach:
+          'Teach proper spacing so spray arms rotate freely. Show them where knives point down in the basket and practice adding the detergent tablet together.',
+      },
+      {
+        name: 'Vacuum living areas and rugs',
+        desc: 'Clear floor obstacles, vacuum in overlapping parallel rows, and empty the dust canister.',
+        howToTeach:
+          'Demonstrate clearing small toys and cords first. Show them how to push forward slowly and pull back in straight, overlapping lines.',
+      },
+      {
+        name: 'Fold and organize personal laundry',
+        desc: 'Sort clothes by type, fold shirts and pants neatly, and put them into the correct dresser drawers.',
+        howToTeach:
+          'Teach the simple shoulder-fold method for shirts and rolling socks into pairs. Label dresser drawers so putting items away is frictionless.',
+      },
+      {
+        name: 'Wipe bathroom counters and sinks',
+        desc: 'Clear personal toiletries, wipe down the sink basin and faucet, and dry with a clean microfiber cloth.',
+        howToTeach:
+          'Provide a mild, child-safe spray bottle (such as diluted dish soap or vinegar and water). Show them how to wipe from the back of the counter toward the sink.',
+      },
+      {
+        name: 'Cook simple meals with an adult nearby',
+        desc: 'Prepare scrambled eggs, assemble sandwiches, peel vegetables, or stir warm oatmeal under adult supervision.',
+        howToTeach:
+          'Emphasize safety first: wash hands, turn skillet handles inward on the stovetop, and always keep an adult in the room when using heat.',
+      },
+      {
+        name: 'Roll trash and recycling bins to the curb',
+        desc: 'Tilt wheelie bins back on their wheels and guide them down the driveway on collection mornings.',
+        howToTeach:
+          'Walk the route together to demonstrate balance. Ensure they know to pause and check for cars before stepping near the curb or roadway.',
+      },
     ],
     schedule: {
       morning: 'Tidy bedroom, make bed, and ensure school backpack and water bottle are ready.',
       afternoon: 'Unload clean dishwasher and wipe dining table after dinner.',
       weekend: 'Roll trash bins to the curb and vacuum living room or bedroom rug.',
     },
+    scheduleTable: [
+      { day: 'Monday', morning: 'Make bed & pack backpack', afternoon: 'Unload clean dishwasher', evening: 'Wipe dining table' },
+      { day: 'Tuesday', morning: 'Make bed & pack backpack', afternoon: 'Fold clean laundry batch', evening: 'Clear dinner plates' },
+      { day: 'Wednesday', morning: 'Make bed & pack backpack', afternoon: 'Tidy bedroom desk & floor', evening: 'Wipe dining table' },
+      { day: 'Thursday', morning: 'Make bed & pack backpack', afternoon: 'Unload clean dishwasher', evening: 'Empty bathroom trash' },
+      { day: 'Friday', morning: 'Make bed & pack backpack', afternoon: 'Sort school papers & bag', evening: 'Family movie snack prep' },
+      { day: 'Saturday', morning: 'Strip bedroom bed sheets', afternoon: 'Vacuum bedroom rug', evening: 'Help cook dinner' },
+      { day: 'Sunday', morning: 'Put fresh sheets on bed', afternoon: 'Roll bins to the curb', evening: 'Review upcoming week chart' },
+    ],
     howToTeach: {
       step1: 'Walk through appliance controls (dishwasher, washer, microwave) with explicit safety rules.',
       step2: 'Work through the full cycle together once, emphasizing start and clean-up steps.',
       step3: 'Hand over full ownership, conducting only a brief final check with constructive feedback.',
     },
     safetyNote:
-      'Cooking tasks at age 8 require an adult nearby in the kitchen. Teach stovetop safety: pot handles turned inward, never leaving boiling pots unattended, and keeping hot pads within reach. Supervise curb trash wheelie bins near busy roads.',
+      'Cooking tasks at age 8 require an adult nearby in the kitchen. Teach stovetop safety: pot handles turned inward, never leaving boiling pots unattended, and keeping hot pads within reach. Supervise curb trash wheelie bins near busy roads. Lawnmowers, power tools, and harsh chemical cleaners remain strictly off-limits.',
+    commonMistakes: [
+      'Expecting adult perfection immediately: A bed made by an 8-year-old will have wrinkles, and folded towels will not look boutique-perfect. Praising consistency and effort builds long-term capability faster than re-doing their work in front of them.',
+      'Giving vague instructions: Phrases like "go clean the playroom" cause decision paralysis. Instead, provide concrete sequential steps: "Put all books on the shelf, then put LEGO bricks in the blue bin."',
+      'Abandoning routines during busy school weeks: Skipping chore expectations during test weeks creates inconsistency. If schoolwork picks up, temporarily scale back to 5-minute essentials rather than dropping the chart entirely.',
+      'Using chores as a disciplinary punishment: Framing chores as penalties makes domestic contributions feel like a sentence rather than a normal, valued part of family life.',
+    ],
     tips: [
-      'Define clear quality standards so they know exactly what a finished job looks like.',
-      'Offer flexibility on when chores are done as long as established deadlines are respected.',
+      'Define clear quality standards so your child knows exactly what a finished job looks like.',
+      'Offer flexibility on when chores are done as long as established daily deadlines are respected.',
       'Frame these responsibilities as essential life skills that prepare them for independence.',
     ],
     notYet:
@@ -360,15 +416,23 @@ const AGE_CONTENT: Record<number, AgeData> = {
     faqs: [
       {
         q: 'Should 8-year-olds receive an allowance for chores?',
-        a: 'Many families keep household maintenance (room, dishes) unpaid, while offering an allowance for personal money management or optional bonus tasks.',
+        a: 'Many families keep basic household maintenance (room, dishes) unpaid, while offering an allowance for personal money management or optional bonus tasks.',
+      },
+      {
+        q: 'How many chores should an 8-year-old have each day?',
+        a: 'Aim for two or three daily routine tasks (taking 10 to 15 minutes total) plus one deeper weekly project on the weekend (such as vacuuming a room or washing the dog with an adult).',
       },
       {
         q: 'How can I get an 8-year-old to clean their bedroom without arguing?',
         a: 'Break the room into categories: "First pick up all dirty clothes, then put all LEGOs in the bin, then make the bed." Concrete steps prevent overwhelm.',
       },
       {
-        q: 'What is the most important chore skill to teach at age 8?',
-        a: 'Operating the dishwasher and laundry machines builds enormous self-confidence and practical domestic competence.',
+        q: 'What kitchen tasks can an 8-year-old do safely?',
+        a: 'With an adult nearby, eight-year-olds can safely scramble eggs, toast bread, make cold sandwiches, rinse produce, measure baking ingredients, and load or unload plates in the dishwasher.',
+      },
+      {
+        q: 'How long should an 8-year-old spend on daily chores?',
+        a: 'Daily chores should take roughly 15 to 20 minutes total. Keeping weekday tasks focused prevents chores from encroaching on school homework, outdoor play, and family relaxation.',
       },
     ],
   },
@@ -667,6 +731,23 @@ const page = agePage(age);
 const content = AGE_CONTENT[age];
 const prevAge = age > 2 ? age - 1 : null;
 const nextAge = age < 14 ? age + 1 : null;
+
+const article = buildArticle({
+  headline: page.h1,
+  description: page.description,
+  path: page.path,
+  datePublished: page.published,
+  dateModified: page.lastmod,
+  imagePath: pageOgImagePath(page),
+  lang: page.lang,
+});
+
+const faqItems: FaqItem[] = content.faqs.map((f) => ({
+  question: f.q,
+  answer: f.a,
+}));
+
+const customJsonLd = age === 8 ? [article, buildFaqPage(faqItems, page.path)] : undefined;
 ---
 
 <ArticleLayout
@@ -676,6 +757,8 @@ const nextAge = age < 14 ? age + 1 : null;
     { name: PAGES.choresByAge.label, path: PAGES.choresByAge.path },
     { name: page.label, path: page.path },
   ]}
+  jsonLd={customJsonLd}
+  ogType="article"
 >
   <p class="text-lg leading-relaxed">{content.intro}</p>
   <p>
@@ -688,29 +771,59 @@ const nextAge = age < 14 ? age + 1 : null;
 
   <h2>Age-appropriate chores for {age}-year-olds</h2>
   <p>Tasks {age}-year-olds can manage with practice. Start with two or three and build from there.</p>
-  <ul class="space-y-2">
+  <ul class="space-y-3">
     {content.chores.map((chore) => (
       <li>
         <strong>{chore.name}:</strong> {chore.desc}
+        {chore.howToTeach && (
+          <p class="mt-1 text-sm text-muted">
+            <span class="font-semibold text-fg">How to teach:</span> {chore.howToTeach}
+          </p>
+        )}
       </li>
     ))}
   </ul>
 
   <h2>Sample weekly routine for a {age}-year-old</h2>
-  <div class="grid gap-4 sm:grid-cols-3">
-    <div class="rounded-xl border border-line bg-surface p-4">
-      <h3 class="font-bold text-fg">Morning routine</h3>
-      <p class="mt-1 text-sm text-muted">{content.schedule.morning}</p>
+  {content.scheduleTable ? (
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Morning</th>
+            <th scope="col">After School</th>
+            <th scope="col">Evening</th>
+          </tr>
+        </thead>
+        <tbody>
+          {content.scheduleTable.map((row) => (
+            <tr>
+              <th scope="row">{row.day}</th>
+              <td>{row.morning}</td>
+              <td>{row.afternoon}</td>
+              <td>{row.evening}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    <div class="rounded-xl border border-line bg-surface p-4">
-      <h3 class="font-bold text-fg">Afternoon / Evening</h3>
-      <p class="mt-1 text-sm text-muted">{content.schedule.afternoon}</p>
+  ) : (
+    <div class="grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl border border-line bg-surface p-4">
+        <h3 class="font-bold text-fg">Morning routine</h3>
+        <p class="mt-1 text-sm text-muted">{content.schedule.morning}</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-4">
+        <h3 class="font-bold text-fg">Afternoon / Evening</h3>
+        <p class="mt-1 text-sm text-muted">{content.schedule.afternoon}</p>
+      </div>
+      <div class="rounded-xl border border-line bg-surface p-4">
+        <h3 class="font-bold text-fg">Weekend tasks</h3>
+        <p class="mt-1 text-sm text-muted">{content.schedule.weekend}</p>
+      </div>
     </div>
-    <div class="rounded-xl border border-line bg-surface p-4">
-      <h3 class="font-bold text-fg">Weekend tasks</h3>
-      <p class="mt-1 text-sm text-muted">{content.schedule.weekend}</p>
-    </div>
-  </div>
+  )}
 
   <h2>How to teach chores to a {age}-year-old</h2>
   <ol class="space-y-2">
@@ -727,6 +840,17 @@ const nextAge = age < 14 ? age + 1 : null;
     </p>
   </div>
 
+  {content.commonMistakes && (
+    <>
+      <h2>Common mistakes when assigning chores to an 8-year-old</h2>
+      <ul class="space-y-2">
+        {content.commonMistakes.map((mistake) => (
+          <li>{mistake}</li>
+        ))}
+      </ul>
+    </>
+  )}
+
   <h2>Teaching tips for {age}-year-olds</h2>
   <ul class="space-y-1">
     {content.tips.map((tip) => (
@@ -737,15 +861,31 @@ const nextAge = age < 14 ? age + 1 : null;
   <h2>Not quite yet: tasks to avoid at {age}</h2>
   <p>{content.notYet}</p>
 
-  <h2>Frequently asked questions about chores for {age}-year-olds</h2>
-  <div class="space-y-4">
-    {content.faqs.map((faq) => (
-      <div class="rounded-xl border border-line bg-surface p-4">
-        <h3 class="font-bold text-fg">{faq.q}</h3>
-        <p class="mt-1 text-sm text-muted">{faq.a}</p>
+  {age === 8 ? (
+    <section aria-labelledby="faq">
+      <h2 id="faq">Frequently asked questions about chores for {age}-year-olds</h2>
+      <div class="space-y-4">
+        {content.faqs.map((faq) => (
+          <div class="rounded-xl border border-line bg-surface p-4">
+            <h3 class="font-bold text-fg">{faq.q}</h3>
+            <p class="mt-1 text-sm text-muted">{faq.a}</p>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
+    </section>
+  ) : (
+    <div class="mt-8">
+      <h2>Frequently asked questions about chores for {age}-year-olds</h2>
+      <div class="space-y-4">
+        {content.faqs.map((faq) => (
+          <div class="rounded-xl border border-line bg-surface p-4">
+            <h3 class="font-bold text-fg">{faq.q}</h3>
+            <p class="mt-1 text-sm text-muted">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
 
   <nav class="my-6 border-y border-line py-4" aria-label="Age navigation">
     <div class="flex flex-wrap items-center justify-between gap-4">
