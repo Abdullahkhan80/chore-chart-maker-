@@ -10,6 +10,7 @@ import { SITE_CONFIG } from '../src/lib/seo.ts';
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
 const HTML_BUDGET_BYTES = 72 * 1024;
+const HTML_GZIP_BUDGET_BYTES = 20 * 1024;
 const ORIGIN = `https://${SITE_CONFIG.domain}`;
 
 interface BuiltPage {
@@ -67,9 +68,24 @@ before(() => {
 
 const indexable = () => pages.filter((p) => !isNoindex(p.html));
 
-test('every HTML file is within the 60 KB budget', () => {
+test('every HTML file is within the 72 KB raw and 20 KB gzipped budget', () => {
   for (const page of pages) {
     assert.ok(page.bytes <= HTML_BUDGET_BYTES, `${page.file} is ${page.bytes} bytes (budget ${HTML_BUDGET_BYTES})`);
+    const gzippedBytes = gzipSync(page.html).length;
+    assert.ok(gzippedBytes <= HTML_GZIP_BUDGET_BYTES, `${page.file} is ${gzippedBytes} bytes gzipped (budget ${HTML_GZIP_BUDGET_BYTES})`);
+  }
+});
+
+test('no built HTML contains third-party scripts or Google Analytics', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(page.html, /googletagmanager\.com|google-analytics\.com/i, `${page.file} contains Google Analytics/GTM`);
+    const scriptSrcs = matchAll(page.html, /<script[^>]+src="([^"]+)"/g);
+    for (const src of scriptSrcs) {
+      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//')) {
+        const url = new URL(src, ORIGIN);
+        assert.equal(url.hostname, SITE_CONFIG.domain, `${page.file} loads external script from ${src}`);
+      }
+    }
   }
 });
 

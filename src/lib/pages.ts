@@ -170,7 +170,8 @@ export const PAGES = {
     title: 'Privacy Policy | Chore Chart Maker',
     h1: 'Privacy policy',
     description:
-      'How Chore Chart Maker protects your privacy: names and chores on your charts stay in your browser, there are no accounts, and analytics never see what you type.',
+      'How Chore Chart Maker protects your privacy: chart data stays in your browser, there are no accounts, and no third-party tracking cookies or scripts are used.',
+    lastmod: '2026-11-04',
   }),
   terms: page({
     path: '/terms/',
