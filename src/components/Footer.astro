@@ -2,38 +2,73 @@
 import { PAGES, AGE_PAGE_AGES, agePagePath } from '../lib/pages.ts';
 import { SITE_CONFIG } from '../lib/seo.ts';
 
+interface Props {
+  currentPath?: string;
+  lang?: string;
+}
+
+const { currentPath, lang } = Astro.props;
+const isPt = lang?.startsWith('pt') || currentPath === PAGES.ptChoreChartMaker.path;
+const isFr = lang?.startsWith('fr') || currentPath === PAGES.frChoreChartMaker.path;
+
+const labels = isPt
+  ? {
+      tools: 'Ferramentas',
+      guides: 'Guias',
+      site: 'Site e Idiomas',
+      tagline: 'Tabelas de tarefas e rotinas gratuitas para imprimir para famílias e repúblicas. Feitas no seu navegador: sem cadastro, zero uploads.',
+      copyright: `© ${new Date().getFullYear()} ${SITE_CONFIG.name}. Ferramentas gratuitas para imprimir para lares ocupados.`,
+    }
+  : isFr
+    ? {
+        tools: 'Outils',
+        guides: 'Guides',
+        site: 'Site et Langues',
+        tagline: 'Tableaux de tâches et routines gratuits à imprimer pour la famille et la colocation. Dans votre navigateur : sans inscription ni transfert de données.',
+        copyright: `© ${new Date().getFullYear()} ${SITE_CONFIG.name}. Outils imprimables gratuits pour les familles occupées.`,
+      }
+    : {
+        tools: 'Tools',
+        guides: 'Guides',
+        site: 'Site & Languages',
+        tagline: 'Free printable chore charts and routines for families and shared homes. Made in your browser: no accounts, zero uploads.',
+        copyright: `© ${new Date().getFullYear()} ${SITE_CONFIG.name}. Free printable tools, made for busy homes.`,
+      };
+
 const columns = [
   {
-    label: 'Tools',
+    label: labels.tools,
     links: [
-      PAGES.choreChartMaker,
-      { ...PAGES.rewardChartMaker, label: 'Reward Chart Maker' },
-      { ...PAGES.freeChoreChartTemplate, label: 'Templates' },
-      PAGES.familyChoreChart,
-      PAGES.roommateChoreChart,
-      PAGES.morningRoutineChart,
-      PAGES.bedtimeRoutineChart,
-      PAGES.elegantChoreChart,
+      isPt ? { path: PAGES.ptChoreChartMaker.path, label: 'Criador de Quadro' } : isFr ? { path: PAGES.frChoreChartMaker.path, label: 'Tableau de Tâches' } : PAGES.choreChartMaker,
+      { ...PAGES.rewardChartMaker, label: isPt ? 'Quadro de Recompensas' : isFr ? 'Tableau de Récompenses' : 'Reward Chart Maker' },
+      { ...PAGES.freeChoreChartTemplate, label: isPt ? 'Modelos de Tabela' : isFr ? 'Modèles Gratuits' : 'Templates' },
+      { ...PAGES.familyChoreChart, label: isPt ? 'Tabela Familiar' : isFr ? 'Tableau Familial' : PAGES.familyChoreChart.label },
+      { ...PAGES.roommateChoreChart, label: isPt ? 'Tabela para Repúblicas' : isFr ? 'Tableau de Colocation' : PAGES.roommateChoreChart.label },
+      { ...PAGES.morningRoutineChart, label: isPt ? 'Rotina Matinal' : isFr ? 'Routine du Matin' : PAGES.morningRoutineChart.label },
+      { ...PAGES.bedtimeRoutineChart, label: isPt ? 'Rotina Noturna' : isFr ? 'Routine du Soir' : PAGES.bedtimeRoutineChart.label },
+      { ...PAGES.elegantChoreChart, label: isPt ? 'Tabela Minimalista' : isFr ? 'Tableau Minimaliste' : PAGES.elegantChoreChart.label },
     ],
   },
   {
-    label: 'Guides',
-    links: [PAGES.choresByAge, ...AGE_PAGE_AGES.map((age) => ({ path: agePagePath(age), label: `Age ${age}` }))],
+    label: labels.guides,
+    links: [
+      { path: PAGES.choresByAge.path, label: isPt ? 'Tarefas por Idade' : isFr ? 'Tâches par Âge' : PAGES.choresByAge.label },
+      ...AGE_PAGE_AGES.map((age) => ({ path: agePagePath(age), label: isPt ? `${age} Anos` : isFr ? `${age} Ans` : `Age ${age}` })),
+    ],
   },
   {
-    label: 'Site & Languages',
+    label: labels.site,
     links: [
-      PAGES.about,
-      PAGES.contact,
-      PAGES.privacyPolicy,
-      PAGES.terms,
-      { path: PAGES.ptChoreChartMaker.path, label: 'Português (Tabela)' },
-      { path: PAGES.frChoreChartMaker.path, label: 'Français (Tableau)' },
+      { path: PAGES.about.path, label: isPt ? 'Sobre' : isFr ? 'À propos' : PAGES.about.label },
+      { path: PAGES.contact.path, label: isPt ? 'Contato' : isFr ? 'Contact' : PAGES.contact.label },
+      { path: PAGES.privacyPolicy.path, label: isPt ? 'Privacidade' : isFr ? 'Confidentialité' : PAGES.privacyPolicy.label },
+      { path: PAGES.terms.path, label: isPt ? 'Termos' : isFr ? 'Conditions' : PAGES.terms.label },
+      { path: PAGES.choreChartMaker.path, label: 'English (US)' },
+      { path: PAGES.ptChoreChartMaker.path, label: 'Português (Brasil)' },
+      { path: PAGES.frChoreChartMaker.path, label: 'Français' },
     ],
   },
 ];
-
-const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer print:hidden">
@@ -44,7 +79,7 @@ const year = new Date().getFullYear();
         <span>{SITE_CONFIG.name}</span>
       </a>
       <p class="mt-3 text-[0.95rem] leading-relaxed text-muted">
-        Free printable chore charts and routines for families and shared homes. Made in your browser: no accounts, zero uploads.
+        {labels.tagline}
       </p>
     </div>
     {
@@ -63,6 +98,6 @@ const year = new Date().getFullYear();
     }
   </div>
   <div class="container-page border-t border-line py-6 text-sm text-muted">
-    © {year} {SITE_CONFIG.name}. Free printable tools, made for busy homes.
+    {labels.copyright}
   </div>
 </footer>

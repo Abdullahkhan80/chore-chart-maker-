@@ -7,76 +7,122 @@ const faq: FaqItem[] = [
   {
     question: 'How does a reward chart work?',
     answer:
-      'Your child earns a sticker or a check mark each time they do the chosen task. When the sticker track is full, they get the reward you agreed on together.',
+      'Your child earns a sticker or check mark each time they complete the target positive behavior. When the sticker track reaches the chosen milestone goal, they receive the reward you agreed upon together.',
   },
   {
     question: 'How many stickers should a reward chart have?',
     answer:
-      'You can set a goal from 5 to 30 stickers. Young children need a short track, around 5 to 10, so the reward comes within a few days. Older kids can work toward a longer goal.',
+      'You can set a goal from 5 to 30 stickers. For toddlers and preschoolers, keep tracks short (5 to 10 stickers) so the reward is achieved within a few days. Older kids can stay motivated across 15 to 30 stickers.',
   },
   {
-    question: 'What are good rewards for kids?',
+    question: 'What are good rewards for kids on a sticker chart?',
     answer:
-      'Experiences often work better than toys: a trip to the park, choosing dinner, an extra bedtime story, baking together or a family movie night. Choose the reward with your child.',
+      'Shared experiences often motivate better than toys: an afternoon trip to the playground, choosing Friday movie night, baking cookies together, staying up 20 minutes late, or picking a favorite dinner.',
   },
   {
-    question: 'Should a reward chart focus on one behavior?',
+    question: 'Should a reward chart focus on only one behavior at a time?',
     answer:
-      'Yes, at first. One clear goal, such as getting dressed without reminders, is easier for a child to understand. Once the habit sticks, phase out the chart and start a new one.',
+      'Yes. Targeting one specific habit—such as potty training, sleeping in their own bed, or brushing teeth without arguing—creates clear expectations. Once the habit becomes second nature, celebrate and fade out the chart.',
   },
   {
     question: 'Can I make reward charts for several children?',
     answer:
-      'Yes. Add each child in step 1 and the reward chart maker prints one page per child, each with their own name and sticker track.',
+      'Yes. Add up to eight children in the first step. The reward chart maker automatically generates one customized page per child, each featuring their own name, avatar, and chosen milestone prize.',
+  },
+  {
+    question: 'What is the best way to transition off a reward chart?',
+    answer:
+      'Gradually increase the number of stickers required, shift from tangible prizes to verbal recognition and shared privileges, and celebrate that the behavior has become part of their everyday routine.',
   },
 ];
+
+const link = 'text-brand underline font-medium';
 ---
 
 <ToolLayout page={PAGES.rewardChartMaker} faq={faq}>
-  <Fragment slot="intro">Set a goal, choose a reward and print a sticker chart your child can fill in. Free, no sign-up, and private by design.</Fragment>
+  <Fragment slot="intro">
+    Set a goal, choose a fun prize, and build a printable reward chart your child can fill with stickers. Free, private, and customizable in minutes.
+  </Fragment>
 
-  <h2>How to use a reward chart effectively</h2>
+  <h2>Encouraging positive habits with an online sticker chart</h2>
   <p>
-    Reward charts are one of the most effective tools for positive reinforcement. Unlike a general chore schedule,
-    a reward chart targets one or two specific behaviors—such as staying in bed, potty training, completing homework,
-    or brushing teeth without a battle.
+    Our free reward chart maker lets you design a customized online sticker chart to motivate new habits, potty training, homework, or positive behavior. Whether you need a 5-sticker milestone chart for a toddler or a 30-sticker goal track for an older child, this tool lets you set a custom target and prize, choose colorful themes, and download or print directly from your browser. Everything runs locally on your device with no accounts, no subscriptions, and complete privacy.
   </p>
+  <p>
+    Unlike general household chore charts, an online sticker chart concentrates attention on positive reinforcement for one or two specific goals, helping young children understand the direct connection between their daily effort and an exciting reward.
+  </p>
+
+  <h2>How it works: customize your reward chart in 4 steps</h2>
+  <ol>
+    <li>
+      <strong>Add child details:</strong> Enter your child's name, choose a favorite color swatch, and select an illustrated avatar icon.
+    </li>
+    <li>
+      <strong>Select target tasks:</strong> Pick the specific behavior you want to encourage—such as potty milestones, staying in bed all night, or completing daily reading.
+    </li>
+    <li>
+      <strong>Set your goal & reward:</strong> In the Style tab, choose between 5 and 30 sticker boxes, type your custom prize (e.g., "A trip to the park"), and select a playful visual theme.
+    </li>
+    <li>
+      <strong>Download or print:</strong> Print immediately on US Letter or A4 paper, or download a high-resolution PDF or PNG file to use at home or display on a tablet.
+    </li>
+  </ol>
+
+  <h2>What makes this reward chart maker different</h2>
   <ul>
     <li>
-      <strong>Keep goals achievable:</strong> Start with a short track of 5 to 10 stickers for younger children so they
-      reach the milestone quickly and feel successful.
+      <strong>Completely free with no premium tiers:</strong> Every feature, including all 12 illustrated themes, custom sticker tracks, and high-res downloads, is 100% free.
     </li>
     <li>
-      <strong>Agree on the reward together:</strong> Pick motivating rewards like extra playground time, choosing movie
-      night, or baking cookies together.
+      <strong>No sign-up or personal info needed:</strong> You never need to enter an email address, create a password, or download an app.
     </li>
     <li>
-      <strong>Celebrate consistency:</strong> Place stickers right when the positive behavior happens to build a clear
-      connection between effort and recognition.
+      <strong>Private in-browser generation:</strong> Names, target goals, and chosen prizes never leave your computer or phone. Everything saves in local storage.
+    </li>
+    <li>
+      <strong>Pre-reader friendly illustrations:</strong> Each target task features clear picture icons so toddlers and pre-kindergarten children can follow along visually.
     </li>
   </ul>
 
-  <h2>Related charts and tools</h2>
-  <p>Looking for a different chart format? Explore our free printable tools:</p>
+  <h2>Proven strategies for using sticker charts successfully</h2>
   <ul>
     <li>
-      <a href={PAGES.choreChartMaker.path}>Free Chore Chart Maker</a>: Build a full weekly schedule with picture icons
-      for everyday household chores.
+      <strong>Focus on one clear behavior:</strong> Trying to fix everything at once confuses children. Choose one high-priority habit, explain exactly what success looks like, and celebrate that single milestone.
     </li>
     <li>
-      <a href={PAGES.morningRoutineChart.path}>Morning Routine Chart</a>: Visual picture steps to make school morning
-      preparations smooth and stress-free.
+      <strong>Keep early horizons short:</strong> Toddlers have limited patience for distant rewards. A 5-box sticker track lets a 3-year-old celebrate success within three or four days, reinforcing their sense of competence.
     </li>
     <li>
-      <a href={PAGES.familyChoreChart.path}>Family Chore Chart</a>: Manage household tasks for all family members on
-      one shared printable chart.
+      <strong>Award stickers immediately:</strong> Place the sticker or checkmark on the chart right as the positive action occurs. Immediate feedback strengthens the neural association between the effort and the recognition.
     </li>
     <li>
-      <a href={PAGES.freeChoreChartTemplate.path}>Free Chore Chart Templates</a>: Ready-made printable templates for
-      quick editing and instant download.
+      <strong>Pick experiential rewards:</strong> Experiences—like visiting the duck pond, picking a board game for family game night, or baking muffins together—build connection and avoid accumulating disposable plastic toys.
     </li>
     <li>
-      <a href={PAGES.choresByAge.path}>Chores by Age Guide</a>: Age-by-age recommendations from toddlers to teenagers.
+      <strong>Never take stickers away:</strong> A reward chart is an incentive system, not a disciplinary fine. Removing previously earned stickers creates resentment and damages motivation.
+    </li>
+  </ul>
+
+  <h2>Related printable tools and chore charts</h2>
+  <p>Looking for other organizational printables? Explore our companion tools:</p>
+  <ul>
+    <li>
+      <a href={PAGES.choreChartMaker.path} class={link}>Free Chore Chart Maker</a>: Build full weekly chore schedules with illustrated icons and allowance options.
+    </li>
+    <li>
+      <a href={PAGES.morningRoutineChart.path} class={link}>Morning Routine Chart</a>: Visual picture steps for calm and punctual school mornings.
+    </li>
+    <li>
+      <a href={PAGES.bedtimeRoutineChart.path} class={link}>Bedtime Routine Chart</a>: Evening checklists that guide children through peaceful wind-down steps.
+    </li>
+    <li>
+      <a href={PAGES.familyChoreChart.path} class={link}>Family Chore Chart</a>: Coordinate daily and weekly responsibilities across parents and siblings.
+    </li>
+    <li>
+      <a href={PAGES.freeChoreChartTemplate.path} class={link}>Free Chore Chart Templates</a>: Ready-made printable starting templates for quick home use.
+    </li>
+    <li>
+      <a href={PAGES.choresByAge.path} class={link}>Chores by Age Guide</a>: Age-by-age developmental guide from toddlers to teenagers.
     </li>
   </ul>
 </ToolLayout>

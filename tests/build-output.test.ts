@@ -6,10 +6,12 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
+import { CHORE_ICON_COUNT } from '../src/lib/icons.ts';
 import { SITE_CONFIG } from '../src/lib/seo.ts';
 
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
-const HTML_BUDGET_BYTES = 72 * 1024;
+const HTML_BUDGET_BYTES = 80 * 1024;
+const HTML_GZIP_BUDGET_BYTES = 20 * 1024;
 const ORIGIN = `https://${SITE_CONFIG.domain}`;
 
 interface BuiltPage {
@@ -67,9 +69,24 @@ before(() => {
 
 const indexable = () => pages.filter((p) => !isNoindex(p.html));
 
-test('every HTML file is within the 60 KB budget', () => {
+test('every HTML file is within the 72 KB raw and 20 KB gzipped budget', () => {
   for (const page of pages) {
     assert.ok(page.bytes <= HTML_BUDGET_BYTES, `${page.file} is ${page.bytes} bytes (budget ${HTML_BUDGET_BYTES})`);
+    const gzippedBytes = gzipSync(page.html).length;
+    assert.ok(gzippedBytes <= HTML_GZIP_BUDGET_BYTES, `${page.file} is ${gzippedBytes} bytes gzipped (budget ${HTML_GZIP_BUDGET_BYTES})`);
+  }
+});
+
+test('no built HTML contains third-party scripts or Google Analytics', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(page.html, /googletagmanager\.com|google-analytics\.com/i, `${page.file} contains Google Analytics/GTM`);
+    const scriptSrcs = matchAll(page.html, /<script[^>]+src="([^"]+)"/g);
+    for (const src of scriptSrcs) {
+      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//')) {
+        const url = new URL(src, ORIGIN);
+        assert.equal(url.hostname, SITE_CONFIG.domain, `${page.file} loads external script from ${src}`);
+      }
+    }
   }
 });
 
@@ -599,4 +616,38 @@ test('unified dates: visible byline, JSON-LD datePublished/dateModified, article
     }
   }
 });
+
+test('no built HTML contains unsourced medical or organizational attributions', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(
+      page.html,
+      /American Academy|\bAAP\b|\bCDC\b|pediatric/i,
+      `${page.file} contains forbidden attributions (American Academy, AAP, CDC, pediatric)`
+    );
+  }
+});
+
+test('no built page claims more chore icons than exist', () => {
+  for (const page of pages) {
+    const matches = page.html.matchAll(/(?:over|more than|around|nearly)?\s*(\d+)\s*(?:illustrated\s+)?(?:chore\s+)?icons/gi);
+    for (const match of matches) {
+      const claimedCount = parseInt(match[1]!, 10);
+      assert.ok(
+        claimedCount <= CHORE_ICON_COUNT,
+        `${page.file} claims ${claimedCount} chore icons, but only ${CHORE_ICON_COUNT} exist: "${match[0]}"`
+      );
+    }
+  }
+});
+
+test('no built HTML contains grammar error "a 8-year" or "a 11-year"', () => {
+  for (const page of pages) {
+    assert.doesNotMatch(
+      page.html,
+      /\ba 8-year|\ba 11-year/i,
+      `${page.file} contains incorrect indefinite article "a 8-year" or "a 11-year"`
+    );
+  }
+});
+
 

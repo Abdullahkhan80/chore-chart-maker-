@@ -79,6 +79,16 @@ test('suggestions follow the age and skip chores already on the chart', () => {
   assert.ok(!suggestionChipsHtml(3, config).includes('Mow the lawn'));
 });
 
+test('rotation chart markup hides age inputs, labels name inputs for roommates, and suggests adult chores', () => {
+  const config = getPreset('roommates')!;
+  assert.equal(config.type, 'rotation');
+  const kidsHtml = kidListHtml(config);
+  assert.doesNotMatch(kidsHtml, />Age<input/i, 'rotation should not display Age inputs');
+  assert.match(kidsHtml, /Roommate 1 name/);
+  const chips = suggestionChipsHtml(20, config);
+  assert.match(chips, /clean-bathroom|wipe-counters|sort-recycling/);
+});
+
 test('every landing page preset renders a ready-made chart preview', () => {
   for (const [path, presetId] of Object.entries(PAGE_PRESETS)) {
     const config = getPreset(presetId);

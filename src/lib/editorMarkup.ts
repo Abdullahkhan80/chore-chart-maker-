@@ -32,6 +32,8 @@ export const ADULT_ROTATION_CHORE_IDS: readonly string[] = [
   'clean-toilet',
   'scrub-bathtub',
   'sort-recycling',
+  'put-away-groceries',
+  'fold-laundry',
   'wash-windows',
   'sweep-porch',
   'bring-in-bins',
@@ -71,7 +73,10 @@ export function kidItemHtml(kid: Kid, index: number, config?: ChartConfig): stri
   const fallbackLabel = isRotation ? `Roommate ${index + 1}` : `Child ${index + 1}`;
   const name = kid.name || fallbackLabel;
   const labelText = isRotation ? `Roommate ${index + 1} name` : `Child ${index + 1} name`;
-  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span><label class="sr-only" for="${id}-name">${labelText}</label><input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div><div class="mt-2 grid grid-cols-3 gap-2"><label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label><label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label><label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label></div></li>`;
+  const ageControl = isRotation
+    ? ''
+    : `<label class="ccm-label">Age<input id="${id}-age" type="number" class="ccm-input" data-kid-field="age" min="${LIMITS.kidAge.min}" max="${LIMITS.kidAge.max}" inputmode="numeric" value="${kid.age ?? ''}"></label>`;
+  return `<li class="ccm-card" data-index="${index}"><div class="flex items-center gap-2">${iconImg(kid.avatarIcon, 40)}<span class="ccm-swatch" style="background:${KID_COLOR_HEX[kid.color]}"></span><label class="sr-only" for="${id}-name">${labelText}</label><input id="${id}-name" class="ccm-input min-w-0 flex-1" data-kid-field="name" value="${esc(kid.name)}" maxlength="${LIMITS.kidNameLength}" placeholder="Name" autocomplete="off"><button type="button" class="ccm-btn" data-action="remove-kid" data-index="${index}" aria-label="Remove ${esc(name)}">✕</button></div><div class="mt-2 grid ${isRotation ? 'grid-cols-2' : 'grid-cols-3'} gap-2">${ageControl}<label class="ccm-label">Color<select id="${id}-color" class="ccm-input" data-kid-field="color">${options(KID_COLORS.map((c) => ({ value: c, label: capitalize(c) })), kid.color)}</select></label><label class="ccm-label">Avatar<select id="${id}-avatar" class="ccm-input" data-kid-field="avatarIcon">${options(AVATAR_ICON_IDS.map((a) => ({ value: a, label: ICON_MANIFEST[a].alt })), kid.avatarIcon)}</select></label></div></li>`;
 }
 
 export function kidListHtml(config: ChartConfig): string {

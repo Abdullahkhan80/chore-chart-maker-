@@ -160,8 +160,23 @@ function mount(root: HTMLElement): void {
     set('inkSaver', state.inkSaver);
   };
 
+  const updateRotationUI = () => {
+    const isRot = state.type === 'rotation';
+    suggestAgeEl.classList.toggle('hidden', isRot);
+    const legend1 = root.querySelector<HTMLElement>('[data-step="1"] .ccm-legend');
+    if (legend1) legend1.textContent = `1. ${isRot ? 'Who is sharing chores?' : 'Who is it for?'}`;
+    const addKidBtn = root.querySelector<HTMLButtonElement>('[data-action="add-kid"]');
+    if (addKidBtn) addKidBtn.textContent = isRot ? '+ Add a roommate' : '+ Add a child';
+    const suggestLabel = suggestAgeEl.parentElement?.querySelector('p.ccm-label');
+    if (suggestLabel) {
+      suggestLabel.textContent = isRot ? 'Suggested shared chores' : 'Suggested for age';
+      suggestLabel.className = isRot ? 'ccm-label font-medium' : 'ccm-label';
+    }
+  };
+
   const renderAll = () => {
     suggestAgeEl.value = String(suggestionAge(state));
+    updateRotationUI();
     renderLists({ kids: true, chores: true, suggestions: true });
     syncStyleControls();
     updateConditional();
@@ -458,6 +473,8 @@ function mount(root: HTMLElement): void {
       { chores: name === 'weekStart' || name === 'allowanceEnabled' },
     );
     if (name === 'type' && state.type !== before.type) {
+      updateRotationUI();
+      renderLists({ kids: true, chores: true, suggestions: true });
       trackEvent('chart_type_selected', { chart_type: state.type });
       announce(`Chart type changed. The preview is updated.`);
     }

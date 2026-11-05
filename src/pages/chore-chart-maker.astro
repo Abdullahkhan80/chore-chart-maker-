@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
+import { CHORE_ICON_COUNT } from '../lib/icons.ts';
 import { AGE_PAGE_AGES, PAGES, agePagePath } from '../lib/pages.ts';
 import type { FaqItem } from '../lib/seo.ts';
 
@@ -63,8 +64,7 @@ const faq: FaqItem[] = [
       Language: <span class="font-bold text-fg">English</span> · <a href={PAGES.ptChoreChartMaker.path} class="underline">Português</a> · <a href={PAGES.frChoreChartMaker.path} class="underline">Français</a>
     </div>
     <p>
-      Build a printable chore chart for your kids in minutes: choose age-appropriate picture chores, pick a layout
-      and print. No sign-up, and nothing you type leaves your browser.
+      Our free chore chart maker is a fast in-browser chore chart generator designed for busy families. Build a printable chore chart for your kids in minutes: choose age-appropriate picture chores, customize daily or weekly schedules, and print directly. No sign-up, no subscriptions, and nothing you type leaves your browser.
     </p>
   </div>
 
@@ -84,6 +84,22 @@ const faq: FaqItem[] = [
       <strong>Download.</strong> Print directly, save a PDF or PNG, or copy a private share link.
     </li>
   </ol>
+
+  <h2>What makes this chore chart maker different</h2>
+  <ul>
+    <li>
+      <strong>Zero accounts or subscriptions:</strong> Every chart layout, theme, and export format is 100% free with no watermarks or hidden paywalls.
+    </li>
+    <li>
+      <strong>Total browser privacy:</strong> Your children's names, ages, and chores stay on your own device. Nothing you type is uploaded to remote servers.
+    </li>
+    <li>
+      <strong>Picture icons for pre-readers:</strong> More than {Math.floor(CHORE_ICON_COUNT / 10) * 10} illustrated chore icons allow toddlers and young children to follow their routines independently before they can read.
+    </li>
+    <li>
+      <strong>Flexible print & digital formats:</strong> Export print-ready PDFs sized for Letter or A4, PNG images for phone and tablet screens, or copy a private share link.
+    </li>
+  </ul>
 
   <h2>Age-appropriate chores at a glance</h2>
   <p>
@@ -175,6 +191,14 @@ const faq: FaqItem[] = [
       <strong>Reset weekly.</strong> Review progress together on Sundays, celebrate wins, and swap chores that need adjusting.
     </li>
   </ul>
+
+  <h2>How to handle chore reluctance without nagging</h2>
+  <p>
+    When kids push back against daily responsibilities, adding more pressure or lecturing usually creates resentment. Instead, tie chores directly to daily privileges using "When/Then" framing: "When your backpack is unpacked and shoes are put away, then you can have screen time or play outside." This removes you as the adversary and lets the household routine serve as the neutral boundary. Keep chores predictable by doing them at the same time every day—such as immediately after school or right before dinner—so completion becomes an automatic habit rather than an ongoing debate.
+  </p>
+  <p>
+    Review your chart every two to three months. As kids grow, tasks that were once challenging become second nature, while new developmental milestones open up opportunities for greater responsibility. Retiring older chores and introducing fresh challenges keeps children engaged and builds real pride in their growing household competence.
+  </p>
 
   <h2>Printing tips</h2>
   <ul>

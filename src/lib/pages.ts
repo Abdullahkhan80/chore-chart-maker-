@@ -40,11 +40,11 @@ export const PAGES = {
   home: page({
     path: '/',
     label: 'Home',
-    title: 'Free Printable Chore Charts | Chore Chart Maker',
+    title: 'Free Printable Chore Charts for Kids | Chore Chart Maker',
     h1: 'Free Printable Chore Charts for Every Family',
     description:
       'Browse free printable chore charts, reward charts and routine charts for kids, families and roommates. Customise in your browser, no sign-up, print in minutes.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   choreChartMaker: page({
     path: '/chore-chart-maker/',
@@ -54,7 +54,7 @@ export const PAGES = {
     description:
       'Use this free chore chart maker to build a printable chore chart for kids in minutes: picture chores by age, weekly, routine or reward layouts. No sign-up.',
     alternates: CHORE_CHART_ALTERNATES,
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   ptChoreChartMaker: page({
     path: '/pt/',
@@ -85,6 +85,7 @@ export const PAGES = {
     h1: 'Reward Chart Maker',
     description:
       'Build a free printable reward chart with sticker boxes, custom goals and rewards for kids. Print on Letter or A4. No sign-up, and nothing you type is uploaded.',
+    lastmod: '2026-11-04',
   }),
   choresByAge: page({
     path: '/chores-for-kids-by-age/',
@@ -93,7 +94,7 @@ export const PAGES = {
     h1: 'Age-appropriate chores for kids, by age',
     description:
       'A practical list of age-appropriate chores for kids from 2 to 14, with what to expect at each age and tips to get started. Turn any list into a printable chart.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   roommateChoreChart: page({
     path: '/roommate-chore-chart/',
@@ -102,7 +103,7 @@ export const PAGES = {
     h1: 'Roommate chore chart maker',
     description:
       'Use this free roommate chore chart maker to split housework fairly. Rotate chores weekly, add everyone in the house, then print or share it. No sign-up needed.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   morningRoutineChart: page({
     path: '/morning-routine-chart/',
@@ -111,7 +112,7 @@ export const PAGES = {
     h1: 'Morning routine chart for kids',
     description:
       'Make a free printable morning routine chart for kids with simple picture steps, from brushing teeth to packing a backpack. Customize it and print it at home.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   bedtimeRoutineChart: page({
     path: '/bedtime-routine-chart/',
@@ -121,7 +122,7 @@ export const PAGES = {
     description:
       'Make a free printable bedtime routine chart with picture steps for kids: brushing teeth, pajamas, books, and lights out. Print or save in minutes.',
     published: DEPLOY_DATE,
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   familyChoreChart: page({
     path: '/family-chore-chart/',
@@ -138,6 +139,7 @@ export const PAGES = {
     h1: 'Free chore chart templates to edit and print',
     description:
       'Free chore chart maker templates you can edit online and print on Letter or A4. Get a PDF or PNG with no sign-up, no trial and nothing uploaded to a server.',
+    lastmod: '2026-11-04',
   }),
   elegantChoreChart: page({
     path: '/elegant-chore-chart/',
@@ -154,7 +156,7 @@ export const PAGES = {
     h1: 'About Chore Chart Maker',
     description:
       'Chore Chart Maker builds free, privacy-first printable tools for parents, teachers and households. Learn who makes the site and how we keep your data private.',
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   }),
   contact: page({
     path: '/contact/',
@@ -163,6 +165,7 @@ export const PAGES = {
     h1: 'Contact us',
     description:
       'Get in touch with the Chore Chart Maker team about our free printable chore chart tools: feedback, bug reports or ideas for new printable charts for kids.',
+    lastmod: '2026-11-04',
   }),
   privacyPolicy: page({
     path: '/privacy-policy/',
@@ -170,7 +173,8 @@ export const PAGES = {
     title: 'Privacy Policy | Chore Chart Maker',
     h1: 'Privacy policy',
     description:
-      'How Chore Chart Maker protects your privacy: names and chores on your charts stay in your browser, there are no accounts, and analytics never see what you type.',
+      'How Chore Chart Maker protects your privacy: chart data stays in your browser, there are no accounts, and no third-party tracking cookies or scripts are used.',
+    lastmod: '2026-11-04',
   }),
   terms: page({
     path: '/terms/',
@@ -216,7 +220,7 @@ export function agePage(age: number): PageMeta {
     h1: `Chores for ${age}-year-olds`,
     description: `Age-appropriate chores for ${age}-year-olds, with daily and weekly ideas, tips for teaching each job, and a free printable chore chart you can customize.`,
     published: isNew ? DEPLOY_DATE : LAUNCH,
-    lastmod: DEPLOY_DATE,
+    lastmod: '2026-11-04',
   });
 }
 
