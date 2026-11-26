@@ -73,13 +73,13 @@ function wrap(text, size, maxWidth) {
   return lines;
 }
 
-/** Largest headline size (72 → 44 px) that fits in three lines. */
+/** Largest headline size (72 → 32 px) that fits in three lines. */
 function fitHeadline(text, maxWidth) {
-  for (let size = 72; size >= 44; size -= 4) {
+  for (let size = 72; size >= 32; size -= 4) {
     const lines = wrap(text, size, maxWidth);
     if (lines.length <= 3) return { size, lines };
   }
-  return { size: 44, lines: wrap(text, 44, maxWidth).slice(0, 3) };
+  return { size: 32, lines: wrap(text, 32, maxWidth) };
 }
 
 /** The H1 with a capital first letter. */

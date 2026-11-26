@@ -40,11 +40,11 @@ export const PAGES = {
   home: page({
     path: '/',
     label: 'Home',
-    title: 'Free Printable Chore Charts for Kids | Chore Chart Maker',
-    h1: 'Free Printable Chore Charts for Every Family',
+    title: 'Free Printable Chore Charts for Kids & Families',
+    h1: 'Free Printable Chore Charts, Reward & Routine Charts for Kids and Families',
     description:
-      'Browse free printable chore charts, reward charts and routine charts for kids, families and roommates. Customise in your browser, no sign-up, print in minutes.',
-    lastmod: '2026-11-04',
+      'Make free printable chore charts, reward charts and morning & bedtime routine charts for kids. No sign-up — print on Letter or A4 in minutes.',
+    lastmod: '2026-11-26',
   }),
   choreChartMaker: page({
     path: '/chore-chart-maker/',
