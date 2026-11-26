@@ -2,7 +2,7 @@
 // restores state (URL hash → localStorage → preset), keeps the controls and the
 // live SVG preview in sync, and lazy-loads the library search, theme thumbnails
 // and exporters. All chart data stays in this browser.
-import { chartParams, trackEvent } from '../lib/analytics.ts';
+import { GA_MEASUREMENT_ID, chartParams, setAnalyticsTransport, trackEvent } from '../lib/analytics.ts';
 import { getChoreById } from '../lib/choreLibrary.ts';
 import {
   choreListHtml,
@@ -26,6 +26,13 @@ import {
   validateConfig,
 } from '../lib/state.ts';
 import { DAYS, KID_COLORS, LIMITS, type ChartConfig, type Day } from '../lib/types.ts';
+
+if (/^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID) && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX') {
+  setAnalyticsTransport((name, params) => {
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    if (typeof gtag === 'function') gtag('event', name, params);
+  });
+}
 
 const PREVIEW_DELAY_MS = 150;
 const SAVE_DELAY_MS = 400;

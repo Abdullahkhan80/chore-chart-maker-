@@ -9,7 +9,7 @@
 - Design: 12 themes (Classic, Pastel, Ocean, Space, Dinosaur, Jungle, Sports, Minimal, Rainbow, Construction, Snowy, Castle), large text, an ink saver mode, Monday or Sunday week start, and optional dates.
 - Paper: US Letter (default) and A4, in portrait or landscape.
 - Exports: PDF download, PNG download, direct browser printing, and a copyable share link.
-- Privacy model: the chart is saved in the browser's localStorage. Share links store the chart in the URL hash (after #), which browsers do not send to servers. No analytics or third-party scripts are loaded. Names and chores never leave the browser.
+- Privacy model: the chart is saved in the browser's localStorage. Share links store the chart in the URL hash (after #), which browsers do not send to servers. Google Analytics 4 is loaded for anonymised page views and anonymous, fixed-category chart events (chart type, theme, paper size and orientation only). Names and chores never leave the browser and are never sent to Google Analytics.
 - Price: free, with every chart type, theme and export included. No sign-up, trial or watermark across the chart; printed charts carry a small site address in one corner.
 
 ## Tools

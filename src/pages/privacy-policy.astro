@@ -18,7 +18,7 @@ const link = 'text-brand underline';
   <ul class="list-disc space-y-2 pl-6">
     <li>The names, chores, rewards and other text you put on a chart never leave your browser.</li>
     <li>There are no accounts, no sign-up and no backend that stores charts.</li>
-    <li>We don't sell data, show personalized ads or use tracking cookies.</li>
+    <li>We don't sell data or show personalized ads.</li>
   </ul>
 
   <h2 class="pt-4 text-xl font-bold">Your charts stay on your device</h2>
@@ -35,9 +35,16 @@ const link = 'text-brand underline';
     chart and see everything on it, including names. Only share links with people you trust.
   </p>
 
-  <h2 class="pt-4 text-xl font-bold">No analytics or tracking cookies</h2>
+  <h2 class="pt-4 text-xl font-bold">Analytics (Google Analytics 4)</h2>
   <p>
-    We do not load third-party analytics services (such as Google Analytics) and do not track your activity across pages or visits. There are no advertising scripts, no tracking cookies, and no third-party trackers anywhere on the site.
+    We load Google Analytics 4 to understand overall traffic and which chart types are helpful. Google Analytics 4
+    uses cookies and collects anonymised page views (with IP anonymisation enabled) along with anonymous chart usage
+    events (chart creation, chart type or theme selection, PDF/PNG export, printing and share-link copying). Those
+    events only carry fixed categories — chart type, theme, paper size and orientation — and never names, chores,
+    rewards or chart content. We do not enable advertising features or cross-site ad tracking. Learn more in{' '}
+    <a href="https://policies.google.com/privacy" class={link} rel="noopener">Google's privacy policy</a>, or opt out
+    using the{' '}
+    <a href="https://tools.google.com/dlpage/gaoptout" class={link} rel="noopener">Google Analytics Opt-out Browser Add-on</a>.
   </p>
 
   <h2 class="pt-4 text-xl font-bold">Hosting and server logs</h2>
@@ -45,13 +52,14 @@ const link = 'text-brand underline';
     The site is served by Cloudflare. Like any web host, Cloudflare processes technical request data, such as your IP
     address, browser type and the page requested, to deliver the site and protect it from abuse. This data is handled
     under <a href="https://www.cloudflare.com/privacypolicy/" class={link} rel="noopener">Cloudflare's privacy policy</a>.
-    All fonts, icons and scripts are served from our own domain, with no third-party trackers.
+    All fonts, icons and application scripts are served from our own domain; the only third-party script is Google
+    Analytics 4.
   </p>
 
   <h2 class="pt-4 text-xl font-bold">Cookies</h2>
   <p>
-    We don't set advertising or tracking cookies. The only thing the site stores in your browser is the chart you are
-    working on, as described above.
+    We don't set advertising cookies. Aside from the chart saved in your browser's local storage, Google Analytics 4 sets
+    analytics cookies as described above.
   </p>
 
   <h2 class="pt-4 text-xl font-bold">Children's privacy</h2>

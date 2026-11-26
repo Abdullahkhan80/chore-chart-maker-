@@ -4,6 +4,8 @@
 // also scans the source to make sure every trackEvent() call follows these rules.
 import { CHART_TYPES, ORIENTATIONS, PAPER_SIZES, THEMES, type ChartConfig } from './types.ts';
 
+export const GA_MEASUREMENT_ID: string = 'G-MNZ7RR8HG8';
+
 const PARAM_VALUES = {
   chart_type: CHART_TYPES,
   theme: THEMES,

@@ -6,6 +6,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
+import { GA_MEASUREMENT_ID } from '../src/lib/analytics.ts';
 import { CHORE_ICON_COUNT } from '../src/lib/icons.ts';
 import { SITE_CONFIG } from '../src/lib/seo.ts';
 
@@ -77,16 +78,23 @@ test('every HTML file is within the 72 KB raw and 20 KB gzipped budget', () => {
   }
 });
 
-test('no built HTML contains third-party scripts or Google Analytics', () => {
+test('built HTML loads only self-hosted scripts plus the single GA4 gtag.js tag', () => {
+  const expectedGtagSrc = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   for (const page of pages) {
-    assert.doesNotMatch(page.html, /googletagmanager\.com|google-analytics\.com/i, `${page.file} contains Google Analytics/GTM`);
+    assert.doesNotMatch(page.html, /googletagmanager\.com\/gtm\.js/i, `${page.file} contains Google Tag Manager`);
     const scriptSrcs = matchAll(page.html, /<script[^>]+src="([^"]+)"/g);
+    let gtagCount = 0;
     for (const src of scriptSrcs) {
+      if (src === expectedGtagSrc) {
+        gtagCount++;
+        continue;
+      }
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//')) {
         const url = new URL(src, ORIGIN);
-        assert.equal(url.hostname, SITE_CONFIG.domain, `${page.file} loads external script from ${src}`);
+        assert.equal(url.hostname, SITE_CONFIG.domain, `${page.file} loads unexpected external script from ${src}`);
       }
     }
+    assert.equal(gtagCount, 1, `${page.file} must load ${expectedGtagSrc} exactly once`);
   }
 });
 
