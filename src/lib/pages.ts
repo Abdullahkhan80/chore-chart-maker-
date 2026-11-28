@@ -111,8 +111,8 @@ export const PAGES = {
     title: 'Morning Routine Chart – Free Printable for Kids',
     h1: 'Morning routine chart for kids',
     description:
-      'Make a free printable morning routine chart for kids with simple picture steps, from brushing teeth to packing a backpack. Customize it and print it at home.',
-    lastmod: '2026-11-04',
+      'Make a free printable morning routine chart for kids with picture steps — wake up to backpack in 30–45 minutes. Print on Letter or A4, no sign-up.',
+    lastmod: '2026-11-26',
   }),
   bedtimeRoutineChart: page({
     path: '/bedtime-routine-chart/',

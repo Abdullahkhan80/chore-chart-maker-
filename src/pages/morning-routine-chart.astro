@@ -1,6 +1,6 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
-import { PAGES } from '../lib/pages.ts';
+import { PAGES, agePage } from '../lib/pages.ts';
 import type { FaqItem } from '../lib/seo.ts';
 
 const faq: FaqItem[] = [
@@ -33,6 +33,16 @@ const faq: FaqItem[] = [
     question: 'Can I make a bedtime routine chart as well?',
     answer:
       'Yes. Use our bedtime routine chart with evening steps like bath time, putting on pajamas, brushing teeth, reading a book together, and lights out.',
+  },
+  {
+    question: 'Can I print a morning routine chart on Letter and A4 paper?',
+    answer:
+      'Yes. The chart prints on both US Letter and A4. Choose your paper size in the editor before you print or download the PDF, and the picture steps stay the same size on either page.',
+  },
+  {
+    question: 'What if mornings still run late even with a chart?',
+    answer:
+      'Start 10 minutes earlier for one week and move the hardest step — usually getting dressed or breakfast — earlier in the order. Keep the same 5 steps in the same order every school day; changing the chart every day is what makes mornings slow again.',
   },
 ];
 
@@ -105,6 +115,88 @@ const link = 'text-brand underline font-medium';
       <strong>Launch pad prep:</strong> Check that homework folders and water bottles are inside the backpack, put on socks and shoes, and grab coats at the front door.
     </li>
   </ol>
+
+  <h2>A 7-step morning routine chart with times (30–45 minutes)</h2>
+  <p>
+    Use this timed layout as a practical starting point when building a morning routine chart for kids for school days:
+  </p>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Step</th>
+          <th scope="col">What to do</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Wake up &amp; make bed</td>
+          <td>7:00 — 5 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Get dressed (clothes laid out the night before)</td>
+          <td>7:05 — 5 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Breakfast &amp; clear plates</td>
+          <td>7:10 — 15 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Brush teeth, wash face, brush hair</td>
+          <td>7:25 — 5 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Pack backpack &amp; check homework folder</td>
+          <td>7:30 — 5 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>Shoes, coat &amp; water bottle at the front door</td>
+          <td>7:35 — 5 minutes</td>
+        </tr>
+        <tr>
+          <th scope="row">7</th>
+          <td>Out the door</td>
+          <td>7:40</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Move the start time earlier or later to fit your school start time — keep the order and the 5-minute steps the same.
+  </p>
+
+  <h2>Worked example: a morning routine chart for a 5-year-old</h2>
+  <p>
+    For a 5-year-old who cannot read yet, keep a picture morning routine chart down to 5 picture steps only: get dressed, eat breakfast, brush teeth, pack the backpack, and put on shoes. Drop the extra items from the 7-step table for now — making the bed can wait until school mornings feel steady, and hair brushing is done with a parent's help rather than as a solo check-off.
+  </p>
+  <p>
+    Hang the chart on the bedroom door at your child's eye level so it is the first thing they see after waking up. Because the icons show each job in order, they can move from step to step without waiting for spoken reminders. A parent checks the last step — backpack and shoes — right before leaving. Pairing this with a calm{' '}
+    <a href={PAGES.bedtimeRoutineChart.path} class={link}>bedtime routine chart</a> and age-matched{' '}
+    <a href={agePage(5).path} class={link}>chores for 5-year-olds</a> keeps both ends of the day predictable.
+  </p>
+
+  <h2>Printing tips for your morning routine chart</h2>
+  <p>
+    Once your free printable morning routine chart with pictures is ready, a few simple choices make a morning routine chart printable and easy to reuse every day:
+  </p>
+  <ul>
+    <li>
+      <strong>Print on Letter or A4:</strong> Pick US Letter or A4 in the editor before printing or downloading a PDF or PNG.
+    </li>
+    <li>
+      <strong>Use the large-text option for pre-readers:</strong> Bigger step labels and icons help younger kids spot each task from across the room.
+    </li>
+    <li>
+      <strong>Laminate or use a clear sleeve:</strong> Slip the chart into a clear plastic sleeve or laminate it so your child can tick steps off with a dry-erase marker and reuse it every school day.
+    </li>
+  </ul>
 
   <h2>Age-by-age tips for morning routines</h2>
   <ul>
